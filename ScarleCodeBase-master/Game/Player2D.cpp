@@ -4,7 +4,7 @@
 
 Player2D::Player2D(string _fileName, ID3D11Device* _GD) : ImageGO2D(_fileName, _GD)
 {
-
+	
 }
 
 Player2D::~Player2D()
