@@ -6,8 +6,10 @@
 Player2D::Player2D(string _fileName, ID3D11Device* _GD) : ImageGO2D(_fileName, _GD)
 {
 	
+
 	SetDrag(0.4);
 	SetPhysicsOn(true);
+
 
 }
 
@@ -55,7 +57,7 @@ void Player2D::Tick(GameData* _GD)
 	//m_pos = Vector2(posX, posY);
 
 
-	//ImageGO2D::Tick(_GD);
+	ImageGO2D::Tick(_GD);
 }
 
 void Player2D::Draw(DrawData2D* _DD)
