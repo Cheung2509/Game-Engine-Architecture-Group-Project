@@ -91,8 +91,8 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_GameObjects.push_back(m_light);
 
 	Player2D* player = new Player2D("grass", _pd3dDevice);
-	player->SetScale(0.5f);
-	player->SetPos(Vector2::Zero);
+	player->SetScale(0.1f);
+	player->SetPos(Vector2(200, 400));
 
 	m_GameObject2Ds.push_back(player);
 

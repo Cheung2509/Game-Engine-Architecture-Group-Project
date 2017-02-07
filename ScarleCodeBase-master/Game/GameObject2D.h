@@ -34,12 +34,22 @@ public:
 	void SetScale(float _scale) { m_scale = _scale * Vector2::One; }
 	void SetOrigin(Vector2 _origin) { m_origin = _origin; }
 
+	void		SetPhysicsOn(bool _physics) { m_physicsOn = _physics; }
+	void		TogglePhysics() { m_physicsOn = !m_physicsOn; }
+	void		SetDrag(float _drag) { m_drag = _drag; }
+
 protected:
 	Vector2 m_pos;
 	float m_rotation;
 	Vector2 m_scale;
 	Color m_colour;
 	Vector2 m_origin;
+
+	//physics stuff
+	bool m_physicsOn = false;
+	float m_drag = 0.0f;
+	Vector2 m_vel = Vector2::Zero;
+	Vector2 m_acc = Vector2::Zero;
 
 };
 
