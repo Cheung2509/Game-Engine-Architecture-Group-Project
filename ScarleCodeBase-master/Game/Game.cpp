@@ -11,6 +11,7 @@
 #include "GameData.h"
 #include "drawdata.h"
 #include "DrawData2D.h"
+#include "Player2D.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -53,7 +54,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_GD = new GameData;
 	m_GD->m_keyboardState = m_keyboardState;
 	m_GD->m_prevKeyboardState = m_prevKeyboardState;
-	m_GD->m_GS = GS_PLAY_TPS_CAM;
+	m_GD->m_GS = GS_PLAY_MAIN_CAM;
 	m_GD->m_mouseState = &m_mouseState;
 
 	//set up DirectXTK Effects system
@@ -84,18 +85,24 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_cam->SetPos(Vector3(0.0f, 100.0f, 100.0f));
 	m_GameObjects.push_back(m_cam);
 
+
 	//create a base light
 	m_light = new Light(Vector3(0.0f, 100.0f, 160.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.4f, 0.1f, 0.1f, 1.0f));
 	m_GameObjects.push_back(m_light);
 
+	Player2D* player = new Player2D("grass", _pd3dDevice);
+	player->SetScale(0.5f);
+	player->SetPos(Vector2::Zero);
+
+	m_GameObject2Ds.push_back(player);
+
+	/*
 	//add Player
 	Player* pPlayer = new Player("BirdModelV1.cmo", _pd3dDevice, m_fxFactory);
 	m_GameObjects.push_back(pPlayer);
+	*/
 
-	//add a secondary camera
-	m_TPScam = new TPSCamera(0.25f * XM_PI, AR, 1.0f, 10000.0f, pPlayer, Vector3::UnitY, Vector3(0.0f, 10.0f, 50.0f));
-	m_GameObjects.push_back(m_TPScam);
-
+	
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
 	m_DD->m_pd3dImmediateContext = nullptr;
@@ -103,6 +110,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_DD->m_cam = m_cam;
 	m_DD->m_light = m_light;
 
+	/*
 	//add random content to show the various what you've got here
 	Terrain* terrain = new Terrain("table.cmo", _pd3dDevice, m_fxFactory, Vector3(100.0f, 0.0f, 100.0f), 0.0f, 0.0f, 0.0f, 0.25f * Vector3::One);
 	m_GameObjects.push_back(terrain);
@@ -157,7 +165,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	VBMC->SetPitch(-XM_PIDIV2);
 	VBMC->SetScale(Vector3(3, 3, 1.5));
 	m_GameObjects.push_back(VBMC);
-
+	*/
 
 	//example basic 2D stuff
 	ImageGO2D* logo = new ImageGO2D("logo_small", _pd3dDevice);
@@ -261,7 +269,6 @@ bool Game::Tick()
 	case GS_GAME_OVER:
 		break;
 	case GS_PLAY_MAIN_CAM:
-	case GS_PLAY_TPS_CAM:
 		PlayTick();
 		break;
 	}
@@ -271,19 +278,9 @@ bool Game::Tick()
 
 void Game::PlayTick()
 {
-	//upon space bar switch camera state
-	if ((m_keyboardState[DIK_SPACE] & 0x80) && !(m_prevKeyboardState[DIK_SPACE] & 0x80))
-	{
-		if (m_GD->m_GS == GS_PLAY_MAIN_CAM)
-		{
-			m_GD->m_GS = GS_PLAY_TPS_CAM;
-		}
-		else
-		{
-			m_GD->m_GS = GS_PLAY_MAIN_CAM;
-		}
-	}
 
+	m_GD->m_GS = GS_PLAY_MAIN_CAM;
+	
 	//update all objects
 	for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
 	{
@@ -302,10 +299,6 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 
 	//set which camera to be used
 	m_DD->m_cam = m_cam;
-	if (m_GD->m_GS == GS_PLAY_TPS_CAM)
-	{
-		m_DD->m_cam = m_TPScam;
-	}
 
 	//update the constant buffer for the rendering of VBGOs
 	VBGO::UpdateConstantBuffer(m_DD);

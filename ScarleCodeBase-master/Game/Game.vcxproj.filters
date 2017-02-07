@@ -132,6 +132,9 @@
     <ClInclude Include="VBCube.h">
       <Filter>Objects\Example VBGOs\Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Player2D.h">
+      <Filter>Objects\2D\Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -186,6 +189,9 @@
       <Filter>Objects\2D\Source</Filter>
     </ClCompile>
     <ClCompile Include="TextGO2D.cpp">
+      <Filter>Objects\2D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Player2D.cpp">
       <Filter>Objects\2D\Source</Filter>
     </ClCompile>
   </ItemGroup>
