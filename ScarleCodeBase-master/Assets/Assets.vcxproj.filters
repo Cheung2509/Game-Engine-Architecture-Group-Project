@@ -57,5 +57,13 @@
     <ImageContentTask Include="logo_small.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="PlayerSpriteSheet.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Walk.png">
+      <Filter>Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

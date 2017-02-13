@@ -12,6 +12,7 @@
 #include "drawdata.h"
 #include "DrawData2D.h"
 #include "Player2D.h"
+#include "AnimatedSprite.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -91,10 +92,15 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_GameObjects.push_back(m_light);
 
 	//create player
-	Player2D* player = new Player2D("grass", _pd3dDevice);
-	player->SetScale(0.1f);
+	Player2D* player = new Player2D("Walk", _pd3dDevice);
+	player->SetScale(1.0f);
 	player->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(player);
+
+	AnimatedSprite* animatedSprite = new AnimatedSprite("PlayerSpriteSheet", _pd3dDevice, 3);
+	animatedSprite->SetScale(1.0f);
+	animatedSprite->SetPos(Vector2(200, 400));
+	m_GameObject2Ds.push_back(animatedSprite);
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;

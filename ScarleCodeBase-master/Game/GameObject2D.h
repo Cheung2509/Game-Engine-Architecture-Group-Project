@@ -50,8 +50,5 @@ protected:
 	float m_drag = 0.0f;
 	Vector2 m_vel = Vector2::Zero;
 	Vector2 m_acc = Vector2::Zero;
-
 };
-
-
 #endif

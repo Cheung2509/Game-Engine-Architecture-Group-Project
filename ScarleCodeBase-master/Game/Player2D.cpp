@@ -3,14 +3,11 @@
 #include "GameData.h"
 
 
+
 Player2D::Player2D(string _fileName, ID3D11Device* _GD) : ImageGO2D(_fileName, _GD)
 {
-	
-
 	SetDrag(0.4);
 	SetPhysicsOn(true);
-
-
 }
 
 Player2D::~Player2D()
@@ -20,8 +17,6 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameData* _GD)
 {
-	//Add controls
-	m_pos.y = 400;
 	/*
 	if (_GD->m_keyboardState[DIK_A] & 0x80)
 	{
