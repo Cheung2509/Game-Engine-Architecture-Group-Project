@@ -105,10 +105,12 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	animatedSprite->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(animatedSprite);
 
-	//creates a  Enemy
-	Enemy* enemy = new Enemy("logo_small", _pd3dDevice);
-	enemy->SetPos(Vector2(200, 400));
-	m_GameObject2Ds.push_back(enemy);
+	//creates 2  Enemies for horizontal and vertical momvent 
+	Enemy* enemyHor = new Enemy("logo_small", _pd3dDevice,Vector2(30,200),Vector2(750,200));
+	m_GameObject2Ds.push_back(enemyHor);
+
+	Enemy* enemyVert=new Enemy("logo_small", _pd3dDevice, Vector2(30, 0), Vector2(30, 200));
+	m_GameObject2Ds.push_back(enemyVert);
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -118,14 +120,28 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_DD->m_light = m_light;
 
 	//example basic 2D stuff
-	ImageGO2D* logo = new ImageGO2D("logo_small", _pd3dDevice);
-	logo->SetPos(200.0f * Vector2::One);
-	m_GameObject2Ds.push_back(logo);
+	//ImageGO2D* logo = new ImageGO2D("logo_small", _pd3dDevice);
+	//logo->SetPos(200.0f * Vector2::One);
+	//m_GameObject2Ds.push_back(logo);
 
-	TextGO2D* text = new TextGO2D("Test Text");
-	text->SetPos(Vector2(100, 10));
-	text->SetColour(Color((float*)&Colors::Yellow));
-	m_GameObject2Ds.push_back(text);
+
+	collects = new TextGO2D("Collectables: ");
+	collects->SetPos(Vector2(10, 525));
+	collects->SetScale(0.7);
+	collects->SetColour(Color((float*)&Colors::Yellow));
+	m_GameObject2Ds.push_back(collects);
+
+	lives = new TextGO2D("Lives: ");
+	lives->SetPos(Vector2(10, 560));
+	lives->SetScale(0.7);
+	lives->SetColour(Color((float*)&Colors::Yellow));
+	m_GameObject2Ds.push_back(lives);
+
+	room = new TextGO2D("roomname");
+	room->SetPos(Vector2(300, 500));
+	room->SetScale(0.7);
+	room->SetColour(Color((float*)&Colors::Yellow));
+	m_GameObject2Ds.push_back(room);
 };
 
 
@@ -241,6 +257,12 @@ void Game::PlayTick()
 
 void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext) 
 {
+
+
+	room->SetText("Kill the poor");
+	collects->SetText("My Collectables: ");
+	lives->SetText("My lives: ");
+
 	//set immediate context of the graphics device
 	m_DD->m_pd3dImmediateContext = _pd3dImmediateContext;
 

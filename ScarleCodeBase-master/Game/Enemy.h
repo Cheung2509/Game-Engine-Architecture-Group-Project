@@ -9,10 +9,17 @@
 class Enemy :public ImageGO2D
 {
 public:
-	Enemy(string _fileName, ID3D11Device* _GD);
+	Enemy(string _fileName, ID3D11Device* _GD,Vector2 startpos,Vector2 endpos);
 	~Enemy();
+	bool checkHorizontal();
+	bool checkVertical();
 
 	virtual void Tick(GameData* _GD);
 protected:
-
+	bool movingRight;
+	bool movingUp;
+	bool movingVerticaly;
+	bool movinghorizantel;
+	Vector2 StartPostion;
+	Vector2 EndPostion;
 };
