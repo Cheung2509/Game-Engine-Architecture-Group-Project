@@ -165,11 +165,20 @@
     <ClInclude Include="fileVBGO.h">
       <Filter>Objects\Example VBGOs\Header</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="Collectable.h">
+=======
+<<<<<<< HEAD
+    <ClInclude Include="AnimatedSprite.h">
+=======
+    <ClInclude Include="Enemy.h">
+>>>>>>> 08e94969f0cf79428f67c660a89532f44c0c5345
+>>>>>>> AnimatedSprite
       <Filter>Objects\2D\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Filter Include="Base">
       <UniqueIdentifier>{9e931243-0bc1-4b9a-8b22-25bc17610394}</UniqueIdentifier>
     </Filter>
@@ -206,5 +215,71 @@
     <Filter Include="Objects\Example VBGOs\Source">
       <UniqueIdentifier>{f74ef80a-3576-40ce-81ee-5d314df51c53}</UniqueIdentifier>
     </Filter>
+=======
+    <ClCompile Include="Game.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="CMOGO.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="camera.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="gameobject.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Terrain.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="VBGO.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="light.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject2D.cpp">
+      <Filter>Objects\2D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TPSCamera.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="VBSnail.cpp">
+      <Filter>Objects\Example VBGOs\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="fileVBGO.cpp">
+      <Filter>Objects\Example VBGOs\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="VBCube.cpp">
+      <Filter>Objects\Example VBGOs\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="treebit.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Tree.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MarchCubes.cpp">
+      <Filter>Objects\Example VBGOs\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageGO2D.cpp">
+      <Filter>Objects\2D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TextGO2D.cpp">
+      <Filter>Objects\2D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Player2D.cpp">
+      <Filter>Objects\2D\Source</Filter>
+    </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="AnimatedSprite.cpp">
+=======
+    <ClCompile Include="Enemy.cpp">
+>>>>>>> 08e94969f0cf79428f67c660a89532f44c0c5345
+      <Filter>Objects\2D\Source</Filter>
+    </ClCompile>
+>>>>>>> AnimatedSprite
   </ItemGroup>
 </Project>

@@ -22,10 +22,17 @@ public:
 	virtual void Tick(GameData* _GD);
 	virtual void Draw(DrawData2D* _DD);
 
+	void MovementManagement(GameData* _GD);
+
 private:
 	PlayerState m_PS;
+
 	int Collectables;
 	bool isfalling = false;
+	float m_jumpTime;
+
+	Vector2 forwardMove;
+	Vector2 upMove;
 };
 
 #endif

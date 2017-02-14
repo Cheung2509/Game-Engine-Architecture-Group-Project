@@ -13,8 +13,12 @@
 #include "DrawData2D.h"
 #include "Player2D.h"
 #include "AnimatedSprite.h"
+<<<<<<< HEAD
 #include "Enemy.h"
 #include "Collectables.h"
+=======
+#include"Enemy.h"
+>>>>>>> AnimatedSprite
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -106,6 +110,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	animatedSprite->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(animatedSprite);
 
+<<<<<<< HEAD
 
 	//create a collectable 
 	Collectables*collectable = new Collectables("Collectable", _pd3dDevice);
@@ -119,6 +124,12 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 
 	Enemy* enemyVert=new Enemy("logo_small", _pd3dDevice, Vector2(30, 0), Vector2(30, 200));
 	m_GameObject2Ds.push_back(enemyVert);
+=======
+	//creates a  Enemy
+	Enemy* enemy = new Enemy("logo_small", _pd3dDevice);
+	enemy->SetPos(200.0f * Vector2(0.5, 2));
+	m_GameObject2Ds.push_back(enemy);
+>>>>>>> AnimatedSprite
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
