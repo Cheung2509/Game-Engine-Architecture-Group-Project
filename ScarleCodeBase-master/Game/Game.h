@@ -28,6 +28,7 @@ struct DrawData;
 struct DrawData2D;
 class Light;
 class TextGO2D;
+class Player2D;
 
 class Game
 {
@@ -71,6 +72,7 @@ protected:
 	DrawData* m_DD;			//Data to be shared to all Game Objects as they are drawn
 	DrawData2D * m_DD2D;	//Data to be passed by game to all 2D Game Objects via Draw 
 
+	Player2D* player;
 	//sound stuff
 	std::unique_ptr<AudioEngine> m_audioEngine;
 

@@ -9,6 +9,7 @@ Player2D::Player2D(string _fileName, ID3D11Device* _GD) : ImageGO2D(_fileName, _
 	SetDrag(0.4);
 	SetPhysicsOn(true);
 	m_PS = PS_MOVE;
+	Collectables = 0;
 }
 
 Player2D::~Player2D()
@@ -95,6 +96,14 @@ void Player2D::Tick(GameData* _GD)
 
 
 	ImageGO2D::Tick(_GD);
+}
+int Player2D::getCollectables()
+{
+	return Collectables;
+}
+void Player2D::addCollectable()
+{
+	Collectables++;
 }
 
 void Player2D::Draw(DrawData2D* _DD)

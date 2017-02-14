@@ -124,6 +124,7 @@
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="camera.h" />
     <ClInclude Include="CMOGO.h" />
+    <ClInclude Include="Collectable.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="DrawData2D.h" />
     <ClInclude Include="DrawData.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="CMOGO.cpp" />
+    <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="fileVBGO.cpp" />
     <ClCompile Include="Game.cpp" />

@@ -13,7 +13,8 @@
 #include "DrawData2D.h"
 #include "Player2D.h"
 #include "AnimatedSprite.h"
-#include"Enemy.h"
+#include "Enemy.h"
+#include "Collectables.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -93,7 +94,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_GameObjects.push_back(m_light);
 
 	//create player
-	Player2D* player = new Player2D("Walk", _pd3dDevice);
+	player = new Player2D("Walk", _pd3dDevice);
 	player->SetScale(1.0f);
 	player->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(player);
@@ -104,6 +105,13 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	animatedSprite->SetScale(1.0f);
 	animatedSprite->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(animatedSprite);
+
+
+	//create a collectable 
+	Collectables*collectable = new Collectables("Collectable", _pd3dDevice);
+	collectable->SetScale(1.0f);
+	collectable->SetPos(Vector2(200, 400));
+	m_GameObject2Ds.push_back(collectable);
 
 	//creates 2  Enemies for horizontal and vertical momvent 
 	Enemy* enemyHor = new Enemy("logo_small", _pd3dDevice,Vector2(30,200),Vector2(750,200));
@@ -118,11 +126,6 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_DD->m_states = m_states;
 	m_DD->m_cam = m_cam;
 	m_DD->m_light = m_light;
-
-	//example basic 2D stuff
-	//ImageGO2D* logo = new ImageGO2D("logo_small", _pd3dDevice);
-	//logo->SetPos(200.0f * Vector2::One);
-	//m_GameObject2Ds.push_back(logo);
 
 
 	collects = new TextGO2D("Collectables: ");
@@ -260,7 +263,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 
 
 	room->SetText("Kill the poor");
-	collects->SetText("My Collectables: ");
+	collects->SetText("My Collectables: "+ to_string(player->getCollectables()));
 	lives->SetText("My lives: ");
 
 	//set immediate context of the graphics device
