@@ -12,10 +12,14 @@
 #include "drawdata.h"
 #include "DrawData2D.h"
 #include "Player2D.h"
+<<<<<<< HEAD
 #include "GameObject2D.h"
 
 #include "AnimatedSprite.h"
 
+=======
+#include "AnimatedSprite.h"
+>>>>>>> refs/remotes/origin/master
 #include"Enemy.h"
 
 using namespace DirectX;
@@ -102,11 +106,16 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	player->setType(PLAYER);
 	m_GameObject2Ds.push_back(player);
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
 	//Creating an example of a animated sprite
 	AnimatedSprite* animatedSprite = new AnimatedSprite("PlayerSpriteSheet", _pd3dDevice, 3);
 	animatedSprite->SetScale(1.0f);
 	animatedSprite->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(animatedSprite);
+<<<<<<< HEAD
 	
 
 	//creates a  Enemy
@@ -114,6 +123,15 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	enemy->SetPos(200.0f * Vector2(0.5, 2));
 	m_GameObject2Ds.push_back(enemy);
 
+=======
+
+	//creates 2  Enemies for horizontal and vertical momvent 
+	Enemy* enemyHor = new Enemy("logo_small", _pd3dDevice,Vector2(30,200),Vector2(750,200));
+	m_GameObject2Ds.push_back(enemyHor);
+
+	Enemy* enemyVert=new Enemy("logo_small", _pd3dDevice, Vector2(30, 0), Vector2(30, 200));
+	m_GameObject2Ds.push_back(enemyVert);
+>>>>>>> refs/remotes/origin/master
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -123,9 +141,9 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_DD->m_light = m_light;
 
 	//example basic 2D stuff
-	ImageGO2D* logo = new ImageGO2D("logo_small", _pd3dDevice);
-	logo->SetPos(200.0f * Vector2::One);
-	m_GameObject2Ds.push_back(logo);
+	//ImageGO2D* logo = new ImageGO2D("logo_small", _pd3dDevice);
+	//logo->SetPos(200.0f * Vector2::One);
+	//m_GameObject2Ds.push_back(logo);
 
 	TextGO2D* text = new TextGO2D("Test Text");
 	text->SetPos(Vector2(100, 10));
