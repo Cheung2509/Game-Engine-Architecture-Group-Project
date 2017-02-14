@@ -12,6 +12,7 @@
 #include "drawdata.h"
 #include "DrawData2D.h"
 #include "Player2D.h"
+#include"Enemy.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -95,6 +96,11 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	player->SetScale(0.1f);
 	player->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(player);
+
+	//creates a  Enemy
+	Enemy* enemy = new Enemy("logo_small", _pd3dDevice);
+	enemy->SetPos(200.0f * Vector2(0.5, 2));
+	m_GameObject2Ds.push_back(enemy);
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
