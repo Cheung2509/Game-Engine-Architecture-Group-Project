@@ -97,6 +97,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	player->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(player);
 
+	//Creating an example of a animated sprite
 	AnimatedSprite* animatedSprite = new AnimatedSprite("PlayerSpriteSheet", _pd3dDevice, 3);
 	animatedSprite->SetScale(1.0f);
 	animatedSprite->SetPos(Vector2(200, 400));

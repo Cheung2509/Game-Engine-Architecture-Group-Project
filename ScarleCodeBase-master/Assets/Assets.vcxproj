@@ -172,7 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="PlayerSpriteSheet.png" />
-    <Image Include="Walk.png" />
+    <ImageContentTask Include="Walk.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -60,10 +60,8 @@
     <ImageContentTask Include="PlayerSpriteSheet.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Walk.png">
+    <ImageContentTask Include="Walk.png">
       <Filter>Textures</Filter>
-    </Image>
+    </ImageContentTask>
   </ItemGroup>
 </Project>
