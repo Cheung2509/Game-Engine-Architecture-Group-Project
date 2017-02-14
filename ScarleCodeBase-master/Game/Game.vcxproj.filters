@@ -135,7 +135,11 @@
     <ClInclude Include="Player2D.h">
       <Filter>Objects\2D\Headers</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="AnimatedSprite.h">
+=======
+    <ClInclude Include="Enemy.h">
+>>>>>>> 08e94969f0cf79428f67c660a89532f44c0c5345
       <Filter>Objects\2D\Headers</Filter>
     </ClInclude>
   </ItemGroup>
@@ -197,7 +201,11 @@
     <ClCompile Include="Player2D.cpp">
       <Filter>Objects\2D\Source</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="AnimatedSprite.cpp">
+=======
+    <ClCompile Include="Enemy.cpp">
+>>>>>>> 08e94969f0cf79428f67c660a89532f44c0c5345
       <Filter>Objects\2D\Source</Filter>
     </ClCompile>
   </ItemGroup>
