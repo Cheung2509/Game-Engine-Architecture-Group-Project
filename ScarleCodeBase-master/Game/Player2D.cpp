@@ -8,6 +8,7 @@ Player2D::Player2D(string _fileName, ID3D11Device* _GD) : ImageGO2D(_fileName, _
 {
 	SetDrag(0.4);
 	SetPhysicsOn(true);
+	m_PS = PS_MOVE;
 }
 
 Player2D::~Player2D()
@@ -28,24 +29,65 @@ void Player2D::Tick(GameData* _GD)
 	}*/
 
 	Vector2 forwardMove = 200.0f * Vector2(1.0f, 0.0f);
-	
-	//forwardMove = Vector2(forwardMove);
-	if (_GD->m_keyboardState[DIK_D] & 0x80)
+	Vector2 upMove = 500 * Vector2(0.0f, 1.0f);
+
+	if (m_PS != PS_DEAD)
 	{
-		m_acc += forwardMove;
+		if (_GD->m_keyboardState[DIK_D] & 0x80)
+		{
+			m_acc += forwardMove;
+		}
+		if (_GD->m_keyboardState[DIK_A] & 0x80)
+		{
+			m_acc -= forwardMove;
+		}
+
+		//If space is pressed make player jump
+		if (_GD->m_keyboardState[DIK_SPACE] & 0x80)
+		{
+			m_PS = PS_JUMP;
+			m_acc -= upMove;
+		}
+
+		
 	}
-	if (_GD->m_keyboardState[DIK_A] & 0x80)
-	{
-		m_acc -= forwardMove;
-	}
+
 
 	if (m_physicsOn)
 	{
+
+		
+
+		if (m_PS == PS_FALLING)
+		{
+			m_acc += upMove;
+		}
+
+
 		Vector2 newVel = m_vel + _GD->m_dt * (m_acc - m_drag*m_vel);
 		Vector2 newPos = m_pos + _GD->m_dt * m_vel;
-
+		
 		m_vel = newVel;
 		m_pos = newPos;
+
+		if (m_vel.y >= -100 &&  m_pos.y < 400)
+		{
+             m_PS = PS_FALLING;
+		}
+
+
+		if (m_PS == PS_FALLING)
+		{
+			if (m_pos.y >= 400)
+			{
+				m_PS = PS_MOVE;
+				m_vel = Vector2::Zero;
+			}
+		}
+
+		
+
+		//if acceleration is less than -20
 	}
 
 	m_acc = Vector2::Zero;

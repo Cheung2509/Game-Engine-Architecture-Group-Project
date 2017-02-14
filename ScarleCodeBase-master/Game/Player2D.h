@@ -3,6 +3,13 @@
 
 #include "ImageGO2D.h"
 
+enum PlayerState
+{
+	PS_MOVE,
+	PS_JUMP,
+	PS_FALLING,
+	PS_DEAD
+};
 
 class Player2D : public ImageGO2D
 {
@@ -14,7 +21,8 @@ public:
 	virtual void Draw(DrawData2D* _DD);
 
 private:
-
+	PlayerState m_PS;
+	bool isfalling = false;
 };
 
 #endif
