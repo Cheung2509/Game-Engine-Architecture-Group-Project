@@ -105,10 +105,12 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	animatedSprite->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(animatedSprite);
 
-	//creates a  Enemy
-	Enemy* enemy = new Enemy("logo_small", _pd3dDevice);
-	enemy->SetPos(Vector2(200, 400));
-	m_GameObject2Ds.push_back(enemy);
+	//creates 2  Enemies for horizontal and vertical momvent 
+	Enemy* enemyHor = new Enemy("logo_small", _pd3dDevice,Vector2(30,200),Vector2(750,200));
+	m_GameObject2Ds.push_back(enemyHor);
+
+	Enemy* enemyVert=new Enemy("logo_small", _pd3dDevice, Vector2(30, 0), Vector2(30, 200));
+	m_GameObject2Ds.push_back(enemyVert);
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -118,9 +120,9 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_DD->m_light = m_light;
 
 	//example basic 2D stuff
-	ImageGO2D* logo = new ImageGO2D("logo_small", _pd3dDevice);
-	logo->SetPos(200.0f * Vector2::One);
-	m_GameObject2Ds.push_back(logo);
+	//ImageGO2D* logo = new ImageGO2D("logo_small", _pd3dDevice);
+	//logo->SetPos(200.0f * Vector2::One);
+	//m_GameObject2Ds.push_back(logo);
 
 	TextGO2D* text = new TextGO2D("Test Text");
 	text->SetPos(Vector2(100, 10));
