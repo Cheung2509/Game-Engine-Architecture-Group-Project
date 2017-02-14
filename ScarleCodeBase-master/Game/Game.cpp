@@ -12,11 +12,11 @@
 #include "drawdata.h"
 #include "DrawData2D.h"
 #include "Player2D.h"
-<<<<<<< HEAD
+#include "GameObject2D.h"
+
 #include "AnimatedSprite.h"
-=======
+
 #include"Enemy.h"
->>>>>>> refs/remotes/origin/master
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -99,20 +99,21 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	Player2D* player = new Player2D("Walk", _pd3dDevice);
 	player->SetScale(1.0f);
 	player->SetPos(Vector2(200, 400));
+	player->setType(PLAYER);
 	m_GameObject2Ds.push_back(player);
 
-<<<<<<< HEAD
 	//Creating an example of a animated sprite
 	AnimatedSprite* animatedSprite = new AnimatedSprite("PlayerSpriteSheet", _pd3dDevice, 3);
 	animatedSprite->SetScale(1.0f);
 	animatedSprite->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(animatedSprite);
-=======
+	
+
 	//creates a  Enemy
 	Enemy* enemy = new Enemy("logo_small", _pd3dDevice);
 	enemy->SetPos(200.0f * Vector2(0.5, 2));
 	m_GameObject2Ds.push_back(enemy);
->>>>>>> refs/remotes/origin/master
+
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -226,7 +227,29 @@ bool Game::Tick()
 		PlayTick();
 		break;
 	}
-	
+	for each(GameObject2D* object1 in m_collider)
+	{
+		if (object1->isAlive())
+		{
+			for each(GameObject2D*object2 in m_collider)
+			{
+				if (object2->isAlive())
+				{
+					if (object1->checkCollisions(object2))
+					{
+						if (object1->GetType() == ObjectType::PLAYER)
+						{
+							if (object2->GetType() == ObjectType::ENEMY)
+							{
+								object1->SetAlive(false);
+								object2->SetAlive(false);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 	return true;
 };
 

@@ -15,4 +15,6 @@ public:
 	virtual void Tick(GameData* _GD);
 protected:
 
+
+
 };
