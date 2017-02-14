@@ -27,6 +27,7 @@ struct GameData;
 struct DrawData;
 struct DrawData2D;
 class Light;
+class TextGO2D;
 
 class Game
 {
@@ -45,6 +46,9 @@ protected:
 	Camera* m_cam; //principle camera
 	TPSCamera* m_TPScam;//TPS cam
 	Light* m_light; //base light
+	TextGO2D* collects;
+	TextGO2D* lives;
+	TextGO2D* room;
 
 	list<GameObject *> m_GameObjects; //data structure storing all GameObjects of this Game
 	list<GameObject2D *> m_GameObject2Ds;//ditto 2D objects

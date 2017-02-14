@@ -8,6 +8,11 @@ TextGO2D::TextGO2D(string _text)
 }
 
 
+void TextGO2D::SetText(string _text)
+{
+	m_text = _text;
+}
+
 void TextGO2D::Tick(GameData* _GD)
 {
 }
