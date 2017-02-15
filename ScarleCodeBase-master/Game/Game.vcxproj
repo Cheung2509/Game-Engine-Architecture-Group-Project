@@ -159,10 +159,7 @@
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="camera.cpp" />
     <ClCompile Include="CMOGO.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="Collectable.cpp" />
-=======
->>>>>>> AnimatedSprite
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="fileVBGO.cpp" />
     <ClCompile Include="Game.cpp" />

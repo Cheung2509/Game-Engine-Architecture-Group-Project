@@ -9,7 +9,6 @@
 class Enemy :public ImageGO2D
 {
 public:
-<<<<<<< HEAD
 	Enemy(string _fileName, ID3D11Device* _GD,Vector2 startpos,Vector2 endpos);
 	~Enemy();
 	bool checkHorizontal();
@@ -23,12 +22,7 @@ protected:
 	bool movinghorizantel;
 	Vector2 StartPostion;
 	Vector2 EndPostion;
-=======
-	Enemy(string _fileName, ID3D11Device* _GD);
-	~Enemy();
 
-	virtual void Tick(GameData* _GD);
 protected:
 
->>>>>>> AnimatedSprite
 };
