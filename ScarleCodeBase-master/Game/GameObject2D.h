@@ -48,7 +48,7 @@ public:
 	void SetAlive(bool alive) { m_alive = alive; }
 
 	//collisions
-	bool checkCollisions(GameObject2D* _target) { return(Vector2::Distance(_target->GetPos(), m_pos) < 1.0f); }
+	bool checkCollisions(GameObject2D* _target) { return(Vector2::Distance(_target->GetPos(), m_pos) < 50.0f); }
 	
 protected:
 	Vector2 m_pos;

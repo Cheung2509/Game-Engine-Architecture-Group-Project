@@ -73,7 +73,6 @@ protected:
 	//Tick functions for each state
 	void PlayTick();
 	//changes
-	list<GameObject2D*> m_GameObjects2D;
 	list<GameObject2D*> m_collider;
 };
 
