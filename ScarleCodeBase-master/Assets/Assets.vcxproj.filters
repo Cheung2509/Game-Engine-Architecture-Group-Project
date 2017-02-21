@@ -69,5 +69,8 @@
     <ImageContentTask Include="Collectable.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Platform.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

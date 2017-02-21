@@ -23,6 +23,7 @@
 #include"Enemy.h"
 
 #include "Collectables.h"
+#include "Platfroms.h"
 
 
 using namespace DirectX;
@@ -132,15 +133,22 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_collider.push_back(PickUp);
 
 	//creates 2  Enemies for horizontal and vertical momvent 
-	Enemy* enemyHor = new Enemy("logo_small", _pd3dDevice,Vector2(30,400),Vector2(750,400));
+	/*Enemy* enemyHor = new Enemy("logo_small", _pd3dDevice,Vector2(30,400),Vector2(750,400));
 	m_GameObject2Ds.push_back(enemyHor);
 	enemyHor->setType(ENEMY);
-	m_collider.push_back(enemyHor);
+	m_collider.push_back(enemyHor);*/
 
 	Enemy* enemyVert=new Enemy("logo_small", _pd3dDevice, Vector2(30, 0), Vector2(30, 300));
 	m_GameObject2Ds.push_back(enemyVert);
 	enemyVert->setType(ENEMY);
 	m_collider.push_back(enemyVert);
+
+	plat = new Platfroms("Platform", _pd3dDevice);
+	plat->SetScale(1.0f);
+	plat->SetPos(Vector2(200, 600));
+	m_GameObject2Ds.push_back(plat);
+	plat->setType(PLATFROM);
+	m_collider.push_back(plat);
 
 
 	//create DrawData struct and populate its pointers
@@ -296,6 +304,10 @@ bool Game::Tick()
 									object2->SetAlive(false);
 									PickUp->SetPickeduP();
 								}
+							}
+							if (object2->GetType() == ObjectType::PLATFROM)
+							{
+								plat->PlatformForce(player);
 							}
 						}
 					}

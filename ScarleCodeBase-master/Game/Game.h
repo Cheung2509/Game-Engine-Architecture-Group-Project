@@ -30,6 +30,7 @@ class Light;
 class TextGO2D;
 class Player2D;
 class Collectables;
+class Platfroms;
 
 class Game
 {
@@ -73,8 +74,9 @@ protected:
 	DrawData* m_DD;			//Data to be shared to all Game Objects as they are drawn
 	DrawData2D * m_DD2D;	//Data to be passed by game to all 2D Game Objects via Draw 
 
-	Player2D* player;       // pointer to player 
+	Player2D* player;       // pointer to player class
 	Collectables* PickUp;   // pointer to pick up class
+	Platfroms* plat;		//pointer to platfrom class
 	//sound stuff
 	std::unique_ptr<AudioEngine> m_audioEngine;
 

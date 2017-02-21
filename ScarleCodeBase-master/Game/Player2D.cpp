@@ -52,18 +52,18 @@ void Player2D::Tick(GameData* _GD)
 		}
 
 
-		//if player state is falling and the player height is over 400
-		if (m_PS == PS_FALLING && m_pos.y >= 400)
-		{
-			//Set the player to move
-			m_PS = PS_MOVE;
+		////if player state is falling and the player height is over 400
+		//if (m_PS == PS_FALLING && m_pos.y >= 400)
+		//{
+		//	//Set the player to move
+		//	m_PS = PS_MOVE;
 
-			//Set velocity to zero to stop it from moving any further down
-			m_vel = Vector2::Zero;
+		//	//Set velocity to zero to stop it from moving any further down
+		//	m_vel = Vector2::Zero;
 
-			//reset jump time when the player is grounded
-			m_jumpTime = 0;
-		}
+		//	//reset jump time when the player is grounded
+		//	m_jumpTime = 0;
+		//}
 	}
 
 	m_acc = Vector2::Zero;

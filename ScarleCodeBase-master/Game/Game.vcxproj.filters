@@ -23,6 +23,7 @@
     <ClCompile Include="VBCube.cpp" />
     <ClCompile Include="VBGO.cpp" />
     <ClCompile Include="VBSnail.cpp" />
+    <ClCompile Include="Platfroms.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
@@ -59,5 +60,6 @@
     <ClInclude Include="VBspiral.h" />
     <ClInclude Include="vertex.h" />
     <ClInclude Include="Collectables.h" />
+    <ClInclude Include="Platfroms.h" />
   </ItemGroup>
 </Project>

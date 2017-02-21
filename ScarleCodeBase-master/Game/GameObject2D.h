@@ -46,7 +46,7 @@ public:
 	void setType(ObjectType type) { m_objectype = type; }
 	bool isAlive() { return m_alive; }
 	void SetAlive(bool alive) { m_alive = alive; }
-
+	void addFroce(Vector2 froceDirection) { m_acc =+ froceDirection; }
 	//collisions
 	bool checkCollisions(GameObject2D* _target) { return(Vector2::Distance(_target->GetPos(), m_pos) < 50.0f); }
 	

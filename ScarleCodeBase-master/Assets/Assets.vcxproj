@@ -178,6 +178,9 @@
     <ImageContentTask Include="Collectable.png" />
     <ImageContentTask Include="JetSetEnemy.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Platform.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />
