@@ -22,12 +22,12 @@
 
 #include"Enemy.h"
 
-#include "Enemy.h"
 #include "Collectables.h"
 
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
+
 
 Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance) 
 {
