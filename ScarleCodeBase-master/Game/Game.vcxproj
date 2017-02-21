@@ -139,6 +139,7 @@
     <ClInclude Include="Light.h" />
     <ClInclude Include="MarchCubes.h" />
     <ClInclude Include="ObjectList.h" />
+    <ClInclude Include="ObjectType.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Player2D.h" />
     <ClInclude Include="Terrain.h" />

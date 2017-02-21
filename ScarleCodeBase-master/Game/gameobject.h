@@ -53,6 +53,7 @@ public:
 	void		SetDrag(float _drag) { m_drag = _drag; }
 
 
+
 protected:
 
 	//World transform/matrix of this GO and it components
@@ -60,6 +61,8 @@ protected:
 	Matrix m_rotMat;
 	Matrix m_fudge;
 	Vector3 m_pos;
+	
+	
 	float m_pitch, m_yaw, m_roll;
 	Vector3 m_scale;
 

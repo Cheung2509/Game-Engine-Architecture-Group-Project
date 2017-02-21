@@ -64,6 +64,8 @@ void Enemy::Tick(GameData* _GD)
 			m_pos += Vector2(0, -0.1);
 		}
 	}
+
+
 }
 bool Enemy::checkHorizontal()
 {

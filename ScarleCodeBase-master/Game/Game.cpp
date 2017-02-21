@@ -5,6 +5,7 @@
 //system headers
 #include <windows.h>
 #include <time.h>
+#include <iostream>
 
 //our headers
 #include "ObjectList.h"
@@ -12,7 +13,13 @@
 #include "drawdata.h"
 #include "DrawData2D.h"
 #include "Player2D.h"
+#include "GameObject2D.h"
+
 #include "AnimatedSprite.h"
+
+
+#include "AnimatedSprite.h"
+
 #include"Enemy.h"
 
 using namespace DirectX;
@@ -96,7 +103,10 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	Player2D* player = new Player2D("Walk", _pd3dDevice);
 	player->SetScale(1.0f);
 	player->SetPos(Vector2(200, 400));
+	player->setType(PLAYER);
 	m_GameObject2Ds.push_back(player);
+	m_collider.push_back(player);
+
 
 
 	//Creating an example of a animated sprite
@@ -105,12 +115,19 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	animatedSprite->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(animatedSprite);
 
-	//creates 2  Enemies for horizontal and vertical momvent 
-	Enemy* enemyHor = new Enemy("logo_small", _pd3dDevice,Vector2(30,200),Vector2(750,200));
-	m_GameObject2Ds.push_back(enemyHor);
+	
 
+
+	//creates 2  Enemies for horizontal and vertical momvent 
+	Enemy* enemyHor = new Enemy("logo_small", _pd3dDevice,Vector2(30,400),Vector2(750,400));
+	m_GameObject2Ds.push_back(enemyHor);
+	enemyHor->setType(ENEMY);
+	m_collider.push_back(enemyHor);
 	Enemy* enemyVert=new Enemy("logo_small", _pd3dDevice, Vector2(30, 0), Vector2(30, 200));
 	m_GameObject2Ds.push_back(enemyVert);
+	enemyVert->setType(ENEMY);
+	m_collider.push_back(enemyVert);
+
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -225,6 +242,31 @@ bool Game::Tick()
 		break;
 	}
 	
+	for each(GameObject2D* object1 in m_collider)
+	{
+		/*if (object1->isAlive())
+		{*/
+			for each(GameObject2D*object2 in m_collider)
+			{
+				/*if (object2->isAlive())
+				{*/
+					if (object1->checkCollisions(object2))
+					{
+						if (object1->GetType() == ObjectType::PLAYER)
+						{
+							if (object2->GetType() == ObjectType::ENEMY)
+							{
+								
+								std::cout << "Collision";
+								object1->SetAlive(false);
+								object2->SetAlive(false);
+							}
+						}
+					}
+				/*}*/
+			}
+		/*}*/
+	}
 	return true;
 };
 

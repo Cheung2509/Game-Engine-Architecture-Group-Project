@@ -16,10 +16,16 @@ public:
 
 	virtual void Tick(GameData* _GD);
 protected:
+
+
+
+
+
 	bool movingRight;
 	bool movingUp;
 	bool movingVerticaly;
 	bool movinghorizantel;
 	Vector2 StartPostion;
 	Vector2 EndPostion;
+
 };
