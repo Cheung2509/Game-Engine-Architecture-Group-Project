@@ -10,6 +10,7 @@ Player2D::Player2D(string _fileName, ID3D11Device* _GD) : ImageGO2D(_fileName, _
 	SetPhysicsOn(true);
 	m_PS = PS_MOVE;
 	Collectables = 0;
+	lives = 3;
 	upMove = 500 * Vector2(0.0f, 1.0f);
 	forwardMove = 200.0f * Vector2(1.0f, 0.0f);
 }
@@ -105,6 +106,14 @@ int Player2D::getCollectables()
 void Player2D::addCollectable()
 {
 	Collectables++;
+}
+int Player2D::getLives()
+{
+	return lives;
+}
+void Player2D::TakeLives()
+{
+	lives--;
 }
 
 void Player2D::Draw(DrawData2D* _DD)

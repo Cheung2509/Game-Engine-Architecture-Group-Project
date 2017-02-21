@@ -124,18 +124,20 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 
 
 	//create a collectable 
-	Collectables*collectable = new Collectables("Collectable", _pd3dDevice);
-	collectable->SetScale(1.0f);
-	collectable->SetPos(Vector2(200, 400));
-	m_GameObject2Ds.push_back(collectable);
-
+	PickUp = new Collectables("Collectable", _pd3dDevice);
+	PickUp->SetScale(1.0f);
+	PickUp->SetPos(Vector2(500, 400));
+	m_GameObject2Ds.push_back(PickUp);
+	PickUp->setType(COLLECTABLE);
+	m_collider.push_back(PickUp);
 
 	//creates 2  Enemies for horizontal and vertical momvent 
 	Enemy* enemyHor = new Enemy("logo_small", _pd3dDevice,Vector2(30,400),Vector2(750,400));
 	m_GameObject2Ds.push_back(enemyHor);
 	enemyHor->setType(ENEMY);
 	m_collider.push_back(enemyHor);
-	Enemy* enemyVert=new Enemy("logo_small", _pd3dDevice, Vector2(30, 0), Vector2(30, 200));
+
+	Enemy* enemyVert=new Enemy("logo_small", _pd3dDevice, Vector2(30, 0), Vector2(30, 300));
 	m_GameObject2Ds.push_back(enemyVert);
 	enemyVert->setType(ENEMY);
 	m_collider.push_back(enemyVert);
@@ -265,28 +267,41 @@ bool Game::Tick()
 	
 	for each(GameObject2D* object1 in m_collider)
 	{
-		/*if (object1->isAlive())
-		{*/
+		if (object1->isAlive())
+		{
 			for each(GameObject2D*object2 in m_collider)
 			{
-				/*if (object2->isAlive())
-				{*/
+				if (object2->isAlive())
+				{
 					if (object1->checkCollisions(object2))
 					{
 						if (object1->GetType() == ObjectType::PLAYER)
 						{
 							if (object2->GetType() == ObjectType::ENEMY)
 							{
-								
-								std::cout << "Collision";
-								object1->SetAlive(false);
-								object2->SetAlive(false);
+								if (player->getLives() > 0)
+								{
+									std::cout << "Collision-ENEMY";
+									object1->SetAlive(false);
+									player->TakeLives();
+									//object2->SetAlive(false);
+								}
+							}
+							if (object2->GetType() == ObjectType::COLLECTABLE)
+							{
+								if (PickUp->GetPickedUp() == false)
+								{
+									std::cout << "Collision-COLLECTABLE";
+									player->addCollectable();
+									object2->SetAlive(false);
+									PickUp->SetPickeduP();
+								}
 							}
 						}
 					}
-				/*}*/
+				}
 			}
-		/*}*/
+		}
 	}
 	return true;
 };
@@ -308,9 +323,9 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
 
 
-	room->SetText("Kill the poor");
+	room->SetText("Kill the poor... god damn it Tim");
 	collects->SetText("My Collectables: "+ to_string(player->getCollectables()));
-	lives->SetText("My lives: ");
+	lives->SetText("My lives: "+ to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it
 
 	//set immediate context of the graphics device
 	m_DD->m_pd3dImmediateContext = _pd3dImmediateContext;
@@ -331,7 +346,10 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	m_DD2D->m_Sprites->Begin();
 	for (list<GameObject2D *>::iterator it = m_GameObject2Ds.begin(); it != m_GameObject2Ds.end(); it++)
 	{
-		(*it)->Draw(m_DD2D);
+		if ((*it)->isAlive())
+		{
+			(*it)->Draw(m_DD2D);
+		}
 	}
 	m_DD2D->m_Sprites->End();
 

@@ -6,7 +6,8 @@ enum ObjectType
 {
 	GAMEOBJECT,
 	ENEMY,
-	PLAYER
+	PLAYER,
+	COLLECTABLE
 };
 
 #endif

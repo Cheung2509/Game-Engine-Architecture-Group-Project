@@ -12,6 +12,7 @@ GameObject2D::GameObject2D()
 	m_pos = Vector2::Zero;
 	m_rotation = 0.0f;
 	m_scale = Vector2::One;
+	m_alive = true;
 
 }
 

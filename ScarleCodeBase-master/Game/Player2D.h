@@ -18,6 +18,8 @@ public:
 	~Player2D();
 	int getCollectables();
 	void addCollectable();
+	int getLives();
+	void TakeLives();
 
 	virtual void Tick(GameData* _GD);
 	virtual void Draw(DrawData2D* _DD);
@@ -30,7 +32,7 @@ private:
 	int Collectables;
 	bool isfalling = false;
 	float m_jumpTime;
-
+	int lives;
 	Vector2 forwardMove;
 	Vector2 upMove;
 };
