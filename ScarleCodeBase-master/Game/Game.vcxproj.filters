@@ -24,6 +24,8 @@
     <ClCompile Include="VBGO.cpp" />
     <ClCompile Include="VBSnail.cpp" />
     <ClCompile Include="Platfroms.cpp" />
+    <ClCompile Include="Ladder.cpp" />
+    <ClCompile Include="LadderTile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
@@ -61,5 +63,7 @@
     <ClInclude Include="vertex.h" />
     <ClInclude Include="Collectables.h" />
     <ClInclude Include="Platfroms.h" />
+    <ClInclude Include="Ladder.h" />
+    <ClInclude Include="LadderTile.h" />
   </ItemGroup>
 </Project>

@@ -25,6 +25,7 @@
 #include "Collectables.h"
 #include "Platfroms.h"
 
+#include "Ladder.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -104,6 +105,14 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_light = new Light(Vector3(0.0f, 100.0f, 160.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.4f, 0.1f, 0.1f, 1.0f));
 	m_GameObjects.push_back(m_light);
 
+	//create a ladder
+	Ladder* ladder = new Ladder("ladder", _pd3dDevice, 4, 400.0f, 200.0f);
+	//ladder->SetScale(0.5);
+	//ladder->setType(ObjectType::LADDER);
+	m_GameObject2Ds.push_back(ladder);
+	m_collider.push_back(ladder);
+
+
 	//create player
 	player = new Player2D("Walk", _pd3dDevice);
 	player->SetScale(1.0f);
@@ -129,7 +138,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	PickUp->SetScale(1.0f);
 	PickUp->SetPos(Vector2(500, 400));
 	m_GameObject2Ds.push_back(PickUp);
-	PickUp->setType(COLLECTABLE);
+	PickUp->setType(COLLECTIBLE);
 	m_collider.push_back(PickUp);
 
 	//creates 2  Enemies for horizontal and vertical momvent 
@@ -147,7 +156,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	plat->SetScale(1.0f);
 	plat->SetPos(Vector2(200, 600));
 	m_GameObject2Ds.push_back(plat);
-	plat->setType(PLATFROM);
+	plat->setType(PLATFORM);
 	m_collider.push_back(plat);
 
 
@@ -295,7 +304,7 @@ bool Game::Tick()
 									//object2->SetAlive(false);
 								}
 							}
-							if (object2->GetType() == ObjectType::COLLECTABLE)
+							if (object2->GetType() == ObjectType::COLLECTIBLE)
 							{
 								if (PickUp->GetPickedUp() == false)
 								{
@@ -305,7 +314,7 @@ bool Game::Tick()
 									PickUp->SetPickeduP();
 								}
 							}
-							if (object2->GetType() == ObjectType::PLATFROM)
+							if (object2->GetType() == ObjectType::PLATFORM)
 							{
 								plat->PlatformForce(player);
 							}
@@ -335,7 +344,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
 
 
-	room->SetText("Kill the poor... god damn it Tim");
+	room->SetText("Kill the poor");
 	collects->SetText("My Collectables: "+ to_string(player->getCollectables()));
 	lives->SetText("My lives: "+ to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it
 

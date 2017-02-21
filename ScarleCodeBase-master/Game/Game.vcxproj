@@ -137,6 +137,8 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="ImageGO2D.h" />
+    <ClInclude Include="Ladder.h" />
+    <ClInclude Include="LadderTile.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="MarchCubes.h" />
     <ClInclude Include="ObjectList.h" />
@@ -168,6 +170,8 @@
     <ClCompile Include="gameobject.cpp" />
     <ClCompile Include="GameObject2D.cpp" />
     <ClCompile Include="ImageGO2D.cpp" />
+    <ClCompile Include="Ladder.cpp" />
+    <ClCompile Include="LadderTile.cpp" />
     <ClCompile Include="light.cpp" />
     <ClCompile Include="MarchCubes.cpp" />
     <ClCompile Include="Platfroms.cpp" />

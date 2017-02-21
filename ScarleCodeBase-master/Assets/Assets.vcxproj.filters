@@ -72,5 +72,8 @@
     <ImageContentTask Include="Platform.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="ladder.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>
