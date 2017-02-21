@@ -22,6 +22,10 @@
 
 #include"Enemy.h"
 
+#include "Enemy.h"
+#include "Collectables.h"
+
+
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
@@ -100,7 +104,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_GameObjects.push_back(m_light);
 
 	//create player
-	Player2D* player = new Player2D("Walk", _pd3dDevice);
+	player = new Player2D("Walk", _pd3dDevice);
 	player->SetScale(1.0f);
 	player->SetPos(Vector2(200, 400));
 	player->setType(PLAYER);
@@ -115,7 +119,15 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	animatedSprite->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(animatedSprite);
 
+
 	
+
+
+	//create a collectable 
+	Collectables*collectable = new Collectables("Collectable", _pd3dDevice);
+	collectable->SetScale(1.0f);
+	collectable->SetPos(Vector2(200, 400));
+	m_GameObject2Ds.push_back(collectable);
 
 
 	//creates 2  Enemies for horizontal and vertical momvent 
@@ -136,15 +148,24 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_DD->m_cam = m_cam;
 	m_DD->m_light = m_light;
 
-	//example basic 2D stuff
-	//ImageGO2D* logo = new ImageGO2D("logo_small", _pd3dDevice);
-	//logo->SetPos(200.0f * Vector2::One);
-	//m_GameObject2Ds.push_back(logo);
 
-	TextGO2D* text = new TextGO2D("Test Text");
-	text->SetPos(Vector2(100, 10));
-	text->SetColour(Color((float*)&Colors::Yellow));
-	m_GameObject2Ds.push_back(text);
+	collects = new TextGO2D("Collectables: ");
+	collects->SetPos(Vector2(10, 525));
+	collects->SetScale(0.7);
+	collects->SetColour(Color((float*)&Colors::Yellow));
+	m_GameObject2Ds.push_back(collects);
+
+	lives = new TextGO2D("Lives: ");
+	lives->SetPos(Vector2(10, 560));
+	lives->SetScale(0.7);
+	lives->SetColour(Color((float*)&Colors::Yellow));
+	m_GameObject2Ds.push_back(lives);
+
+	room = new TextGO2D("roomname");
+	room->SetPos(Vector2(300, 500));
+	room->SetScale(0.7);
+	room->SetColour(Color((float*)&Colors::Yellow));
+	m_GameObject2Ds.push_back(room);
 };
 
 
@@ -285,6 +306,12 @@ void Game::PlayTick()
 
 void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext) 
 {
+
+
+	room->SetText("Kill the poor");
+	collects->SetText("My Collectables: "+ to_string(player->getCollectables()));
+	lives->SetText("My lives: ");
+
 	//set immediate context of the graphics device
 	m_DD->m_pd3dImmediateContext = _pd3dImmediateContext;
 

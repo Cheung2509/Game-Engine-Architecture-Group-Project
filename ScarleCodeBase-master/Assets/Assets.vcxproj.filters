@@ -63,5 +63,11 @@
     <ImageContentTask Include="Walk.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="JetSetEnemy.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Collectable.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

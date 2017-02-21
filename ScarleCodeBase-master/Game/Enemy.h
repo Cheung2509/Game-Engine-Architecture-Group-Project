@@ -28,4 +28,9 @@ protected:
 	Vector2 StartPostion;
 	Vector2 EndPostion;
 
+
+
+protected:
+
+
 };
