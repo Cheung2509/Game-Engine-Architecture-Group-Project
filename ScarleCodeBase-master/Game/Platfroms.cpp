@@ -6,8 +6,9 @@ Platfroms::Platfroms(string _fileName, ID3D11Device* _GD): ImageGO2D(_fileName, 
 	PlatfromUpMove = EqualAndOpposite * Vector2(0.0f, 1.0f);
 }
 
+
 void Platfroms::PlatformForce(GameObject2D* gameObject)
 {
-	gameObject->addFroce(PlatfromUpMove);
+	//gameObject->addForce(PlatfromUpMove);
 }
 		

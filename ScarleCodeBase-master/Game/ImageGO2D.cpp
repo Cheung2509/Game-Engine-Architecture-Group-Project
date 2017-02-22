@@ -36,7 +36,7 @@ ImageGO2D::~ImageGO2D()
 
 void ImageGO2D::Tick(GameData* _GD)
 {
-
+	GameObject2D::Tick(_GD);
 }
 
 

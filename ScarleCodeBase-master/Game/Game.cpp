@@ -281,7 +281,11 @@ bool Game::Tick()
 		PlayTick();
 		break;
 	}
-	
+	return true;
+};
+
+void Game::PlayTick()
+{
 	for each(GameObject2D* object1 in m_collider)
 	{
 		if (object1->isAlive())
@@ -316,7 +320,7 @@ bool Game::Tick()
 							}
 							if (object2->GetType() == ObjectType::PLATFORM)
 							{
-								plat->PlatformForce(player);
+								player->addForce(Vector2(0, -100));
 							}
 						}
 					}
@@ -324,11 +328,7 @@ bool Game::Tick()
 			}
 		}
 	}
-	return true;
-};
 
-void Game::PlayTick()
-{
 	//update all objects
 	for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
 	{

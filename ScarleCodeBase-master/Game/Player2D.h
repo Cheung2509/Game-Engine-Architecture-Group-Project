@@ -5,6 +5,7 @@
 
 enum PlayerState
 {
+	PS_IDLE,
 	PS_MOVE,
 	PS_JUMP,
 	PS_FALLING,
