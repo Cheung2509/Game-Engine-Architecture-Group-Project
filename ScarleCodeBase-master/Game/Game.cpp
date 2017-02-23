@@ -122,16 +122,11 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_collider.push_back(player);
 
 
-
 	//Creating an example of a animated sprite
 	AnimatedSprite* animatedSprite = new AnimatedSprite("PlayerSpriteSheet", _pd3dDevice, 3);
 	animatedSprite->SetScale(1.0f);
 	animatedSprite->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(animatedSprite);
-
-
-	
-
 
 	//create a collectable 
 	PickUp = new Collectables("Collectable", _pd3dDevice);
@@ -152,13 +147,13 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	enemyVert->setType(ENEMY);
 	m_collider.push_back(enemyVert);
 
-	plat = new Platfroms("Platform", _pd3dDevice);
-	plat->SetScale(1.0f);
-	plat->SetPos(Vector2(200, 600));
-	m_GameObject2Ds.push_back(plat);
+	//creat platfrom Tiles
+	plat = new Platfroms("Platform", _pd3dDevice, 20, 200.0f, 500.0f);
+	/*plat->SetScale(1.0f);
+	plat->SetPos(Vector2(200, 600));*/
 	plat->setType(PLATFORM);
+	m_GameObject2Ds.push_back(plat);
 	m_collider.push_back(plat);
-
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -320,6 +315,8 @@ void Game::PlayTick()
 							}
 							if (object2->GetType() == ObjectType::PLATFORM)
 							{
+								std::cout << "Collision-Platfrom";
+								player->SetGravityOn(false);
 								player->addForce(Vector2(0, -100));
 							}
 						}
