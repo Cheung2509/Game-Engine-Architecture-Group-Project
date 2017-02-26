@@ -43,9 +43,9 @@ void Platforms::Draw(DrawData2D* _DD)
 
 bool Platforms::checkCollisions(GameObject2D* _target)
 {
-	for (vector<PlatfromTile*>::iterator it = _platfromTile.begin(); it != _platfromTile.end(); it++)
+	for (vector<PlatfromTile*>::iterator it = _platfromTile.begin(); it != _platfromTile.end(); ++it)
 	{
-		if (Vector2::Distance(_target->GetPos(), (*it)->GetPos()) < 50.0f);
+		if ((*it)->checkCollisions(_target))
 		{
 			return true;
 		}

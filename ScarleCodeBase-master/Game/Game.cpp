@@ -285,17 +285,27 @@ void Game::PlayTick()
 					{
 						if (object1->GetType() == ObjectType::ENEMY)
 						{
-							player->addForce(Vector2(0, player->GetVel().y));
+							if (player->getLives() == 0)
+							{
+								std::cout << "Enemy hit \n";
+								player->SetAlive(false);
+								player->TakeLives();
+							}
 						}
 
 						if (object1->GetType() == ObjectType::PLATFORM)
 						{
-							std::cout << "Landed";
+							std::cout << "Landed \n";
+							player->addForce(-Vector2(0, player->GetVel().y));
+							player->resetJumpTime();
 						}
 
 						if (object1->GetType() == ObjectType::COLLECTIBLE)
 						{
 							std::cout << "Colected \n";
+							player->addCollectable();
+							object1->SetAlive(false);
+							PickUp->SetPickeduP();
 						}
 					}
 				}
