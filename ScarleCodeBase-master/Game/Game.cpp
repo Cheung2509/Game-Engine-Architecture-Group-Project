@@ -26,6 +26,7 @@
 #include "Platfroms.h"
 
 #include "Ladder.h"
+#include "LadderTile.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -108,9 +109,15 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//create a ladder
 	Ladder* ladder = new Ladder("ladder", _pd3dDevice, 4, 400.0f, 200.0f);
 	//ladder->SetScale(0.5);
-	//ladder->setType(ObjectType::LADDER);
+	
 	m_GameObject2Ds.push_back(ladder);
 	m_collider.push_back(ladder);
+	
+	for (vector<LadderTile*>::iterator it = ladder->ladderTiles.begin(); it != ladder->ladderTiles.end(); it++)
+	{
+		m_GameObject2Ds.push_back(*it);
+		m_collider.push_back(*it);
+	}
 
 
 	//create player
@@ -317,6 +324,10 @@ bool Game::Tick()
 							if (object2->GetType() == ObjectType::PLATFORM)
 							{
 								plat->PlatformForce(player);
+							}
+							if (object2->GetType() == ObjectType::LADDER)
+							{
+								std::cout << "Collision-LADDER";
 							}
 						}
 					}

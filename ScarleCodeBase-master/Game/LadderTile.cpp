@@ -6,9 +6,11 @@ LadderTile::LadderTile(string _fileName, ID3D11Device* _GD, Vector2 _pos) : Imag
 {
 	SetPos(_pos);
 	SetScale(0.5f);
+	setType(ObjectType::LADDER);
 }
 
 
 LadderTile::~LadderTile()
 {
 }
+
