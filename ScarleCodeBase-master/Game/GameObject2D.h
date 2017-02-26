@@ -27,6 +27,7 @@ public:
 	virtual void Draw(DrawData2D* _DD) = 0;
 	// getters
 	Vector2 GetPos() { return m_pos; }
+	Vector2 GetVel() { return m_vel; }
 	//setters
 
 	void SetPos(Vector2 _pos) { m_pos = _pos; }
@@ -47,7 +48,7 @@ public:
 	void setType(ObjectType type) { m_objectype = type; }
 	bool isAlive() { return m_alive; }
 	void SetAlive(bool alive) { m_alive = alive; }
-	void addForce(Vector2 forceDirection) { m_acc = forceDirection; }
+	void addForce(Vector2 forceDirection) { m_vel += forceDirection; }
 
 	//collisions
 	bool checkCollisions(GameObject2D* _target) { return(Vector2::Distance(_target->GetPos(), m_pos) < 50.0f); }

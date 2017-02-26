@@ -20,6 +20,7 @@ public:
 protected:
 
 	ID3D11ShaderResourceView* m_pTextureRV;
+
 };
 
 #endif

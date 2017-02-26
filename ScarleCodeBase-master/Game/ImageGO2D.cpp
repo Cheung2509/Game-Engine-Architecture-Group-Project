@@ -22,7 +22,6 @@ ImageGO2D::ImageGO2D(string _fileName, ID3D11Device* _GD) :m_pTextureRV(nullptr)
 	((ID3D11Texture2D *)pResource)->GetDesc(&Desc);
 
 	m_origin = 0.5f*Vector2((float)Desc.Width, (float)Desc.Height);//around which rotation and scaing is done
-
 }
 
 ImageGO2D::~ImageGO2D()

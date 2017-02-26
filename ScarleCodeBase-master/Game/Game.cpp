@@ -97,7 +97,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 
 	//create a base camera
 	m_cam = new Camera(0.25f * XM_PI, AR, 1.0f, 10000.0f, Vector3::UnitY, Vector3::Zero);
-	m_cam->SetPos(Vector3(0.0f, 100.0f, 100.0f));
+	m_cam->SetPos(Vector3::Up);
 	m_GameObjects.push_back(m_cam);
 
 
@@ -114,7 +114,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 
 
 	//create player
-	player = new Player2D("Walk", _pd3dDevice);
+	player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
 	player->SetScale(1.0f);
 	player->SetPos(Vector2(200, 400));
 	player->setType(PLAYER);
@@ -128,10 +128,6 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	animatedSprite->SetScale(1.0f);
 	animatedSprite->SetPos(Vector2(200, 400));
 	m_GameObject2Ds.push_back(animatedSprite);
-
-
-	
-
 
 	//create a collectable 
 	PickUp = new Collectables("Collectable", _pd3dDevice);
@@ -320,7 +316,9 @@ void Game::PlayTick()
 							}
 							if (object2->GetType() == ObjectType::PLATFORM)
 							{
-								player->addForce(Vector2(0, -100));
+								std::cout << "Landed \n";
+								player->addForce(-Vector2(0, player->GetVel().y));
+								player->resetJumpTime();
 							}
 						}
 					}

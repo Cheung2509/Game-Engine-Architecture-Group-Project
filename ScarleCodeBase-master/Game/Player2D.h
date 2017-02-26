@@ -1,26 +1,30 @@
 #ifndef _PLAYER2D_H_
 #define _PLAYER2D_H_
 
-#include "ImageGO2D.h"
+#include "AnimatedSprite.h"
 
 enum PlayerState
 {
-	PS_IDLE,
-	PS_MOVE,
-	PS_JUMP,
-	PS_FALLING,
-	PS_DEAD
+	PlayerState_IDLE,
+	PlayerState_MOVE,
+	PlayerState_JUMP,
+	PlayerState_FALLING,
+	PlayerState_DEAD
 };
 
-class Player2D : public ImageGO2D
+class Player2D : public AnimatedSprite
 {
 public:
-	Player2D(string _fileName, ID3D11Device* _GD);
+	Player2D(string _fileName, ID3D11Device* _GD, int _frameCount);
 	~Player2D();
+
 	int getCollectables();
 	void addCollectable();
+
 	int getLives();
 	void TakeLives();
+
+	void resetJumpTime();
 
 	virtual void Tick(GameData* _GD);
 	virtual void Draw(DrawData2D* _DD);

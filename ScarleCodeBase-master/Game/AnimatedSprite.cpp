@@ -21,40 +21,25 @@ AnimatedSprite::AnimatedSprite(string _fileName, ID3D11Device* _GD, int frameCou
 	((ID3D11Texture2D *)resource)->GetDesc(&desc);
 
 	m_frameWidth = desc.Width;
+	m_frameHeight = desc.Height;
+
+	sourceRect = new RECT();
 }
 
 AnimatedSprite::~AnimatedSprite()
 {
-
+	if (sourceRect)
+	{
+		sourceRect = nullptr;
+	}
 }
 
 void AnimatedSprite::Tick(GameData* _GD)
 {
-	if (_GD->m_GS != GS_PAUSE)
-	{
-		m_totalElapsed += _GD->m_dt;
-
-		if (m_totalElapsed > m_timePerFrame)
-		{
-			++m_frame;
-			m_frame = m_frame % m_frameCount;
-			m_totalElapsed -= m_timePerFrame;
-		}
-	}
-
 	ImageGO2D::Tick(_GD);
 }
 
 void AnimatedSprite::Draw(DrawData2D* _DD)
 {
-	int frameWidth = m_frameWidth / m_frameCount;
-
-	RECT* sourceRect = new RECT();;
-	sourceRect->left = frameWidth * m_frame;
-	sourceRect->top = 0;
-	sourceRect->right = sourceRect->left + frameWidth;
-	sourceRect->bottom = 16 * 3;
-
-
 	_DD->m_Sprites->Draw(m_pTextureRV, m_pos, sourceRect, m_colour, m_rotation, m_origin, m_scale, SpriteEffects_None);
 }
