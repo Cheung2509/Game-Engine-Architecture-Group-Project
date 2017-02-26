@@ -76,6 +76,9 @@
     <ClCompile Include="VBSnail.cpp">
       <Filter>Objects\Example VBGOs\Source</Filter>
     </ClCompile>
+    <ClCompile Include="PlatfromTile.cpp">
+      <Filter>Objects\2D\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectList.h">
@@ -188,6 +191,9 @@
     </ClInclude>
     <ClInclude Include="VBspiral.h">
       <Filter>Objects\Example VBGOs\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatfromTile.h">
+      <Filter>Objects\2D\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

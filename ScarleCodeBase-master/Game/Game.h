@@ -30,7 +30,7 @@ class Light;
 class TextGO2D;
 class Player2D;
 class Collectables;
-class Platfroms;
+class Platforms;
 
 class Game
 {
@@ -76,7 +76,7 @@ protected:
 
 	Player2D* player;       // pointer to player class
 	Collectables* PickUp;   // pointer to pick up class
-	Platfroms* plat;		//pointer to platfrom class
+	Platforms* plat;		//pointer to platfrom class
 	//sound stuff
 	std::unique_ptr<AudioEngine> m_audioEngine;
 

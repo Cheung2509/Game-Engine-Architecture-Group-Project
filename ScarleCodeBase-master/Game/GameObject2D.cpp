@@ -23,7 +23,7 @@ void GameObject2D::Tick(GameData* _GD)
 		//Move object down if gravity is on
 		if (m_gravityOn == true)
 		{
-			m_acc += Vector2(0, 10);
+			m_acc += Vector2(0, 50);
 		}
 
 		//Claculating new velocity and position

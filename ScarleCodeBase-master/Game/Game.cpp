@@ -116,23 +116,15 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//create player
 	player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
 	player->SetScale(1.0f);
-	player->SetPos(Vector2(200, 400));
+	player->SetPos(Vector2(200, 450));
 	player->setType(PLAYER);
 	m_GameObject2Ds.push_back(player);
 	m_collider.push_back(player);
 
-
-
-	//Creating an example of a animated sprite
-	AnimatedSprite* animatedSprite = new AnimatedSprite("PlayerSpriteSheet", _pd3dDevice, 3);
-	animatedSprite->SetScale(1.0f);
-	animatedSprite->SetPos(Vector2(200, 400));
-	m_GameObject2Ds.push_back(animatedSprite);
-
 	//create a collectable 
 	PickUp = new Collectables("Collectable", _pd3dDevice);
 	PickUp->SetScale(1.0f);
-	PickUp->SetPos(Vector2(500, 400));
+	PickUp->SetPos(Vector2(200, 600));
 	m_GameObject2Ds.push_back(PickUp);
 	PickUp->setType(COLLECTIBLE);
 	m_collider.push_back(PickUp);
@@ -148,13 +140,12 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	enemyVert->setType(ENEMY);
 	m_collider.push_back(enemyVert);
 
-	plat = new Platfroms("Platform", _pd3dDevice);
+	//creat platfrom Tiles
+	plat = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 600.0f);
 	plat->SetScale(1.0f);
-	plat->SetPos(Vector2(200, 600));
-	m_GameObject2Ds.push_back(plat);
 	plat->setType(PLATFORM);
+	m_GameObject2Ds.push_back(plat);
 	m_collider.push_back(plat);
-
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -284,42 +275,27 @@ void Game::PlayTick()
 {
 	for each(GameObject2D* object1 in m_collider)
 	{
-		if (object1->isAlive())
+		if (object1->GetType() != ObjectType::PLAYER)
 		{
-			for each(GameObject2D*object2 in m_collider)
+			for each(GameObject2D* object2 in m_collider)
 			{
-				if (object2->isAlive())
+				if (object2->GetType() == ObjectType::PLAYER && object2->isAlive())
 				{
 					if (object1->checkCollisions(object2))
 					{
-						if (object1->GetType() == ObjectType::PLAYER)
+						if (object1->GetType() == ObjectType::ENEMY)
 						{
-							if (object2->GetType() == ObjectType::ENEMY)
-							{
-								if (player->getLives() > 0)
-								{
-									std::cout << "Collision-ENEMY";
-									object1->SetAlive(false);
-									player->TakeLives();
-									//object2->SetAlive(false);
-								}
-							}
-							if (object2->GetType() == ObjectType::COLLECTIBLE)
-							{
-								if (PickUp->GetPickedUp() == false)
-								{
-									std::cout << "Collision-COLLECTABLE";
-									player->addCollectable();
-									object2->SetAlive(false);
-									PickUp->SetPickeduP();
-								}
-							}
-							if (object2->GetType() == ObjectType::PLATFORM)
-							{
-								std::cout << "Landed \n";
-								player->addForce(-Vector2(0, player->GetVel().y));
-								player->resetJumpTime();
-							}
+							player->addForce(Vector2(0, player->GetVel().y));
+						}
+
+						if (object1->GetType() == ObjectType::PLATFORM)
+						{
+							std::cout << "Landed";
+						}
+
+						if (object1->GetType() == ObjectType::COLLECTIBLE)
+						{
+							std::cout << "Colected \n";
 						}
 					}
 				}
