@@ -184,6 +184,10 @@
   <ItemGroup>
     <ImageContentTask Include="ladder.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Enemy.png" />
+    <ImageContentTask Include="EnemyHor.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

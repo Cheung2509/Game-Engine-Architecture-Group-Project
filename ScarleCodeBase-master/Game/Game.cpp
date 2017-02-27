@@ -24,7 +24,7 @@
 
 #include "Collectables.h"
 #include "Platfroms.h"
-
+#include "PlatfromTile.h"
 #include "Ladder.h"
 
 using namespace DirectX;
@@ -124,28 +124,35 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//create a collectable 
 	PickUp = new Collectables("Collectable", _pd3dDevice);
 	PickUp->SetScale(1.0f);
-	PickUp->SetPos(Vector2(200, 600));
+	PickUp->SetPos(Vector2(400, 150));
 	m_GameObject2Ds.push_back(PickUp);
 	PickUp->setType(COLLECTIBLE);
 	m_collider.push_back(PickUp);
 
 	//creates 2  Enemies for horizontal and vertical momvent 
-	/*Enemy* enemyHor = new Enemy("logo_small", _pd3dDevice,Vector2(30,400),Vector2(750,400));
+	Enemy* enemyHor = new Enemy("EnemyHor", _pd3dDevice,Vector2(300,450),Vector2(550,450));
 	m_GameObject2Ds.push_back(enemyHor);
 	enemyHor->setType(ENEMY);
-	m_collider.push_back(enemyHor);*/
+	m_collider.push_back(enemyHor);
 
-	Enemy* enemyVert=new Enemy("logo_small", _pd3dDevice, Vector2(30, 0), Vector2(30, 300));
+	Enemy* enemyVert=new Enemy("Enemy", _pd3dDevice, Vector2(30, 0), Vector2(30, 450));
 	m_GameObject2Ds.push_back(enemyVert);
 	enemyVert->setType(ENEMY);
 	m_collider.push_back(enemyVert);
 
 	//creat platfrom Tiles
-	plat = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 600.0f);
+	plat = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 480.0f);
 	plat->SetScale(1.0f);
-	plat->setType(PLATFORM);
+	//plat->setType(PLATFORM);
 	m_GameObject2Ds.push_back(plat);
 	m_collider.push_back(plat);
+
+	for (vector<PlatfromTile*>::iterator it = plat->_platfromTile.begin(); it != plat->_platfromTile.end(); it++)
+	{
+		m_GameObject2Ds.push_back(*it);
+		m_collider.push_back(*it);
+	}
+
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -285,24 +292,24 @@ void Game::PlayTick()
 					{
 						if (object1->GetType() == ObjectType::ENEMY)
 						{
-							if (player->getLives() == 0)
+							if (player->getLives() != 0)
 							{
 								std::cout << "Enemy hit \n";
-								player->SetAlive(false);
-								player->TakeLives();
+								/*player->SetAlive(false);
+								player->TakeLives();*/
 							}
 						}
 
 						if (object1->GetType() == ObjectType::PLATFORM)
 						{
-							std::cout << "Landed \n";
+							//std::cout << "Landed \n";
 							player->addForce(-Vector2(0, player->GetVel().y));
 							player->resetJumpTime();
 						}
 
 						if (object1->GetType() == ObjectType::COLLECTIBLE)
 						{
-							if (object1->isAlive())
+							if (PickUp->GetPickedUp()==false)
 							{
 								std::cout << "Colected \n";
 								player->addCollectable();

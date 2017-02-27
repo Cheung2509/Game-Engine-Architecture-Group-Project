@@ -75,5 +75,11 @@
     <ImageContentTask Include="ladder.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="Enemy.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="EnemyHor.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
   </ItemGroup>
 </Project>

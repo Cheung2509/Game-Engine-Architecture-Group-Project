@@ -6,7 +6,7 @@ PlatfromTile::PlatfromTile(string _fileName, ID3D11Device* _GD, Vector2 _pos) : 
 {
 	SetPos(_pos);
 	SetScale(0.5f);
-	setType(PLATFORM);
+	setType(ObjectType::PLATFORM);
 	SetAlive(true);
 }
 
