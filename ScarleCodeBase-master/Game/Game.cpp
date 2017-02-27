@@ -286,35 +286,41 @@ void Game::PlayTick()
 		{
 			for each(GameObject2D* object2 in m_collider)
 			{
-				switch (object2->GetType())
+				if (object2->GetType() == ObjectType::PLAYER && object2->isAlive())
 				{
-				case ObjectType::ENEMY:
-					if (object1->GetType() == ObjectType::ENEMY)
-						{
-							if (player->getLives() != 0)
-							{
-								std::cout << "Enemy hit \n";
-								//player->SetAlive(false);
-								//player->TakeLives();
-							}
-						}
-					break;
-				case ObjectType::COLLECTIBLE:
-					if (PickUp->GetPickedUp() == false)
+					if (object1->checkCollisions(object2))
 					{
-						std::cout << "Colected \n";
-						player->addCollectable();
-						object1->SetAlive(false);
-						PickUp->SetPickeduP();
+						switch (object1->GetType())
+						{
+						case ObjectType::ENEMY:
+							if (object1->GetType() == ObjectType::ENEMY)
+							{
+								if (player->getLives() != 0)
+								{
+									std::cout << "Enemy hit \n";
+									//player->SetAlive(false);
+									//player->TakeLives();
+								}
+							}
+							break;
+						case ObjectType::COLLECTIBLE:
+							if (PickUp->GetPickedUp() == false)
+							{
+								std::cout << "Colected \n";
+								player->addCollectable();
+								object1->SetAlive(false);
+								PickUp->SetPickeduP();
+							}
+							break;
+						case ObjectType::PLATFORM:
+							//std::cout << "Landed \n";
+							player->addForce(-Vector2(0, player->GetVel().y));
+							player->resetJumpTime();
+							break;
+						case::ObjectType::LADDER:
+							break;
+						}
 					}
-					break;
-				case ObjectType::PLATFORM:
-					//std::cout << "Landed \n";
-					player->addForce(-Vector2(0, player->GetVel().y));
-					player->resetJumpTime();
-					break;
-				case::ObjectType::LADDER:
-					break;
 				}
 				/*if (object2->GetType() == ObjectType::PLAYER && object2->isAlive())
 				{
