@@ -302,10 +302,13 @@ void Game::PlayTick()
 
 						if (object1->GetType() == ObjectType::COLLECTIBLE)
 						{
-							std::cout << "Colected \n";
-							player->addCollectable();
-							object1->SetAlive(false);
-							PickUp->SetPickeduP();
+							if (object1->isAlive())
+							{
+								std::cout << "Colected \n";
+								player->addCollectable();
+								object1->SetAlive(false);
+								PickUp->SetPickeduP();
+							}
 						}
 					}
 				}

@@ -38,7 +38,7 @@ void Player2D::Tick(GameData* _GD)
 	{
 		m_PS = PlayerState::PlayerState_MOVE;
 	}
-	else if (m_vel == Vector2::Zero)
+	else if (m_vel.x < 1 || m_vel.x > 1)
 	{
 		std::cout << "Idle \n";
 		m_PS = PlayerState::PlayerState_IDLE;
