@@ -9,7 +9,8 @@ enum PlayerState
 	PlayerState_MOVE,
 	PlayerState_JUMP,
 	PlayerState_FALLING,
-	PlayerState_DEAD
+	PlayerState_DEAD,
+	PlayerState_CLIMBING
 };
 
 class Player2D : public AnimatedSprite

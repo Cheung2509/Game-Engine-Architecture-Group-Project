@@ -10,7 +10,7 @@
 
 Player2D::Player2D(string _fileName, ID3D11Device* _GD, int _frameCount) : AnimatedSprite(_fileName, _GD, _frameCount)
 {
-	SetDrag(0.4);
+	SetDrag(1);
 	SetPhysicsOn(true);
 	SetGravityOn(true);
 	m_PS = PlayerState_MOVE;
@@ -29,6 +29,7 @@ void Player2D::Tick(GameData* _GD)
 {
 	MovementManagement(_GD);
 
+	//Checking velocity and set playerstate accordingly
 	if (m_vel.y > 0)
 	{
 		std::cout << "Falling \n";
@@ -42,6 +43,16 @@ void Player2D::Tick(GameData* _GD)
 	{
 		std::cout << "Idle \n";
 		m_PS = PlayerState::PlayerState_IDLE;
+	}
+
+	//If gravity is not on the player is climbing something
+	if (m_PS == PlayerState::PlayerState_CLIMBING)
+	{
+		SetGravityOn(false);
+	}
+	else
+	{
+		SetGravityOn(true);
 	}
 
 	//switch statement to determine which frame to render
@@ -70,6 +81,9 @@ void Player2D::Tick(GameData* _GD)
 		m_frame = 2;
 		break;
 	}
+	
+	//showing the velocity of the player
+	cout << m_vel.x << "\n";
 
 	AnimatedSprite::Tick(_GD);
 }
@@ -97,7 +111,7 @@ void Player2D::MovementManagement(GameData* _GD)
 			{
 				m_PS = PlayerState::PlayerState_JUMP;
 
-				GameObject2D::addForce(Vector2(0, -100 * _GD->m_dt));
+				GameObject2D::addForce(Vector2(0, -200 * _GD->m_dt));
 
 				if (_GD->m_prevKeyboardState[DIK_SPACE])
 				{
