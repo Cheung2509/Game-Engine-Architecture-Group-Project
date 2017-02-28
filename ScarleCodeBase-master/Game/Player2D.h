@@ -24,6 +24,8 @@ public:
 
 	int getLives();
 	void TakeLives();
+	void SetSpeedY(float speed);
+	void SetIsGrounded(bool isItGrounded);
 
 	void resetJumpTime();
 
@@ -41,6 +43,18 @@ private:
 	int lives;
 	Vector2 forwardMove;
 	Vector2 upMove;
+
+	float speed;
+	float topSpeed;
+	float accel;
+	float decel;
+	float friction;
+	bool isGrounded;
+	float speedY;
+	float airAccel;
+	float grav;
+	float jumpSpeed;
+	
 };
 
 #endif

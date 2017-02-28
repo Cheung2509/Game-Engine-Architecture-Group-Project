@@ -10,14 +10,32 @@
 
 Player2D::Player2D(string _fileName, ID3D11Device* _GD, int _frameCount) : AnimatedSprite(_fileName, _GD, _frameCount)
 {
-	SetDrag(1);
+	/*SetDrag(1);
 	SetPhysicsOn(true);
 	SetGravityOn(true);
 	m_PS = PlayerState_MOVE;
 	Collectables = 0;
 	lives = 3;
 	upMove = 500 * Vector2(0.0f, 1.0f);
-	forwardMove = 200.0f * Vector2(1.0f, 0.0f);
+	forwardMove = 200.0f * Vector2(1.0f, 0.0f);*/
+	//m_fudge = Matrix::CreateRotationY(XM_PI);
+
+	m_pos.y = 0.5f;
+	speed = 0.0f;
+	topSpeed = 6 *40 ;
+	accel = 0.046875 * 40;
+	decel = 0.5* 40;
+	friction = 0.046875 * 40;
+	isGrounded = true;
+	airAccel = 0.09375 * 40;
+	speedY = 0.0f;
+	grav = 0.21875;
+	jumpSpeed = -3.5*40;
+
+	SetDrag(friction);
+	
+	SetPhysicsOn(true);
+
 }
 
 Player2D::~Player2D()
@@ -27,32 +45,151 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameData* _GD)
 {
-	MovementManagement(_GD);
+	
 
-	//Checking velocity and set playerstate accordingly
-	if (m_vel.y > 0)
+	if (_GD->m_keyboardState[DIK_D] & 0x80)
 	{
-		std::cout << "Falling \n";
-		m_PS = PlayerState::PlayerState_FALLING;
-	}
-	else if (m_vel.x != 0)
-	{
-		m_PS = PlayerState::PlayerState_MOVE;
-	}
-	else if (m_vel.x < 1 || m_vel.x > 1)
-	{
-		std::cout << "Idle \n";
-		m_PS = PlayerState::PlayerState_IDLE;
-	}
 
-	//If gravity is not on the player is climbing something
-	if (m_PS == PlayerState::PlayerState_CLIMBING)
+		//checks if player is pressing against their direction or forward
+		if (speed < 0)
+		{
+			if (isGrounded)
+			{
+				m_PS = PlayerState::PlayerState_MOVE;
+			}
+			speed += decel;
+
+
+		}
+		else if (speed < topSpeed)
+		{
+			if (!isGrounded)
+			{
+				speed += airAccel;
+			}
+			else
+			{
+				speed += accel;
+				m_PS = PlayerState::PlayerState_MOVE;
+			}
+
+		}
+
+	}
+	else if (_GD->m_keyboardState[DIK_A] & 0x80)
 	{
-		SetGravityOn(false);
+		if (speed > 0)
+		{
+			if (isGrounded)
+			{
+				m_PS = PlayerState::PlayerState_MOVE;
+			}
+			speed -= decel;
+
+		}
+		else if (speed > -topSpeed)
+		{
+			if (!isGrounded)
+			{
+				speed -= airAccel;
+			}
+			else
+			{
+				speed -= accel;
+				m_PS = PlayerState::PlayerState_MOVE;
+			}
+		}
 	}
 	else
 	{
-		SetGravityOn(true);
+		if (isGrounded)
+		{
+			speed = 0;
+		}
+	}
+
+	//jump functionality 
+	if (_GD->m_keyboardState[DIK_W] & 0x80)
+	{
+
+		if (isGrounded)
+		{
+			speedY = jumpSpeed;
+			isGrounded = false;
+			printf("jumped\n");
+			m_PS = PlayerState::PlayerState_JUMP;
+
+		}
+		else
+		{
+			speedY += grav;
+			if (speedY >= 16 * 40)
+			{
+				speedY = 16 * 40;
+			}
+			//speedY = prevYSpeed;
+		}
+	}
+	else
+	{
+
+		if (speedY > 4 * 40)
+		{
+			speedY = 4 * 40;
+		}
+
+		if (!isGrounded)
+		{
+			speedY += grav;
+			if (speedY >= 16 * 40)
+			{
+				speedY = 16 * 40;
+			}
+		}
+
+	}
+
+
+	if (speedY > 0 && speedY < 4 * 40)
+	{
+		float airDrag = 0.96875;
+		if (speed < 0.125 * 40)
+		{
+			speed = speed * airDrag;
+		}
+	}
+
+
+	//create the transform based on speed
+	forwardMove = speed * Vector2(1, 0);
+	upMove = speedY * Vector2(0, 1);
+	Matrix rotMove = Matrix::CreateRotationY(0);
+	upMove = Vector2::Transform(upMove, rotMove);
+	forwardMove = Vector2::Transform(forwardMove, rotMove);
+
+	//make the player move based on speed calcs
+	m_acc += forwardMove;
+	m_acc += upMove;
+
+	std::cout << speedY << "\n";
+
+	if (m_physicsOn)
+	{
+		float newVelX = m_vel.x + _GD->m_dt * (m_acc.x - m_drag *m_vel.x);
+		//float newVelY = m_vel.y + _GD->m_dt * (m_acc.y - m_drag*m_vel.y);
+		float newVelY = m_acc.y;
+		//could also do same for Z
+
+		Vector2 newVel = Vector2(newVelX, newVelY);
+		//m_vel + _GD->m_dt * (m_acc - m_drag*m_vel);
+
+		Vector2 newPos = m_pos + (_GD->m_dt * m_vel);
+
+
+		m_vel = newVel;
+		m_pos = newPos;
+
+		m_acc = Vector2::Zero;
 	}
 
 	//switch statement to determine which frame to render
@@ -66,7 +203,7 @@ void Player2D::Tick(GameData* _GD)
 			if (m_totalElapsed > m_timePerFrame)
 			{
 				++m_frame;
-				m_frame = m_frame % m_frameCount; 
+				m_frame = m_frame % m_frameCount;
 				m_totalElapsed -= m_timePerFrame;
 			}
 		}
@@ -81,11 +218,7 @@ void Player2D::Tick(GameData* _GD)
 		m_frame = 2;
 		break;
 	}
-	
-	//showing the velocity of the player
-	cout << m_vel.x << "\n";
 
-	AnimatedSprite::Tick(_GD);
 }
 
 void Player2D::MovementManagement(GameData* _GD)
@@ -138,6 +271,16 @@ int Player2D::getLives()
 void Player2D::TakeLives()
 {
 	lives--;
+}
+
+void Player2D::SetSpeedY(float speed)
+{
+	speedY = speed;
+}
+
+void Player2D::SetIsGrounded(bool isItGrounded)
+{
+	isGrounded = isItGrounded;
 }
 
 void Player2D::resetJumpTime()

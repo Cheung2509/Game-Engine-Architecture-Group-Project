@@ -123,7 +123,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//create player
 	player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
 	player->SetScale(1.0f);
-	player->SetPos(Vector2(200, 450));
+	player->SetPos(Vector2(200, 430));
 	player->setType(PLAYER);
 	m_GameObject2Ds.push_back(player);
 	m_collider.push_back(player);
@@ -321,8 +321,12 @@ void Game::PlayTick()
 							break;
 						case ObjectType::PLATFORM:
 							//std::cout << "Landed \n";
-							player->addForce(-Vector2(0, player->GetVel().y));
+							/*player->addForce(-Vector2(0, player->GetVel().y));
 							player->resetJumpTime();
+							*/
+							player->SetIsGrounded(true);
+							printf ("isgrounded");
+							player->SetSpeedY(0.0f);
 							break;
 						case::ObjectType::LADDER:
 							break;
