@@ -45,7 +45,11 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameData* _GD)
 {
-	
+	if (m_PS == PlayerState::PlayerState_CLIMBING)
+	{
+		isGrounded = true;
+		speedY = 0.0f;
+	}
 
 	if (_GD->m_keyboardState[DIK_D] & 0x80)
 	{
@@ -112,7 +116,12 @@ void Player2D::Tick(GameData* _GD)
 	if (_GD->m_keyboardState[DIK_W] & 0x80)
 	{
 
-		if (isGrounded)
+		if (m_PS == PlayerState::PlayerState_CLIMBING)
+		{
+
+			m_pos.y--;
+		}
+		else if (isGrounded)
 		{
 			speedY = jumpSpeed;
 			isGrounded = false;
@@ -284,6 +293,11 @@ void Player2D::SetSpeedY(float speed)
 void Player2D::SetIsGrounded(bool isItGrounded)
 {
 	isGrounded = isItGrounded;
+}
+
+void Player2D::SetPlayerState(PlayerState state)
+{
+	m_PS = state;
 }
 
 void Player2D::resetJumpTime()

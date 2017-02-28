@@ -123,7 +123,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//create player
 	player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
 	player->SetScale(1.0f);
-	player->SetPos(Vector2(200, 450));
+	player->SetPos(Vector2(200, 430));
 	player->setType(PLAYER);
 	m_GameObject2Ds.push_back(player);
 	m_collider.push_back(player);
@@ -131,7 +131,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//create Respawner
 	Respawner = new Collectables("Collectable", _pd3dDevice);
 	Respawner->SetScale(1.0f);
-	Respawner->SetPos(Vector2(100, 450));
+	Respawner->SetPos(Vector2(100, 430));
 	m_GameObject2Ds.push_back(Respawner);
 	Respawner->setType(RESPAWN);
 	m_collider.push_back(Respawner);
@@ -344,15 +344,29 @@ void Game::PlayTick()
 								PickUp->SetPickeduP();
 							}
 							break;
+
 						case ObjectType::PLATFORM:
 							//std::cout << "Landed \n";
-							player->addForce(-Vector2(0, player->GetVel().y));
-							player->resetJumpTime();
+							player->SetIsGrounded(true);
+							printf("isgrounded");
+							player->SetSpeedY(0.0f);
 							break;
+
 						case::ObjectType::LADDER:
+							printf("ladder");
+							player->SetPlayerState(PlayerState::PlayerState_CLIMBING);
 							break;
+
 						case::ObjectType::RESPAWN:
 							Respawner->SetRespawnUp(true);
+						}
+					}
+					else
+					{
+						if (object1->GetType() == ObjectType::LADDER)
+						{
+							//player->SetPlayerState(PlayerState::PlayerState_IDLE);
+							player->SetIsGrounded(false);
 						}
 					}
 				}

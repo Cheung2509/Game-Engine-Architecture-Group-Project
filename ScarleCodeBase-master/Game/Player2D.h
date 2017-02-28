@@ -26,6 +26,7 @@ public:
 	void TakeLives();
 	void SetSpeedY(float speed);
 	void SetIsGrounded(bool isItGrounded);
+	void SetPlayerState(PlayerState state);
 
 	void resetJumpTime();
 
