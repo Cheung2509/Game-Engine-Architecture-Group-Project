@@ -123,7 +123,9 @@ void Player2D::Tick(GameData* _GD)
 		else
 		{
 			speedY += grav;
-			if (speedY >= 16 * 40)
+
+			//top ySpeed
+			if (speedY > 16 * 40)
 			{
 				speedY = 16 * 40;
 			}
@@ -132,7 +134,7 @@ void Player2D::Tick(GameData* _GD)
 	}
 	else
 	{
-
+		//variable jump height
 		if (speedY > 4 * 40)
 		{
 			speedY = 4 * 40;
@@ -141,6 +143,7 @@ void Player2D::Tick(GameData* _GD)
 		if (!isGrounded)
 		{
 			speedY += grav;
+			//top ySpeed
 			if (speedY >= 16 * 40)
 			{
 				speedY = 16 * 40;
