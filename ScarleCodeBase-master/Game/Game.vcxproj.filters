@@ -46,35 +46,8 @@
     <ClCompile Include="Platfroms.cpp">
       <Filter>Objects\2D\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Objects\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Terrain.cpp">
-      <Filter>Objects\Source</Filter>
-    </ClCompile>
     <ClCompile Include="TPSCamera.cpp">
       <Filter>Objects\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Tree.cpp">
-      <Filter>Objects\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="treebit.cpp">
-      <Filter>Objects\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="VBGO.cpp">
-      <Filter>Objects\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="fileVBGO.cpp">
-      <Filter>Objects\Example VBGOs\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="MarchCubes.cpp">
-      <Filter>Objects\Example VBGOs\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="VBCube.cpp">
-      <Filter>Objects\Example VBGOs\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="VBSnail.cpp">
-      <Filter>Objects\Example VBGOs\Source</Filter>
     </ClCompile>
     <ClCompile Include="PlatfromTile.cpp">
       <Filter>Objects\2D\Source</Filter>
@@ -147,22 +120,7 @@
     <ClInclude Include="Platfroms.h">
       <Filter>Objects\2D\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Terrain.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="TPSCamera.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Tree.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TreeBit.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="VBGO.h">
       <Filter>Objects\Headers</Filter>
     </ClInclude>
     <ClInclude Include="vertex.h">
@@ -170,27 +128,6 @@
     </ClInclude>
     <ClInclude Include="ObjectType.h">
       <Filter>Base\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="fileVBGO.h">
-      <Filter>Objects\Example VBGOs\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="MarchCubes.h">
-      <Filter>Objects\Example VBGOs\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="VBCube.h">
-      <Filter>Objects\Example VBGOs\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="VBPillow.h">
-      <Filter>Objects\Example VBGOs\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="VBSnail.h">
-      <Filter>Objects\Example VBGOs\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="VBSpiked.h">
-      <Filter>Objects\Example VBGOs\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="VBspiral.h">
-      <Filter>Objects\Example VBGOs\Headers</Filter>
     </ClInclude>
     <ClInclude Include="PlatfromTile.h">
       <Filter>Objects\2D\Headers</Filter>
@@ -212,9 +149,6 @@
     <Filter Include="Objects\2D">
       <UniqueIdentifier>{500381e1-7d5a-4bb0-9d34-edcb3e1fdd12}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\Example VBGOs">
-      <UniqueIdentifier>{7f926b73-a12f-4617-9170-ea2f749a4c6e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Objects\Headers">
       <UniqueIdentifier>{cbc00798-8a2a-454e-b2c9-e3be93b6582f}</UniqueIdentifier>
     </Filter>
@@ -226,12 +160,6 @@
     </Filter>
     <Filter Include="Objects\2D\Source">
       <UniqueIdentifier>{bbee43eb-cb7d-425b-8b5d-c01b7eb66a1e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Objects\Example VBGOs\Headers">
-      <UniqueIdentifier>{809e8367-6b05-41dd-9317-caa9d35b3d3e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Objects\Example VBGOs\Source">
-      <UniqueIdentifier>{2b4d0ecb-3e67-4421-9100-ecaa70ab6e53}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

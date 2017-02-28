@@ -86,9 +86,6 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	// Create other render resources here
 	m_states = new CommonStates(_pd3dDevice);
 
-	//init render system for VBGOs
-	VBGO::Init(_pd3dDevice);
-
 	//find how big my window is to correctly calculate my aspect ratio
 	RECT rc;
 	GetClientRect(m_hWnd, &rc);
@@ -213,9 +210,6 @@ Game::~Game()
 	//delete Game Data & Draw Data
 	delete m_GD;
 	delete m_DD;
-
-	//tidy up VBGO render system
-	VBGO::CleanUp();
 
 	//tidy away Direct Input Stuff
 	if (m_pKeyboard)
@@ -449,9 +443,6 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 
 	//set which camera to be used
 	m_DD->m_cam = m_cam;
-
-	//update the constant buffer for the rendering of VBGOs
-	VBGO::UpdateConstantBuffer(m_DD);
 
 	//draw all objects
 	for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
