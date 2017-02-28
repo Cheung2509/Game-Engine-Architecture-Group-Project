@@ -32,7 +32,7 @@ using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
 
-Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance) 
+Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 {
 	//set up audio
 	CoInitializeEx(nullptr, COINIT_MULTITHREADED);
@@ -109,10 +109,10 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//create a ladder
 	Ladder* ladder = new Ladder("ladder", _pd3dDevice, 4, 400.0f, 200.0f);
 	//ladder->SetScale(0.5);
-	
+
 	m_GameObject2Ds.push_back(ladder);
 	m_collider.push_back(ladder);
-	
+
 	for (vector<LadderTile*>::iterator it = ladder->ladderTiles.begin(); it != ladder->ladderTiles.end(); it++)
 	{
 		m_GameObject2Ds.push_back(*it);
@@ -123,10 +123,18 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//create player
 	player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
 	player->SetScale(1.0f);
-	player->SetPos(Vector2(200, 430));
+	player->SetPos(Vector2(200, 450));
 	player->setType(PLAYER);
 	m_GameObject2Ds.push_back(player);
 	m_collider.push_back(player);
+
+	//create Respawner
+	Respawner = new Collectables("Collectable", _pd3dDevice);
+	Respawner->SetScale(1.0f);
+	Respawner->SetPos(Vector2(100, 450));
+	m_GameObject2Ds.push_back(Respawner);
+	Respawner->setType(RESPAWN);
+	m_collider.push_back(Respawner);
 
 	//create a collectable 
 	PickUp = new Collectables("Collectable", _pd3dDevice);
@@ -137,12 +145,12 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_collider.push_back(PickUp);
 
 	//creates 2  Enemies for horizontal and vertical momvent 
-	Enemy* enemyHor = new Enemy("EnemyHor", _pd3dDevice,Vector2(300,450),Vector2(550,450));
+	Enemy* enemyHor = new Enemy("EnemyHor", _pd3dDevice, Vector2(300, 450), Vector2(550, 450));
 	m_GameObject2Ds.push_back(enemyHor);
 	enemyHor->setType(ENEMY);
 	m_collider.push_back(enemyHor);
 
-	Enemy* enemyVert=new Enemy("Enemy", _pd3dDevice, Vector2(30, 0), Vector2(30, 450));
+	Enemy* enemyVert = new Enemy("Enemy", _pd3dDevice, Vector2(30, 0), Vector2(30, 450));
 	m_GameObject2Ds.push_back(enemyVert);
 	enemyVert->setType(ENEMY);
 	m_collider.push_back(enemyVert);
@@ -189,7 +197,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 };
 
 
-Game::~Game() 
+Game::~Game()
 {
 	//delete Game Data & Draw Data
 	delete m_GD;
@@ -237,7 +245,7 @@ Game::~Game()
 
 };
 
-bool Game::Tick() 
+bool Game::Tick()
 {
 	//tick audio engine
 	if (!m_audioEngine->Update())
@@ -305,9 +313,26 @@ void Game::PlayTick()
 								if (player->getLives() != 0)
 								{
 									std::cout << "Enemy hit \n";
-									//player->SetAlive(false);
-									//player->TakeLives();
+									player->SetAlive(false);
+									player->TakeLives();
+									if (Respawner->GetRespawnUp())
+									{
+										player->SetAlive(true);
+										player->SetPos(Respawner->GetPos());
+									}
+									else
+									{
+										player->SetAlive(true);
+										player->SetPos(Vector2(200, 450));
+									}
+									player->SetZeroVel(0);
+
 								}
+								else
+								{
+									player->SetAlive(false);
+								}
+
 							}
 							break;
 						case ObjectType::COLLECTIBLE:
@@ -321,53 +346,51 @@ void Game::PlayTick()
 							break;
 						case ObjectType::PLATFORM:
 							//std::cout << "Landed \n";
-							/*player->addForce(-Vector2(0, player->GetVel().y));
+							player->addForce(-Vector2(0, player->GetVel().y));
 							player->resetJumpTime();
-							*/
-							player->SetIsGrounded(true);
-							printf ("isgrounded");
-							player->SetSpeedY(0.0f);
 							break;
 						case::ObjectType::LADDER:
 							break;
+						case::ObjectType::RESPAWN:
+							Respawner->SetRespawnUp(true);
 						}
 					}
 				}
 				/*if (object2->GetType() == ObjectType::PLAYER && object2->isAlive())
 				{
-					if (object1->checkCollisions(object2))
-					{
-						if (object1->GetType() == ObjectType::ENEMY)
-						{
-							if (player->getLives() != 0)
-							{
-								std::cout << "Enemy hit \n";
-								/*player->SetAlive(false);
-								player->TakeLives();
-							}
-						}
-						else if (object1->GetType() == ObjectType::PLATFORM)
-						{
-							//std::cout << "Landed \n";
-							player->addForce(-Vector2(0, player->GetVel().y));
-							player->resetJumpTime();
-						}
+				if (object1->checkCollisions(object2))
+				{
+				if (object1->GetType() == ObjectType::ENEMY)
+				{
+				if (player->getLives() != 0)
+				{
+				std::cout << "Enemy hit \n";
+				/*player->SetAlive(false);
+				player->TakeLives();
+				}
+				}
+				else if (object1->GetType() == ObjectType::PLATFORM)
+				{
+				//std::cout << "Landed \n";
+				player->addForce(-Vector2(0, player->GetVel().y));
+				player->resetJumpTime();
+				}
 
-						if (object1->GetType() == ObjectType::COLLECTIBLE)
-						{
-							if (PickUp->GetPickedUp()==false)
-							{
-								std::cout << "Colected \n";
-								player->addCollectable();
-								object1->SetAlive(false);
-								PickUp->SetPickeduP();
-							}
-							if (object2->GetType() == ObjectType::LADDER)
-							{
-								std::cout << "Collision-LADDER";
-							}
-						}
-					}
+				if (object1->GetType() == ObjectType::COLLECTIBLE)
+				{
+				if (PickUp->GetPickedUp()==false)
+				{
+				std::cout << "Colected \n";
+				player->addCollectable();
+				object1->SetAlive(false);
+				PickUp->SetPickeduP();
+				}
+				if (object2->GetType() == ObjectType::LADDER)
+				{
+				std::cout << "Collision-LADDER";
+				}
+				}
+				}
 				}*/
 			}
 		}
@@ -384,15 +407,15 @@ void Game::PlayTick()
 	}
 }
 
-void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext) 
+void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
 
 
 	room->SetText("Kill the poor");
-	collects->SetText("My Collectables: "+ to_string(player->getCollectables()));
-	lives->SetText("My lives: "+ to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it
+	collects->SetText("My Collectables: " + to_string(player->getCollectables()));
+	lives->SetText("My lives: " + to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it
 
-	//set immediate context of the graphics device
+																  //set immediate context of the graphics device
 	m_DD->m_pd3dImmediateContext = _pd3dImmediateContext;
 
 	//set which camera to be used

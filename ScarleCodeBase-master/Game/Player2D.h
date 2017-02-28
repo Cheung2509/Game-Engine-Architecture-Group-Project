@@ -40,7 +40,7 @@ private:
 	int Collectables;
 	bool isfalling = false;
 	float m_jumpTime;
-	int lives;
+	int lives = 3;
 	Vector2 forwardMove;
 	Vector2 upMove;
 

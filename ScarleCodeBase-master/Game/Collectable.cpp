@@ -19,4 +19,9 @@ void Collectables::SetPickeduP()
 {
 	PickedUp = true;
 }
+
+bool Collectables::GetRespawnUp()
+{
+	return m_RespawnUp;
+}
 		

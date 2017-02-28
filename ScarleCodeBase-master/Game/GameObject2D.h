@@ -36,6 +36,8 @@ public:
 	void SetScale(Vector2 _scale) { m_scale = _scale; }
 	void SetScale(float _scale) { m_scale = _scale * Vector2::One; }
 	void SetOrigin(Vector2 _origin) { m_origin = _origin; }
+	void zeroVel(Vector2 _vel) { _vel = m_vel; }
+	void SetZeroVel(float _vel) { m_vel = _vel * Vector2::Zero; }
 	
 	void		SetPhysicsOn(bool _physics) { m_physicsOn = _physics; }
 	void		SetGravityOn(bool _gravity) { m_gravityOn = _gravity; }

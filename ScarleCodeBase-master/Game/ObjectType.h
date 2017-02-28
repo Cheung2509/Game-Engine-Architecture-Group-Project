@@ -9,7 +9,8 @@ enum ObjectType
 	PLAYER,
 	COLLECTIBLE,
 	PLATFORM,
-	LADDER
+	LADDER,
+	RESPAWN
 };
 
 #endif
