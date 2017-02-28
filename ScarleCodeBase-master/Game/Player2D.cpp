@@ -51,6 +51,11 @@ void Player2D::Tick(GameData* _GD)
 		speedY = 0.0f;
 	}
 
+	if (isGrounded == false)
+	{
+		m_PS = PlayerState::PlayerState_FALLING;
+	}
+
 	if (_GD->m_keyboardState[DIK_D] & 0x80)
 	{
 
@@ -299,6 +304,11 @@ void Player2D::SetPlayerState(PlayerState state)
 {
 	m_PS = state;
 }
+PlayerState Player2D::GetPlayerState()
+{
+	return m_PS;
+}
+
 
 void Player2D::resetJumpTime()
 {

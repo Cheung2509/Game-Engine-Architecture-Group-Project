@@ -27,6 +27,7 @@ public:
 	void SetSpeedY(float speed);
 	void SetIsGrounded(bool isItGrounded);
 	void SetPlayerState(PlayerState state);
+	PlayerState GetPlayerState();
 
 	void resetJumpTime();
 

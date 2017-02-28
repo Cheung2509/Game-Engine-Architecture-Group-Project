@@ -156,7 +156,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_collider.push_back(enemyVert);
 
 	//creat platfrom Tiles
-	plat = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 480.0f);
+	Platforms*  plat = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 480.0f);
 	plat->SetScale(1.0f);
 	//plat->setType(PLATFORM);
 	m_GameObject2Ds.push_back(plat);
@@ -168,6 +168,17 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 		m_collider.push_back(*it);
 	}
 
+	//creat platfrom more platforms around the level 
+	Platforms* plat2 = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 350.0f);
+	plat2->SetScale(1.0f);
+	//plat->setType(PLATFORM);
+	m_GameObject2Ds.push_back(plat2);
+	m_collider.push_back(plat2);
+	for (vector<PlatfromTile*>::iterator it = plat2->_platfromTile.begin(); it != plat2->_platfromTile.end(); it++)
+	{
+		m_GameObject2Ds.push_back(*it);
+		m_collider.push_back(*it);
+	}
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -346,10 +357,14 @@ void Game::PlayTick()
 							break;
 
 						case ObjectType::PLATFORM:
-							//std::cout << "Landed \n";
-							player->SetIsGrounded(true);
-							printf("isgrounded");
-							player->SetSpeedY(0.0f);
+							if (player->GetPlayerState() != PlayerState::PlayerState_JUMP)
+							{
+								std::cout << "Landed \n";
+								//player->addForce(-Vector2(0, player->GetVel().y));
+								player->SetIsGrounded(true);
+								printf("isgrounded");
+								player->SetSpeedY(0.0f);
+						}
 							break;
 
 						case::ObjectType::LADDER:
