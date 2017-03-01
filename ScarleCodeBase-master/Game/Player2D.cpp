@@ -84,6 +84,14 @@ void Player2D::MovementManagement(GameData* _GD)
 	{
 		isGrounded = true;
 		speedY = 0.0f;
+
+		if (_GD->m_keyboardState[DIK_S] & 0x80)
+		{
+
+			m_pos.y++;
+
+		}
+
 	}
 
 	if (isGrounded == false)
@@ -144,6 +152,7 @@ void Player2D::MovementManagement(GameData* _GD)
 			}
 		}
 	}
+	
 	else
 	{
 		if (isGrounded)
