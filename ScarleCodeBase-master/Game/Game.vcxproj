@@ -123,6 +123,7 @@
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
     <ClInclude Include="camera.h" />
+    <ClInclude Include="Camera2D.h" />
     <ClInclude Include="CMOGO.h" />
     <ClInclude Include="Collectables.h" />
     <ClInclude Include="ConstantBuffer.h" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
     <ClCompile Include="camera.cpp" />
+    <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="CMOGO.cpp" />
     <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="Enemy.cpp" />

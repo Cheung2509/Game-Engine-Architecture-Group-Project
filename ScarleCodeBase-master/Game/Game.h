@@ -31,6 +31,7 @@ class TextGO2D;
 class Player2D;
 class Collectables;
 class Platforms;
+class Camera2D;
 
 class Game
 {
@@ -47,7 +48,7 @@ protected:
 	DWORD m_playTime; //amount of time since the game started
 
 	Camera* m_cam; //principle camera
-	TPSCamera* m_TPScam;//TPS cam
+	Camera2D* m_debugCam2D;
 	Light* m_light; //base light
 	TextGO2D* collects;
 	TextGO2D* lives;
@@ -77,7 +78,7 @@ protected:
 	Player2D* player;       // pointer to player class
 	Collectables* PickUp;   // pointer to pick up class
 	Collectables* Respawner;
-	
+
 	//sound stuff
 	std::unique_ptr<AudioEngine> m_audioEngine;
 

@@ -45,6 +45,41 @@ Player2D::~Player2D()
 
 void Player2D::Tick(GameData* _GD)
 {
+	if (_GD->m_GS != GS_PLAY_DEBUG_CAM)
+	{
+		MovementManagement(_GD);
+
+		//switch statement to determine which frame to render
+		switch (m_PS)
+		{
+		case PlayerState_MOVE:
+			if (_GD->m_GS != GS_PAUSE)
+			{
+				m_totalElapsed += _GD->m_dt;
+
+				if (m_totalElapsed > m_timePerFrame)
+				{
+					++m_frame;
+					m_frame = m_frame % m_frameCount;
+					m_totalElapsed -= m_timePerFrame;
+				}
+			}
+			break;
+		case PlayerState_IDLE:
+			m_frame = 0;
+			break;
+		case PlayerState_JUMP:
+			m_frame = 2;
+			break;
+		case PlayerState_FALLING:
+			m_frame = 2;
+			break;
+		}
+	}
+}
+
+void Player2D::MovementManagement(GameData* _GD)
+{
 	if (m_PS == PlayerState::PlayerState_CLIMBING)
 	{
 		isGrounded = true;
@@ -207,69 +242,6 @@ void Player2D::Tick(GameData* _GD)
 		m_pos = newPos;
 
 		m_acc = Vector2::Zero;
-	}
-
-	//switch statement to determine which frame to render
-	switch (m_PS)
-	{
-	case PlayerState_MOVE:
-		if (_GD->m_GS != GS_PAUSE)
-		{
-			m_totalElapsed += _GD->m_dt;
-
-			if (m_totalElapsed > m_timePerFrame)
-			{
-				++m_frame;
-				m_frame = m_frame % m_frameCount;
-				m_totalElapsed -= m_timePerFrame;
-			}
-		}
-		break;
-	case PlayerState_IDLE:
-		m_frame = 0;
-		break;
-	case PlayerState_JUMP:
-		m_frame = 2;
-		break;
-	case PlayerState_FALLING:
-		m_frame = 2;
-		break;
-	}
-
-}
-
-void Player2D::MovementManagement(GameData* _GD)
-{
-	//if player is not dead
-	if (m_PS != PlayerState_DEAD)
-	{
-		//player moves left or right
-		if (_GD->m_keyboardState[DIK_D] & 0x80)
-		{
-			m_acc += forwardMove;
-		}
-		if (_GD->m_keyboardState[DIK_A] & 0x80)
-		{
-			m_acc -= forwardMove;
-		}
-
-		//if player is not falling and space is  not held over 0.5 seconds
-		if (m_PS != PlayerState_FALLING && m_jumpTime < 0.5f)
-		{
-			//If space is pressed make player jump
-			if (_GD->m_keyboardState[DIK_SPACE] & 0x80)
-			{
-				m_PS = PlayerState::PlayerState_JUMP;
-
-				GameObject2D::addForce(Vector2(0, -200 * _GD->m_dt));
-
-				if (_GD->m_prevKeyboardState[DIK_SPACE])
-				{
-					m_jumpTime += _GD->m_dt;
-				}
-				std::cout << "Jumping \n";
-			}
-		}
 	}
 }
 

@@ -8,6 +8,8 @@
 #include "SpriteBatch.h"
 #include "SpriteFont.h"
 
+class Camera2D;
+
 using namespace DirectX;
 using namespace std;
 
@@ -16,6 +18,8 @@ struct DrawData2D
 	//spritebatch stuff
 	unique_ptr<SpriteBatch>	m_Sprites;
 	unique_ptr<SpriteFont> m_Font;
+
+	Camera2D* m_cam2D;
 };
 
 #endif

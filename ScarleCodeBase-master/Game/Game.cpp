@@ -14,19 +14,14 @@
 #include "DrawData2D.h"
 #include "Player2D.h"
 #include "GameObject2D.h"
-
 #include "AnimatedSprite.h"
-
-
-#include "AnimatedSprite.h"
-
-#include"Enemy.h"
-
+#include "Enemy.h"
 #include "Collectables.h"
 #include "Platfroms.h"
 #include "PlatfromTile.h"
 #include "Ladder.h"
 #include "LadderTile.h"
+#include "Camera2D.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -98,6 +93,10 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_cam->SetPos(Vector3::Up);
 	m_GameObjects.push_back(m_cam);
 
+	m_debugCam2D = new Camera2D();
+	m_debugCam2D->SetPos(Vector2(0, 0));
+	m_debugCam2D->SetRot(0.0f);
+	m_GameObject2Ds.push_back(m_debugCam2D);
 
 	//create a base light
 	m_light = new Light(Vector3(0.0f, 100.0f, 160.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.4f, 0.1f, 0.1f, 1.0f));
@@ -106,7 +105,6 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//create a ladder
 	Ladder* ladder = new Ladder("ladder", _pd3dDevice, 4, 400.0f, 200.0f);
 	//ladder->SetScale(0.5);
-
 	m_GameObject2Ds.push_back(ladder);
 	m_collider.push_back(ladder);
 
@@ -115,7 +113,6 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 		m_GameObject2Ds.push_back(*it);
 		m_collider.push_back(*it);
 	}
-
 
 	//create player
 	player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
@@ -294,12 +291,29 @@ bool Game::Tick()
 	case GS_PLAY_MAIN_CAM:
 		PlayTick();
 		break;
+	case GS_PLAY_DEBUG_CAM:
+		PlayTick();
+		break;
 	}
 	return true;
 };
 
 void Game::PlayTick()
 {
+	if ((m_keyboardState[DIK_SPACE] & 0x80) && !(m_prevKeyboardState[DIK_SPACE] & 0x80))
+	{
+		if (m_GD->m_GS == GS_PLAY_MAIN_CAM)
+		{
+			std::cout << "State Changed";
+			m_GD->m_GS = GS_PLAY_DEBUG_CAM;
+		}
+		else
+		{
+			std::cout << "State Changed";
+			m_GD->m_GS = GS_PLAY_MAIN_CAM;
+		}
+	}
+
 	for each(GameObject2D* object1 in m_collider)
 	{
 		if (object1->GetType() != ObjectType::PLAYER)
@@ -353,7 +367,6 @@ void Game::PlayTick()
 						case ObjectType::PLATFORM:
 							if (player->GetPlayerState() != PlayerState::PlayerState_JUMP)
 							{
-								std::cout << "Landed \n";
 								//player->addForce(-Vector2(0, player->GetVel().y));
 								player->SetIsGrounded(true);
 								printf("isgrounded");
@@ -434,7 +447,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
 
 
-	room->SetText("Kill the poor");
+	room->SetText("Room 1");
 	collects->SetText("My Collectables: " + to_string(player->getCollectables()));
 	lives->SetText("My lives: " + to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it
 
@@ -444,6 +457,16 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	//set which camera to be used
 	m_DD->m_cam = m_cam;
 
+	switch (m_GD->m_GS)
+	{
+	case GS_PLAY_DEBUG_CAM:
+		m_DD2D->m_cam2D = m_debugCam2D;
+		break;
+	case GS_PLAY_MAIN_CAM:
+		m_DD2D->m_cam2D = m_debugCam2D;
+		break;
+	}
+
 	//draw all objects
 	for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
 	{
@@ -451,7 +474,14 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	}
 
 	// Draw sprite batch stuff 
-	m_DD2D->m_Sprites->Begin();
+	m_DD2D->m_Sprites->Begin( SpriteSortMode::SpriteSortMode_BackToFront,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		nullptr,
+		m_DD2D->m_cam2D->getTransform());
+
 	for (list<GameObject2D *>::iterator it = m_GameObject2Ds.begin(); it != m_GameObject2Ds.end(); it++)
 	{
 		if ((*it)->isAlive())
