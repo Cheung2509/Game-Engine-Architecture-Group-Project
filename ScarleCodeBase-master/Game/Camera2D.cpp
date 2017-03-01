@@ -2,6 +2,7 @@
 #include "gamedata.h"
 #include "DrawData2D.h"
 #include "helper.h"
+#include <iostream>
 
 Camera2D::Camera2D(Vector2 _target, float _zoom)
 {
@@ -16,6 +17,7 @@ Camera2D::~Camera2D()
 
 void Camera2D::Tick(GameData* _GD)
 {
+	/*
 	if (_GD->m_GS == GS_PLAY_DEBUG_CAM)
 	{
 		if (_GD->m_keyboardState[DIK_A] & 0x80)
@@ -36,11 +38,14 @@ void Camera2D::Tick(GameData* _GD)
 			m_pos.y -= 100 * _GD->m_dt;
 		}
 	}
+	*/
 	m_transform =
-		Matrix::CreateTranslation(Vector3(m_pos.x, m_pos.y, 0)) *
+		Matrix::CreateTranslation(Vector3(-m_pos.x, -m_pos.y, 0)) *
 		Matrix::CreateRotationZ(m_rotation) *
 		Matrix::CreateScale(Vector3(m_zoom, m_zoom, 1)) *
-		Matrix::CreateTranslation(Vector3(0.0, 0.0f, 0.0f));
+		Matrix::CreateTranslation(Vector3(_GD->viewportWidth * 0.5f, _GD->viewportHeight * 0.5f, 0.0f));
+
+	std::cout << "X: " << m_pos.x << "Y: " << m_pos.y << "\n";
 
 	GameObject2D::Tick(_GD);
 }

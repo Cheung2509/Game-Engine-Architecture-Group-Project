@@ -55,6 +55,12 @@
     <ClCompile Include="Camera2D.cpp">
       <Filter>Objects\2D\Source</Filter>
     </ClCompile>
+    <ClCompile Include="CameraFollow2D.cpp">
+      <Filter>Objects\2D\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugCamera.cpp">
+      <Filter>Objects\2D\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectList.h">
@@ -137,6 +143,12 @@
     </ClInclude>
     <ClInclude Include="Camera2D.h">
       <Filter>Objects\2D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraFollow2D.h">
+      <Filter>Objects\2D\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCamera.h">
+      <Filter>Base\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

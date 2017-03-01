@@ -14,6 +14,8 @@ struct GameData
 {
 	float m_dt;  //time step since last frame
 	GameState m_GS; //global GameState
+	float viewportWidth;
+	float viewportHeight;
 
 	//player input
 	unsigned char* m_keyboardState; //current state of the Keyboard

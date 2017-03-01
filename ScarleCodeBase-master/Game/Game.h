@@ -31,7 +31,8 @@ class TextGO2D;
 class Player2D;
 class Collectables;
 class Platforms;
-class Camera2D;
+class DebugCamera;
+class CameraFollow2D;
 
 class Game
 {
@@ -48,7 +49,8 @@ protected:
 	DWORD m_playTime; //amount of time since the game started
 
 	Camera* m_cam; //principle camera
-	Camera2D* m_debugCam2D;
+	DebugCamera* m_debugCam2D;
+	CameraFollow2D* m_playerCam;
 	Light* m_light; //base light
 	TextGO2D* collects;
 	TextGO2D* lives;
@@ -56,6 +58,7 @@ protected:
 
 	list<GameObject *> m_GameObjects; //data structure storing all GameObjects of this Game
 	list<GameObject2D *> m_GameObject2Ds;//ditto 2D objects
+	list<TextGO2D *> m_UserInterface;
 
 	//required for the CMO model rendering system
 	CommonStates* m_states;

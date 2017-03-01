@@ -4,7 +4,7 @@
 #include <iostream>
 
 #include "GameData.h"
-
+#include "DrawData2D.h"
 
 
 
@@ -165,7 +165,6 @@ void Player2D::MovementManagement(GameData* _GD)
 		{
 			speedY = jumpSpeed;
 			isGrounded = false;
-			printf("jumped\n");
 			m_PS = PlayerState::PlayerState_JUMP;
 
 		}
@@ -222,8 +221,6 @@ void Player2D::MovementManagement(GameData* _GD)
 	//make the player move based on speed calcs
 	m_acc += forwardMove;
 	m_acc += upMove;
-
-	std::cout << speedY << "\n";
 
 	if (m_physicsOn)
 	{

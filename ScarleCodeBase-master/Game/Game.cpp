@@ -21,7 +21,8 @@
 #include "PlatfromTile.h"
 #include "Ladder.h"
 #include "LadderTile.h"
-#include "Camera2D.h"
+#include "DebugCamera.h"
+#include "CameraFollow2D.h"
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -93,7 +94,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_cam->SetPos(Vector3::Up);
 	m_GameObjects.push_back(m_cam);
 
-	m_debugCam2D = new Camera2D();
+	m_debugCam2D = new DebugCamera();
 	m_debugCam2D->SetPos(Vector2(0, 0));
 	m_debugCam2D->SetRot(0.0f);
 	m_GameObject2Ds.push_back(m_debugCam2D);
@@ -121,6 +122,9 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	player->setType(PLAYER);
 	m_GameObject2Ds.push_back(player);
 	m_collider.push_back(player);
+
+	m_playerCam = new CameraFollow2D(player);
+	m_GameObject2Ds.push_back(m_playerCam);
 
 	//create Respawner
 	Respawner = new Collectables("Collectable", _pd3dDevice);
@@ -186,19 +190,19 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	collects->SetPos(Vector2(10, 525));
 	collects->SetScale(0.7);
 	collects->SetColour(Color((float*)&Colors::Yellow));
-	m_GameObject2Ds.push_back(collects);
+	m_UserInterface.push_back(collects);
 
 	lives = new TextGO2D("Lives: ");
 	lives->SetPos(Vector2(10, 560));
 	lives->SetScale(0.7);
 	lives->SetColour(Color((float*)&Colors::Yellow));
-	m_GameObject2Ds.push_back(lives);
+	m_UserInterface.push_back(lives);
 
 	room = new TextGO2D("roomname");
 	room->SetPos(Vector2(300, 500));
 	room->SetScale(0.7);
 	room->SetColour(Color((float*)&Colors::Yellow));
-	m_GameObject2Ds.push_back(room);
+	m_UserInterface.push_back(room);
 };
 
 
@@ -273,6 +277,9 @@ bool Game::Tick()
 	RECT window;
 	GetWindowRect(m_hWnd, &window);
 	SetCursorPos((window.left + window.right) >> 1, (window.bottom + window.top) >> 1);
+
+	m_GD->viewportHeight = window.bottom;
+	m_GD->viewportWidth = window.left;
 
 	//calculate frame time-step dt for passing down to game objects
 	DWORD currentTime = GetTickCount();
@@ -369,7 +376,6 @@ void Game::PlayTick()
 							{
 								//player->addForce(-Vector2(0, player->GetVel().y));
 								player->SetIsGrounded(true);
-								printf("isgrounded");
 								player->SetSpeedY(0.0f);
 						}
 							break;
@@ -460,10 +466,12 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	switch (m_GD->m_GS)
 	{
 	case GS_PLAY_DEBUG_CAM:
+		cout << "DebugCam \n";
 		m_DD2D->m_cam2D = m_debugCam2D;
 		break;
 	case GS_PLAY_MAIN_CAM:
-		m_DD2D->m_cam2D = m_debugCam2D;
+		cout << "PlayerCam \n";
+		m_DD2D->m_cam2D = m_playerCam;
 		break;
 	}
 
@@ -488,6 +496,14 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 		{
 			(*it)->Draw(m_DD2D);
 		}
+	}
+	m_DD2D->m_Sprites->End();
+
+	m_DD2D->m_Sprites->Begin();
+
+	for (list<TextGO2D*>::iterator it = m_UserInterface.begin(); it != m_UserInterface.end(); it++)
+	{
+		(*it)->Draw(m_DD2D);
 	}
 	m_DD2D->m_Sprites->End();
 
