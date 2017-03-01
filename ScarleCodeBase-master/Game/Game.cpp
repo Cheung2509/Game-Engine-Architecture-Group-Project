@@ -338,6 +338,7 @@ void Game::PlayTick()
 									{
 										player->SetAlive(true);
 										player->SetPos(Respawner->GetPos());
+										player->SetPlayerState(PlayerState::PlayerState_IDLE);
 									}
 									else
 									{
