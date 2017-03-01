@@ -14,7 +14,7 @@ public:
 	virtual void Tick(GameData* _GD);
 	virtual void Draw(DrawData2D* _DD);
 
-	void PlatformForce(GameObject2D* gameObject);
+	//void PlatformForce(GameObject2D* gameObject);
 	std::vector<PlatfromTile*> _platfromTile;
 	int incrementY = 0;
 
@@ -25,6 +25,6 @@ public:
 	Vector2 position = Vector2(0.0f, 0.0f);
 
 private:
-	float EqualAndOpposite;
-	Vector2 PlatfromUpMove;
+	/*float EqualAndOpposite;
+	Vector2 PlatfromUpMove;*/
 };

@@ -373,12 +373,16 @@ void Game::PlayTick()
 							break;
 
 						case ObjectType::PLATFORM:
-							if (player->GetPlayerState() != PlayerState::PlayerState_JUMP)
+							/*if (player->GetPlayerState() != PlayerState::PlayerState_JUMP)
 							{
-								//player->addForce(-Vector2(0, player->GetVel().y));
 								player->SetIsGrounded(true);
 								player->SetSpeedY(0.0f);
-						}
+							}*/
+							if (player->GetPosY()+30 < object1->GetPosY())
+							{
+								player->SetIsGrounded(true);
+								player->SetSpeedY(0.0f);
+							}
 							break;
 
 						case::ObjectType::LADDER:

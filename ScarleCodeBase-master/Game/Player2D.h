@@ -28,6 +28,7 @@ public:
 	void SetIsGrounded(bool isItGrounded);
 	void SetPlayerState(PlayerState state);
 	PlayerState GetPlayerState();
+	bool getIsGrounded() { return isGrounded; }
 
 	void resetJumpTime();
 

@@ -29,6 +29,7 @@ public:
 	Vector2 GetPos() { return m_pos; }
 	Vector2 GetVel() { return m_vel; }
 	float GetRot() { return m_rotation; }
+	float GetPosY() { return m_pos.y; }
 	//setters
 
 	void SetPos(Vector2 _pos) { m_pos = _pos; }
@@ -52,7 +53,6 @@ public:
 	bool isAlive() { return m_alive; }
 	void SetAlive(bool alive) { m_alive = alive; }
 	void addForce(Vector2 forceDirection) { m_vel += forceDirection; }
-
 	//collisions
 	virtual bool checkCollisions(GameObject2D* _target) { return(Vector2::Distance(_target->GetPos(), m_pos) < 40.0f); }
 	
