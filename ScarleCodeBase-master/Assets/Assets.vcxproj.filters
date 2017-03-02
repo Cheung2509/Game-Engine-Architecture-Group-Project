@@ -7,9 +7,6 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{8e595723-add9-42f2-8215-4fcf74f338ac}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Models">
-      <UniqueIdentifier>{64fc769d-bad4-4c24-bf49-281a0d86541d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Textures">
       <UniqueIdentifier>{d0ca2129-2972-476d-82a9-1f0a9000b117}</UniqueIdentifier>
     </Filter>
