@@ -40,6 +40,10 @@ public:
 	void SetOrigin(Vector2 _origin) { m_origin = _origin; }
 	void zeroVel(Vector2 _vel) { _vel = m_vel; }
 	void SetZeroVel(float _vel) { m_vel = _vel * Vector2::Zero; }
+	void SetSpeedY(float speed);
+	void SetIsGrounded(bool isItGrounded);
+	void setHasJumped(bool hasItJumped);
+	void setOnLadder(bool isOnLadder);
 	
 	void		SetPhysicsOn(bool _physics) { m_physicsOn = _physics; }
 	void		SetGravityOn(bool _gravity) { m_gravityOn = _gravity; }
@@ -62,6 +66,18 @@ protected:
 	Vector2 m_scale;
 	Color m_colour;
 	Vector2 m_origin;
+	float speed;
+	float topSpeed;
+	float accel;
+	float decel;
+	float friction;
+	bool isGrounded;
+	bool hasJumped;
+	bool onLadder;
+	float speedY;
+	float airAccel;
+	float grav;
+	float jumpSpeed;
 
 
 	//physics stuff

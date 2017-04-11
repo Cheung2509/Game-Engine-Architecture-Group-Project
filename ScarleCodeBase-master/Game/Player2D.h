@@ -41,22 +41,13 @@ private:
 	PlayerState m_PS;
 
 	int Collectables;
-	bool isfalling = false;
-	float m_jumpTime;
+	//bool isfalling = false;
+	//float m_jumpTime;
 	int lives = 3;
 	Vector2 forwardMove;
 	Vector2 upMove;
 
-	float speed;
-	float topSpeed;
-	float accel;
-	float decel;
-	float friction;
-	bool isGrounded;
-	float speedY;
-	float airAccel;
-	float grav;
-	float jumpSpeed;
+	
 	
 };
 

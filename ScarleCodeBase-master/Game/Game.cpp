@@ -156,7 +156,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//creat platfrom Tiles
 	Platforms*  plat = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 480.0f);
 	plat->SetScale(1.0f);
-	//plat->setType(PLATFORM);
+	plat->setType(PLATFORM);
 	m_GameObject2Ds.push_back(plat);
 	m_collider.push_back(plat);
 
@@ -169,7 +169,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//creat platfrom more platforms around the level 
 	Platforms* plat2 = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 350.0f);
 	plat2->SetScale(1.0f);
-	//plat->setType(PLATFORM);
+	plat2->setType(PLATFORM);
 	m_GameObject2Ds.push_back(plat2);
 	m_collider.push_back(plat2);
 	for (vector<PlatfromTile*>::iterator it = plat2->_platfromTile.begin(); it != plat2->_platfromTile.end(); it++)
@@ -321,6 +321,94 @@ void Game::PlayTick()
 		}
 	}
 
+	CollisionManagement();
+
+	//update all objects
+	for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
+	{
+		(*it)->Tick(m_GD);
+	}
+	for (list<GameObject2D *>::iterator it = m_GameObject2Ds.begin(); it != m_GameObject2Ds.end(); it++)
+	{
+		(*it)->Tick(m_GD);
+	}
+}
+
+void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
+{
+	if (object1->GetType() != ObjectType::LADDER)
+	{
+		switch (object1->GetType())
+		{
+		case ObjectType::ENEMY:
+			if (object1->GetType() == ObjectType::ENEMY)
+			{
+				if (player->getLives() != 0)
+				{
+					std::cout << "Enemy hit \n";
+					player->SetAlive(false);
+					player->TakeLives();
+					if (Respawner->GetRespawnUp())
+					{
+						player->SetAlive(true);
+						player->SetPos(Respawner->GetPos());
+						player->SetPlayerState(PlayerState::PlayerState_IDLE);
+					}
+					else
+					{
+						player->SetAlive(true);
+						player->SetPos(Vector2(200, 450));
+					}
+					player->SetZeroVel(0);
+
+				}
+				else
+				{
+					player->SetAlive(false);
+				}
+
+			}
+			break;
+		case ObjectType::COLLECTIBLE:
+			if (PickUp->GetPickedUp() == false)
+			{
+				std::cout << "Collected \n";
+				player->addCollectable();
+				object1->SetAlive(false);
+				PickUp->SetPickeduP();
+			}
+			break;
+
+		case ObjectType::PLATFORM:
+			/*if (player->GetPlayerState() != PlayerState::PlayerState_JUMP)
+			{
+			player->SetIsGrounded(true);
+			player->SetSpeedY(0.0f);
+			}*/
+			//if (player->GetPosY() + 30 < object1->GetPosY())
+			//{
+				player->SetIsGrounded(true);
+				player->SetSpeedY(0.0f);
+			//}
+			break;
+
+		case::ObjectType::RESPAWN:
+			Respawner->SetRespawnUp(true);
+		}
+	}
+	else
+	{
+		object2->SetIsGrounded(true);
+		object2->setHasJumped(false);
+		object2->SetSpeedY(0.0f);
+		//object2->setSpeed(0.0f);
+		object2->setOnLadder(true);
+	}
+
+}
+
+void Game::CollisionManagement()
+{
 	for each(GameObject2D* object1 in m_collider)
 	{
 		if (object1->GetType() != ObjectType::PLAYER)
@@ -331,76 +419,16 @@ void Game::PlayTick()
 				{
 					if (object1->checkCollisions(object2))
 					{
-						switch (object1->GetType())
-						{
-						case ObjectType::ENEMY:
-							if (object1->GetType() == ObjectType::ENEMY)
-							{
-								if (player->getLives() != 0)
-								{
-									std::cout << "Enemy hit \n";
-									player->SetAlive(false);
-									player->TakeLives();
-									if (Respawner->GetRespawnUp())
-									{
-										player->SetAlive(true);
-										player->SetPos(Respawner->GetPos());
-										player->SetPlayerState(PlayerState::PlayerState_IDLE);
-									}
-									else
-									{
-										player->SetAlive(true);
-										player->SetPos(Vector2(200, 450));
-									}
-									player->SetZeroVel(0);
-
-								}
-								else
-								{
-									player->SetAlive(false);
-								}
-
-							}
-							break;
-						case ObjectType::COLLECTIBLE:
-							if (PickUp->GetPickedUp() == false)
-							{
-								std::cout << "Colected \n";
-								player->addCollectable();
-								object1->SetAlive(false);
-								PickUp->SetPickeduP();
-							}
-							break;
-
-						case ObjectType::PLATFORM:
-							/*if (player->GetPlayerState() != PlayerState::PlayerState_JUMP)
-							{
-								player->SetIsGrounded(true);
-								player->SetSpeedY(0.0f);
-							}*/
-							if (player->GetPosY()+30 < object1->GetPosY())
-							{
-								player->SetIsGrounded(true);
-								player->SetSpeedY(0.0f);
-							}
-							break;
-
-						case::ObjectType::LADDER:
-							printf("ladder");
-							player->SetPlayerState(PlayerState::PlayerState_CLIMBING);
-							break;
-
-						case::ObjectType::RESPAWN:
-							Respawner->SetRespawnUp(true);
-						}
+						CollisionResolution(object1, object2);
+						return;
 					}
 					else
 					{
-						if (object1->GetType() == ObjectType::LADDER)
-						{
-							//player->SetPlayerState(PlayerState::PlayerState_IDLE);
-							player->SetIsGrounded(false);
-						}
+
+						//player->SetPlayerState(PlayerState::PlayerState_IDLE);
+						player->SetIsGrounded(false);
+						player->setOnLadder(false);
+
 					}
 				}
 				/*if (object2->GetType() == ObjectType::PLAYER && object2->isAlive())
@@ -441,16 +469,6 @@ void Game::PlayTick()
 				}*/
 			}
 		}
-	}
-
-	//update all objects
-	for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
-	{
-		(*it)->Tick(m_GD);
-	}
-	for (list<GameObject2D *>::iterator it = m_GameObject2Ds.begin(); it != m_GameObject2Ds.end(); it++)
-	{
-		(*it)->Tick(m_GD);
 	}
 }
 

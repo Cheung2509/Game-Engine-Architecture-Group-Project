@@ -29,8 +29,8 @@ Player2D::Player2D(string _fileName, ID3D11Device* _GD, int _frameCount) : Anima
 	isGrounded = true;
 	airAccel = 0.09375 * 40;
 	speedY = 0.0f;
-	grav = 0.21875;
-	jumpSpeed = -3.5*40;
+	grav = 0.21875*5*1.2;
+	jumpSpeed = -3.5*50;
 
 	SetDrag(friction);
 	
@@ -80,6 +80,9 @@ void Player2D::Tick(GameData* _GD)
 
 void Player2D::MovementManagement(GameData* _GD)
 {
+
+	//THIS IS WHERE THE PHYSICS HAPPEN
+	//BUT ONLY BASE PHYSICS. CHANGES TO THE PLAYER THROUGH INTERACTION WITH OBJECTS WILL BE IN THE GAME.CPP WITH COLLISION STUFF
 	if (m_PS == PlayerState::PlayerState_CLIMBING)
 	{
 		isGrounded = true;
@@ -101,17 +104,10 @@ void Player2D::MovementManagement(GameData* _GD)
 
 	if (_GD->m_keyboardState[DIK_D] & 0x80)
 	{
-
 		//checks if player is pressing against their direction or forward
 		if (speed < 0)
 		{
-			if (isGrounded)
-			{
-				m_PS = PlayerState::PlayerState_MOVE;
-			}
 			speed += decel;
-
-
 		}
 		else if (speed < topSpeed)
 		{
@@ -122,22 +118,14 @@ void Player2D::MovementManagement(GameData* _GD)
 			else
 			{
 				speed += accel;
-				m_PS = PlayerState::PlayerState_MOVE;
 			}
-
 		}
-
 	}
 	else if (_GD->m_keyboardState[DIK_A] & 0x80)
 	{
 		if (speed > 0)
 		{
-			if (isGrounded)
-			{
-				m_PS = PlayerState::PlayerState_MOVE;
-			}
 			speed -= decel;
-
 		}
 		else if (speed > -topSpeed)
 		{
@@ -148,74 +136,95 @@ void Player2D::MovementManagement(GameData* _GD)
 			else
 			{
 				speed -= accel;
-				m_PS = PlayerState::PlayerState_MOVE;
 			}
 		}
 	}
-	
 	else
 	{
 		if (isGrounded)
 		{
-			speed = 0;
+			if (speed < 0.125*40 && speed > -0.125 *40)
+			{
+				speed = 0;
+			}
+			else
+			{
+				if (speed > 0)
+				{
+					speed -= friction;
+				}
+				else if (speed < 0)
+				{
+					speed += friction;
+				}
+
+			}
+
 		}
 	}
-
 	//jump functionality 
 	if (_GD->m_keyboardState[DIK_W] & 0x80)
 	{
-
-		if (m_PS == PlayerState::PlayerState_CLIMBING)
-		{
-
-			m_pos.y--;
-		}
-		else if (isGrounded)
+		if (isGrounded)
 		{
 			speedY = jumpSpeed;
 			isGrounded = false;
-			m_PS = PlayerState::PlayerState_JUMP;
-
+			printf("jumped\n");
+			hasJumped = true;
 		}
 		else
 		{
 			speedY += grav;
 
-			//top ySpeed
-			if (speedY > 16 * 40)
+			if (speedY >= 16 * 40)
 			{
 				speedY = 16 * 40;
 			}
-			//speedY = prevYSpeed;
+
 		}
 	}
 	else
 	{
-		//variable jump height
-		if (speedY > 4 * 40)
+		if (hasJumped)
 		{
-			speedY = 4 * 40;
+			if (speedY < -2 * 50)
+			{
+				speedY = -2 * 50;
+			}
 		}
-
 		if (!isGrounded)
 		{
+
 			speedY += grav;
-			//top ySpeed
 			if (speedY >= 16 * 40)
 			{
 				speedY = 16 * 40;
 			}
 		}
-
 	}
-
-
-	if (speedY > 0 && speedY < 4 * 40)
+	if (speedY > 0 && speedY > -4 * 40)
 	{
 		float airDrag = 0.96875;
-		if (speed < 0.125 * 40)
+		if (speed > 0.125 * 40)
 		{
 			speed = speed * airDrag;
+		}
+	}
+	SetDrag(friction);
+
+	if (_GD->m_keyboardState[DIK_W] & 0x80)
+	{
+		if (onLadder)
+		{
+			m_pos.y = m_pos.y--;
+		}
+	}
+
+	if (_GD->m_keyboardState[DIK_S] & 0x80)
+	{
+		if (onLadder)
+		{
+			m_pos.y = m_pos.y++;
 		}
 	}
 
@@ -249,6 +258,11 @@ void Player2D::MovementManagement(GameData* _GD)
 
 		m_acc = Vector2::Zero;
 	}
+
+	if (_GD->m_keyboardState[DIK_R] & 0x80)
+	{
+		printf("Debug");
+	}
 }
 
 int Player2D::getCollectables()
@@ -278,6 +292,8 @@ void Player2D::SetIsGrounded(bool isItGrounded)
 	isGrounded = isItGrounded;
 }
 
+
+
 void Player2D::SetPlayerState(PlayerState state)
 {
 	m_PS = state;
@@ -287,11 +303,6 @@ PlayerState Player2D::GetPlayerState()
 	return m_PS;
 }
 
-
-void Player2D::resetJumpTime()
-{
-	m_jumpTime = 0;
-}
 
 
 void Player2D::Draw(DrawData2D* _DD)

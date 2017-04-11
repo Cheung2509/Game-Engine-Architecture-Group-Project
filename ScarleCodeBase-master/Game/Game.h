@@ -87,6 +87,8 @@ protected:
 
 	//Tick functions for each state
 	void PlayTick();
+	void CollisionResolution(GameObject2D* object1, GameObject2D* object2);
+	void CollisionManagement();
 	//changes
 	list<GameObject2D*> m_collider;
 };

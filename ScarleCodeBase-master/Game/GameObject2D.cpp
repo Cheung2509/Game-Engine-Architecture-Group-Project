@@ -41,3 +41,25 @@ ObjectType GameObject2D::GetType()
 {
 	return m_objectype;
 }
+
+void GameObject2D::SetSpeedY(float speed)
+{
+	speedY = speed;
+}
+
+void GameObject2D::SetIsGrounded(bool isItGrounded)
+{
+	isGrounded = isItGrounded;
+}
+
+void GameObject2D::setHasJumped(bool hasItJumped)
+{
+	hasJumped = hasItJumped;
+}
+
+void GameObject2D::setOnLadder(bool isOnLadder)
+{
+	onLadder = isOnLadder;
+}
+
+
