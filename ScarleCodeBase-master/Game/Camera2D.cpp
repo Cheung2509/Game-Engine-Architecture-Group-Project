@@ -45,7 +45,7 @@ void Camera2D::Tick(GameData* _GD)
 		Matrix::CreateScale(Vector3(m_zoom, m_zoom, 1)) *
 		Matrix::CreateTranslation(Vector3(_GD->viewportWidth * 0.5f, _GD->viewportHeight * 0.5f, 0.0f));
 
-	std::cout << "X: " << m_pos.x << "Y: " << m_pos.y << "\n";
+	//std::cout << "X: " << m_pos.x << "Y: " << m_pos.y << "\n";
 
 	GameObject2D::Tick(_GD);
 }

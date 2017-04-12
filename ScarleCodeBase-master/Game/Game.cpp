@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <time.h>
 #include <iostream>
+#include <fstream>
 
 //our headers
 #include "ObjectList.h"
@@ -474,9 +475,22 @@ void Game::CollisionManagement()
 
 void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
+	//basic file reader using f stream may want to look at json stuff from dugeon death
+	ifstream RoomNameFile;
+	std::string RoomName;
+	RoomNameFile.open("RoomNameFile.txt");
+	if (RoomNameFile.is_open())
+	{
+		while (!RoomNameFile.eof())
+		{
+			getline(RoomNameFile, RoomName);
+		}
+	}
+	RoomNameFile.close();
+	
+	
 
-
-	room->SetText("Room 1");
+	room->SetText(RoomName);
 	collects->SetText("My Collectables: " + to_string(player->getCollectables()));
 	lives->SetText("My lives: " + to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it
 
@@ -493,7 +507,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 		m_DD2D->m_cam2D = m_debugCam2D;
 		break;
 	case GS_PLAY_MAIN_CAM:
-		cout << "PlayerCam \n";
+	//	cout << "PlayerCam \n";
 		m_DD2D->m_cam2D = m_playerCam;
 		break;
 	}
