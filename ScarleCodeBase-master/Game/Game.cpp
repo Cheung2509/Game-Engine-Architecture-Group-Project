@@ -7,6 +7,7 @@
 #include <time.h>
 #include <iostream>
 #include <fstream>
+#include <jsoncons/json.hpp>
 
 //our headers
 #include "ObjectList.h"
@@ -432,42 +433,7 @@ void Game::CollisionManagement()
 
 					}
 				}
-				/*if (object2->GetType() == ObjectType::PLAYER && object2->isAlive())
-				{
-				if (object1->checkCollisions(object2))
-				{
-				if (object1->GetType() == ObjectType::ENEMY)
-				{
-				if (player->getLives() != 0)
-				{
-				std::cout << "Enemy hit \n";
-				/*player->SetAlive(false);
-				player->TakeLives();
-				}
-				}
-				else if (object1->GetType() == ObjectType::PLATFORM)
-				{
-				//std::cout << "Landed \n";
-				player->addForce(-Vector2(0, player->GetVel().y));
-				player->resetJumpTime();
-				}
-
-				if (object1->GetType() == ObjectType::COLLECTIBLE)
-				{
-				if (PickUp->GetPickedUp()==false)
-				{
-				std::cout << "Colected \n";
-				player->addCollectable();
-				object1->SetAlive(false);
-				PickUp->SetPickeduP();
-				}
-				if (object2->GetType() == ObjectType::LADDER)
-				{
-				std::cout << "Collision-LADDER";
-				}
-				}
-				}
-				}*/
+				
 			}
 		}
 	}
@@ -475,21 +441,26 @@ void Game::CollisionManagement()
 
 void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
-	//basic file reader using f stream may want to look at json stuff from dugeon death
-	ifstream RoomNameFile;
+	//Json file reader test now should be moved to an oop set up im thinking two classes one to store all the levels we will need and another to load the current level 
+	using jsoncons::json;
 	std::string RoomName;
-	RoomNameFile.open("RoomNameFile.txt");
-	if (RoomNameFile.is_open())
+
+	std::ifstream LevelsFile("..\\Application\\LevelSetUp.json");
+
+	if (LevelsFile.is_open())
 	{
-		while (!RoomNameFile.eof())
+		json Rooms;
+		LevelsFile >> Rooms;
+
+		for (const auto& room : Rooms.members())
 		{
-			getline(RoomNameFile, RoomName);
+			const auto& name = room.name();
+			const auto& data = room.value();
+
+			auto Title = data["RoomName"].as_cstring();
+			RoomName = Title; //currently passes vairablew from file called room name to room name string but cud just get name of the room from the 
 		}
 	}
-	RoomNameFile.close();
-	
-	
-
 	room->SetText(RoomName);
 	collects->SetText("My Collectables: " + to_string(player->getCollectables()));
 	lives->SetText("My lives: " + to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it
