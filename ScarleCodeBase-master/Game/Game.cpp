@@ -160,7 +160,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	plat->SetScale(1.0f);
 	plat->setType(PLATFORM);
 	m_GameObject2Ds.push_back(plat);
-	m_collider.push_back(plat);
+	//m_collider.push_back(plat);
 
 	for (vector<PlatfromTile*>::iterator it = plat->_platfromTile.begin(); it != plat->_platfromTile.end(); it++)
 	{
@@ -173,7 +173,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	plat2->SetScale(1.0f);
 	plat2->setType(PLATFORM);
 	m_GameObject2Ds.push_back(plat2);
-	m_collider.push_back(plat2);
+	//m_collider.push_back(plat2);
 	for (vector<PlatfromTile*>::iterator it = plat2->_platfromTile.begin(); it != plat2->_platfromTile.end(); it++)
 	{
 		m_GameObject2Ds.push_back(*it);
@@ -387,11 +387,18 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 			player->SetIsGrounded(true);
 			player->SetSpeedY(0.0f);
 			}*/
-			//if (player->GetPosY() + 30 < object1->GetPosY())
-			//{
+			if (player->GetPosY() < object1->GetPosY())
+			{
+				//top collision
 				player->SetIsGrounded(true);
 				player->SetSpeedY(0.0f);
-			//}
+			}
+			else if (player->GetPosY() > object1->GetPosY())
+			{
+				//bottom collision
+				player->SetSpeedY(20.0f);
+			}
+
 			break;
 
 		case::ObjectType::RESPAWN:
