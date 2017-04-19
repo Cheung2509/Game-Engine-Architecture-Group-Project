@@ -1,11 +1,17 @@
 #pragma once
-#include "ImageGO2D.h"
-class LadderTile :public ImageGO2D
+#include "GameObject2D.h"
+
+class Sprite;
+
+class LadderTile :public GameObject2D
 {
 public:
-	LadderTile(string _fileName, ID3D11Device* _GD, Vector2 _pos);
+	LadderTile(Sprite*, Vector2);
 	~LadderTile();
 
+	virtual void Draw(DrawData2D* _DD);
 
+private:
+	Sprite* sprite;
 };
 

@@ -1,11 +1,16 @@
 #pragma once
-#include "ImageGO2D.h"
-class PlatfromTile :public ImageGO2D
+#include "GameObject2D.h"
+
+class Sprite;
+class PlatfromTile :public GameObject2D
 {
 public:
-	PlatfromTile(string _fileName, ID3D11Device* _GD, Vector2 _pos);
+	PlatfromTile(Sprite*, Vector2);
 	~PlatfromTile();
 
+	virtual void Draw(DrawData2D* _DD);
 
+protected:
+	Sprite* sprite;
 };
 

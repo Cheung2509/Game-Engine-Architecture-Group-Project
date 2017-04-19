@@ -1,14 +1,17 @@
 #pragma once
 #include "GameObject2D.h"
+
 #include <vector>
 #include <memory>
 
 
 class LadderTile;
+class Sprite;
+
 class Ladder: public GameObject2D
 {
 public:
-	Ladder(string _fileName, ID3D11Device* _GD, int _noOfTiles, float _initPosX, float _initPosY);
+	Ladder(Sprite* _sprite, int _noOfTiles, float _initPosX, float _initPosY);
 	virtual ~Ladder();
 
 	virtual void Tick(GameData* _GD);

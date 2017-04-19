@@ -2,6 +2,8 @@
 #include "Levels.h"
 #include "gamedata.h"
 
+#include "Sprite.h"
+
 #include "PlatfromTile.h"
 #include "LadderTile.h"
 #include "Player2D.h"
@@ -24,6 +26,9 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 {
 	Vector2 TilePos(0, 0);  //x and y coordiantes of Tiles to be placed
 
+	Sprite* _platform = new Sprite("Platform", _pd3dDevice);
+	Sprite* _ladder = new Sprite("Ladder", _pd3dDevice);
+
 	for (int i = 0; i < Map.size(); i++)
 	{
 		if (TilePos.x >= _GD->viewportWidth)
@@ -40,7 +45,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 			case '_':
 				//create a platfrom;
 				//TilePos.x = 0.0f + incrementY;
-				plat = new PlatfromTile("Platform", _pd3dDevice, TilePos);
+				plat = new PlatfromTile(_platform, TilePos);
 				//plat->SetScale(1.0f);
 				plat->setType(PLATFORM);
 				InSceneObjects.push_back(plat);
@@ -48,7 +53,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				break;
 			case'H':
 				//create ladderTile
-				Ladder = new LadderTile("ladder", _pd3dDevice, TilePos);
+				Ladder = new LadderTile(_ladder, TilePos);
 				InSceneObjects.push_back(Ladder);
 				break;
 			//case'*':

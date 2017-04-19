@@ -1,6 +1,8 @@
 #include "Platfroms.h"
 
-Platforms::Platforms(string _fileName, ID3D11Device* _GD, int _noOfTiles, float _initPosX, float _initPosY)
+#include "Sprite.h"
+
+Platforms::Platforms(Sprite* _sprite, int _noOfTiles, float _initPosX, float _initPosY)
 {
 	posX = _initPosX;
 	posY = _initPosY;
@@ -10,7 +12,7 @@ Platforms::Platforms(string _fileName, ID3D11Device* _GD, int _noOfTiles, float 
 		posX = _initPosX + incrementY;
 		posY = _initPosY ;
 		position = Vector2(posX, posY);
-		_platfromTile.push_back(new PlatfromTile(_fileName, _GD, position));
+		_platfromTile.push_back(new PlatfromTile(_sprite, position));
 		incrementY += 30;
 	}
 

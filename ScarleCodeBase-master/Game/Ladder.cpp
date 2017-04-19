@@ -1,9 +1,11 @@
 #include "Ladder.h"
 #include "LadderTile.h"
 
+#include "Sprite.h"
 
 
-Ladder::Ladder(string _fileName, ID3D11Device* _GD, int _noOfTiles, float _initPosX, float _initPosY)
+
+Ladder::Ladder(Sprite* _sprite, int _noOfTiles, float _initPosX, float _initPosY)
 {
 	
 	 posX = _initPosX;
@@ -15,7 +17,7 @@ Ladder::Ladder(string _fileName, ID3D11Device* _GD, int _noOfTiles, float _initP
 		posX = _initPosX;
 		posY = _initPosY - incrementY;
 		position = Vector2(posX, posY);
-		ladderTiles.push_back(new LadderTile(_fileName, _GD, position));
+		ladderTiles.push_back(new LadderTile(_sprite, position));
 		incrementY -= 60;
 	}
 

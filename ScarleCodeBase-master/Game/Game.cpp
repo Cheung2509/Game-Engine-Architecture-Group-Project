@@ -158,20 +158,20 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//enemyVert->setType(ENEMY);
 	//m_collider.push_back(enemyVert);
 
-	//creat platfrom Tiles
+	/*creat platfrom Tiles
 	Platforms*  plat = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 480.0f);
 	plat->SetScale(1.0f);
-	//plat->setType(PLATFORM);
-	//m_GameObject2Ds.push_back(plat);
-	//m_collider.push_back(plat);
+	plat->setType(PLATFORM);
+	m_GameObject2Ds.push_back(plat);
+	m_collider.push_back(plat);
 
 	for (vector<PlatfromTile*>::iterator it = plat->_platfromTile.begin(); it != plat->_platfromTile.end(); it++)
 	{
 		m_GameObject2Ds.push_back(*it);
 		m_collider.push_back(*it);
-	}
+	}*/
 
-	//creat platfrom more platforms around the level 
+	////creat platfrom more platforms around the level 
 	//Platforms* plat2 = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 350.0f);
 	//plat2->SetScale(1.0f);
 	//plat2->setType(PLATFORM);
@@ -182,6 +182,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//	m_GameObject2Ds.push_back(*it);
 	//	m_collider.push_back(*it);
 	//}
+	
 	GetWindowRect(m_hWnd, &window);
 	m_GD->viewportHeight = window.bottom;
 	m_GD->viewportWidth = window.left;
@@ -333,7 +334,7 @@ void Game::PlayTick()
 		}
 	}
 
-	CollisionManagement();
+	//CollisionManagement();
 
 	//update all objects
 	for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
