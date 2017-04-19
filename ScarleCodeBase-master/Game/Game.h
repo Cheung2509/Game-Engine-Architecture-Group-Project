@@ -53,7 +53,7 @@ protected:
 
 	Camera* m_cam; //principle camera
 	DebugCamera* m_debugCam2D;
-	CameraFollow2D* m_playerCam;
+	//CameraFollow2D* m_playerCam;
 	Light* m_light; //base light
 	TextGO2D* collects;
 	TextGO2D* lives;
@@ -96,7 +96,7 @@ protected:
 	void CollisionResolution(GameObject2D* object1, GameObject2D* object2);
 	void CollisionManagement();
 	//changes
-	list<GameObject2D*> m_collider;
+	//list<GameObject2D*> m_collider;
 };
 
 
