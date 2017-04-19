@@ -31,6 +31,9 @@ class TextGO2D;
 class Player2D;
 class Collectables;
 class Platforms;
+class Levels;
+class Room;
+
 class DebugCamera;
 class CameraFollow2D;
 
@@ -73,6 +76,7 @@ protected:
 	unsigned char			m_prevKeyboardState[256];
 	DIMOUSESTATE			m_mouseState;
 	HWND m_hWnd;
+	RECT window;
 
 	GameData* m_GD;			//Data to be shared to all Game Objects as they are ticked
 	DrawData* m_DD;			//Data to be shared to all Game Objects as they are drawn
@@ -81,6 +85,8 @@ protected:
 	Player2D* player;       // pointer to player class
 	Collectables* PickUp;   // pointer to pick up class
 	Collectables* Respawner;
+
+	std::unique_ptr<Room>_Room = nullptr;
 
 	//sound stuff
 	std::unique_ptr<AudioEngine> m_audioEngine;

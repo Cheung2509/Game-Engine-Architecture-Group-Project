@@ -15,17 +15,7 @@ Platforms::Platforms(string _fileName, ID3D11Device* _GD, int _noOfTiles, float 
 	}
 
 	float yPosition = _platfromTile[2]->GetPosY();
-
-	/*EqualAndOpposite = 1000.0f;
-	PlatfromUpMove = EqualAndOpposite * Vector2(0.0f, 10.0f);*/
 }
-
-
-//void Platforms::PlatformForce(GameObject2D* gameObject)
-//{
-//	gameObject->addForce(PlatfromUpMove);
-//}
-
 
 void Platforms::Tick(GameData* _GD)
 {

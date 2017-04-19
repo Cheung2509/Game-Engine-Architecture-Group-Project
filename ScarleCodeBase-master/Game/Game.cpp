@@ -7,7 +7,7 @@
 #include <time.h>
 #include <iostream>
 #include <fstream>
-#include <jsoncons/json.hpp>
+
 
 //our headers
 #include "ObjectList.h"
@@ -23,6 +23,9 @@
 #include "PlatfromTile.h"
 #include "Ladder.h"
 #include "LadderTile.h"
+#include "Room.h"
+#include "Levels.h"
+
 #include "DebugCamera.h"
 #include "CameraFollow2D.h"
 
@@ -106,60 +109,60 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_GameObjects.push_back(m_light);
 
 	//create a ladder
-	Ladder* ladder = new Ladder("ladder", _pd3dDevice, 4, 400.0f, 200.0f);
-	//ladder->SetScale(0.5);
-	m_GameObject2Ds.push_back(ladder);
-	m_collider.push_back(ladder);
+	//Ladder* ladder = new Ladder("ladder", _pd3dDevice, 4, 400.0f, 200.0f);
+	////ladder->SetScale(0.5);
+	///*m_GameObject2Ds.push_back(ladder);
+	//m_collider.push_back(ladder);*/
 
-	for (vector<LadderTile*>::iterator it = ladder->ladderTiles.begin(); it != ladder->ladderTiles.end(); it++)
-	{
-		m_GameObject2Ds.push_back(*it);
-		m_collider.push_back(*it);
-	}
+	//for (vector<LadderTile*>::iterator it = ladder->ladderTiles.begin(); it != ladder->ladderTiles.end(); it++)
+	//{
+	//	m_GameObject2Ds.push_back(*it);
+	//	m_collider.push_back(*it);
+	//}
 
-	//create player
+	////create player
 	player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
 	player->SetScale(1.0f);
 	player->SetPos(Vector2(200, 430));
 	player->setType(PLAYER);
 	m_GameObject2Ds.push_back(player);
 	m_collider.push_back(player);
-
+	//player = _Room->getPlayer();
 	m_playerCam = new CameraFollow2D(player);
 	m_GameObject2Ds.push_back(m_playerCam);
 
-	//create Respawner
-	Respawner = new Collectables("Collectable", _pd3dDevice);
-	Respawner->SetScale(1.0f);
-	Respawner->SetPos(Vector2(100, 430));
-	m_GameObject2Ds.push_back(Respawner);
-	Respawner->setType(RESPAWN);
-	m_collider.push_back(Respawner);
+	////create Respawner
+	//Respawner = new Collectables("Collectable", _pd3dDevice);
+	//Respawner->SetScale(1.0f);
+	//Respawner->SetPos(Vector2(100, 430));
+	//m_GameObject2Ds.push_back(Respawner);
+	//Respawner->setType(RESPAWN);
+	//m_collider.push_back(Respawner);
 
-	//create a collectable 
-	PickUp = new Collectables("Collectable", _pd3dDevice);
-	PickUp->SetScale(1.0f);
-	PickUp->SetPos(Vector2(400, 150));
-	m_GameObject2Ds.push_back(PickUp);
-	PickUp->setType(COLLECTIBLE);
-	m_collider.push_back(PickUp);
+	////create a collectable 
+	//PickUp = new Collectables("Collectable", _pd3dDevice);
+	//PickUp->SetScale(1.0f);
+	//PickUp->SetPos(Vector2(400, 150));
+	//m_GameObject2Ds.push_back(PickUp);
+	//PickUp->setType(COLLECTIBLE);
+	//m_collider.push_back(PickUp);
 
-	//creates 2  Enemies for horizontal and vertical momvent 
-	Enemy* enemyHor = new Enemy("EnemyHor", _pd3dDevice, Vector2(300, 450), Vector2(550, 450));
-	m_GameObject2Ds.push_back(enemyHor);
-	enemyHor->setType(ENEMY);
-	m_collider.push_back(enemyHor);
+	////creates 2  Enemies for horizontal and vertical momvent 
+	//Enemy* enemyHor = new Enemy("EnemyHor", _pd3dDevice, Vector2(300, 450), Vector2(550, 450));
+	//m_GameObject2Ds.push_back(enemyHor);
+	//enemyHor->setType(ENEMY);
+	//m_collider.push_back(enemyHor);
 
-	Enemy* enemyVert = new Enemy("Enemy", _pd3dDevice, Vector2(30, 0), Vector2(30, 450));
-	m_GameObject2Ds.push_back(enemyVert);
-	enemyVert->setType(ENEMY);
-	m_collider.push_back(enemyVert);
+	//Enemy* enemyVert = new Enemy("Enemy", _pd3dDevice, Vector2(30, 0), Vector2(30, 450));
+	//m_GameObject2Ds.push_back(enemyVert);
+	//enemyVert->setType(ENEMY);
+	//m_collider.push_back(enemyVert);
 
 	//creat platfrom Tiles
 	Platforms*  plat = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 480.0f);
 	plat->SetScale(1.0f);
-	plat->setType(PLATFORM);
-	m_GameObject2Ds.push_back(plat);
+	//plat->setType(PLATFORM);
+	//m_GameObject2Ds.push_back(plat);
 	//m_collider.push_back(plat);
 
 	for (vector<PlatfromTile*>::iterator it = plat->_platfromTile.begin(); it != plat->_platfromTile.end(); it++)
@@ -169,16 +172,23 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	}
 
 	//creat platfrom more platforms around the level 
-	Platforms* plat2 = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 350.0f);
-	plat2->SetScale(1.0f);
-	plat2->setType(PLATFORM);
-	m_GameObject2Ds.push_back(plat2);
-	//m_collider.push_back(plat2);
-	for (vector<PlatfromTile*>::iterator it = plat2->_platfromTile.begin(); it != plat2->_platfromTile.end(); it++)
-	{
-		m_GameObject2Ds.push_back(*it);
-		m_collider.push_back(*it);
-	}
+	//Platforms* plat2 = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 350.0f);
+	//plat2->SetScale(1.0f);
+	//plat2->setType(PLATFORM);
+	//m_GameObject2Ds.push_back(plat2);
+	////m_collider.push_back(plat2);
+	//for (vector<PlatfromTile*>::iterator it = plat2->_platfromTile.begin(); it != plat2->_platfromTile.end(); it++)
+	//{
+	//	m_GameObject2Ds.push_back(*it);
+	//	m_collider.push_back(*it);
+	//}
+	GetWindowRect(m_hWnd, &window);
+	m_GD->viewportHeight = window.bottom;
+	m_GD->viewportWidth = window.left;
+	Levels::load();
+	_Room.reset(Levels::LoadedLevels[0].createRoom());
+	_Room->CreateRoom(m_GD, _pd3dDevice);
+
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -276,12 +286,12 @@ bool Game::Tick()
 	}
 
 	//lock the cursor to the centre of the window
-	RECT window;
-	GetWindowRect(m_hWnd, &window);
+	//RECT window;
+	//GetWindowRect(m_hWnd, &window);
 	SetCursorPos((window.left + window.right) >> 1, (window.bottom + window.top) >> 1);
 
-	m_GD->viewportHeight = window.bottom;
-	m_GD->viewportWidth = window.left;
+	//m_GD->viewportHeight = window.bottom;
+	//m_GD->viewportWidth = window.left;
 
 	//calculate frame time-step dt for passing down to game objects
 	DWORD currentTime = GetTickCount();
@@ -330,6 +340,7 @@ void Game::PlayTick()
 	{
 		(*it)->Tick(m_GD);
 	}
+	_Room->Tick(m_GD);
 	for (list<GameObject2D *>::iterator it = m_GameObject2Ds.begin(); it != m_GameObject2Ds.end(); it++)
 	{
 		(*it)->Tick(m_GD);
@@ -418,11 +429,11 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 
 void Game::CollisionManagement()
 {
-	for each(GameObject2D* object1 in m_collider)
+	for each(GameObject2D* object1 in m_collider)//changed this line 
 	{
 		if (object1->GetType() != ObjectType::PLAYER)
 		{
-			for each(GameObject2D* object2 in m_collider)
+			for each(GameObject2D* object2 in m_collider)//and this 
 			{
 				if (object2->GetType() == ObjectType::PLAYER && object2->isAlive())
 				{
@@ -448,27 +459,8 @@ void Game::CollisionManagement()
 
 void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
-	//Json file reader test now should be moved to an oop set up im thinking two classes one to store all the levels we will need and another to load the current level 
-	using jsoncons::json;
-	std::string RoomName;
-
-	std::ifstream LevelsFile("..\\Application\\LevelSetUp.json");
-
-	if (LevelsFile.is_open())
-	{
-		json Rooms;
-		LevelsFile >> Rooms;
-
-		for (const auto& room : Rooms.members())
-		{
-			const auto& name = room.name();
-			const auto& data = room.value();
-
-			auto Title = data["RoomName"].as_cstring();
-			RoomName = Title; //currently passes vairablew from file called room name to room name string but cud just get name of the room from the 
-		}
-	}
-	room->SetText(RoomName);
+	
+	room->SetText(_Room->getRoomMap());
 	collects->SetText("My Collectables: " + to_string(player->getCollectables()));
 	lives->SetText("My lives: " + to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it
 
@@ -512,6 +504,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 			(*it)->Draw(m_DD2D);
 		}
 	}
+	_Room->Draw(m_DD2D);
 	m_DD2D->m_Sprites->End();
 
 	m_DD2D->m_Sprites->Begin();

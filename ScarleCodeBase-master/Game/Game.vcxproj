@@ -142,12 +142,14 @@
     <ClInclude Include="ImageGO2D.h" />
     <ClInclude Include="Ladder.h" />
     <ClInclude Include="LadderTile.h" />
+    <ClInclude Include="Levels.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="ObjectList.h" />
     <ClInclude Include="ObjectType.h" />
     <ClInclude Include="Platfroms.h" />
     <ClInclude Include="PlatfromTile.h" />
     <ClInclude Include="Player2D.h" />
+    <ClInclude Include="Room.h" />
     <ClInclude Include="TextGO2D.h" />
     <ClInclude Include="TPSCamera.h" />
     <ClInclude Include="vertex.h" />
@@ -167,10 +169,12 @@
     <ClCompile Include="ImageGO2D.cpp" />
     <ClCompile Include="Ladder.cpp" />
     <ClCompile Include="LadderTile.cpp" />
+    <ClCompile Include="Levels.cpp" />
     <ClCompile Include="light.cpp" />
     <ClCompile Include="Platfroms.cpp" />
     <ClCompile Include="PlatfromTile.cpp" />
     <ClCompile Include="Player2D.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="TextGO2D.cpp" />
     <ClCompile Include="TPSCamera.cpp" />
   </ItemGroup>
