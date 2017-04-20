@@ -5,6 +5,7 @@
 #include "PlatfromTile.h"
 #include "LadderTile.h"
 #include "Player2D.h"
+#include "Collectables.h"
 
 #include "CameraFollow2D.h"
 
@@ -20,6 +21,7 @@ Room::Room(Levels& L) :
 	plat = nullptr;
 	Ladder = nullptr;
 	player = nullptr;
+	PickUp = nullptr;
 }
 
 
@@ -71,6 +73,18 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 				m_playerCam = new CameraFollow2D(player);
 				InSceneObjects.push_back(m_playerCam);
+				break;
+			case'$':
+				//create collecatable
+				PickUp = new Collectables("Collectable", _pd3dDevice);
+				PickUp->SetScale(1.0f);
+				PickUp->SetPos(TilePos);
+				PickUp->setType(COLLECTIBLE);
+
+				InSceneObjects.push_back(PickUp);
+				m_collider.push_back(PickUp);
+				break;
+
 			default:
 				break;
 			}
@@ -90,6 +104,9 @@ void Room::Draw(DrawData2D* _DD)
 {
 	for (auto& Object : InSceneObjects)
 	{
-		Object->Draw(_DD);
+		if (Object->isAlive())
+		{
+			Object->Draw(_DD);
+		}
 	}
 }

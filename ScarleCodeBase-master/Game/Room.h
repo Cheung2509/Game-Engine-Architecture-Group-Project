@@ -10,6 +10,7 @@
 class Levels;
 class PlatfromTile;
 class LadderTile;
+class Collectables;
 class Player2D;
 
 class CameraFollow2D;
@@ -27,6 +28,7 @@ public:
 
 	Player2D* getPlayer() { return player; }
 	CameraFollow2D* getPlayerCamera() { return m_playerCam; }
+	Collectables* getCollectable() { return PickUp; }
 
 	void CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice);
 	void Tick(GameData* _GD);
@@ -44,6 +46,8 @@ private:
 
 	PlatfromTile*  plat;
 	LadderTile* Ladder;
+	Collectables* PickUp;
+
 	Player2D* player;
 	CameraFollow2D* m_playerCam;
 

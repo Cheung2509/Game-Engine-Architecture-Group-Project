@@ -19,10 +19,10 @@
 #include "AnimatedSprite.h"
 #include "Enemy.h"
 #include "Collectables.h"
-#include "Platfroms.h"
-#include "PlatfromTile.h"
-#include "Ladder.h"
-#include "LadderTile.h"
+//#include "Platfroms.h"
+//#include "PlatfromTile.h"
+//#include "Ladder.h"
+//#include "LadderTile.h"
 #include "Room.h"
 #include "Levels.h"
 
@@ -362,17 +362,17 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 					std::cout << "Enemy hit \n";
 					player->SetAlive(false);
 					player->TakeLives();
-					if (Respawner->GetRespawnUp())
+					/*if (Respawner->GetRespawnUp())
 					{
 						player->SetAlive(true);
 						player->SetPos(Respawner->GetPos());
 						player->SetPlayerState(PlayerState::PlayerState_IDLE);
 					}
 					else
-					{
+					{*/
 						player->SetAlive(true);
 						player->SetPos(Vector2(200, 450));
-					}
+					//}
 					player->SetZeroVel(0);
 
 				}
@@ -384,12 +384,12 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 			}
 			break;
 		case ObjectType::COLLECTIBLE:
-			if (PickUp->GetPickedUp() == false)
+			if (_Room->getCollectable()->GetPickedUp() == false)// could change this 
 			{
 				std::cout << "Collected \n";
 				player->addCollectable();
 				object1->SetAlive(false);
-				PickUp->SetPickeduP();
+				_Room->getCollectable()->SetPickeduP();
 			}
 			break;
 
@@ -413,8 +413,8 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 
 			break;
 
-		case::ObjectType::RESPAWN:
-			Respawner->SetRespawnUp(true);
+		/*case::ObjectType::RESPAWN:
+			Respawner->SetRespawnUp(true);*/
 		}
 	}
 	else
