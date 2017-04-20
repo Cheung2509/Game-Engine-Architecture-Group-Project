@@ -4,28 +4,10 @@
     <ClCompile Include="Game.cpp">
       <Filter>Base\Source</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedSprite.cpp">
-      <Filter>Objects\2D\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Collectable.cpp">
-      <Filter>Objects\2D\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Objects\2D\Source</Filter>
-    </ClCompile>
     <ClCompile Include="GameObject2D.cpp">
       <Filter>Objects\2D\Source</Filter>
     </ClCompile>
-    <ClCompile Include="ImageGO2D.cpp">
-      <Filter>Objects\2D\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Ladder.cpp">
-      <Filter>Objects\2D\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="LadderTile.cpp">
-      <Filter>Objects\2D\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Player2D.cpp">
       <Filter>Objects\2D\Source</Filter>
     </ClCompile>
     <ClCompile Include="TextGO2D.cpp">
@@ -49,9 +31,6 @@
     <ClCompile Include="TPSCamera.cpp">
       <Filter>Objects\Source</Filter>
     </ClCompile>
-    <ClCompile Include="PlatfromTile.cpp">
-      <Filter>Objects\2D\Source</Filter>
-    </ClCompile>
     <ClCompile Include="Camera2D.cpp">
       <Filter>Objects\2D\Source</Filter>
     </ClCompile>
@@ -67,7 +46,30 @@
     <ClCompile Include="Room.cpp">
       <Filter>Base\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="AnimatedSprite.cpp">
+      <Filter>Objects\2D\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Collectable.cpp">
+      <Filter>Objects\2D\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Objects\2D\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageGO2D.cpp">
+      <Filter>Objects\2D\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Objects\2D\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Player2D.cpp">
+      <Filter>Objects\2D\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatfromTile.cpp">
+      <Filter>Objects\2D\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="LadderTile.cpp">
+      <Filter>Objects\2D\Source\Sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectList.h">
@@ -197,6 +199,9 @@
     </Filter>
     <Filter Include="Objects\2D\Headers\Sprite Stuff">
       <UniqueIdentifier>{91b26574-4393-4606-966b-66c3db13c1be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\2D\Source\Sprite">
+      <UniqueIdentifier>{515f52a3-074b-4b6f-9ab0-2167e50e80e6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -29,8 +29,8 @@ struct DrawData2D;
 class Light;
 class TextGO2D;
 class Player2D;
-class Collectables;
-class Platforms;
+//class Collectables;
+//class Platforms;
 class Levels;
 class Room;
 
@@ -53,8 +53,9 @@ protected:
 
 	Camera* m_cam; //principle camera
 	DebugCamera* m_debugCam2D;
-	CameraFollow2D* m_playerCam;
+	//CameraFollow2D* m_playerCam;
 	Light* m_light; //base light
+
 	TextGO2D* collects;
 	TextGO2D* lives;
 	TextGO2D* room;
@@ -83,8 +84,8 @@ protected:
 	DrawData2D * m_DD2D;	//Data to be passed by game to all 2D Game Objects via Draw 
 
 	Player2D* player;       // pointer to player class
-	Collectables* PickUp;   // pointer to pick up class
-	Collectables* Respawner;
+	//Collectables* PickUp;   // pointer to pick up class
+	//Collectables* Respawner;
 
 	std::unique_ptr<Room>_Room = nullptr;
 
@@ -96,7 +97,7 @@ protected:
 	void CollisionResolution(GameObject2D* object1, GameObject2D* object2);
 	void CollisionManagement();
 	//changes
-	list<GameObject2D*> m_collider;
+	//list<GameObject2D*> m_collider;
 };
 
 

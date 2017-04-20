@@ -19,10 +19,10 @@
 #include "AnimatedSprite.h"
 #include "Enemy.h"
 #include "Collectables.h"
-#include "Platfroms.h"
-#include "PlatfromTile.h"
-#include "Ladder.h"
-#include "LadderTile.h"
+//#include "Platfroms.h"
+//#include "PlatfromTile.h"
+//#include "Ladder.h"
+//#include "LadderTile.h"
 #include "Room.h"
 #include "Levels.h"
 
@@ -121,15 +121,15 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//}
 
 	////create player
-	player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
-	player->SetScale(1.0f);
-	player->SetPos(Vector2(200, 430));
-	player->setType(PLAYER);
-	m_GameObject2Ds.push_back(player);
-	m_collider.push_back(player);
-	//player = _Room->getPlayer();
-	m_playerCam = new CameraFollow2D(player);
-	m_GameObject2Ds.push_back(m_playerCam);
+	//player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
+	//player->SetScale(1.0f);
+	//player->SetPos(Vector2(200, 430));
+	//player->setType(PLAYER);
+	//m_GameObject2Ds.push_back(player);
+	//m_collider.push_back(player);
+	////player = _Room->getPlayer();
+	//m_playerCam = new CameraFollow2D(player);
+	//m_GameObject2Ds.push_back(m_playerCam);
 
 	////create Respawner
 	//Respawner = new Collectables("Collectable", _pd3dDevice);
@@ -171,6 +171,19 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 		m_collider.push_back(*it);
 	}*/
 
+	//creat platfrom Tiles
+	//Platforms*  plat = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 480.0f);
+	//plat->SetScale(1.0f);
+	////plat->setType(PLATFORM);
+	////m_GameObject2Ds.push_back(plat);
+	////m_collider.push_back(plat);
+
+	//for (vector<PlatfromTile*>::iterator it = plat->_platfromTile.begin(); it != plat->_platfromTile.end(); it++)
+	//{
+	//	m_GameObject2Ds.push_back(*it);
+	//	m_collider.push_back(*it);
+	//}
+
 	////creat platfrom more platforms around the level 
 	//Platforms* plat2 = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 350.0f);
 	//plat2->SetScale(1.0f);
@@ -182,14 +195,14 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//	m_GameObject2Ds.push_back(*it);
 	//	m_collider.push_back(*it);
 	//}
-	
+
 	GetWindowRect(m_hWnd, &window);
 	m_GD->viewportHeight = window.bottom;
 	m_GD->viewportWidth = window.left;
 	Levels::load();
 	_Room.reset(Levels::LoadedLevels[0].createRoom());
 	_Room->CreateRoom(m_GD, _pd3dDevice);
-
+	player = _Room->getPlayer(); //set games copy of player 
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -334,7 +347,7 @@ void Game::PlayTick()
 		}
 	}
 
-	//CollisionManagement();
+	CollisionManagement();
 
 	//update all objects
 	for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
@@ -362,17 +375,17 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 					std::cout << "Enemy hit \n";
 					player->SetAlive(false);
 					player->TakeLives();
-					if (Respawner->GetRespawnUp())
+					/*if (Respawner->GetRespawnUp())
 					{
 						player->SetAlive(true);
 						player->SetPos(Respawner->GetPos());
 						player->SetPlayerState(PlayerState::PlayerState_IDLE);
 					}
 					else
-					{
+					{*/
 						player->SetAlive(true);
 						player->SetPos(Vector2(200, 450));
-					}
+					//}
 					player->SetZeroVel(0);
 
 				}
@@ -384,12 +397,12 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 			}
 			break;
 		case ObjectType::COLLECTIBLE:
-			if (PickUp->GetPickedUp() == false)
+			if (_Room->getCollectable()->GetPickedUp() == false)// could change this 
 			{
 				std::cout << "Collected \n";
 				player->addCollectable();
 				object1->SetAlive(false);
-				PickUp->SetPickeduP();
+				_Room->getCollectable()->SetPickeduP();
 			}
 			break;
 
@@ -413,8 +426,8 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 
 			break;
 
-		case::ObjectType::RESPAWN:
-			Respawner->SetRespawnUp(true);
+		/*case::ObjectType::RESPAWN:
+			Respawner->SetRespawnUp(true);*/
 		}
 	}
 	else
@@ -430,11 +443,11 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 
 void Game::CollisionManagement()
 {
-	for each(GameObject2D* object1 in m_collider)//changed this line 
+	for each(GameObject2D* object1 in _Room->getColldingObjects())
 	{
 		if (object1->GetType() != ObjectType::PLAYER)
 		{
-			for each(GameObject2D* object2 in m_collider)//and this 
+			for each(GameObject2D* object2 in _Room->getColldingObjects())
 			{
 				if (object2->GetType() == ObjectType::PLAYER && object2->isAlive())
 				{
@@ -462,8 +475,8 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
 	
 	room->SetText(_Room->getRoomMap());
-	collects->SetText("My Collectables: " + to_string(player->getCollectables()));
-	lives->SetText("My lives: " + to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it
+	collects->SetText("My Collectables: " + to_string(player->getCollectables()));//changed 
+	lives->SetText("My lives: " + to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it  //changed 
 
 																  //set immediate context of the graphics device
 	m_DD->m_pd3dImmediateContext = _pd3dImmediateContext;
@@ -479,7 +492,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 		break;
 	case GS_PLAY_MAIN_CAM:
 	//	cout << "PlayerCam \n";
-		m_DD2D->m_cam2D = m_playerCam;
+		m_DD2D->m_cam2D = _Room->getPlayerCamera();//cahnged this line 
 		break;
 	}
 
