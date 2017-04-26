@@ -13,12 +13,6 @@
     <ClCompile Include="TextGO2D.cpp">
       <Filter>Objects\2D\Source</Filter>
     </ClCompile>
-    <ClCompile Include="camera.cpp">
-      <Filter>Objects\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="CMOGO.cpp">
-      <Filter>Objects\Source</Filter>
-    </ClCompile>
     <ClCompile Include="gameobject.cpp">
       <Filter>Objects\Source</Filter>
     </ClCompile>
@@ -26,18 +20,6 @@
       <Filter>Objects\Source</Filter>
     </ClCompile>
     <ClCompile Include="Platfroms.cpp">
-      <Filter>Objects\2D\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="TPSCamera.cpp">
-      <Filter>Objects\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera2D.cpp">
-      <Filter>Objects\2D\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraFollow2D.cpp">
-      <Filter>Objects\2D\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugCamera.cpp">
       <Filter>Objects\2D\Source</Filter>
     </ClCompile>
     <ClCompile Include="Levels.cpp">
@@ -58,9 +40,6 @@
     <ClCompile Include="ImageGO2D.cpp">
       <Filter>Objects\2D\Source\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Objects\2D\Source\Sprite</Filter>
-    </ClCompile>
     <ClCompile Include="Player2D.cpp">
       <Filter>Objects\2D\Source\Sprite</Filter>
     </ClCompile>
@@ -69,6 +48,18 @@
     </ClCompile>
     <ClCompile Include="LadderTile.cpp">
       <Filter>Objects\2D\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Objects\2D\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera2D.cpp">
+      <Filter>Objects\2D\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraFollow2D.cpp">
+      <Filter>Objects\2D\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugCamera.cpp">
+      <Filter>Objects\2D\Source\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -99,12 +90,6 @@
     <ClInclude Include="TextGO2D.h">
       <Filter>Objects\2D\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="camera.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CMOGO.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="GameData.h">
       <Filter>Base\Header</Filter>
     </ClInclude>
@@ -120,22 +105,10 @@
     <ClInclude Include="Platfroms.h">
       <Filter>Objects\2D\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="TPSCamera.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="vertex.h">
       <Filter>Base\Header</Filter>
     </ClInclude>
     <ClInclude Include="ObjectType.h">
-      <Filter>Base\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera2D.h">
-      <Filter>Objects\2D\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraFollow2D.h">
-      <Filter>Objects\2D\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugCamera.h">
       <Filter>Base\Header</Filter>
     </ClInclude>
     <ClInclude Include="Levels.h">
@@ -165,8 +138,17 @@
     <ClInclude Include="ImageGO2D.h">
       <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
+    <ClInclude Include="Tile.h">
       <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera2D.h">
+      <Filter>Objects\2D\Headers\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraFollow2D.h">
+      <Filter>Objects\2D\Headers\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCamera.h">
+      <Filter>Objects\2D\Headers\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -202,6 +184,12 @@
     </Filter>
     <Filter Include="Objects\2D\Source\Sprite">
       <UniqueIdentifier>{515f52a3-074b-4b6f-9ab0-2167e50e80e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\2D\Headers\Camera">
+      <UniqueIdentifier>{3e594ea4-1924-4f06-b241-9d2f7dad782f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\2D\Source\Camera">
+      <UniqueIdentifier>{33e4d688-cfd7-464f-b692-76c22df65ebb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

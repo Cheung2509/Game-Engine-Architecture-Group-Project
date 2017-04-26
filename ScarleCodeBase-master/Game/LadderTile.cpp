@@ -1,8 +1,8 @@
 #include "LadderTile.h"
 
-#include "Sprite.h"
+#include "Tile.h"
 
-LadderTile::LadderTile(Sprite* sp, Vector2 _pos)
+LadderTile::LadderTile(Tile* sp, Vector2 _pos)
 {
 	SetPos(_pos);
 	SetScale(0.5f);

@@ -2,7 +2,7 @@
 #include "Levels.h"
 #include "gamedata.h"
 
-#include "Sprite.h"
+#include "Tile.h"
 
 #include "PlatfromTile.h"
 #include "LadderTile.h"
@@ -36,8 +36,8 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 {
 	Vector2 TilePos(0, 0);  //x and y coordiantes of Tiles to be placed
 
-	Sprite* _platform = new Sprite("Platform", _pd3dDevice);
-	Sprite* _ladder = new Sprite("Ladder", _pd3dDevice);
+	Tile* _platform = new Tile("Platform", _pd3dDevice);
+	Tile* _ladder = new Tile("Ladder", _pd3dDevice);
 
 	for (int i = 0; i < Map.size(); i++)
 	{

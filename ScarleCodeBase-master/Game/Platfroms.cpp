@@ -1,8 +1,8 @@
 #include "Platfroms.h"
 
-#include "Sprite.h"
+#include "Tile.h"
 
-Platforms::Platforms(Sprite* _sprite, int _noOfTiles, float _initPosX, float _initPosY)
+Platforms::Platforms(Tile* _sprite, int _noOfTiles, float _initPosX, float _initPosY)
 {
 	posX = _initPosX;
 	posY = _initPosY;

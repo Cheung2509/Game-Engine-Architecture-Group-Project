@@ -1,8 +1,8 @@
 #include "PlatfromTile.h"
 
-#include "Sprite.h"
+#include "Tile.h"
 
-PlatfromTile::PlatfromTile(Sprite* _sprite, Vector2 _pos)
+PlatfromTile::PlatfromTile(Tile* _sprite, Vector2 _pos)
 {
 	SetPos(_pos);
 	SetScale(0.5f);

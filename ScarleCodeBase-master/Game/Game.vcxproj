@@ -123,10 +123,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
-    <ClInclude Include="camera.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="CameraFollow2D.h" />
-    <ClInclude Include="CMOGO.h" />
     <ClInclude Include="Collectables.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="DebugCamera.h" />
@@ -150,17 +148,14 @@
     <ClInclude Include="PlatfromTile.h" />
     <ClInclude Include="Player2D.h" />
     <ClInclude Include="Room.h" />
-    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Tile.h" />
     <ClInclude Include="TextGO2D.h" />
-    <ClInclude Include="TPSCamera.h" />
     <ClInclude Include="vertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
-    <ClCompile Include="camera.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="CameraFollow2D.cpp" />
-    <ClCompile Include="CMOGO.cpp" />
     <ClCompile Include="Collectable.cpp" />
     <ClCompile Include="DebugCamera.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -176,9 +171,8 @@
     <ClCompile Include="PlatfromTile.cpp" />
     <ClCompile Include="Player2D.cpp" />
     <ClCompile Include="Room.cpp" />
-    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Tile.cpp" />
     <ClCompile Include="TextGO2D.cpp" />
-    <ClCompile Include="TPSCamera.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

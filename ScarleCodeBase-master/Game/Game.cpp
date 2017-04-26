@@ -14,17 +14,7 @@
 #include "GameData.h"
 #include "drawdata.h"
 #include "DrawData2D.h"
-#include "Player2D.h"
-#include "GameObject2D.h"
-#include "AnimatedSprite.h"
-#include "Enemy.h"
-#include "Collectables.h"
-//#include "Platfroms.h"
-//#include "PlatfromTile.h"
-//#include "Ladder.h"
-//#include "LadderTile.h"
-#include "Room.h"
-#include "Levels.h"
+
 
 #include "DebugCamera.h"
 #include "CameraFollow2D.h"
@@ -94,11 +84,6 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	UINT height = rc.bottom - rc.top;
 	float AR = (float)width / (float)height;
 
-	//create a base camera
-	m_cam = new Camera(0.25f * XM_PI, AR, 1.0f, 10000.0f, Vector3::UnitY, Vector3::Zero);
-	m_cam->SetPos(Vector3::Up);
-	m_GameObjects.push_back(m_cam);
-
 	m_debugCam2D = new DebugCamera();
 	m_debugCam2D->SetPos(Vector2(0, 0));
 	m_debugCam2D->SetRot(0.0f);
@@ -107,94 +92,6 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	//create a base light
 	m_light = new Light(Vector3(0.0f, 100.0f, 160.0f), Color(1.0f, 1.0f, 1.0f, 1.0f), Color(0.4f, 0.1f, 0.1f, 1.0f));
 	m_GameObjects.push_back(m_light);
-
-	//create a ladder
-	//Ladder* ladder = new Ladder("ladder", _pd3dDevice, 4, 400.0f, 200.0f);
-	////ladder->SetScale(0.5);
-	///*m_GameObject2Ds.push_back(ladder);
-	//m_collider.push_back(ladder);*/
-
-	//for (vector<LadderTile*>::iterator it = ladder->ladderTiles.begin(); it != ladder->ladderTiles.end(); it++)
-	//{
-	//	m_GameObject2Ds.push_back(*it);
-	//	m_collider.push_back(*it);
-	//}
-
-	////create player
-	//player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
-	//player->SetScale(1.0f);
-	//player->SetPos(Vector2(200, 430));
-	//player->setType(PLAYER);
-	//m_GameObject2Ds.push_back(player);
-	//m_collider.push_back(player);
-	////player = _Room->getPlayer();
-	//m_playerCam = new CameraFollow2D(player);
-	//m_GameObject2Ds.push_back(m_playerCam);
-
-	////create Respawner
-	//Respawner = new Collectables("Collectable", _pd3dDevice);
-	//Respawner->SetScale(1.0f);
-	//Respawner->SetPos(Vector2(100, 430));
-	//m_GameObject2Ds.push_back(Respawner);
-	//Respawner->setType(RESPAWN);
-	//m_collider.push_back(Respawner);
-
-	////create a collectable 
-	//PickUp = new Collectables("Collectable", _pd3dDevice);
-	//PickUp->SetScale(1.0f);
-	//PickUp->SetPos(Vector2(400, 150));
-	//m_GameObject2Ds.push_back(PickUp);
-	//PickUp->setType(COLLECTIBLE);
-	//m_collider.push_back(PickUp);
-
-	////creates 2  Enemies for horizontal and vertical momvent 
-	//Enemy* enemyHor = new Enemy("EnemyHor", _pd3dDevice, Vector2(300, 450), Vector2(550, 450));
-	//m_GameObject2Ds.push_back(enemyHor);
-	//enemyHor->setType(ENEMY);
-	//m_collider.push_back(enemyHor);
-
-	//Enemy* enemyVert = new Enemy("Enemy", _pd3dDevice, Vector2(30, 0), Vector2(30, 450));
-	//m_GameObject2Ds.push_back(enemyVert);
-	//enemyVert->setType(ENEMY);
-	//m_collider.push_back(enemyVert);
-
-	/*creat platfrom Tiles
-	Platforms*  plat = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 480.0f);
-	plat->SetScale(1.0f);
-	plat->setType(PLATFORM);
-	m_GameObject2Ds.push_back(plat);
-	m_collider.push_back(plat);
-
-	for (vector<PlatfromTile*>::iterator it = plat->_platfromTile.begin(); it != plat->_platfromTile.end(); it++)
-	{
-		m_GameObject2Ds.push_back(*it);
-		m_collider.push_back(*it);
-	}*/
-
-	//creat platfrom Tiles
-	//Platforms*  plat = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 480.0f);
-	//plat->SetScale(1.0f);
-	////plat->setType(PLATFORM);
-	////m_GameObject2Ds.push_back(plat);
-	////m_collider.push_back(plat);
-
-	//for (vector<PlatfromTile*>::iterator it = plat->_platfromTile.begin(); it != plat->_platfromTile.end(); it++)
-	//{
-	//	m_GameObject2Ds.push_back(*it);
-	//	m_collider.push_back(*it);
-	//}
-
-	////creat platfrom more platforms around the level 
-	//Platforms* plat2 = new Platforms("Platform", _pd3dDevice, 20, 0.0f, 350.0f);
-	//plat2->SetScale(1.0f);
-	//plat2->setType(PLATFORM);
-	//m_GameObject2Ds.push_back(plat2);
-	////m_collider.push_back(plat2);
-	//for (vector<PlatfromTile*>::iterator it = plat2->_platfromTile.begin(); it != plat2->_platfromTile.end(); it++)
-	//{
-	//	m_GameObject2Ds.push_back(*it);
-	//	m_collider.push_back(*it);
-	//}
 
 	GetWindowRect(m_hWnd, &window);
 	m_GD->viewportHeight = window.bottom;
@@ -298,11 +195,6 @@ bool Game::Tick()
 	{
 		return false;
 	}
-
-	//lock the cursor to the centre of the window
-	//RECT window;
-	//GetWindowRect(m_hWnd, &window);
-	SetCursorPos((window.left + window.right) >> 1, (window.bottom + window.top) >> 1);
 
 	//m_GD->viewportHeight = window.bottom;
 	//m_GD->viewportWidth = window.left;

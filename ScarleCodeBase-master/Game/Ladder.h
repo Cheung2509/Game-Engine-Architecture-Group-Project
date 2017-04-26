@@ -6,12 +6,12 @@
 
 
 class LadderTile;
-class Sprite;
+class Tile;
 
 class Ladder: public GameObject2D
 {
 public:
-	Ladder(Sprite* _sprite, int _noOfTiles, float _initPosX, float _initPosY);
+	Ladder(Tile* _sprite, int _noOfTiles, float _initPosX, float _initPosY);
 	virtual ~Ladder();
 
 	virtual void Tick(GameData* _GD);

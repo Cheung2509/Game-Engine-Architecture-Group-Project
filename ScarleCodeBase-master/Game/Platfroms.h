@@ -5,11 +5,11 @@
 #include "PlatfromTile.h"
 
 class PlatfromTile;
-class Sprite;
+class Tile;
 class Platforms : public GameObject2D
 {
 public:
-	Platforms(Sprite* _sprite, int _noOfTiles, float _initPosX, float _initPosY);
+	Platforms(Tile* _sprite, int _noOfTiles, float _initPosX, float _initPosY);
 	virtual ~Platforms()=default;
 
 	virtual void Tick(GameData* _GD);
