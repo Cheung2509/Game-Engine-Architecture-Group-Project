@@ -18,15 +18,15 @@
 Room::Room(Levels& L) :
 	level(L)
 {
-	Title = L.getTitle();
-	Map =L.getMap();
+	title = L.getTitle();
+	map =L.getMap();
 
 	plat = nullptr;
-	Ladder = nullptr;
+	ladder = nullptr;
 	player = nullptr;
-	PickUp = nullptr;
-	Respawner = nullptr;
-	EnemyHor = nullptr;
+	pickUp = nullptr;
+	respawner = nullptr;
+	enemyHor = nullptr;
 }
 
 
@@ -42,16 +42,16 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 	Tile* _platform = new Tile("Platform", _pd3dDevice);
 	Tile* _ladder = new Tile("Ladder", _pd3dDevice);
 
-	for (int i = 0; i < Map.size(); i++)
+	for (auto&& mapRow:map)
 	{
-		if (TilePos.x >= _GD->viewportWidth)
+		for(int i=0;i<mapRow.size();i++) 
 		{
+			if (TilePos.x >= _GD->viewportWidth)
+			{
 			TilePos.x = 0;
 			TilePos.y += 15;//needs to be change to size of tile
-		}
-		//for(int i=0;i>MapRow.size();i++) 
-		//{
-			switch (Map.at(i))
+			}
+			switch (mapRow.at(i))
 			{
 			case '_':
 				//create a platfrom;
@@ -65,9 +65,10 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case'H':
 				//create ladderTile
-				Ladder = new LadderTile(_ladder, TilePos);
-				InSceneObjects.push_back(Ladder);
-				m_collider.push_back(plat);
+				ladder = new LadderTile(_ladder, TilePos);
+				ladder->setType(ObjectType::LADDER);
+				InSceneObjects.push_back(ladder);
+				m_collider.push_back(ladder);
 				break;
 
 			case'|':
@@ -93,41 +94,41 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case'$':
 				//create collecatable
-				PickUp = new Collectables("Collectable", _pd3dDevice);
-				PickUp->SetPos(TilePos);
-				InSceneObjects.push_back(PickUp);
-				m_collider.push_back(PickUp);
+				pickUp = new Collectables("Collectable", _pd3dDevice);
+				pickUp->SetPos(TilePos);
+				InSceneObjects.push_back(pickUp);
+				m_collider.push_back(pickUp);
 				break;
 
 			case '@':
 				//create Respawner
-				Respawner = new Collectables("CheckPoint", _pd3dDevice);
-				Respawner->SetScale(0.5f);
-				Respawner->SetPos(TilePos);
+				respawner = new Collectables("CheckPoint", _pd3dDevice);
+				respawner->SetScale(0.5f);
+				respawner->SetPos(TilePos);
 
-				InSceneObjects.push_back(Respawner);
-				Respawner->setType(RESPAWN);
-				m_collider.push_back(Respawner);
+				InSceneObjects.push_back(respawner);
+				respawner->setType(RESPAWN);
+				m_collider.push_back(respawner);
 				break;
 
 			case '+':
-				EnemyStartPos = TilePos;
+				enemyStartPos = TilePos;
 				break;
 
 			case'%':
 				//create enemy
-				EnemyHor = new Enemy("EnemyHor", _pd3dDevice, EnemyStartPos, TilePos);
+				enemyHor = new Enemy("EnemyHor", _pd3dDevice, enemyStartPos, TilePos);
 
-				InSceneObjects.push_back(EnemyHor);
-				m_collider.push_back(EnemyHor);
+				InSceneObjects.push_back(enemyHor);
+				m_collider.push_back(enemyHor);
 
 				break;
 
 			default:
 				break;
 			}
-		//}
 			TilePos.x += 30;//Tilesize
+		}
 	}
 }
 

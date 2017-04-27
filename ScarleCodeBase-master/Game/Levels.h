@@ -7,18 +7,19 @@ class Room;
 class Levels
 {
 public:
-	Levels(std::string Ti,std::string MP);
+	Levels(std::string Ti, std::vector<std::string>MP);
 	~Levels()=default;
 
 	Room* createRoom();
 	static void load();
 
 	std::string getTitle() { return Title; }
-	std::string getMap() { return Map; }
+	std::vector<std::string> getMap() { return Map; }
 
 private:
 	std::string Title="Name of Room";
-	std::string Map="ASKI picture of level";
+	//std::string Map="ASKI picture of level";
+	std::vector<std::string> Map;
 public:
 	static std::vector<Levels> LoadedLevels;
 

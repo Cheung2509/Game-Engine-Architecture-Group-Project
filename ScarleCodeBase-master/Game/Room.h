@@ -24,14 +24,14 @@ public:
 	friend class Levels;
 	~Room() = default;
 
-	std::string getRoomName() { return Title; }
-	std::string getRoomMap() { return Map; }
+	std::string getRoomName() { return title; }
+	std::vector<std::string> getRoomMap() { return map; }
 	list<GameObject2D *> getColldingObjects(); 
 
 	Player2D* getPlayer() { return player; }
 	CameraFollow2D* getPlayerCamera() { return m_playerCam; }
-	Collectables* getCollectable() { return PickUp; }
-	Collectables* getRespawner() { return Respawner; }
+	Collectables* getCollectable() { return pickUp; }
+	Collectables* getRespawner() { return respawner; }
 
 	void CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice);
 	void Tick(GameData* _GD);
@@ -42,20 +42,20 @@ private:
 	Room(Levels&);
 	Levels& level;
 
-	std::string Title;
-	std::string Map;
+	std::string title;
+	std::vector<std::string> map;
 
-	Vector2 EnemyStartPos;
+	Vector2 enemyStartPos;
 
 	//float incrementY;
 	//possibly need to add a bool to stop two players being created 
 
-	Enemy* EnemyHor;
-	LadderTile* Ladder;
+	Enemy* enemyHor;
+	LadderTile* ladder;
 	//RopeTile* Rope;
 	PlatfromTile* plat;
-	Collectables* PickUp;
-	Collectables* Respawner;
+	Collectables* pickUp;
+	Collectables* respawner;
 
 	Player2D* player;
 	CameraFollow2D* m_playerCam;

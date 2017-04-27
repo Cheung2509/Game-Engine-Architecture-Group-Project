@@ -1,6 +1,12 @@
 {
   "TestRoom": {
     "RoomName": "mother fucking room name bitches",
-    "Map":  "+OO%OOOOOOOOOOOOOOOOOOOOOOOOO$OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO@OOOOOOOOOOOOOOOOOOO*OOOOOOOOOOOOOOOOOOOOOOO____________________________________________________"
+    "Map":  [
+             "OOOOOOOOOOOOOOOOOOOO",
+             "*__________________$",
+             "____________________",
+             "____________________"
+            ]
+
   }
 }

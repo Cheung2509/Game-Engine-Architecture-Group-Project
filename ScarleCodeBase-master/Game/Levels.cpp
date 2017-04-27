@@ -2,7 +2,7 @@
 #include "Room.h"
 #include <jsoncons/json.hpp>
 
-Levels::Levels(std::string Ti, std::string MP)
+Levels::Levels(std::string Ti, std::vector<string> MP)
 {
 	Title = Ti;
 	Map = MP;
@@ -32,7 +32,7 @@ void Levels::load()
 			const auto& data = room.value();
 
 			auto File_Title = data["RoomName"].as_cstring();
-			auto File_Map = data["Map"].as_cstring();
+			auto File_Map = data["Map"].as<std::vector<string>>();
 			//RoomName = Title; //currently passes vairablew from file called room name to room name string but cud just get name of the room from the 
 			/*std::ifstream model("..\\..\\Resources\\ASCII\\"
 				+ ascii);

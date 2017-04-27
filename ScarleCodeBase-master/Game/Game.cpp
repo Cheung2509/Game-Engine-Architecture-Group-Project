@@ -368,7 +368,7 @@ void Game::CollisionManagement()
 void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
 	
-	room->SetText(_Room->getRoomMap());
+	room->SetText(_Room->getRoomName());
 	collects->SetText("My Collectables: " + to_string(player->getCollectables()));//changed 
 	lives->SetText("My lives: " + to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it  //changed 
 
