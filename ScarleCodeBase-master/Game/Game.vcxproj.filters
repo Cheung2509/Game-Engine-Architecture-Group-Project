@@ -61,6 +61,9 @@
     <ClCompile Include="DebugCamera.cpp">
       <Filter>Objects\2D\Source\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectList.h">
@@ -150,6 +153,9 @@
     <ClInclude Include="DebugCamera.h">
       <Filter>Objects\2D\Headers\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Base\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
@@ -176,17 +182,17 @@
     <Filter Include="Objects\2D\Headers">
       <UniqueIdentifier>{fc18e1e0-83b5-451e-8649-7aba08fda1fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\2D\Source">
-      <UniqueIdentifier>{bbee43eb-cb7d-425b-8b5d-c01b7eb66a1e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Objects\2D\Headers\Sprite Stuff">
       <UniqueIdentifier>{91b26574-4393-4606-966b-66c3db13c1be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\2D\Source\Sprite">
-      <UniqueIdentifier>{515f52a3-074b-4b6f-9ab0-2167e50e80e6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Objects\2D\Headers\Camera">
       <UniqueIdentifier>{3e594ea4-1924-4f06-b241-9d2f7dad782f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\2D\Source">
+      <UniqueIdentifier>{bbee43eb-cb7d-425b-8b5d-c01b7eb66a1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\2D\Source\Sprite">
+      <UniqueIdentifier>{515f52a3-074b-4b6f-9ab0-2167e50e80e6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Objects\2D\Source\Camera">
       <UniqueIdentifier>{33e4d688-cfd7-464f-b692-76c22df65ebb}</UniqueIdentifier>

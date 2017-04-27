@@ -126,6 +126,7 @@
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="CameraFollow2D.h" />
     <ClInclude Include="Collectables.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="DebugCamera.h" />
     <ClInclude Include="DrawData2D.h" />
@@ -157,6 +158,7 @@
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="CameraFollow2D.cpp" />
     <ClCompile Include="Collectable.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DebugCamera.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
