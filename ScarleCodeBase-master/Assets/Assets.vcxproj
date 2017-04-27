@@ -178,6 +178,18 @@
     <ImageContentTask Include="Enemy.png" />
     <ImageContentTask Include="EnemyHor.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Assets.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="respawner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="CheckPoint.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />

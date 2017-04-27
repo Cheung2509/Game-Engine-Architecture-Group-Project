@@ -3,6 +3,8 @@
 Collectables::Collectables(string _fileName, ID3D11Device* _GD): ImageGO2D(_fileName, _GD)
 {
 	PickedUp = false;
+	setType(COLLECTIBLE);
+	SetScale(1.0f);
 }
 Collectables::~Collectables()
 {

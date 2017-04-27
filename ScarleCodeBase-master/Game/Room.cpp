@@ -8,6 +8,7 @@
 #include "LadderTile.h"
 #include "Player2D.h"
 #include "Collectables.h"
+#include "Enemy.h"
 
 #include "CameraFollow2D.h"
 
@@ -24,6 +25,8 @@ Room::Room(Levels& L) :
 	Ladder = nullptr;
 	player = nullptr;
 	PickUp = nullptr;
+	Respawner = nullptr;
+	EnemyHor = nullptr;
 }
 
 
@@ -46,12 +49,10 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 			TilePos.x = 0;
 			TilePos.y += 15;//needs to be change to size of tile
 		}
-
+		//for(int i=0;i>MapRow.size();i++) 
+		//{
 			switch (Map.at(i))
 			{
-			case 'O':
-				// do nothing 
-				break;
 			case '_':
 				//create a platfrom;
 				//TilePos.x = 0.0f + incrementY;
@@ -61,12 +62,22 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				InSceneObjects.push_back(plat);
 				m_collider.push_back(plat);
 				break;
+
 			case'H':
 				//create ladderTile
 				Ladder = new LadderTile(_ladder, TilePos);
 				InSceneObjects.push_back(Ladder);
 				m_collider.push_back(plat);
 				break;
+
+			case'|':
+				//Rope Tile depending on how it wil work will go here
+
+				//RopeTile = new Rope(_Rope, TilePos);
+				//InSceneObjects.push_back(RopeTile);
+				//m_collider.push_back(RopeTile);
+				break;
+
 			case'*':
 				// create player 
 				player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
@@ -79,20 +90,43 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				m_playerCam = new CameraFollow2D(player);
 				InSceneObjects.push_back(m_playerCam);
 				break;
+
 			case'$':
 				//create collecatable
 				PickUp = new Collectables("Collectable", _pd3dDevice);
-				PickUp->SetScale(1.0f);
 				PickUp->SetPos(TilePos);
-				PickUp->setType(COLLECTIBLE);
-
 				InSceneObjects.push_back(PickUp);
 				m_collider.push_back(PickUp);
+				break;
+
+			case '@':
+				//create Respawner
+				Respawner = new Collectables("CheckPoint", _pd3dDevice);
+				Respawner->SetScale(0.5f);
+				Respawner->SetPos(TilePos);
+
+				InSceneObjects.push_back(Respawner);
+				Respawner->setType(RESPAWN);
+				m_collider.push_back(Respawner);
+				break;
+
+			case '+':
+				EnemyStartPos = TilePos;
+				break;
+
+			case'%':
+				//create enemy
+				EnemyHor = new Enemy("EnemyHor", _pd3dDevice, EnemyStartPos, TilePos);
+
+				InSceneObjects.push_back(EnemyHor);
+				m_collider.push_back(EnemyHor);
+
 				break;
 
 			default:
 				break;
 			}
+		//}
 			TilePos.x += 30;//Tilesize
 	}
 }

@@ -53,5 +53,17 @@
     <ImageContentTask Include="EnemyHor.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="respawner.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="CheckPoint.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Assets.rc" />
   </ItemGroup>
 </Project>

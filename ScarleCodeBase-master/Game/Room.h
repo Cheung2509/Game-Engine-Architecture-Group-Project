@@ -10,7 +10,9 @@
 class Levels;
 class PlatfromTile;
 class LadderTile;
+//class RopeTile;
 class Collectables;
+class Enemy;
 class Player2D;
 
 class CameraFollow2D;
@@ -29,6 +31,7 @@ public:
 	Player2D* getPlayer() { return player; }
 	CameraFollow2D* getPlayerCamera() { return m_playerCam; }
 	Collectables* getCollectable() { return PickUp; }
+	Collectables* getRespawner() { return Respawner; }
 
 	void CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice);
 	void Tick(GameData* _GD);
@@ -38,15 +41,21 @@ public:
 private:
 	Room(Levels&);
 	Levels& level;
+
 	std::string Title;
 	std::string Map;
+
+	Vector2 EnemyStartPos;
 
 	//float incrementY;
 	//possibly need to add a bool to stop two players being created 
 
-	PlatfromTile*  plat;
+	Enemy* EnemyHor;
 	LadderTile* Ladder;
+	//RopeTile* Rope;
+	PlatfromTile* plat;
 	Collectables* PickUp;
+	Collectables* Respawner;
 
 	Player2D* player;
 	CameraFollow2D* m_playerCam;

@@ -96,6 +96,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	GetWindowRect(m_hWnd, &window);
 	m_GD->viewportHeight = window.bottom;
 	m_GD->viewportWidth = window.left;
+
 	Levels::load();
 	_Room.reset(Levels::LoadedLevels[0].createRoom());
 	_Room->CreateRoom(m_GD, _pd3dDevice);
@@ -267,17 +268,17 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 					std::cout << "Enemy hit \n";
 					player->SetAlive(false);
 					player->TakeLives();
-					/*if (Respawner->GetRespawnUp())
+					if (_Room->getRespawner()->GetRespawnUp())
 					{
 						player->SetAlive(true);
-						player->SetPos(Respawner->GetPos());
+						player->SetPos(_Room->getRespawner()->GetPos());
 						player->SetPlayerState(PlayerState::PlayerState_IDLE);
 					}
 					else
-					{*/
+					{
 						player->SetAlive(true);
 						player->SetPos(Vector2(200, 450));
-					//}
+					}
 					player->SetZeroVel(0);
 
 				}
@@ -318,8 +319,9 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 
 			break;
 
-		/*case::ObjectType::RESPAWN:
-			Respawner->SetRespawnUp(true);*/
+		case::ObjectType::RESPAWN:
+			_Room->getRespawner()->SetRespawnUp(true);
+			break;
 		}
 	}
 	else

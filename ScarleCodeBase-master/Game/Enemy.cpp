@@ -6,6 +6,7 @@
 
 Enemy::Enemy(string _fileName, ID3D11Device* _GD, Vector2 startpos, Vector2 endpos) :ImageGO2D(_fileName, _GD)
 {
+	setType(ENEMY);
 	movingRight = true;
 	StartPostion = startpos;
 	EndPostion = endpos;
