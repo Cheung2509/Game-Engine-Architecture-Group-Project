@@ -62,16 +62,14 @@
     <ImageContentTask Include="background.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="motherFigure.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Assets.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="motherFigure.png">
-      <Filter>Textures</Filter>
-    </Image>
   </ItemGroup>
 </Project>

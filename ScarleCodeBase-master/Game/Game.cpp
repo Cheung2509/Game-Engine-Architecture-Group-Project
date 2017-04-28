@@ -328,6 +328,26 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 		case::ObjectType::RESPAWN:
 			m_Room->getRespawner()->SetRespawnUp(true);
 			break;
+		case ObjectType::MOTHER:
+			//stop player from moving through // this dosnt work might give it to tim to look at 
+			if (player->getSpeed() > 0)
+			{
+				player->SetSpeed(player->getSpeed() + - 20.0f);
+			}
+			else if (player->getSpeed() < 0)
+			{
+				player->SetSpeed(player->getSpeed()+20.0f);
+			}
+			if (player->getSpeedY() > 0)
+			{
+				player->SetSpeedY(player->getSpeedY() + -20.0f);
+			}
+			else if (player->getSpeedY() < 0)
+			{
+				player->SetSpeedY(player->getSpeedY() + 20.0f);
+			}
+			break;
+
 		}
 	}
 	else

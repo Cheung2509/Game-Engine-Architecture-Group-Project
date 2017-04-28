@@ -30,6 +30,8 @@ public:
 	Vector2 GetVel() { return m_vel; }
 	float GetRot() { return m_rotation; }
 	float GetPosY() { return m_pos.y; }
+	float getSpeed() { return speed; }
+	float getSpeedY() { return speedY; }
 	//setters
 
 	void SetPos(Vector2 _pos) { m_pos = _pos; }
@@ -41,6 +43,7 @@ public:
 	void zeroVel(Vector2 _vel) { _vel = m_vel; }
 	void SetZeroVel(float _vel) { m_vel = _vel * Vector2::Zero; }
 	void SetSpeedY(float speed);
+	void SetSpeed(float Speed);
 	void SetIsGrounded(bool isItGrounded);
 	void setHasJumped(bool hasItJumped);
 	void setOnLadder(bool isOnLadder);

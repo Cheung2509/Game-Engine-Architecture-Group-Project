@@ -194,7 +194,7 @@
     <ImageContentTask Include="background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="motherFigure.png" />
+    <ImageContentTask Include="motherFigure.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

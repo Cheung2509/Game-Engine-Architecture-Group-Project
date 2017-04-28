@@ -11,6 +11,7 @@ enum ObjectType
 	PLATFORM,
 	THINPLATFORM,
 	LADDER,
+	MOTHER,
 	RESPAWN
 };
 

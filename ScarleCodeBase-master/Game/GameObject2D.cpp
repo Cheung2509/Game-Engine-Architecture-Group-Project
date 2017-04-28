@@ -47,6 +47,11 @@ void GameObject2D::SetSpeedY(float speed)
 	speedY = speed;
 }
 
+void GameObject2D::SetSpeed(float Speed)
+{
+	speed = Speed;
+}
+
 void GameObject2D::SetIsGrounded(bool isItGrounded)
 {
 	isGrounded = isItGrounded;
