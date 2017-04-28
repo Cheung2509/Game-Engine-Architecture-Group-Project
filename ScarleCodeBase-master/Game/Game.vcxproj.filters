@@ -64,6 +64,9 @@
     <ClCompile Include="Background.cpp">
       <Filter>Objects\Source</Filter>
     </ClCompile>
+    <ClCompile Include="MotherObstecle.cpp">
+      <Filter>Objects\2D\Source\Sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectList.h">
@@ -155,6 +158,9 @@
     </ClInclude>
     <ClInclude Include="Background.h">
       <Filter>Objects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MotherObstecle.h">
+      <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

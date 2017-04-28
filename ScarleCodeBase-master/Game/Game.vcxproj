@@ -143,6 +143,7 @@
     <ClInclude Include="LadderTile.h" />
     <ClInclude Include="Levels.h" />
     <ClInclude Include="Light.h" />
+    <ClInclude Include="MotherObstecle.h" />
     <ClInclude Include="ObjectList.h" />
     <ClInclude Include="ObjectType.h" />
     <ClInclude Include="Platfroms.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="LadderTile.cpp" />
     <ClCompile Include="Levels.cpp" />
     <ClCompile Include="light.cpp" />
+    <ClCompile Include="MotherObstecle.cpp" />
     <ClCompile Include="Platfroms.cpp" />
     <ClCompile Include="PlatfromTile.cpp" />
     <ClCompile Include="Player2D.cpp" />

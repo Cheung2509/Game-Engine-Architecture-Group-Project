@@ -9,6 +9,7 @@
 #include "Player2D.h"
 #include "Collectables.h"
 #include "Enemy.h"
+#include "MotherObstecle.h"
 
 #include "CameraFollow2D.h"
 
@@ -27,6 +28,7 @@ Room::Room(Levels& L) :
 	pickUp = nullptr;
 	respawner = nullptr;
 	enemyHor = nullptr;
+	mother = nullptr;
 }
 
 list<GameObject2D*> Room::getColldingObjects()
@@ -125,6 +127,15 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				m_collider.push_back(enemyHor);
 
 				break;
+			case 'm':
+				//if player does not have all the collectables 
+				if (player->getCollectables() != 3) // collectables max not a varable yet 
+				{
+					//create motherObstecle
+					mother = new MotherObstecle("motherFigure", _pd3dDevice, TilePos);
+					InSceneObjects.push_back(mother);
+					m_collider.push_back(mother);
+				}
 
 			default:
 				break;

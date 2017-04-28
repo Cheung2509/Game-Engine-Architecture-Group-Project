@@ -69,4 +69,9 @@
   <ItemGroup>
     <ResourceCompile Include="Assets.rc" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="motherFigure.png">
+      <Filter>Textures</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
