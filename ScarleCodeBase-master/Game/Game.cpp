@@ -326,7 +326,7 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 			break;
 
 		case::ObjectType::RESPAWN:
-			m_Room->getRespawner()->SetRe spawnUp(true);
+			m_Room->getRespawner()->SetRespawnUp(true);
 			break;
 		}
 	}
