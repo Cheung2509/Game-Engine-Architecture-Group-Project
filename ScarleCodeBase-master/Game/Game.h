@@ -29,8 +29,7 @@ struct DrawData2D;
 class Light;
 class TextGO2D;
 class Player2D;
-//class Collectables;
-//class Platforms;
+class Background;
 class Levels;
 class Room;
 
@@ -84,10 +83,9 @@ protected:
 	DrawData2D * m_DD2D;	//Data to be passed by game to all 2D Game Objects via Draw 
 
 	Player2D* player;       // pointer to player class
-	//Collectables* PickUp;   // pointer to pick up class
-	//Collectables* Respawner;
+	Background* BackG;
 
-	std::unique_ptr<Room>_Room = nullptr;
+	std::unique_ptr<Room> m_Room = nullptr;
 
 	//sound stuff
 	std::unique_ptr<AudioEngine> m_audioEngine;

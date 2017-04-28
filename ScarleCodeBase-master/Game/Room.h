@@ -34,16 +34,21 @@ public:
 	Collectables* getRespawner() { return respawner; }
 
 	void CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice);
+	int getCurrentLevel() { return levelCur; }
+	void setCurrentLevel(int i);
 	void Tick(GameData* _GD);
 	void Draw(DrawData2D* _DD);
+
 
 
 private:
 	Room(Levels&);
 	Levels& level;
+	int levelCur;
 
 	std::string title;
 	std::vector<std::string> map;
+
 
 	Vector2 enemyStartPos;
 

@@ -1,0 +1,37 @@
+{
+  "Level 1-1": 
+  {
+    "RoomName": "Level 1",
+    "Map":  [
+             "|+OOOOOOOOOOOOOOOO%|",
+             "|H________________$|",
+             "|HOOOOOOOOOOOOOOOOO|",
+             "|HOOOOOOO@OOOOOOOOO|",
+             "|H*________________|",
+             "|==================|"
+            ]
+  },
+  "The Milkman Conspiracy": 
+   {
+    "RoomName": "Level 2",
+    "Map":  [
+             "OOOOOOOOOOOOOOOOOOOO",
+             "$__________________$",
+             "HOOOOOOOOO$OOOOOOOOO",
+             "HOOO@OOOOOOOOOOOOOOO",
+             "*___________________"
+            ]
+   },
+  "Water Temple": 
+   {
+    "RoomName": "Level 3",
+    "Map":  [
+             "OOOOOOOOOOOOOOOOOOOO",
+             "+__________________%",
+             "HOOOOOOOO$$$$$$OOOOO",
+             "HOOO@OO*OOOOOOOOOOOO",
+             "H___________________"
+            ]
+   }
+}
+

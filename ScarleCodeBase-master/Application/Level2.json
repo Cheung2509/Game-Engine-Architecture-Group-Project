@@ -1,0 +1,12 @@
+{
+"TestRoom2": {
+    "RoomName": "test2",
+    "Map":  [
+             "OOOOOOOOOOOOOOOOOOOO",
+             "$__________________$",
+             "HOOOOOOOOO$OOOOOOOOO",
+             "HOOO@OOOOOOOOOOOOOOO",
+             "*___________________"
+            ]
+  }
+}

@@ -14,6 +14,7 @@
 #include "GameData.h"
 #include "drawdata.h"
 #include "DrawData2D.h"
+#include "Background.h"
 
 
 #include "DebugCamera.h"
@@ -97,10 +98,15 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_GD->viewportHeight = window.bottom;
 	m_GD->viewportWidth = window.left;
 
+	//create a background
+	BackG = new Background("background", _pd3dDevice);
+
+	//create first level
 	Levels::load();
-	_Room.reset(Levels::LoadedLevels[0].createRoom());
-	_Room->CreateRoom(m_GD, _pd3dDevice);
-	player = _Room->getPlayer(); //set games copy of player 
+	m_Room.reset(Levels::LoadedLevels[0].createRoom());
+	m_Room->CreateRoom(m_GD, _pd3dDevice);
+	player = m_Room->getPlayer(); //set games copy of player 
+
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -247,7 +253,7 @@ void Game::PlayTick()
 	{
 		(*it)->Tick(m_GD);
 	}
-	_Room->Tick(m_GD);
+	m_Room->Tick(m_GD);
 	for (list<GameObject2D *>::iterator it = m_GameObject2Ds.begin(); it != m_GameObject2Ds.end(); it++)
 	{
 		(*it)->Tick(m_GD);
@@ -268,10 +274,10 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 					std::cout << "Enemy hit \n";
 					player->SetAlive(false);
 					player->TakeLives();
-					if (_Room->getRespawner()->GetRespawnUp())
+					if (m_Room->getRespawner()->GetRespawnUp())
 					{
 						player->SetAlive(true);
-						player->SetPos(_Room->getRespawner()->GetPos());
+						player->SetPos(m_Room->getRespawner()->GetPos());
 						player->SetPlayerState(PlayerState::PlayerState_IDLE);
 					}
 					else
@@ -290,12 +296,12 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 			}
 			break;
 		case ObjectType::COLLECTIBLE:
-			if (_Room->getCollectable()->GetPickedUp() == false)// could change this 
+			if (m_Room->getCollectable()->GetPickedUp() == false)// could change this 
 			{
 				std::cout << "Collected \n";
 				player->addCollectable();
 				object1->SetAlive(false);
-				_Room->getCollectable()->SetPickeduP();
+				m_Room->getCollectable()->SetPickeduP();
 			}
 			break;
 
@@ -320,7 +326,7 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 			break;
 
 		case::ObjectType::RESPAWN:
-			_Room->getRespawner()->SetRespawnUp(true);
+			m_Room->getRespawner()->SetRe spawnUp(true);
 			break;
 		}
 	}
@@ -337,11 +343,11 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 
 void Game::CollisionManagement()
 {
-	for each(GameObject2D* object1 in _Room->getColldingObjects())
+	for each(GameObject2D* object1 in m_Room->getColldingObjects())
 	{
 		if (object1->GetType() != ObjectType::PLAYER)
 		{
-			for each(GameObject2D* object2 in _Room->getColldingObjects())
+			for each(GameObject2D* object2 in m_Room->getColldingObjects())
 			{
 				if (object2->GetType() == ObjectType::PLAYER && object2->isAlive())
 				{
@@ -368,7 +374,7 @@ void Game::CollisionManagement()
 void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
 	
-	room->SetText(_Room->getRoomName());
+	room->SetText(m_Room->getRoomName());
 	collects->SetText("My Collectables: " + to_string(player->getCollectables()));//changed 
 	lives->SetText("My lives: " + to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it  //changed 
 
@@ -386,7 +392,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 		break;
 	case GS_PLAY_MAIN_CAM:
 	//	cout << "PlayerCam \n";
-		m_DD2D->m_cam2D = _Room->getPlayerCamera();//cahnged this line 
+		m_DD2D->m_cam2D = m_Room->getPlayerCamera();//cahnged this line 
 		break;
 	}
 
@@ -395,7 +401,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	{
 		(*it)->Draw(m_DD);
 	}
-
+	
 	// Draw sprite batch stuff 
 	m_DD2D->m_Sprites->Begin( SpriteSortMode::SpriteSortMode_BackToFront,
 		nullptr,
@@ -412,7 +418,11 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 			(*it)->Draw(m_DD2D);
 		}
 	}
-	_Room->Draw(m_DD2D);
+	if (m_Room->getPlayer()->isAlive())
+	{
+		BackG->Draw(m_DD2D);
+	}
+	m_Room->Draw(m_DD2D);
 	m_DD2D->m_Sprites->End();
 
 	m_DD2D->m_Sprites->Begin();

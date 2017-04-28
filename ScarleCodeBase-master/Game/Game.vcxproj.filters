@@ -61,6 +61,9 @@
     <ClCompile Include="DebugCamera.cpp">
       <Filter>Objects\2D\Source\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectList.h">
@@ -149,6 +152,9 @@
     </ClInclude>
     <ClInclude Include="DebugCamera.h">
       <Filter>Objects\2D\Headers\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Objects\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

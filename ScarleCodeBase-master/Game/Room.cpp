@@ -29,7 +29,6 @@ Room::Room(Levels& L) :
 	enemyHor = nullptr;
 }
 
-
 list<GameObject2D*> Room::getColldingObjects()
 {
 	 return m_collider; 
@@ -37,6 +36,7 @@ list<GameObject2D*> Room::getColldingObjects()
 
 void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 {
+	
 	Vector2 TilePos(0, 0);  //x and y coordiantes of Tiles to be placed
 
 	Tile* _platform = new Tile("Platform", _pd3dDevice);
@@ -49,7 +49,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 			if (TilePos.x >= _GD->viewportWidth)
 			{
 			TilePos.x = 0;
-			TilePos.y += 15;//needs to be change to size of tile
+			TilePos.y += 50;//needs to be change to size of tile
 			}
 			switch (mapRow.at(i))
 			{
@@ -90,6 +90,8 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 				m_playerCam = new CameraFollow2D(player);
 				InSceneObjects.push_back(m_playerCam);
+				//possibly create another platform here
+
 				break;
 
 			case'$':
@@ -130,6 +132,11 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 			TilePos.x += 30;//Tilesize
 		}
 	}
+}
+
+void Room::setCurrentLevel(int i)
+{
+	levelCur = i;
 }
 
 void Room::Tick(GameData* _GD)

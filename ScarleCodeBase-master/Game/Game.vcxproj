@@ -123,6 +123,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimatedSprite.h" />
+    <ClInclude Include="Background.h" />
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="CameraFollow2D.h" />
     <ClInclude Include="Collectables.h" />
@@ -154,6 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AnimatedSprite.cpp" />
+    <ClCompile Include="Background.cpp" />
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="CameraFollow2D.cpp" />
     <ClCompile Include="Collectable.cpp" />

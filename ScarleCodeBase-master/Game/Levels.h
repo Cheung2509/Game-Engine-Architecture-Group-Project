@@ -18,8 +18,8 @@ public:
 
 private:
 	std::string Title="Name of Room";
-	//std::string Map="ASKI picture of level";
 	std::vector<std::string> Map;
+
 public:
 	static std::vector<Levels> LoadedLevels;
 
