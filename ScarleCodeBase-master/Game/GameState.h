@@ -14,5 +14,10 @@ enum GameState {
 	GS_GAME_OVER,
 	GS_COUNT
 };
+enum MenuState {
+	MS_NULL = 0,
+	MS_MAIN = 1,
+	MS_PLAY = 2
+};
 
 #endif

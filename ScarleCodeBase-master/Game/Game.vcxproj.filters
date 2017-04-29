@@ -67,6 +67,9 @@
     <ClCompile Include="MotherObstecle.cpp">
       <Filter>Objects\2D\Source\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectList.h">
@@ -161,6 +164,9 @@
     </ClInclude>
     <ClInclude Include="MotherObstecle.h">
       <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Base\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

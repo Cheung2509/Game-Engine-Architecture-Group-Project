@@ -15,10 +15,12 @@
 #include "drawdata.h"
 #include "DrawData2D.h"
 #include "Background.h"
+#include "Menu.h"
 
 
 #include "DebugCamera.h"
 #include "CameraFollow2D.h"
+
 
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
@@ -64,6 +66,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_GD->m_prevKeyboardState = m_prevKeyboardState;
 	m_GD->m_GS = GS_PLAY_MAIN_CAM;
 	m_GD->m_mouseState = &m_mouseState;
+	m_GD->m_MS = MS_MAIN;
 
 	//set up DirectXTK Effects system
 	m_fxFactory = new EffectFactory(_pd3dDevice);
@@ -98,6 +101,11 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_GD->viewportHeight = window.bottom;
 	m_GD->viewportWidth = window.left;
 
+	//create menu sprite
+	mainMenu = new Menu("BackgroundOther", _pd3dDevice);
+	mainMenu->SetScale(0.6f);
+	mainMenu->SetPos(Vector2(570, 300));
+
 	//create a background
 	BackG = new Background("background", _pd3dDevice);
 
@@ -115,7 +123,18 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	m_DD->m_cam = m_cam;
 	m_DD->m_light = m_light;
 
+	MenuStart = new TextGO2D("PLAY");
+	MenuStart->SetPos(Vector2(600, 200));
+	MenuStart->SetScale(0.7);
+	MenuStart->SetColour(Color((float*)&Colors::White));
+	m_MainMenuText.push_back(MenuStart);
 
+	MenuExit = new TextGO2D("EXIT");
+	MenuExit->SetPos(Vector2(600, 250));
+	MenuExit->SetScale(0.7);
+	MenuExit->SetColour(Color((float*)&Colors::White));
+	m_MainMenuText.push_back(MenuExit);
+		
 	collects = new TextGO2D("Collectables: ");
 	collects->SetPos(Vector2(10, 525));
 	collects->SetScale(0.7);
@@ -232,31 +251,64 @@ bool Game::Tick()
 
 void Game::PlayTick()
 {
-	if ((m_keyboardState[DIK_SPACE] & 0x80) && !(m_prevKeyboardState[DIK_SPACE] & 0x80))
+	if (m_GD->m_MS == MS_MAIN)
 	{
-		if (m_GD->m_GS == GS_PLAY_MAIN_CAM)
+		RECT  virtualRect;
+		virtualRect.left = 580;
+		virtualRect.right = 680;
+		virtualRect.bottom = 220;
+		virtualRect.top = 180;
+		POINT cursorPos;
+		GetCursorPos(&cursorPos);
+		ScreenToClient(m_hWnd, &cursorPos);
+		if ((cursorPos.x > virtualRect.left && cursorPos.x < virtualRect.right) &&
+			(cursorPos.y > virtualRect.top && cursorPos.y < virtualRect.bottom))
 		{
-			std::cout << "State Changed";
-			m_GD->m_GS = GS_PLAY_DEBUG_CAM;
+			MenuStart->SetColour(Color((float*)&Colors::Yellow));
+			MenuExit->SetColour(Color((float*)&Colors::Yellow));
+
+			if (m_GD->m_mouseState->rgbButtons[0])
+			{
+				m_GD->m_MS = MS_PLAY;
+			}
 		}
 		else
 		{
-			std::cout << "State Changed";
-			m_GD->m_GS = GS_PLAY_MAIN_CAM;
+			MenuStart->SetColour(Color((float*)&Colors::White));
+			MenuExit->SetColour(Color((float*)&Colors::White));
 		}
-	}
 
-	CollisionManagement();
-
-	//update all objects
-	for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
-	{
-		(*it)->Tick(m_GD);
 	}
-	m_Room->Tick(m_GD);
-	for (list<GameObject2D *>::iterator it = m_GameObject2Ds.begin(); it != m_GameObject2Ds.end(); it++)
+	else
 	{
-		(*it)->Tick(m_GD);
+
+
+		if ((m_keyboardState[DIK_SPACE] & 0x80) && !(m_prevKeyboardState[DIK_SPACE] & 0x80))
+		{
+			if (m_GD->m_GS == GS_PLAY_MAIN_CAM)
+			{
+				std::cout << "State Changed";
+				m_GD->m_GS = GS_PLAY_DEBUG_CAM;
+			}
+			else
+			{
+				std::cout << "State Changed";
+				m_GD->m_GS = GS_PLAY_MAIN_CAM;
+			}
+		}
+
+		CollisionManagement();
+
+		//update all objects
+		for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
+		{
+			(*it)->Tick(m_GD);
+		}
+		m_Room->Tick(m_GD);
+		for (list<GameObject2D *>::iterator it = m_GameObject2Ds.begin(); it != m_GameObject2Ds.end(); it++)
+		{
+			(*it)->Tick(m_GD);
+		}
 	}
 }
 
@@ -442,6 +494,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	{
 		BackG->Draw(m_DD2D);
 	}
+	
 	m_Room->Draw(m_DD2D);
 	m_DD2D->m_Sprites->End();
 
@@ -451,8 +504,21 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	{
 		(*it)->Draw(m_DD2D);
 	}
+	if (m_GD->m_MS == MS_MAIN) //Draw Main Menu
+	{
+		mainMenu->Draw(m_DD2D);
+		for (list<TextGO2D*>::iterator it = m_MainMenuText.begin(); it != m_MainMenuText.end(); it++)
+		{
+			(*it)->Draw(m_DD2D);
+		}
+	}
+	else
+	{
+		int fuckmylife = 0;
+	}
+	
 	m_DD2D->m_Sprites->End();
-
+	
 	//drawing text screws up the Depth Stencil State, this puts it back again!
 	_pd3dImmediateContext->OMSetDepthStencilState(m_states->DepthDefault(), 0);
 };

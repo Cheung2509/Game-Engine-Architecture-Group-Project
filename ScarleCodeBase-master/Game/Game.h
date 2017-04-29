@@ -32,6 +32,7 @@ class Player2D;
 class Background;
 class Levels;
 class Room;
+class Menu;
 
 class DebugCamera;
 class CameraFollow2D;
@@ -59,10 +60,15 @@ protected:
 	TextGO2D* lives;
 	TextGO2D* room;
 
+	TextGO2D* MenuTitle;
+	TextGO2D* MenuStart;
+	TextGO2D* MenuExit;
+	
+	
 	list<GameObject *> m_GameObjects; //data structure storing all GameObjects of this Game
 	list<GameObject2D *> m_GameObject2Ds;//ditto 2D objects
 	list<TextGO2D *> m_UserInterface;
-
+	list<TextGO2D*> m_MainMenuText;
 	//required for the CMO model rendering system
 	CommonStates* m_states;
 	IEffectFactory* m_fxFactory;
@@ -84,7 +90,7 @@ protected:
 
 	Player2D* player;       // pointer to player class
 	Background* BackG;
-
+	Menu* mainMenu;
 	std::unique_ptr<Room> m_Room = nullptr;
 
 	//sound stuff
@@ -96,6 +102,8 @@ protected:
 	void CollisionManagement();
 	//changes
 	//list<GameObject2D*> m_collider;
+
+	
 };
 
 

@@ -14,6 +14,7 @@ struct GameData
 {
 	float m_dt;  //time step since last frame
 	GameState m_GS; //global GameState
+	MenuState m_MS;
 	float viewportWidth;
 	float viewportHeight;
 
