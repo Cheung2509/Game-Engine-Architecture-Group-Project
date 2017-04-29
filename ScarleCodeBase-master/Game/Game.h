@@ -32,10 +32,14 @@ class Player2D;
 class Background;
 class Levels;
 class Room;
+
 class Menu;
+
+
 
 class DebugCamera;
 class CameraFollow2D;
+class CollisionManager;
 
 class Game
 {
@@ -87,6 +91,7 @@ protected:
 	GameData* m_GD;			//Data to be shared to all Game Objects as they are ticked
 	DrawData* m_DD;			//Data to be shared to all Game Objects as they are drawn
 	DrawData2D * m_DD2D;	//Data to be passed by game to all 2D Game Objects via Draw 
+	CollisionManager* collisionManager;
 
 	Player2D* player;       // pointer to player class
 	Background* BackG;
@@ -98,12 +103,13 @@ protected:
 
 	//Tick functions for each state
 	void PlayTick();
-	void CollisionResolution(GameObject2D* object1, GameObject2D* object2);
-	void CollisionManagement();
+
 	//changes
 	//list<GameObject2D*> m_collider;
 
 	
+
+
 };
 
 
