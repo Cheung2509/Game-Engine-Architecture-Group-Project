@@ -17,7 +17,8 @@ enum GameState {
 enum MenuState {
 	MS_NULL = 0,
 	MS_MAIN = 1,
-	MS_PLAY = 2
+	MS_PLAY = 2,
+	MS_EXIT = 3
 };
 
 #endif

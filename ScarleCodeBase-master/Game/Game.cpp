@@ -223,10 +223,11 @@ bool Game::Tick()
 	ReadInput();
 
 	//Upon pressing escape QUIT
-	if (m_keyboardState[DIK_ESCAPE] & 0x80)
+	if ((m_keyboardState[DIK_ESCAPE] & 0x80) || (m_GD->m_MS == MS_EXIT))
 	{
 		return false;
 	}
+	
 
 	//m_GD->viewportHeight = window.bottom;
 	//m_GD->viewportWidth = window.left;
@@ -259,19 +260,25 @@ void Game::PlayTick()
 {
 	if (m_GD->m_MS == MS_MAIN)
 	{
-		RECT  virtualRect;
-		virtualRect.left = 580;
-		virtualRect.right = 680;
-		virtualRect.bottom = 220;
-		virtualRect.top = 180;
+		RECT  virtualRectPlay;
+		RECT virtualRectExit;
+		virtualRectPlay.left = 580;
+		virtualRectPlay.right = 680;
+		virtualRectPlay.bottom = 229;
+		virtualRectPlay.top = 180;
+
+		virtualRectExit.left = 580;
+		virtualRectExit.right = 680;
+		virtualRectExit.bottom = 290;
+		virtualRectExit.top = 230;
 		POINT cursorPos;
 		GetCursorPos(&cursorPos);
 		ScreenToClient(m_hWnd, &cursorPos);
-		if ((cursorPos.x > virtualRect.left && cursorPos.x < virtualRect.right) &&
-			(cursorPos.y > virtualRect.top && cursorPos.y < virtualRect.bottom))
+		if ((cursorPos.x > virtualRectPlay.left && cursorPos.x < virtualRectPlay.right) &&
+			(cursorPos.y > virtualRectPlay.top && cursorPos.y < virtualRectPlay.bottom))
 		{
 			MenuStart->SetColour(Color((float*)&Colors::Yellow));
-			MenuExit->SetColour(Color((float*)&Colors::Yellow));
+			
 
 			if (m_GD->m_mouseState->rgbButtons[0])
 			{
@@ -281,9 +288,21 @@ void Game::PlayTick()
 		else
 		{
 			MenuStart->SetColour(Color((float*)&Colors::White));
+			
+		}
+		if ((cursorPos.x > virtualRectExit.left && cursorPos.x < virtualRectExit.right) &&
+			(cursorPos.y > virtualRectExit.top && cursorPos.y < virtualRectExit.bottom))
+		{
+			MenuExit->SetColour(Color((float*)&Colors::Yellow));
+			if (m_GD->m_mouseState->rgbButtons[0])
+			{
+				m_GD->m_MS = MS_EXIT;
+			}
+		}
+		else
+		{
 			MenuExit->SetColour(Color((float*)&Colors::White));
 		}
-
 
 	}
 
