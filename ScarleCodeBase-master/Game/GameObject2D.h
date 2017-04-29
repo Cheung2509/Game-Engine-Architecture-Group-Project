@@ -29,7 +29,6 @@ public:
 	Vector2 GetPos() { return m_pos; }
 	Vector2 GetVel() { return m_vel; }
 	float GetRot() { return m_rotation; }
-	float GetPosY() { return m_pos.y; }
 	float getSpeed() { return speed; }
 	float getSpeedY() { return speedY; }
 	//setters

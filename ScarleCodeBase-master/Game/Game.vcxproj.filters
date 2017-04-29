@@ -1,79 +1,140 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Game.cpp">
-      <Filter>Base\Source</Filter>
+    <ClCompile Include="Background.cpp">
+      <Filter>Objects\Source</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject2D.cpp">
-      <Filter>Objects\2D\Source</Filter>
+    <ClCompile Include="Collectable.cpp">
+      <Filter>Objects\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Ladder.cpp">
-      <Filter>Objects\2D\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="TextGO2D.cpp">
-      <Filter>Objects\2D\Source</Filter>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Objects\Source</Filter>
     </ClCompile>
     <ClCompile Include="gameobject.cpp">
       <Filter>Objects\Source</Filter>
     </ClCompile>
-    <ClCompile Include="light.cpp">
+    <ClCompile Include="GameObject2D.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Ladder.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MotherObstecle.cpp">
       <Filter>Objects\Source</Filter>
     </ClCompile>
     <ClCompile Include="Platfroms.cpp">
-      <Filter>Objects\2D\Source</Filter>
+      <Filter>Objects\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Levels.cpp">
-      <Filter>Base\Source</Filter>
+    <ClCompile Include="AnimatedSprite.cpp">
+      <Filter>Objects\Source\SpriteStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageGO2D.cpp">
+      <Filter>Objects\Source\SpriteStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatfromTile.cpp">
+      <Filter>Objects\Source\SpriteStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="Player2D.cpp">
+      <Filter>Objects\Source\SpriteStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Objects\Source\SpriteStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="LadderTile.cpp">
+      <Filter>Objects\Source\SpriteStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Objects\Source\SpriteStuff</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera2D.cpp">
+      <Filter>Objects\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraFollow2D.cpp">
+      <Filter>Objects\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugCamera.cpp">
+      <Filter>Objects\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="TextGO2D.cpp">
+      <Filter>Objects\Source</Filter>
     </ClCompile>
     <ClCompile Include="Room.cpp">
       <Filter>Base\Source</Filter>
     </ClCompile>
-    <ClCompile Include="AnimatedSprite.cpp">
-      <Filter>Objects\2D\Source\Sprite</Filter>
+    <ClCompile Include="light.cpp">
+      <Filter>Base\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Collectable.cpp">
-      <Filter>Objects\2D\Source\Sprite</Filter>
+    <ClCompile Include="Levels.cpp">
+      <Filter>Base\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy.cpp">
-      <Filter>Objects\2D\Source\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="ImageGO2D.cpp">
-      <Filter>Objects\2D\Source\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Player2D.cpp">
-      <Filter>Objects\2D\Source\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="PlatfromTile.cpp">
-      <Filter>Objects\2D\Source\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="LadderTile.cpp">
-      <Filter>Objects\2D\Source\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Objects\2D\Source\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera2D.cpp">
-      <Filter>Objects\2D\Source\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraFollow2D.cpp">
-      <Filter>Objects\2D\Source\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugCamera.cpp">
-      <Filter>Objects\2D\Source\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Background.cpp">
-      <Filter>Objects\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="MotherObstecle.cpp">
-      <Filter>Objects\2D\Source\Sprite</Filter>
+    <ClCompile Include="Game.cpp">
+      <Filter>Base\Source</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
       <Filter>Base\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ObjectList.h">
-      <Filter>Objects</Filter>
+    <ClInclude Include="ObjectList.h" />
+    <ClInclude Include="gameobject.h">
+      <Filter>Objects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject2D.h">
+      <Filter>Objects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Ladder.h">
+      <Filter>Objects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MotherObstecle.h">
+      <Filter>Objects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectType.h">
+      <Filter>Objects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Platfroms.h">
+      <Filter>Objects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Player2D.h">
+      <Filter>Objects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TextGO2D.h">
+      <Filter>Objects\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera2D.h">
+      <Filter>Objects\Headers\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraFollow2D.h">
+      <Filter>Objects\Headers\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCamera.h">
+      <Filter>Objects\Headers\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedSprite.h">
+      <Filter>Objects\Headers\SpriteStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Objects\Headers\SpriteStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Objects\Headers\SpriteStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Objects\Headers\SpriteStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Collectables.h">
+      <Filter>Objects\Headers\SpriteStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageGO2D.h">
+      <Filter>Objects\Headers\SpriteStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="LadderTile.h">
+      <Filter>Objects\Headers\SpriteStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="PlatfromTile.h">
+      <Filter>Objects\Headers\SpriteStuff</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Objects\Headers\SpriteStuff</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
       <Filter>Base\Header</Filter>
@@ -87,83 +148,26 @@
     <ClInclude Include="Game.h">
       <Filter>Base\Header</Filter>
     </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Base\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject2D.h">
-      <Filter>Objects\2D\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Ladder.h">
-      <Filter>Objects\2D\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TextGO2D.h">
-      <Filter>Objects\2D\Headers</Filter>
-    </ClInclude>
     <ClInclude Include="GameData.h">
       <Filter>Base\Header</Filter>
     </ClInclude>
-    <ClInclude Include="gameobject.h">
-      <Filter>Objects\Headers</Filter>
+    <ClInclude Include="GameState.h">
+      <Filter>Base\Header</Filter>
     </ClInclude>
     <ClInclude Include="Helper.h">
-      <Filter>Base\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Platfroms.h">
-      <Filter>Objects\2D\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="vertex.h">
-      <Filter>Base\Header</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjectType.h">
       <Filter>Base\Header</Filter>
     </ClInclude>
     <ClInclude Include="Levels.h">
       <Filter>Base\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Base\Header</Filter>
+    </ClInclude>
     <ClInclude Include="Room.h">
       <Filter>Base\Header</Filter>
     </ClInclude>
-    <ClInclude Include="AnimatedSprite.h">
-      <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="LadderTile.h">
-      <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="PlatfromTile.h">
-      <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="Player2D.h">
-      <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemy.h">
-      <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="Collectables.h">
-      <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="ImageGO2D.h">
-      <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera2D.h">
-      <Filter>Objects\2D\Headers\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraFollow2D.h">
-      <Filter>Objects\2D\Headers\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="DebugCamera.h">
-      <Filter>Objects\2D\Headers\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Background.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="MotherObstecle.h">
-      <Filter>Objects\2D\Headers\Sprite Stuff</Filter>
+    <ClInclude Include="vertex.h">
+      <Filter>Base\Header</Filter>
     </ClInclude>
     <ClInclude Include="Menu.h">
       <Filter>Base\Header</Filter>
@@ -171,43 +175,34 @@
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Base">
-      <UniqueIdentifier>{2be5c615-11e5-4fee-8a4c-9676f5bce933}</UniqueIdentifier>
+      <UniqueIdentifier>{ae988f6b-5a95-488d-9829-36cc44f479db}</UniqueIdentifier>
     </Filter>
     <Filter Include="Objects">
-      <UniqueIdentifier>{685c4af1-9394-4c4a-a182-d29bd0a7b12d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Base\Header">
-      <UniqueIdentifier>{9be5e890-c4e4-4a97-9c94-9841acd8b6e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Base\Source">
-      <UniqueIdentifier>{c0225613-de28-44f8-b8a3-02f58d3e44dc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Objects\2D">
-      <UniqueIdentifier>{500381e1-7d5a-4bb0-9d34-edcb3e1fdd12}</UniqueIdentifier>
+      <UniqueIdentifier>{50aca14a-aa3a-439d-aff4-43583a7cda97}</UniqueIdentifier>
     </Filter>
     <Filter Include="Objects\Headers">
-      <UniqueIdentifier>{cbc00798-8a2a-454e-b2c9-e3be93b6582f}</UniqueIdentifier>
+      <UniqueIdentifier>{06ec5276-885a-4e17-8832-202f48c90ac3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Objects\Source">
-      <UniqueIdentifier>{16431145-3ac5-4ed7-9b32-237b483ec492}</UniqueIdentifier>
+      <UniqueIdentifier>{ab7cbc89-3cab-4702-bd8c-f9c9a5d1c4c9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\2D\Headers">
-      <UniqueIdentifier>{fc18e1e0-83b5-451e-8649-7aba08fda1fc}</UniqueIdentifier>
+    <Filter Include="Objects\Headers\Camera">
+      <UniqueIdentifier>{ea2a0e5a-1a53-4b81-9a47-c22cf0ba47dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\2D\Source">
-      <UniqueIdentifier>{bbee43eb-cb7d-425b-8b5d-c01b7eb66a1e}</UniqueIdentifier>
+    <Filter Include="Objects\Headers\SpriteStuff">
+      <UniqueIdentifier>{8886b965-9bc1-4ce6-a9f5-46f40748eab3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\2D\Headers\Sprite Stuff">
-      <UniqueIdentifier>{91b26574-4393-4606-966b-66c3db13c1be}</UniqueIdentifier>
+    <Filter Include="Objects\Source\Camera">
+      <UniqueIdentifier>{d648a3b8-870b-48e9-9d3f-f76cd80e854b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\2D\Source\Sprite">
-      <UniqueIdentifier>{515f52a3-074b-4b6f-9ab0-2167e50e80e6}</UniqueIdentifier>
+    <Filter Include="Objects\Source\SpriteStuff">
+      <UniqueIdentifier>{b6f292c7-6747-40ce-9ccc-f2cbdfaaf426}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\2D\Headers\Camera">
-      <UniqueIdentifier>{3e594ea4-1924-4f06-b241-9d2f7dad782f}</UniqueIdentifier>
+    <Filter Include="Base\Header">
+      <UniqueIdentifier>{91a36bc1-9492-4072-bc3a-afbe9fcddb0c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Objects\2D\Source\Camera">
-      <UniqueIdentifier>{33e4d688-cfd7-464f-b692-76c22df65ebb}</UniqueIdentifier>
+    <Filter Include="Base\Source">
+      <UniqueIdentifier>{cef7781b-a356-4167-8508-8933a02c4ba1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

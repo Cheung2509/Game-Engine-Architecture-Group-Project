@@ -127,6 +127,7 @@
     <ClInclude Include="Camera2D.h" />
     <ClInclude Include="CameraFollow2D.h" />
     <ClInclude Include="Collectables.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="DebugCamera.h" />
     <ClInclude Include="DrawData2D.h" />
@@ -151,7 +152,7 @@
     <ClInclude Include="PlatfromTile.h" />
     <ClInclude Include="Player2D.h" />
     <ClInclude Include="Room.h" />
-    <ClInclude Include="Tile.h" />
+    <ClInclude Include="Sprite.h" />
     <ClInclude Include="TextGO2D.h" />
     <ClInclude Include="vertex.h" />
   </ItemGroup>
@@ -161,6 +162,7 @@
     <ClCompile Include="Camera2D.cpp" />
     <ClCompile Include="CameraFollow2D.cpp" />
     <ClCompile Include="Collectable.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DebugCamera.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -177,7 +179,7 @@
     <ClCompile Include="PlatfromTile.cpp" />
     <ClCompile Include="Player2D.cpp" />
     <ClCompile Include="Room.cpp" />
-    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="TextGO2D.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -61,6 +61,7 @@ private:
 	LadderTile* ladder;
 	//RopeTile* Rope;
 	PlatfromTile* plat;
+	PlatfromTile* invisPlat;
 	Collectables* pickUp;
 	Collectables* respawner;
 
