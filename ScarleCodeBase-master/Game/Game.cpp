@@ -104,7 +104,7 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 
 	//create first level
 	Levels::load();
-	m_Room.reset(Levels::LoadedLevels[0].createRoom());
+	m_Room.reset(Levels::LoadedLevels[2].createRoom());
 	m_Room->CreateRoom(m_GD, _pd3dDevice);
 	player = m_Room->getPlayer(); //set games copy of player 
 

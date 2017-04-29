@@ -48,12 +48,11 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 		switch (obj->GetType())
 		{
 		case ObjectType::COLLECTIBLE:
-			if (!room->getCollectable()->GetPickedUp())
+			if (obj->isAlive())
 			{
 				std::cout << "Collected \n";
 				room->getPlayer()->addCollectable();
 				obj->SetAlive(false);
-				room->getCollectable()->SetPickeduP();
 			}
 			break;
 		case ObjectType::ENEMY:
