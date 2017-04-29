@@ -317,11 +317,11 @@ void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
 				player->SetIsGrounded(true);
 				player->SetSpeedY(0.0f);
 			}
-			else if (player->GetPosY() > object1->GetPosY())
+			/*else if (player->GetPosY() > object1->GetPosY())
 			{
 				//bottom collision
 				player->SetSpeedY(20.0f);
-			}
+			}*/
 
 			break;
 

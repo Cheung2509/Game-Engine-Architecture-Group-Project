@@ -64,6 +64,14 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				InSceneObjects.push_back(plat);
 				m_collider.push_back(plat);
 				break;
+			case'I':
+				//invisible wall
+				invisPlat = new PlatfromTile(_platform, TilePos);
+				//invisPlat->//set rotation or set width plus height when functionailty is in there 
+				invisPlat->SetAlive(false);
+				InSceneObjects.push_back(invisPlat);
+				m_collider.push_back(invisPlat);
+				break;
 
 			case'H':
 				//create ladderTile
