@@ -9,7 +9,7 @@ public:
 	~PlatfromTile();
 
 	virtual void Draw(DrawData2D* _DD);
-
+	
 protected:
 	Sprite* sprite;
 };
