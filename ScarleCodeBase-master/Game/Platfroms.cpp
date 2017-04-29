@@ -1,8 +1,8 @@
 #include "Platfroms.h"
 
-#include "Tile.h"
+#include "Sprite.h"
 
-Platforms::Platforms(Tile* _sprite, int _noOfTiles, float _initPosX, float _initPosY)
+Platforms::Platforms(Sprite* _sprite, int _noOfTiles, float _initPosX, float _initPosY)
 {
 	posX = _initPosX;
 	posY = _initPosY;
@@ -16,7 +16,7 @@ Platforms::Platforms(Tile* _sprite, int _noOfTiles, float _initPosX, float _init
 		incrementY += 30;
 	}
 
-	float yPosition = _platfromTile[2]->GetPosY();
+	float yPosition = _platfromTile[2]->GetPos().y;
 }
 
 void Platforms::Tick(GameData* _GD)

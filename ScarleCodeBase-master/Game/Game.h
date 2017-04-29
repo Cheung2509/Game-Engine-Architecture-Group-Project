@@ -29,6 +29,7 @@ struct DrawData2D;
 class Light;
 class TextGO2D;
 class Player2D;
+class CollisionManager;
 //class Collectables;
 //class Platforms;
 class Levels;
@@ -82,20 +83,21 @@ protected:
 	GameData* m_GD;			//Data to be shared to all Game Objects as they are ticked
 	DrawData* m_DD;			//Data to be shared to all Game Objects as they are drawn
 	DrawData2D * m_DD2D;	//Data to be passed by game to all 2D Game Objects via Draw 
+	CollisionManager* collisionManager;
 
 	Player2D* player;       // pointer to player class
 	//Collectables* PickUp;   // pointer to pick up class
 	//Collectables* Respawner;
 
-	std::unique_ptr<Room>_Room = nullptr;
+	std::unique_ptr<Room> _Room = nullptr;
 
 	//sound stuff
 	std::unique_ptr<AudioEngine> m_audioEngine;
 
 	//Tick functions for each state
 	void PlayTick();
-	void CollisionResolution(GameObject2D* object1, GameObject2D* object2);
-	void CollisionManagement();
+	//void CollisionResolution(GameObject2D* object1, GameObject2D* object2);
+	//void CollisionManagement();
 	//changes
 	//list<GameObject2D*> m_collider;
 };

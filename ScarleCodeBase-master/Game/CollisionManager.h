@@ -3,21 +3,21 @@
 
 #include <list>
 #include "GameObject2D.h"
+#include <memory>
+#include "Room.h"
 
-class Room;
-
+class Player2D;
 class CollisionManager
 {
 public:
 	CollisionManager() = default;
 	~CollisionManager() = default;
 
-	void checkCollision(std::list<GameObject2D*>, Room*);
+	void checkCollision(Room*);
 
 	bool isCollided(GameObject2D*, GameObject2D*);
 
-	void resolveCollision();
+	void resolveCollision(Room*, GameObject2D*);
 private:
-	std::list<GameObject2D> m_collider;
 };
 #endif // ! _COLLISION_MANAGER_H_

@@ -14,6 +14,7 @@
 #include "GameData.h"
 #include "drawdata.h"
 #include "DrawData2D.h"
+#include "CollisionManager.h"
 
 
 #include "DebugCamera.h"
@@ -127,6 +128,8 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	room->SetScale(0.7);
 	room->SetColour(Color((float*)&Colors::Yellow));
 	m_UserInterface.push_back(room);
+
+	collisionManager = new CollisionManager();
 };
 
 
@@ -240,7 +243,7 @@ void Game::PlayTick()
 		}
 	}
 
-	CollisionManagement();
+	collisionManager->checkCollision(_Room.get());
 
 	//update all objects
 	for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
@@ -254,116 +257,120 @@ void Game::PlayTick()
 	}
 }
 
-void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
-{
-	if (object1->GetType() != ObjectType::LADDER)
-	{
-		switch (object1->GetType())
-		{
-		case ObjectType::ENEMY:
-			if (object1->GetType() == ObjectType::ENEMY)
-			{
-				if (player->getLives() != 0)
-				{
-					std::cout << "Enemy hit \n";
-					player->SetAlive(false);
-					player->TakeLives();
-					if (_Room->getRespawner()->GetRespawnUp())
-					{
-						player->SetAlive(true);
-						player->SetPos(_Room->getRespawner()->GetPos());
-						player->SetPlayerState(PlayerState::PlayerState_IDLE);
-					}
-					else
-					{
-						player->SetAlive(true);
-						player->SetPos(Vector2(200, 450));
-					}
-					player->SetZeroVel(0);
-
-				}
-				else
-				{
-					player->SetAlive(false);
-				}
-
-			}
-			break;
-		case ObjectType::COLLECTIBLE:
-			if (_Room->getCollectable()->GetPickedUp() == false)// could change this 
-			{
-				std::cout << "Collected \n";
-				player->addCollectable();
-				object1->SetAlive(false);
-				_Room->getCollectable()->SetPickeduP();
-			}
-			break;
-
-		case ObjectType::PLATFORM:
-			/*if (player->GetPlayerState() != PlayerState::PlayerState_JUMP)
-			{
-			player->SetIsGrounded(true);
-			player->SetSpeedY(0.0f);
-			}*/
-			if (player->GetPosY() < object1->GetPosY())
-			{
-				//top collision
-				player->SetIsGrounded(true);
-				player->SetSpeedY(0.0f);
-			}
-			else if (player->GetPosY() > object1->GetPosY())
-			{
-				//bottom collision
-				player->SetSpeedY(20.0f);
-			}
-
-			break;
-
-		case::ObjectType::RESPAWN:
-			_Room->getRespawner()->SetRespawnUp(true);
-			break;
-		}
-	}
-	else
-	{
-		object2->SetIsGrounded(true);
-		object2->setHasJumped(false);
-		object2->SetSpeedY(0.0f);
-		//object2->setSpeed(0.0f);
-		object2->setOnLadder(true);
-	}
-
-}
-
-void Game::CollisionManagement()
-{
-	for each(GameObject2D* object1 in _Room->getColldingObjects())
-	{
-		if (object1->GetType() != ObjectType::PLAYER)
-		{
-			for each(GameObject2D* object2 in _Room->getColldingObjects())
-			{
-				if (object2->GetType() == ObjectType::PLAYER && object2->isAlive())
-				{
-					if (object1->checkCollisions(object2))
-					{
-						CollisionResolution(object1, object2);
-						return;
-					}
-					else
-					{
-
-						//player->SetPlayerState(PlayerState::PlayerState_IDLE);
-						player->SetIsGrounded(false);
-						player->setOnLadder(false);
-
-					}
-				}
-				
-			}
-		}
-	}
-}
+//void Game::CollisionResolution(GameObject2D * object1, GameObject2D * object2)
+//{
+//	if (object1->GetType() != ObjectType::LADDER)
+//	{
+//		switch (object1->GetType())
+//		{
+//		case ObjectType::ENEMY:
+//			if (object1->GetType() == ObjectType::ENEMY)
+//			{
+//				if (player->getLives() != 0)
+//				{
+//					std::cout << "Enemy hit \n";
+//					player->SetAlive(false);
+//					player->TakeLives();
+//					if (_Room->getRespawner()->GetRespawnUp())
+//					{
+//						player->SetAlive(true);
+//						player->SetPos(_Room->getRespawner()->GetPos());
+//						player->SetPlayerState(PlayerState::PlayerState_IDLE);
+//					}
+//					else
+//					{
+//						player->SetAlive(true);
+//						player->SetPos(Vector2(200, 450));
+//					}
+//					player->SetZeroVel(0);
+//
+//				}
+//				else
+//				{
+//					player->SetAlive(false);
+//				}
+//
+//			}
+//			break;
+//		case ObjectType::COLLECTIBLE:
+//			if (_Room->getCollectable()->GetPickedUp() == false)// could change this 
+//			{
+//				std::cout << "Collected \n";
+//				player->addCollectable();
+//				object1->SetAlive(false);
+//				_Room->getCollectable()->SetPickeduP();
+//			}
+//			break;
+//
+//		case ObjectType::PLATFORM:
+//			/*if (player->GetPlayerState() != PlayerState::PlayerState_JUMP)
+//			{
+//			player->SetIsGrounded(true);
+//			player->SetSpeedY(0.0f);
+//			}*/
+//			if (player->GetPos().y < object1->GetPos().y)
+//			{
+//				//top collision
+//				player->SetIsGrounded(true);
+//				player->SetSpeedY(0.0f);
+//			}
+//			else if (player->GetPos().y > object1->GetPos().y)
+//			{
+//				//bottom collision
+//				player->SetSpeedY(20.0f);
+//			}
+//
+//			break;
+//
+//		case::ObjectType::RESPAWN:
+//			_Room->getRespawner()->SetRespawnUp(true);
+//			break;
+//		}
+//	}
+//	else
+//	{
+//		object2->SetIsGrounded(true);
+//		object2->setHasJumped(false);
+//		object2->SetSpeedY(0.0f);
+//		//object2->setSpeed(0.0f);
+//		object2->setOnLadder(true);
+//	}
+//
+//}
+//
+//void Game::CollisionManagement()
+//{
+//	int count = 0;
+//
+//	for each(GameObject2D* object1 in _Room->getColldingObjects())
+//	{
+//		if (object1->GetType() != ObjectType::PLAYER)
+//		{
+//			for each(GameObject2D* object2 in _Room->getColldingObjects())
+//			{
+//				if (object2->GetType() == ObjectType::PLAYER && object2->isAlive())
+//				{
+//					if (object1->checkCollisions(object2))
+//					{
+//						CollisionResolution(object1, object2);
+//						count++;
+//					}
+//					
+//				}
+//				
+//			}
+//		}
+//	}
+//
+//	if (count == 0)
+//	{
+//
+//		//player->SetPlayerState(PlayerState::PlayerState_IDLE);
+//		player->SetIsGrounded(false);
+//		player->setOnLadder(false);
+//
+//	}
+//}
 
 void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
