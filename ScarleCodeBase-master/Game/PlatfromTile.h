@@ -1,16 +1,16 @@
 #pragma once
 #include "GameObject2D.h"
 
-class Tile;
+class Sprite;
 class PlatfromTile :public GameObject2D
 {
 public:
-	PlatfromTile(Tile*, Vector2);
+	PlatfromTile(Sprite*, Vector2);
 	~PlatfromTile();
 
 	virtual void Draw(DrawData2D* _DD);
 
 protected:
-	Tile* sprite;
+	Sprite* sprite;
 };
 
