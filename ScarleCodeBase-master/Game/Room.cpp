@@ -178,3 +178,8 @@ void Room::Draw(DrawData2D* _DD)
 		}
 	}
 }
+void Room::addToLists(GameObject2D * Object)
+{
+	InSceneObjects.push_back(Object);
+	m_collider.push_back(Object);
+}

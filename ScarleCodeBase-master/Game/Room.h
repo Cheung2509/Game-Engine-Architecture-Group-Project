@@ -39,6 +39,7 @@ public:
 	void setCurrentLevel(int i);
 	void Tick(GameData* _GD);
 	void Draw(DrawData2D* _DD);
+	void addToLists(GameObject2D* Object);
 
 
 

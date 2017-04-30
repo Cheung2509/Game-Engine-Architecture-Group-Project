@@ -64,6 +64,12 @@
     <ClCompile Include="Collectable.cpp">
       <Filter>Objects\Source\SpriteStuff</Filter>
     </ClCompile>
+    <ClCompile Include="inGameLevelEditor.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEditorButton.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectList.h" />
@@ -153,6 +159,12 @@
     </ClInclude>
     <ClInclude Include="GameObject2D.h">
       <Filter>Objects\Headers\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="inGameLevelEditor.h">
+      <Filter>Base\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEditorButton.h">
+      <Filter>Objects\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
