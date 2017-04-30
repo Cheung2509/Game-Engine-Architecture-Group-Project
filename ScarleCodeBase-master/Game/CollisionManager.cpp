@@ -16,11 +16,14 @@ void CollisionManager::checkCollision(Room* room)
 		//if the player collides with collider
 		if (isCollided(room->getPlayer(), obj))
 		{
-			if ((obj)->GetType() != ObjectType::PLAYER)
+			if (room->getPlayer()->isAlive())
 			{
-				//Do collision behaviour
-				resolveCollision(room, obj);
-				collided = true;
+				if ((obj)->GetType() != ObjectType::PLAYER)
+				{
+					//Do collision behaviour
+					resolveCollision(room, obj);
+					collided = true;
+				}
 			}
 		}
 	}
@@ -133,7 +136,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 				else
 				{
 					room->getPlayer()->SetAlive(true);
-					room->getPlayer()->SetPos(Vector2(200, 450));
+					room->getPlayer()->SetPos(Vector2(0, 0));
 				}
 				room->getPlayer()->SetZeroVel(0);
 			}
