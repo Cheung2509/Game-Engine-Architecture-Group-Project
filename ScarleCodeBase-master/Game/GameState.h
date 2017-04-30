@@ -10,7 +10,6 @@ enum GameState {
 	GS_ATTRACT,
 	GS_PLAY_MAIN_CAM,
 	GS_PLAY_DEBUG_CAM,
-	GS_PAUSE,
 	GS_GAME_OVER,
 	GS_COUNT
 };
@@ -18,7 +17,9 @@ enum MenuState {
 	MS_NULL = 0,
 	MS_MAIN = 1,
 	MS_PLAY = 2,
-	MS_EXIT = 3
+	MS_EXIT = 3,
+	MS_PAUSE = 4,
+	MS_GAMEMENU = 5
 };
 
 #endif

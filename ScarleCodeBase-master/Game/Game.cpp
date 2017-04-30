@@ -242,8 +242,6 @@ bool Game::Tick()
 	{
 	case GS_ATTRACT:
 		break;
-	case GS_PAUSE:
-		break;
 	case GS_GAME_OVER:
 		break;
 	case GS_PLAY_MAIN_CAM:
@@ -263,7 +261,7 @@ void Game::PlayTick()
 		RECT  virtualRectPlay;
 		RECT virtualRectExit;
 		virtualRectPlay.left = 580;
-		virtualRectPlay.right = 680;
+		virtualRectPlay.right = 680; //virtual rectangle around button may give colour
 		virtualRectPlay.bottom = 229;
 		virtualRectPlay.top = 180;
 
@@ -271,6 +269,7 @@ void Game::PlayTick()
 		virtualRectExit.right = 680;
 		virtualRectExit.bottom = 290;
 		virtualRectExit.top = 230;
+
 		POINT cursorPos;
 		GetCursorPos(&cursorPos);
 		ScreenToClient(m_hWnd, &cursorPos);
@@ -303,14 +302,20 @@ void Game::PlayTick()
 		{
 			MenuExit->SetColour(Color((float*)&Colors::White));
 		}
-
 	}
-
-	
-
-
 	else
 	{
+		
+		if ((m_GD->m_MS == MS_PAUSE) && (m_keyboardState[DIK_P] & 0x80) && !(m_prevKeyboardState[DIK_P] & 0x80))
+		{
+			m_GD->m_MS = MS_PLAY;
+		}
+		else if ((m_keyboardState[DIK_P] & 0x80) && !(m_prevKeyboardState[DIK_P] & 0x80))
+		{
+			m_GD->m_MS = MS_PAUSE;
+			Sleep(100);
+		}
+		
 		collisionManager->checkCollision(m_Room.get());
 
 		if ((m_keyboardState[DIK_SPACE] & 0x80) && !(m_prevKeyboardState[DIK_SPACE] & 0x80))
@@ -326,25 +331,27 @@ void Game::PlayTick()
 				m_GD->m_GS = GS_PLAY_MAIN_CAM;
 			}
 		}
-
-
-
-		//update all objects
-		for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
+		if (m_GD->m_MS == MS_PAUSE)
 		{
-			(*it)->Tick(m_GD);
 		}
-		m_Room->Tick(m_GD);
-		for (list<GameObject2D *>::iterator it = m_GameObject2Ds.begin(); it != m_GameObject2Ds.end(); it++)
+		else
 		{
-			(*it)->Tick(m_GD);
+			//update all objects
+			for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
+			{
+				(*it)->Tick(m_GD);
+			}
+			m_Room->Tick(m_GD);
+			for (list<GameObject2D *>::iterator it = m_GameObject2Ds.begin(); it != m_GameObject2Ds.end(); it++)
+			{
+				(*it)->Tick(m_GD);
+			}
 		}
 	}
 }
 
 void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 {
-	
 	room->SetText(m_Room->getRoomName());
 	collects->SetText("My Collectables: " + to_string(player->getCollectables()));//changed 
 	lives->SetText("My lives: " + to_string(player->getLives())); //THIS SETS UPS LIVES  line above shows how to write to it  //changed 
