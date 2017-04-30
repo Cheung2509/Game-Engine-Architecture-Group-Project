@@ -24,6 +24,7 @@ void CollisionManager::checkCollision(Room* room)
 		}
 	}
 
+	//if nothing collides
 	if (!collided)
 	{
 		room->getPlayer()->SetIsGrounded(false);
@@ -33,8 +34,10 @@ void CollisionManager::checkCollision(Room* room)
 
 bool CollisionManager::isCollided(GameObject2D* gameObject1, GameObject2D* gameObject2)
 {
+	//downcast the player object
 	Player2D* player = dynamic_cast<Player2D*> (gameObject1);
 
+	//check if gameObject 2 is a tile
 	if (dynamic_cast<Tile*> (gameObject2) != NULL)
 	{
 		Tile* tile = dynamic_cast<Tile*>  (gameObject2);
@@ -47,6 +50,7 @@ bool CollisionManager::isCollided(GameObject2D* gameObject1, GameObject2D* gameO
 			return true;
 		}
 	}
+	//check if gameObject2 is a collectable
 	else if (dynamic_cast<Collectables*> (gameObject2) != NULL)
 	{
 		Collectables* collect = dynamic_cast<Collectables*> (gameObject2);
@@ -59,6 +63,7 @@ bool CollisionManager::isCollided(GameObject2D* gameObject1, GameObject2D* gameO
 			return true;
 		}
 	}
+	//check if gameObject2 is an Enemy
 	else if (dynamic_cast<Enemy*> (gameObject2) != NULL)
 	{
 		Enemy* enemy = dynamic_cast<Enemy*> (gameObject2);
@@ -71,13 +76,14 @@ bool CollisionManager::isCollided(GameObject2D* gameObject1, GameObject2D* gameO
 			return true;
 		}
 	}
-
-
+	
+	//return false if the other object does not collide anything
 	return false;
 }
 
 void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 {
+	//Ladder collisions overider everything
 	if (obj->GetType() == ObjectType::LADDER)
 	{
 		room->getPlayer()->SetIsGrounded(true);
@@ -87,6 +93,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 	}
 	else
 	{
+		//Switch statement to check other objects
 		switch (obj->GetType())
 		{
 		case ObjectType::COLLECTIBLE:
