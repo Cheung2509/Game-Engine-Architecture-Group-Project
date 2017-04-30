@@ -1,8 +1,8 @@
 #ifndef _PLAYER2D_H_
 #define _PLAYER2D_H_
 
-#include "AnimatedSprite.h"
-
+#include "GameObject2D.h"
+#include "Sprite.h"
 enum PlayerState
 {
 	PlayerState_IDLE,
@@ -13,10 +13,10 @@ enum PlayerState
 	PlayerState_CLIMBING
 };
 
-class Player2D : public AnimatedSprite
+class Player2D : public GameObject2D
 {
 public:
-	Player2D(string _fileName, ID3D11Device* _GD, int _frameCount);
+	Player2D(string _fileName, ID3D11Device* _GD);
 	~Player2D();
 
 	int getCollectables();
@@ -29,6 +29,7 @@ public:
 	void SetPlayerState(PlayerState state);
 	PlayerState GetPlayerState();
 	bool getIsGrounded() { return isGrounded; }
+	Sprite* getSprite() { return sprite; }
 
 	void resetJumpTime();
 
@@ -41,14 +42,11 @@ private:
 	PlayerState m_PS;
 
 	int Collectables;
-	//bool isfalling = false;
-	//float m_jumpTime;
 	int lives = 3;
 	Vector2 forwardMove;
 	Vector2 upMove;
 
-	
-	
+	Sprite* sprite;
 };
 
 #endif

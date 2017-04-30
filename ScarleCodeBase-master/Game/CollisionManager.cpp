@@ -1,6 +1,8 @@
 #include "CollisionManager.h"
 #include "Player2D.h"
 #include "Collectables.h"
+#include "Tile.h"
+#include "Enemy.h"
 
 #include <iostream>
 
@@ -11,7 +13,7 @@ void CollisionManager::checkCollision(Room* room)
 	for each (GameObject2D* obj in room->getColldingObjects())
 	{
 		//if the player collides with collider
-		if (room->getPlayer()->checkCollisions(obj))
+		if (isCollided(room->getPlayer(), obj))
 		{
 			if ((obj)->GetType() != ObjectType::PLAYER)
 			{
@@ -31,7 +33,47 @@ void CollisionManager::checkCollision(Room* room)
 
 bool CollisionManager::isCollided(GameObject2D* gameObject1, GameObject2D* gameObject2)
 {
-	return gameObject1->checkCollisions(gameObject2);
+	Player2D* player = dynamic_cast<Player2D*> (gameObject1);
+
+	if (dynamic_cast<Tile*> (gameObject2) != NULL)
+	{
+		Tile* tile = dynamic_cast<Tile*>  (gameObject2);
+		
+		if ((tile->getSprite()->getSpriteHeight() * tile->getScale().y) + tile->GetPos().y >= player->getSprite()->GetPos().y &&
+			tile->GetPos().y <= player->GetPos().y + (player->getSprite()->getSpriteHeight() * player->getScale().y) &&
+			(tile->getSprite()->getSpriteWidth() * tile->getScale().x) + tile->GetPos().x >= player->GetPos().x &&
+			tile->GetPos().x <= (player->getSprite()->getSpriteWidth() * player->getScale().x) + player->GetPos().x)
+		{
+			return true;
+		}
+	}
+	else if (dynamic_cast<Collectables*> (gameObject2) != NULL)
+	{
+		Collectables* collect = dynamic_cast<Collectables*> (gameObject2);
+
+		if ((collect->getSprite()->getSpriteHeight() * collect->getScale().y) + collect->GetPos().y >= player->getSprite()->GetPos().y &&
+			collect->GetPos().y <= player->GetPos().y + (player->getSprite()->getSpriteHeight() * player->getScale().y) &&
+			(collect->getSprite()->getSpriteWidth() * collect->getScale().x) + collect->GetPos().x >= player->GetPos().x &&
+			collect->GetPos().x <= (player->getSprite()->getSpriteWidth() * player->getScale().x) + player->GetPos().x)
+		{
+			return true;
+		}
+	}
+	else if (dynamic_cast<Enemy*> (gameObject2) != NULL)
+	{
+		Enemy* enemy = dynamic_cast<Enemy*> (gameObject2);
+
+		if ((enemy->getSprite()->getSpriteHeight() * enemy->getScale().y) + enemy->GetPos().y >= player->getSprite()->GetPos().y &&
+			enemy->GetPos().y <= player->GetPos().y + (player->getSprite()->getSpriteHeight() * player->getScale().y) &&
+			(enemy->getSprite()->getSpriteWidth() * enemy->getScale().x) + enemy->GetPos().x >= player->GetPos().x &&
+			enemy->GetPos().x <= (player->getSprite()->getSpriteWidth() * player->getScale().x) + player->GetPos().x)
+		{
+			return true;
+		}
+	}
+
+
+	return false;
 }
 
 void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)

@@ -1,14 +1,21 @@
 #include "Collectables.h"
+#include "Sprite.h"
 
-Collectables::Collectables(string _fileName, ID3D11Device* _GD): ImageGO2D(_fileName, _GD)
+Collectables::Collectables(Sprite* _sprite)
 {
 	PickedUp = false;
 	setType(COLLECTIBLE);
 	SetScale(1.0f);
+
+	sprite = _sprite;
 }
 Collectables::~Collectables()
 {
-
+	if (sprite != nullptr)
+	{
+		delete sprite;
+		sprite = nullptr;
+	}
 }
 
 
@@ -25,5 +32,13 @@ void Collectables::SetPickeduP()
 bool Collectables::GetRespawnUp()
 {
 	return m_RespawnUp;
+}
+
+void Collectables::Draw(DrawData2D * _DD)
+{
+	sprite->SetPos(m_pos);
+	sprite->SetScale(m_scale);
+	sprite->SetRot(m_rotation);
+	sprite->Draw(_DD);
 }
 		

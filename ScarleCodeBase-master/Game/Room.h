@@ -9,7 +9,7 @@
 
 class Levels;
 class PlatfromTile;
-class LadderTile;
+class Tile;
 //class RopeTile;
 class Collectables;
 class Enemy;
@@ -58,10 +58,10 @@ private:
 
 	Enemy* enemyHor;
 	MotherObstecle* mother;
-	LadderTile* ladder;
+	Tile* ladder;
 	//RopeTile* Rope;
-	PlatfromTile* plat;
-	PlatfromTile* invisPlat;
+	Tile* plat;
+	Tile* invisPlat;
 	Collectables* pickUp;
 	Collectables* respawner;
 

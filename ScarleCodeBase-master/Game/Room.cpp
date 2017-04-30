@@ -4,8 +4,7 @@
 
 #include "Sprite.h"
 
-#include "PlatfromTile.h"
-#include "LadderTile.h"
+#include "Tile.h"
 #include "Player2D.h"
 #include "Collectables.h"
 #include "Enemy.h"
@@ -43,6 +42,9 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 	Sprite* _platform = new Sprite("Platform", _pd3dDevice);
 	Sprite* _ladder = new Sprite("Ladder", _pd3dDevice);
+	Sprite* _collectable = new Sprite("Collectable", _pd3dDevice);
+	Sprite* _respawn = new Sprite("CheckPoint", _pd3dDevice);
+	Sprite* _enemyHor = new Sprite("EnemyHor", _pd3dDevice);
 
 	for (auto&& mapRow:map)
 	{
@@ -58,7 +60,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 			case '_':
 				//create a platfrom;
 				//TilePos.x = 0.0f + incrementY;
-				plat = new PlatfromTile(_platform, TilePos);
+				plat = new Tile(_platform, TilePos);
 				//plat->SetScale(1.0f);
 				plat->setType(PLATFORM);
 				InSceneObjects.push_back(plat);
@@ -66,7 +68,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				break;
 			case'I':
 				//invisible wall
-				invisPlat = new PlatfromTile(_platform, TilePos);
+				invisPlat = new Tile(_platform, TilePos);
 				//invisPlat->//set rotation or set width plus height when functionailty is in there 
 				invisPlat->SetAlive(false);
 				InSceneObjects.push_back(invisPlat);
@@ -75,7 +77,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case'H':
 				//create ladderTile
-				ladder = new LadderTile(_ladder, TilePos);
+				ladder = new Tile(_ladder, TilePos);
 				ladder->setType(ObjectType::LADDER);
 				InSceneObjects.push_back(ladder);
 				m_collider.push_back(ladder);
@@ -91,7 +93,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case'*':
 				// create player 
-				player = new Player2D("PlayerSpriteSheet", _pd3dDevice, 3);
+				player = new Player2D("Walk", _pd3dDevice);
 				player->SetScale(1.0f);
 				player->SetPos(TilePos);
 				player->setType(PLAYER);
@@ -106,7 +108,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case'$':
 				//create collecatable
-				pickUp = new Collectables("Collectable", _pd3dDevice);
+				pickUp = new Collectables(_collectable);
 				pickUp->SetPos(TilePos);
 				InSceneObjects.push_back(pickUp);
 				m_collider.push_back(pickUp);
@@ -114,7 +116,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case '@':
 				//create Respawner
-				respawner = new Collectables("CheckPoint", _pd3dDevice);
+				respawner = new Collectables(_respawn);
 				respawner->SetScale(0.5f);
 				respawner->SetPos(TilePos);
 
@@ -129,7 +131,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case'%':
 				//create enemy
-				enemyHor = new Enemy("EnemyHor", _pd3dDevice, enemyStartPos, TilePos);
+				enemyHor = new Enemy(_enemyHor, enemyStartPos, TilePos);
 
 				InSceneObjects.push_back(enemyHor);
 				m_collider.push_back(enemyHor);

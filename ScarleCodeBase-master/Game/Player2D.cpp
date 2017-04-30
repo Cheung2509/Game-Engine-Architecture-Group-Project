@@ -8,7 +8,7 @@
 
 
 
-Player2D::Player2D(string _fileName, ID3D11Device* _GD, int _frameCount) : AnimatedSprite(_fileName, _GD, _frameCount)
+Player2D::Player2D(string _fileName, ID3D11Device* _GD)
 {
 	/*SetDrag(1);
 	SetPhysicsOn(true);
@@ -36,6 +36,7 @@ Player2D::Player2D(string _fileName, ID3D11Device* _GD, int _frameCount) : Anima
 	
 	SetPhysicsOn(true);
 
+	sprite = new Sprite(_fileName, _GD);
 }
 
 Player2D::~Player2D()
@@ -48,33 +49,6 @@ void Player2D::Tick(GameData* _GD)
 	if (_GD->m_GS != GS_PLAY_DEBUG_CAM)
 	{
 		MovementManagement(_GD);
-
-		//switch statement to determine which frame to render
-		switch (m_PS)
-		{
-		case PlayerState_MOVE:
-			if (_GD->m_GS != GS_PAUSE)
-			{
-				m_totalElapsed += _GD->m_dt;
-
-				if (m_totalElapsed > m_timePerFrame)
-				{
-					++m_frame;
-					m_frame = m_frame % m_frameCount;
-					m_totalElapsed -= m_timePerFrame;
-				}
-			}
-			break;
-		case PlayerState_IDLE:
-			m_frame = 0;
-			break;
-		case PlayerState_JUMP:
-			m_frame = 2;
-			break;
-		case PlayerState_FALLING:
-			m_frame = 2;
-			break;
-		}
 	}
 }
 
@@ -307,12 +281,8 @@ PlayerState Player2D::GetPlayerState()
 
 void Player2D::Draw(DrawData2D* _DD)
 {
-	int frameWidth = m_frameWidth / m_frameCount;
-
-	sourceRect->left = frameWidth * m_frame;
-	sourceRect->right = sourceRect->left + frameWidth;
-	sourceRect->top = 0;
-	sourceRect->bottom = m_frameHeight;
-
-	AnimatedSprite::Draw(_DD);
+	sprite->SetPos(m_pos);
+	sprite->SetScale(m_scale);
+	sprite->SetRot(m_rotation);
+	sprite->Draw(_DD);
 }

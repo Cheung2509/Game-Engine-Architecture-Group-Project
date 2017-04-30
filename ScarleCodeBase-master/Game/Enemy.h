@@ -1,4 +1,4 @@
-#include "ImageGO2D.h"
+#include "GameObject2D.h"
 
 //=================================================================
 //Class for 2D Enemy
@@ -6,20 +6,21 @@
 //Enemy kills player when colliding
 //=================================================================
 
-class Enemy :public ImageGO2D
+class Sprite;
+
+class Enemy :public GameObject2D
 {
 public:
-	Enemy(string _fileName, ID3D11Device* _GD,Vector2 startpos,Vector2 endpos);
+	Enemy(Sprite* sprite , Vector2 startpos, Vector2 endpos);
 	~Enemy();
 	bool checkHorizontal();
 	bool checkVertical();
 
+	Sprite* getSprite() { return sprite; }
+
 	virtual void Tick(GameData* _GD);
+	virtual void Draw(DrawData2D* _DD);
 protected:
-
-
-
-
 
 	bool movingRight;
 	bool movingUp;
@@ -27,10 +28,5 @@ protected:
 	bool movinghorizantel;
 	Vector2 StartPostion;
 	Vector2 EndPostion;
-
-
-
-protected:
-
-
+	Sprite* sprite;
 };

@@ -1,8 +1,8 @@
-#include "LadderTile.h"
+#include "Tile.h"
 
 #include "Sprite.h"
 
-LadderTile::LadderTile(Sprite* sp, Vector2 _pos)
+Tile::Tile(Sprite* sp, Vector2 _pos)
 {
 	SetPos(_pos);
 	SetScale(0.5f);
@@ -13,12 +13,16 @@ LadderTile::LadderTile(Sprite* sp, Vector2 _pos)
 }
 
 
-LadderTile::~LadderTile()
+Tile::~Tile()
 {
-	
+	if (sprite != nullptr)
+	{
+		delete sprite;
+		sprite = nullptr;
+	}
 }
 
-void LadderTile::Draw(DrawData2D * _DD)
+void Tile::Draw(DrawData2D * _DD)
 {
 	sprite->SetPos(m_pos);
 	sprite->SetScale(m_scale);

@@ -12,7 +12,7 @@ Platforms::Platforms(Sprite* _sprite, int _noOfTiles, float _initPosX, float _in
 		posX = _initPosX + incrementY;
 		posY = _initPosY ;
 		position = Vector2(posX, posY);
-		_platfromTile.push_back(new PlatfromTile(_sprite, position));
+		_platfromTile.push_back(new Tile(_sprite, position));
 		incrementY += 30;
 	}
 
@@ -21,7 +21,7 @@ Platforms::Platforms(Sprite* _sprite, int _noOfTiles, float _initPosX, float _in
 
 void Platforms::Tick(GameData* _GD)
 {
-	for (vector<PlatfromTile*>::iterator it = _platfromTile.begin(); it != _platfromTile.end(); it++)
+	for (vector<Tile*>::iterator it = _platfromTile.begin(); it != _platfromTile.end(); it++)
 	{
 		(*it)->Tick(_GD);
 	}
@@ -29,7 +29,7 @@ void Platforms::Tick(GameData* _GD)
 
 void Platforms::Draw(DrawData2D* _DD)
 {
-	for (vector<PlatfromTile*>::iterator it = _platfromTile.begin(); it != _platfromTile.end(); it++)
+	for (vector<Tile*>::iterator it = _platfromTile.begin(); it != _platfromTile.end(); it++)
 	{
 		(*it)->Draw(_DD);
 	}
@@ -37,7 +37,7 @@ void Platforms::Draw(DrawData2D* _DD)
 
 bool Platforms::checkCollisions(GameObject2D* _target)
 {
-	for (vector<PlatfromTile*>::iterator it = _platfromTile.begin(); it != _platfromTile.end(); ++it)
+	for (vector<Tile*>::iterator it = _platfromTile.begin(); it != _platfromTile.end(); ++it)
 	{
 		if ((*it)->checkCollisions(_target))
 		{

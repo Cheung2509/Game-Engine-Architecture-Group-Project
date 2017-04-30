@@ -2,15 +2,17 @@
 #include "GameObject2D.h"
 
 class Sprite;
-class PlatfromTile :public GameObject2D
+
+class Tile :public GameObject2D
 {
 public:
-	PlatfromTile(Sprite*, Vector2);
-	~PlatfromTile();
+	Tile(Sprite*, Vector2);
+	~Tile();
 
 	virtual void Draw(DrawData2D* _DD);
-	
-protected:
+
+	Sprite* getSprite() { return sprite; };
+private:
 	Sprite* sprite;
 };
 

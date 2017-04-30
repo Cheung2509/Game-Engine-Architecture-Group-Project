@@ -31,6 +31,7 @@ public:
 	float GetRot() { return m_rotation; }
 	float getSpeed() { return speed; }
 	float getSpeedY() { return speedY; }
+	Vector2 getScale() { return m_scale; }
 	//setters
 
 	void SetPos(Vector2 _pos) { m_pos = _pos; }

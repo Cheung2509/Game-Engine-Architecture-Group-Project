@@ -2,9 +2,9 @@
 #include "GameObject2D.h"
 #include <vector>
 #include <memory>
-#include "PlatfromTile.h"
+#include "Tile.h"
 
-class PlatfromTile;
+class Tile;
 class Sprite;
 class Platforms : public GameObject2D
 {
@@ -16,7 +16,7 @@ public:
 	virtual void Draw(DrawData2D* _DD);
 
 	//void PlatformForce(GameObject2D* gameObject);
-	std::vector<PlatfromTile*> _platfromTile;
+	std::vector<Tile*> _platfromTile;
 	int incrementY = 0;
 
 	virtual bool checkCollisions(GameObject2D* _target) override;

@@ -3,8 +3,9 @@
 #include "DrawData2D.h"
 #include "GameData.h"
 #include "helper.h"
+#include "Sprite.h"
 
-Enemy::Enemy(string _fileName, ID3D11Device* _GD, Vector2 startpos, Vector2 endpos) :ImageGO2D(_fileName, _GD)
+Enemy::Enemy(Sprite* _sprite, Vector2 startpos, Vector2 endpos)
 {
 	setType(ENEMY);
 	movingRight = true;
@@ -27,11 +28,17 @@ Enemy::Enemy(string _fileName, ID3D11Device* _GD, Vector2 startpos, Vector2 endp
 	{
 		movinghorizantel = true;
 	}
+
+	sprite = _sprite;
 }
 
 Enemy::~Enemy()
 {
-
+	if (sprite != nullptr)
+	{
+		delete sprite;
+		sprite = nullptr;
+	}
 }
 
 
@@ -68,6 +75,14 @@ void Enemy::Tick(GameData* _GD)
 
 
 }
+void Enemy::Draw(DrawData2D * _DD)
+{
+	sprite->SetPos(m_pos);
+	sprite->SetScale(m_scale);
+	sprite->SetRot(m_rotation);
+	sprite->Draw(_DD);
+}
+
 bool Enemy::checkHorizontal()
 {
 
