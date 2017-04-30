@@ -45,6 +45,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 	Sprite* _collectable = new Sprite("Collectable", _pd3dDevice);
 	Sprite* _respawn = new Sprite("CheckPoint", _pd3dDevice);
 	Sprite* _enemyHor = new Sprite("EnemyHor", _pd3dDevice);
+	Sprite* _motherObstacle = new Sprite("motherFigure", _pd3dDevice);
 
 	for (auto&& mapRow:map)
 	{
@@ -139,13 +140,12 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				break;
 			case 'm':
 				//if player does not have all the collectables 
-				if (player->getCollectables() != 3) // collectables max not a varable yet 
-				{
+				
 					//create motherObstecle
-					mother = new MotherObstecle("motherFigure", _pd3dDevice, TilePos);
+					mother = new MotherObstacle(_motherObstacle, TilePos);
 					InSceneObjects.push_back(mother);
 					m_collider.push_back(mother);
-				}
+				
 
 			default:
 				break;

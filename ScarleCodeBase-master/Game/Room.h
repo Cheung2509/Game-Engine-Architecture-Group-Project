@@ -13,7 +13,7 @@ class Tile;
 //class RopeTile;
 class Collectables;
 class Enemy;
-class MotherObstecle;
+class MotherObstacle;
 class Player2D;
 
 class CameraFollow2D;
@@ -57,7 +57,7 @@ private:
 	//possibly need to add a bool to stop two players being created 
 
 	Enemy* enemyHor;
-	MotherObstecle* mother;
+	MotherObstacle* mother;
 	Tile* ladder;
 	//RopeTile* Rope;
 	Tile* plat;

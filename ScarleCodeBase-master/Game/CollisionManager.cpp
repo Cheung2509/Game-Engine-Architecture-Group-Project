@@ -3,6 +3,7 @@
 #include "Collectables.h"
 #include "Tile.h"
 #include "Enemy.h"
+#include "MotherObstecle.h"
 
 #include <iostream>
 
@@ -76,6 +77,19 @@ bool CollisionManager::isCollided(GameObject2D* gameObject1, GameObject2D* gameO
 			return true;
 		}
 	}
+	else if (dynamic_cast<MotherObstacle*> (gameObject2) != NULL)
+	{
+		MotherObstacle* mother = dynamic_cast<MotherObstacle*> (gameObject2);
+
+		if ((mother->getSprite()->getSpriteHeight() * mother->getScale().y) + mother->GetPos().y >= mother->getSprite()->GetPos().y &&
+			mother->GetPos().y <= player->GetPos().y + (player->getSprite()->getSpriteHeight() * player->getScale().y) &&
+			(mother->getSprite()->getSpriteWidth() * mother->getScale().x) + mother->GetPos().x >= player->GetPos().x &&
+			mother->GetPos().x <= (player->getSprite()->getSpriteWidth() * player->getScale().x) + player->GetPos().x)
+		{
+			return true;
+		}
+
+	}
 	
 	//return false if the other object does not collide anything
 	return false;
@@ -129,24 +143,53 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 			}
 			break;
 		case ObjectType::MOTHER:
-			if (room->getPlayer()->getSpeed() > 0)
+			if (room->getPlayer()->getCollectables() != 3)
 			{
-				room->getPlayer()->SetSpeed(room->getPlayer()->getSpeed() + -20.0f);
-			}
-			else if (room->getPlayer()->getSpeed() < 0)
-			{
-				room->getPlayer()->SetSpeed(room->getPlayer()->getSpeed() + 20.0f);
-			}
-			if (room->getPlayer()->getSpeedY() > 0)
-			{
-				room->getPlayer()->SetSpeedY(room->getPlayer()->getSpeedY() + -20.0f);
-			}
-			else if (room->getPlayer()->getSpeedY() < 0)
-			{
-				room->getPlayer()->SetSpeedY(room->getPlayer()->getSpeedY() + 20.0f);
-			}
-			break;
 
+				
+				if (room->getPlayer()->GetPos().x > obj->GetPos().x + 40 &&
+					room->getPlayer()->GetPos().y <= obj->GetPos().y + 50
+					&& room->getPlayer()->GetPos().y >= obj->GetPos().y - 50)
+				{
+					//right collision
+					float currentY = room->getPlayer()->GetPos().y;
+
+					room->getPlayer()->SetPos(Vector2(obj->GetPos().x + 55, currentY));
+					room->getPlayer()->SetSpeed(0);
+
+
+				}
+				else if (room->getPlayer()->GetPos().x >= obj->GetPos().x - 40 &&
+					room->getPlayer()->GetPos().y < obj->GetPos().y + 50
+					&& room->getPlayer()->GetPos().y >= obj->GetPos().y - 50)
+				{
+					//left collision
+
+					float currentY = room->getPlayer()->GetPos().y;
+					room->getPlayer()->SetPos(Vector2(obj->GetPos().x - 40, currentY));
+					room->getPlayer()->SetSpeed(0);
+
+				}
+				if (room->getPlayer()->GetPos().y <= obj->GetPos().y - 50)
+				{
+					//bottom collision
+					float currentX = room->getPlayer()->GetPos().x;
+					room->getPlayer()->SetPos(Vector2(currentX, obj->GetPos().y - 40));
+					room->getPlayer()->SetSpeedY(0);
+				}
+			
+				else if (room->getPlayer()->GetPos().y >= obj->GetPos().y + 50 && room->getPlayer()->GetPos().y <= obj->GetPos().y + 50)
+				{
+					//top collision
+					float currentX = room->getPlayer()->GetPos().x;
+					room->getPlayer()->SetPos(Vector2(currentX, obj->GetPos().y + 40));
+					room->getPlayer()->SetSpeedY(0);
+				}
+			}
+			else
+			{
+				//PLAYER WINS - STATE CHANGE TO WIN/GAME OVER
+			}
 			break;
 		case ObjectType::PLATFORM:
 			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)

@@ -1,11 +1,16 @@
-#include "ImageGO2D.h"
+#include "GameObject2D.h"
 
+class Sprite;
 
-class MotherObstecle: public ImageGO2D
+class MotherObstacle : public GameObject2D
 {
 public:
-	MotherObstecle(string _fileName, ID3D11Device* _GD,Vector2 Pos);
-	~MotherObstecle()=default;
+	MotherObstacle(Sprite*, Vector2 Pos);
+	~MotherObstacle();
+
+	Sprite* getSprite() { return sprite; };
+
+	virtual void Draw(DrawData2D* _DD);
 private:
-	
+	Sprite* sprite;
 };
