@@ -19,7 +19,9 @@ enum MenuState {
 	MS_PLAY = 2,
 	MS_EXIT = 3,
 	MS_PAUSE = 4,
-	MS_GAMEMENU = 5
+	MS_GAMEMENU = 5,
+	MS_MEME = 6
+	
 };
 
 #endif

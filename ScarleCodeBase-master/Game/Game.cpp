@@ -208,6 +208,7 @@ Game::~Game()
 
 bool Game::Tick()
 {
+	
 	//tick audio engine
 	if (!m_audioEngine->Update())
 	{
@@ -256,6 +257,11 @@ bool Game::Tick()
 
 void Game::PlayTick()
 {
+	if ((m_keyboardState[DIK_M] & 0x80) && !(m_prevKeyboardState[DIK_M] & 0x80))
+	{
+		m_DD2D->m_cam2D->SetRot(180.0f);
+	}
+	
 	if (m_GD->m_MS == MS_MAIN)
 	{
 		RECT  virtualRectPlay;
