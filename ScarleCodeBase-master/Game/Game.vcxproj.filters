@@ -64,6 +64,9 @@
     <ClCompile Include="Collectable.cpp">
       <Filter>Objects\Source\SpriteStuff</Filter>
     </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectList.h" />
@@ -153,6 +156,9 @@
     </ClInclude>
     <ClInclude Include="GameObject2D.h">
       <Filter>Objects\Headers\Base Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Base\Header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

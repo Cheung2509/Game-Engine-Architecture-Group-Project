@@ -34,7 +34,7 @@ class Levels;
 class Room;
 
 class Menu;
-
+class GameOver;
 
 
 class DebugCamera;
@@ -67,12 +67,15 @@ protected:
 	TextGO2D* MenuTitle;
 	TextGO2D* MenuStart;
 	TextGO2D* MenuExit;
+	TextGO2D* GameRestart;
+	TextGO2D* GameExit;
 	
 	
 	list<GameObject *> m_GameObjects; //data structure storing all GameObjects of this Game
 	list<GameObject2D *> m_GameObject2Ds;//ditto 2D objects
 	list<TextGO2D *> m_UserInterface;
 	list<TextGO2D*> m_MainMenuText;
+	list<TextGO2D*> m_GameOverText;
 	//required for the CMO model rendering system
 	CommonStates* m_states;
 	IEffectFactory* m_fxFactory;
@@ -92,10 +95,12 @@ protected:
 	DrawData* m_DD;			//Data to be shared to all Game Objects as they are drawn
 	DrawData2D * m_DD2D;	//Data to be passed by game to all 2D Game Objects via Draw 
 	CollisionManager* collisionManager;
+	GameOver* gameOver;
 
 	Player2D* player;       // pointer to player class
 	Background* BackG;
 	Menu* mainMenu;
+	Menu* GameOverMenu;
 	std::unique_ptr<Room> m_Room = nullptr;
 
 	//sound stuff

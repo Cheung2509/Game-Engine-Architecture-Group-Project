@@ -19,9 +19,7 @@
 #include "Menu.h"
 
 #include "CollisionManager.h"
-
-
-
+#include "GameOver.h"
 #include "DebugCamera.h"
 #include "CameraFollow2D.h"
 
@@ -110,6 +108,10 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	mainMenu->SetScale(0.6f);
 	mainMenu->SetPos(Vector2(570, 300));
 
+	GameOverMenu = new Menu("BackgroundOther", _pd3dDevice);
+	GameOverMenu->SetScale(0.6f);
+	GameOverMenu->SetPos(Vector2(570, 300));
+
 	//create a background
 	BackG = new Background("background", _pd3dDevice);
 
@@ -138,7 +140,19 @@ Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
 	MenuExit->SetScale(0.7);
 	MenuExit->SetColour(Color((float*)&Colors::White));
 	m_MainMenuText.push_back(MenuExit);
-		
+
+	GameExit = new TextGO2D("EXIT");
+	GameExit->SetPos(Vector2(600, 250));
+	GameExit->SetScale(0.7);
+	GameExit->SetColour(Color((float*)&Colors::White));
+	m_GameOverText.push_back(GameExit);
+
+	GameRestart = new TextGO2D("RESTART");
+	GameRestart->SetPos(Vector2(600, 200));
+	GameRestart->SetScale(0.7);
+	GameRestart->SetColour(Color((float*)&Colors::White));
+	m_GameOverText.push_back(GameRestart);
+
 	collects = new TextGO2D("Collectables: ");
 	collects->SetPos(Vector2(10, 525));
 	collects->SetScale(0.7);
@@ -257,11 +271,20 @@ bool Game::Tick()
 
 void Game::PlayTick()
 {
-	if ((m_keyboardState[DIK_M] & 0x80) && !(m_prevKeyboardState[DIK_M] & 0x80))
+	if (player->getLives() <= 0)
+	{
+		m_GD->m_MS = MS_GAMEOVER;
+	}
+	if ((m_keyboardState[DIK_M] & 0x80) && !(m_prevKeyboardState[DIK_M] & 0x80))//NEVER PRESS M!!!
 	{
 		m_DD2D->m_cam2D->SetRot(180.0f);
+	} 
+	if (m_GD->m_MS == MS_GAMEOVER)
+	{
+		gameOver->GameOverButtons();
+		/*GameOver gameOver;
+		gameOver.GameOverButtons();*/
 	}
-	
 	if (m_GD->m_MS == MS_MAIN)
 	{
 		RECT  virtualRectPlay;
@@ -270,12 +293,10 @@ void Game::PlayTick()
 		virtualRectPlay.right = 680; //virtual rectangle around button may give colour
 		virtualRectPlay.bottom = 229;
 		virtualRectPlay.top = 180;
-
 		virtualRectExit.left = 580;
 		virtualRectExit.right = 680;
 		virtualRectExit.bottom = 290;
 		virtualRectExit.top = 230;
-
 		POINT cursorPos;
 		GetCursorPos(&cursorPos);
 		ScreenToClient(m_hWnd, &cursorPos);
@@ -283,8 +304,6 @@ void Game::PlayTick()
 			(cursorPos.y > virtualRectPlay.top && cursorPos.y < virtualRectPlay.bottom))
 		{
 			MenuStart->SetColour(Color((float*)&Colors::Yellow));
-			
-
 			if (m_GD->m_mouseState->rgbButtons[0])
 			{
 				m_GD->m_MS = MS_PLAY;
@@ -416,6 +435,14 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	{
 		(*it)->Draw(m_DD2D);
 	}
+	if (m_GD->m_MS == MS_GAMEOVER)
+	{
+		GameOverMenu->Draw(m_DD2D);
+		for (list<TextGO2D*>::iterator it = m_GameOverText.begin(); it != m_GameOverText.end(); it++)
+		{
+			(*it)->Draw(m_DD2D);
+		}
+	}
 	if (m_GD->m_MS == MS_MAIN) //Draw Main Menu
 	{
 		mainMenu->Draw(m_DD2D);
@@ -426,7 +453,6 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	}
 	else
 	{
-		int fuckmylife = 0;
 	}
 	
 	m_DD2D->m_Sprites->End();

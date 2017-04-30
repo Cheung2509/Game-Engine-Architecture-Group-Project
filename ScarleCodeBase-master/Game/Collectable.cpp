@@ -1,6 +1,7 @@
 #include "Collectables.h"
 #include "Sprite.h"
 
+
 Collectables::Collectables(Sprite* _sprite)
 {
 	PickedUp = false;
