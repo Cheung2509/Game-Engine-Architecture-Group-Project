@@ -68,6 +68,12 @@
     <ImageContentTask Include="BackgroundOther.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="ConveyerBelt.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Ice.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
