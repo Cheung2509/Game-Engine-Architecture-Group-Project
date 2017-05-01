@@ -73,10 +73,6 @@
     <ClCompile Include="RopePiece.cpp">
       <Filter>Objects\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Spring.cpp">
-      <Filter>Objects\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="RopeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectList.h" />
@@ -171,15 +167,6 @@
       <Filter>Base\Header</Filter>
     </ClInclude>
     <ClInclude Include="LevelEditorButton.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="Spring.h">
-      <Filter>Objects\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="RopePiece.h">
-      <Filter>Objects\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="RopeManager.h">
       <Filter>Objects\Headers</Filter>
     </ClInclude>
   </ItemGroup>
