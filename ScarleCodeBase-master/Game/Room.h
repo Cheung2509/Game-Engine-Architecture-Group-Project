@@ -46,6 +46,11 @@ public:
 	void addToLists(GameObject2D* Object);
 
 
+	void resetRoom();
+	void ChangeLevel(GameData* _GD, ID3D11Device* _pd3dDevice);
+
+
+
 
 private:
 	Room(Levels&);

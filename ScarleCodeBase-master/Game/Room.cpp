@@ -23,7 +23,7 @@ Room::Room(Levels& L) :
 
 	plat = nullptr;
 	ladder = nullptr;
-	player = nullptr;
+	//player = nullptr;
 	pickUp = nullptr;
 	respawner = nullptr;
 	enemyHor = nullptr;
@@ -99,11 +99,15 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case'*':
 				// create player 
-				player = new Player2D("Walk", _pd3dDevice);
-				player->SetScale(1.0f);
+				if (player == nullptr)
+				{
+					player = new Player2D("Walk", _pd3dDevice);
+					player->SetScale(1.0f);
+					
+					Playerspawn = TilePos;
+					player->setType(PLAYER);
+				}
 				player->SetPos(TilePos);
-				Playerspawn = TilePos;
-				player->setType(PLAYER);
 				InSceneObjects.push_back(player);
 				m_collider.push_back(player);
 
@@ -219,6 +223,26 @@ void Room::setCollectableAlive()
 		}
 
 	}
+}
+void Room::resetRoom()
+{
+	InSceneObjects.clear();
+	m_collider.clear();
+	plat = nullptr;
+	ladder = nullptr;
+	//player = nullptr;
+	pickUp = nullptr;
+	respawner = nullptr;
+	enemyHor = nullptr;
+	mother = nullptr;
+}
+
+void Room::ChangeLevel(GameData * _GD, ID3D11Device * _pd3dDevice)
+{
+	resetRoom();
+	map = level.LoadedLevels[levelCur].getMap();
+	title = level.LoadedLevels[levelCur].getTitle();
+	CreateRoom(_GD, _pd3dDevice);
 }
 
 void Room::addToLists(GameObject2D * Object)

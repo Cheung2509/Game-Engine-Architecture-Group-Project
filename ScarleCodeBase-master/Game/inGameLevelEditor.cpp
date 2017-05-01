@@ -42,8 +42,8 @@ void inGameLevelEditor::createObject(GameData * _GD, Room* room, HWND m_hWnd)
 	GetCursorPos(&cursorPos);
 	ScreenToClient(m_hWnd, &cursorPos);
 
-	/*if ((cursorPos.x > PlatformButton->get && cursorPos.x < PlatformButton->GetPos().x) &&
-		(cursorPos.y > PlatformButton->GetPos().y && cursorPos.y < PlatformButton->GetPos().y))
+	/*if ((cursorPos.x < (PlatformButton->GetPos().x + PlatformButton->getSpriteWidth())) &&
+	(cursorPos.y < (PlatformButton->GetPos().x + PlatformButton->getSpriteWidth())))
 	{*/
 		if (_GD->m_mouseState->rgbButtons[0])
 		{
