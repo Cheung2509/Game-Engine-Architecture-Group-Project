@@ -32,9 +32,12 @@ class Player2D;
 class Background;
 class Levels;
 class Room;
+class inGameLevelEditor;
+
 
 class Menu;
 class GameOver;
+
 
 
 class DebugCamera;
@@ -45,7 +48,7 @@ class Game
 {
 public:
 
-	Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance);
+	Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance);
 	virtual ~Game();
 
 	bool Tick(); //tick the game state
@@ -59,6 +62,7 @@ protected:
 	DebugCamera* m_debugCam2D;
 	//CameraFollow2D* m_playerCam;
 	Light* m_light; //base light
+	inGameLevelEditor* inGameEditor;
 
 	TextGO2D* collects;
 	TextGO2D* lives;
@@ -79,6 +83,7 @@ protected:
 	//required for the CMO model rendering system
 	CommonStates* m_states;
 	IEffectFactory* m_fxFactory;
+	ID3D11Device* _pd3dDevice;
 
 	//direct input stuff
 	bool ReadInput(); //Get current Mouse and Keyboard states
@@ -97,6 +102,7 @@ protected:
 	CollisionManager* collisionManager;
 	//Room* room_ptr;
 	GameOver* gameOver;
+	/*Collectables*collectable;*/
 
 	Player2D* player;       // pointer to player class
 	Background* BackG;

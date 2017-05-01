@@ -13,7 +13,7 @@ class Tile;
 //class RopeTile;
 class Collectables;
 class Enemy;
-class MotherObstecle;
+class MotherObstacle;
 class Player2D;
 
 class CameraFollow2D;
@@ -33,13 +33,17 @@ public:
 	CameraFollow2D* getPlayerCamera() { return m_playerCam; }
 	Collectables* getCollectable() { return pickUp; }
 	Collectables* getRespawner() { return respawner; }
+	Collectables* setRespawner(Collectables* _respawn) { _respawn = respawner; }
+	/*Vector2 setRespawner(Vector2 _respawn) { respawner = _respawn; }*/
 
 	void CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice);
 	int getCurrentLevel() { return levelCur; }
+	Vector2 getPlayerSpawn() { return Playerspawn; }
 	void setCurrentLevel(int i);
 	void Tick(GameData* _GD);
 	void Draw(DrawData2D* _DD);
 	void setCollectableAlive();
+	void addToLists(GameObject2D* Object);
 
 
 
@@ -58,8 +62,11 @@ private:
 	//possibly need to add a bool to stop two players being created 
 
 	Enemy* enemyHor;
-	MotherObstecle* mother;
+	MotherObstacle* mother;
 	Tile* ladder;
+	Tile* conveyorLeft;
+	Tile* conveyorRight;
+	Tile* ice;
 	//RopeTile* Rope;
 	Tile* plat;
 	Tile* invisPlat;
@@ -73,6 +80,7 @@ private:
 
 	list<GameObject2D *> InSceneObjects;//list to hold all objects created
 	list<GameObject2D*> m_collider;
+	Vector2 Playerspawn;
 };
 
 

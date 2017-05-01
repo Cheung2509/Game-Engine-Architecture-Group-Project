@@ -47,6 +47,8 @@ public:
 	void SetIsGrounded(bool isItGrounded);
 	void setHasJumped(bool hasItJumped);
 	void setOnLadder(bool isOnLadder);
+	void setfriction(float _friction) { friction = _friction; }
+
 	
 	void		SetPhysicsOn(bool _physics) { m_physicsOn = _physics; }
 	void		SetGravityOn(bool _gravity) { m_gravityOn = _gravity; }

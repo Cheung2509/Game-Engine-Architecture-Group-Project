@@ -141,6 +141,8 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="ImageGO2D.h" />
+    <ClInclude Include="inGameLevelEditor.h" />
+    <ClInclude Include="LevelEditorButton.h" />
     <ClInclude Include="Tile.h" />
     <ClInclude Include="Levels.h" />
     <ClInclude Include="Light.h" />
@@ -168,6 +170,8 @@
     <ClCompile Include="GameObject2D.cpp" />
     <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="ImageGO2D.cpp" />
+    <ClCompile Include="inGameLevelEditor.cpp" />
+    <ClCompile Include="LevelEditorButton.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Levels.cpp" />
     <ClCompile Include="light.cpp" />

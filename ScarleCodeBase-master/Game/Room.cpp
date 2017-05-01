@@ -28,6 +28,9 @@ Room::Room(Levels& L) :
 	respawner = nullptr;
 	enemyHor = nullptr;
 	mother = nullptr;
+	conveyorLeft = nullptr;
+	conveyorRight = nullptr;
+	ice = nullptr;
 }
 
 list<GameObject2D*> Room::getColldingObjects()
@@ -45,6 +48,9 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 	Sprite* _collectable = new Sprite("Collectable", _pd3dDevice);
 	Sprite* _respawn = new Sprite("CheckPoint", _pd3dDevice);
 	Sprite* _enemyHor = new Sprite("EnemyHor", _pd3dDevice);
+	Sprite* _motherObstacle = new Sprite("motherFigure", _pd3dDevice);
+	Sprite* _conveyerBelt = new Sprite("ConveyerBelt", _pd3dDevice);
+	Sprite* _ice = new Sprite("Ice", _pd3dDevice);
 
 	for (auto&& mapRow : map)
 	{
@@ -96,6 +102,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				player = new Player2D("Walk", _pd3dDevice);
 				player->SetScale(1.0f);
 				player->SetPos(TilePos);
+				Playerspawn = TilePos;
 				player->setType(PLAYER);
 				InSceneObjects.push_back(player);
 				m_collider.push_back(player);
@@ -138,15 +145,34 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 				break;
 			case 'm':
-				//if player does not have all the collectables 
-				if (player->getCollectables() != 3) // collectables max not a varable yet 
-				{
+				
 					//create motherObstecle
-					mother = new MotherObstecle("motherFigure", _pd3dDevice, TilePos);
+					mother = new MotherObstacle(_motherObstacle, TilePos);
 					InSceneObjects.push_back(mother);
 					m_collider.push_back(mother);
-				}
+					break;
+			case '<':
 
+				conveyorLeft = new Tile(_conveyerBelt, TilePos);
+				conveyorLeft->setType(ObjectType::CONVEYORLEFT);
+				conveyorLeft->SetScale(0.05f);
+				InSceneObjects.push_back(conveyorLeft);
+				m_collider.push_back(conveyorLeft);
+				break;
+			case '>':
+
+				conveyorRight = new Tile(_conveyerBelt, TilePos);
+				conveyorRight->setType(ObjectType::CONVEYORRIGHT);
+				conveyorRight->SetScale(0.05f);
+				InSceneObjects.push_back(conveyorRight);
+				m_collider.push_back(conveyorRight);
+				break;
+			case '!':
+				ice = new Tile(_ice, TilePos);
+				ice->setType(ObjectType::ICE);
+				ice->SetScale(0.05f);
+				InSceneObjects.push_back(ice);
+				m_collider.push_back(ice);
 			default:
 				break;
 			}
@@ -183,10 +209,20 @@ void Room::setCollectableAlive()
 {
 	for (auto& Object : InSceneObjects)
 	{
-		if (Object->GetType()==ObjectType::COLLECTIBLE)
+		if (Object->GetType() == ObjectType::COLLECTIBLE)
 		{
 			Object->SetAlive(true);
 		}
-		
+		if (Object->GetType() == ObjectType::RESPAWN)
+		{
+
+		}
+
 	}
+}
+
+void Room::addToLists(GameObject2D * Object)
+{
+	InSceneObjects.push_back(Object);
+	m_collider.push_back(Object);
 }

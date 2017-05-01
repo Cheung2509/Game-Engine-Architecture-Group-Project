@@ -17,6 +17,7 @@
 #include "Background.h"
 
 #include "Menu.h"
+#include "inGameLevelEditor.h"
 
 #include "CollisionManager.h"
 #include "GameOver.h"
@@ -24,12 +25,14 @@
 #include "CameraFollow2D.h"
 
 
+
 using namespace DirectX;
 using namespace DirectX::SimpleMath;
 
 
-Game::Game(ID3D11Device* _pd3dDevice, HWND _hWnd, HINSTANCE _hInstance)
+Game::Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance)
 {
+	_pd3dDevice = _pd;
 	//set up audio
 	CoInitializeEx(nullptr, COINIT_MULTITHREADED);
 	AUDIO_ENGINE_FLAGS eflags = AudioEngine_Default;
@@ -264,6 +267,8 @@ bool Game::Tick()
 		break;
 	case GS_PLAY_DEBUG_CAM:
 		PlayTick();
+		inGameEditor->createObject(m_GD, m_Room.get(), m_hWnd);
+		inGameEditor->Tick(m_GD);
 		break;
 	}
 	return true;
@@ -284,6 +289,9 @@ void Game::PlayTick()
 		gameOver = new GameOver();
 		gameOver->GameOverButtons(m_hWnd,GameRestart,GameExit,m_GD);
 		player->setLives(3);
+		player->setCollectables(0);
+		player->SetPos(m_Room->getPlayerSpawn());
+		m_Room->getRespawner()->SetRespawnUp(false);
 		m_Room->setCollectableAlive();
 			
 		
@@ -353,6 +361,8 @@ void Game::PlayTick()
 			{
 				std::cout << "State Changed";
 				m_GD->m_GS = GS_PLAY_DEBUG_CAM;
+				inGameEditor = new inGameLevelEditor(_pd3dDevice);
+				//inGameEditor->createButtons(_pd3dDevice);
 			}
 			else
 			{
@@ -376,6 +386,8 @@ void Game::PlayTick()
 				(*it)->Tick(m_GD);
 			}
 		}
+
+		collisionManager->checkCollision(m_Room.get());
 	}
 }
 
@@ -425,11 +437,16 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 			(*it)->Draw(m_DD2D);
 		}
 	}
-	if (m_Room->getPlayer()->isAlive())
+	/*if (m_Room->getPlayer()->isAlive())
 	{
 		BackG->Draw(m_DD2D);
+	}*/
+
+	if (m_GD->m_GS == GameState::GS_PLAY_DEBUG_CAM)
+	{
+		inGameEditor->Draw(m_DD2D);
 	}
-	
+
 	m_Room->Draw(m_DD2D);
 	m_DD2D->m_Sprites->End();
 

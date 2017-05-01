@@ -20,6 +20,7 @@ public:
 	~Player2D();
 
 	int getCollectables();
+	void setCollectables(int _Collect) { Collectables = _Collect; }
 	void addCollectable();
 
 	int getLives();
