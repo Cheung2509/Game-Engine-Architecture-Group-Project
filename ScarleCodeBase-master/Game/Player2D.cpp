@@ -29,8 +29,8 @@ Player2D::Player2D(string _fileName, ID3D11Device* _GD)
 	isGrounded = true;
 	airAccel = 0.09375 * 40;
 	speedY = 0.0f;
-	grav = 0.21875*5;
-	jumpSpeed = -6.5*50;
+	grav = 0.21875 * 5;
+	jumpSpeed = -15 * 50;
 
 	SetDrag(friction);
 	

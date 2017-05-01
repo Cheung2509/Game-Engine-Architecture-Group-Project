@@ -276,24 +276,15 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 			}
 			break;
 		case ObjectType::PLATFORM:
-			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)
+			if (room->getPlayer()->getSpeedY() >= 0)
 			{
-				room->getPlayer()->SetIsGrounded(true);
-				room->getPlayer()->SetSpeedY(0.0f);
-				room->getPlayer()->setfriction(0.046875 * 40);
+				if (room->getPlayer()->GetPos().y + (72 * obj->getScale().y) <= obj->GetPos().y)
+				{
+					room->getPlayer()->SetSpeedY(0);
+					room->getPlayer()->SetIsGrounded(true);
+					std::cout << "On Platform" << std::endl;
+				}
 			}
-			if (room->getPlayer()->GetVel().y < obj->GetPos().y)
-			{
-				//top collision
-				room->getPlayer()->SetIsGrounded(true);
-				room->getPlayer()->SetSpeedY(0.0f);
-			}
-			else if (room->getPlayer()->GetPos().y > obj->GetPos().y)
-			{
-				//bottom collision
-				room->getPlayer()->SetSpeedY(0.0f);
-			}
-			std::cout << "On Platform" << std::endl;
 			break;
 		case ObjectType::RESPAWN:
 			room->getRespawner()->SetRespawnUp(true);
