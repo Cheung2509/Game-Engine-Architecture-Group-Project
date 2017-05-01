@@ -170,7 +170,6 @@
     <ClCompile Include="ImageGO2D.cpp" />
     <ClCompile Include="inGameLevelEditor.cpp" />
     <ClCompile Include="LevelEditorButton.cpp" />
-    <ClCompile Include="RopePiece.cpp" />
     <ClCompile Include="Tile.cpp" />
     <ClCompile Include="Levels.cpp" />
     <ClCompile Include="light.cpp" />

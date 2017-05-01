@@ -70,9 +70,6 @@
     <ClCompile Include="LevelEditorButton.cpp">
       <Filter>Objects\Source</Filter>
     </ClCompile>
-    <ClCompile Include="RopePiece.cpp">
-      <Filter>Objects\Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjectList.h" />
