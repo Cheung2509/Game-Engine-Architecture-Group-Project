@@ -281,9 +281,17 @@ void Game::PlayTick()
 	} 
 	if (m_GD->m_MS == MS_GAMEOVER)
 	{
-		gameOver->GameOverButtons();
+		if (((m_keyboardState[DIK_E] & 0x80) && !(m_prevKeyboardState[DIK_E] & 0x80)))
+		{
+			player->setLives(3);
+			m_Room->setCollectableAlive();
+			m_GD->m_MS = MS_PLAY;
+		}
+		
+		/*gameOver->GameOverButtons();*/
 		/*GameOver gameOver;
 		gameOver.GameOverButtons();*/
+
 	}
 	if (m_GD->m_MS == MS_MAIN)
 	{
@@ -435,7 +443,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	{
 		(*it)->Draw(m_DD2D);
 	}
-	if (m_GD->m_MS == MS_GAMEOVER)
+	if (m_GD->m_MS == MS_GAMEOVER)//Draw Game Over menu
 	{
 		GameOverMenu->Draw(m_DD2D);
 		for (list<TextGO2D*>::iterator it = m_GameOverText.begin(); it != m_GameOverText.end(); it++)

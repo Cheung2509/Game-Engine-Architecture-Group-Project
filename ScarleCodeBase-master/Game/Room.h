@@ -39,6 +39,7 @@ public:
 	void setCurrentLevel(int i);
 	void Tick(GameData* _GD);
 	void Draw(DrawData2D* _DD);
+	void setCollectableAlive();
 
 
 
@@ -63,6 +64,7 @@ private:
 	Tile* plat;
 	Tile* invisPlat;
 	Collectables* pickUp;
+	Collectables* collectables;
 	Collectables* respawner;
 
 	Player2D* player;

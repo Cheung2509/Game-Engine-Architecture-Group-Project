@@ -46,9 +46,9 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 	Sprite* _respawn = new Sprite("CheckPoint", _pd3dDevice);
 	Sprite* _enemyHor = new Sprite("EnemyHor", _pd3dDevice);
 
-	for (auto&& mapRow:map)
+	for (auto&& mapRow : map)
 	{
-		for(int i=0;i<mapRow.size();i++) 
+		for (int i = 0; i < mapRow.size(); i++)
 		{
 			if (TilePos.x >= _GD->viewportWidth)
 			{
@@ -176,5 +176,17 @@ void Room::Draw(DrawData2D* _DD)
 		{
 			Object->Draw(_DD);
 		}
+	}
+}
+
+void Room::setCollectableAlive()
+{
+	for (auto& Object : InSceneObjects)
+	{
+		if (Object->GetType()==ObjectType::COLLECTIBLE)
+		{
+			Object->SetAlive(true);
+		}
+		
 	}
 }

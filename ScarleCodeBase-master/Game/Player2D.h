@@ -27,6 +27,8 @@ public:
 	void SetSpeedY(float speed);
 	void SetIsGrounded(bool isItGrounded);
 	void SetPlayerState(PlayerState state);
+
+	void setLives(int _lives) { lives = _lives; }
 	PlayerState GetPlayerState();
 	bool getIsGrounded() { return isGrounded; }
 	Sprite* getSprite() { return sprite; }
