@@ -20,9 +20,9 @@ void CollisionManager::checkCollision(Room* room)
 			{
 				if ((obj)->GetType() != ObjectType::PLAYER)
 				{
-					//Do collision behaviour
-					resolveCollision(room, obj);
-					collided = true;
+						//Do collision behaviour
+						resolveCollision(room, obj);
+						collided = true;
 				}
 			}
 		}
@@ -64,7 +64,10 @@ bool CollisionManager::isCollided(GameObject2D* gameObject1, GameObject2D* gameO
 			(collect->getSprite()->getSpriteWidth() * collect->getScale().x) + collect->GetPos().x >= player->GetPos().x &&
 			collect->GetPos().x <= (player->getSprite()->getSpriteWidth() * player->getScale().x) + player->GetPos().x)
 		{
-			return true;
+			if (collect->isAlive())
+			{
+				return true;
+			}
 		}
 	}
 	//check if gameObject2 is an Enemy
@@ -181,7 +184,8 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 					room->getPlayer()->SetSpeedY(0);
 				}
 			
-				else if (room->getPlayer()->GetPos().y >= obj->GetPos().y + 50 && room->getPlayer()->GetPos().y <= obj->GetPos().y + 50)
+				else if (room->getPlayer()->GetPos().y >= obj->GetPos().y + 50 && 
+					room->getPlayer()->GetPos().y <= obj->GetPos().y + 50)
 				{
 					//top collision
 					float currentX = room->getPlayer()->GetPos().x;
@@ -211,6 +215,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 				//bottom collision
 				room->getPlayer()->SetSpeedY(0.0f);
 			}
+			std::cout << "On Platform" << std::endl;
 			break;
 		case ObjectType::RESPAWN:
 			room->getRespawner()->SetRespawnUp(true);

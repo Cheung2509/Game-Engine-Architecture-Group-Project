@@ -22,3 +22,11 @@ void RopePiece::Tick(GameData * _GD)
 {
 	GameObject2D::Tick(_GD);
 }
+
+void RopePiece::Draw(DrawData2D * _DD)
+{
+	sprite->SetPos(m_pos);
+	sprite->SetScale(m_scale);
+	sprite->SetRot(m_rotation);
+	sprite->Draw(_DD);
+}

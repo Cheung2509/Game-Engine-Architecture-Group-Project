@@ -315,8 +315,6 @@ void Game::PlayTick()
 
 	else
 	{
-		collisionManager->checkCollision(m_Room.get());
-
 		if ((m_keyboardState[DIK_SPACE] & 0x80) && !(m_prevKeyboardState[DIK_SPACE] & 0x80))
 		{
 			if (m_GD->m_GS == GS_PLAY_MAIN_CAM)
@@ -345,6 +343,8 @@ void Game::PlayTick()
 		{
 			(*it)->Tick(m_GD);
 		}
+
+		collisionManager->checkCollision(m_Room.get());
 	}
 }
 
