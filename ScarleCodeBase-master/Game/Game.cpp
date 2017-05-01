@@ -120,7 +120,7 @@ Game::Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance)
 
 	//create first level
 	Levels::load();
-	m_Room.reset(Levels::LoadedLevels[2].createRoom());
+	m_Room.reset(Levels::LoadedLevels[0].createRoom());
 	m_Room->CreateRoom(m_GD, _pd3dDevice);
 	player = m_Room->getPlayer(); //set games copy of player 
 
@@ -453,10 +453,11 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 			(*it)->Draw(m_DD2D);
 		}
 	}
-	/*if (m_Room->getPlayer()->isAlive())
+
+	if (m_Room->getPlayer()->isAlive())
 	{
 		BackG->Draw(m_DD2D);
-	}*/
+	}
 
 	if (m_GD->m_GS == GameState::GS_PLAY_DEBUG_CAM)
 	{
