@@ -60,6 +60,9 @@ private:
 	Enemy* enemyHor;
 	MotherObstacle* mother;
 	Tile* ladder;
+	Tile* conveyorLeft;
+	Tile* conveyorRight;
+	Tile* ice;
 	//RopeTile* Rope;
 	Tile* plat;
 	Tile* invisPlat;

@@ -124,6 +124,83 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 				obj->SetAlive(false);
 			}
 			break;
+		case ObjectType::CONVEYORLEFT:
+		{
+			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)
+			{
+				room->getPlayer()->SetIsGrounded(true);
+				room->getPlayer()->SetSpeedY(0.0f);
+
+				float currentPosX = room->getPlayer()->GetPos().x;
+				float currentPosY = room->getPlayer()->GetPos().y;
+				room->getPlayer()->SetPos(Vector2(currentPosX - 0.05, currentPosY));
+				room->getPlayer()->setfriction(0.046875 * 40);
+
+			}
+			if (room->getPlayer()->GetVel().y < obj->GetPos().y)
+			{
+				//top collision
+				room->getPlayer()->SetIsGrounded(true);
+				room->getPlayer()->SetSpeedY(0.0f);
+
+			}
+			else if (room->getPlayer()->GetPos().y > obj->GetPos().y)
+			{
+				//bottom collision
+				room->getPlayer()->SetSpeedY(0.0f);
+			}
+		}
+		break;		
+		case ObjectType::CONVEYORRIGHT:
+		{
+			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)
+			{
+				room->getPlayer()->SetIsGrounded(true);
+				room->getPlayer()->SetSpeedY(0.0f);
+
+				float currentPosX = room->getPlayer()->GetPos().x;
+				float currentPosY = room->getPlayer()->GetPos().y;
+				room->getPlayer()->SetPos(Vector2(currentPosX + 0.05, currentPosY));
+				room->getPlayer()->setfriction(0.046875 * 40);
+
+			}
+			if (room->getPlayer()->GetVel().y < obj->GetPos().y)
+			{
+				//top collision
+				room->getPlayer()->SetIsGrounded(true);
+				room->getPlayer()->SetSpeedY(0.0f);
+
+			}
+			else if (room->getPlayer()->GetPos().y > obj->GetPos().y)
+			{
+				//bottom collision
+				room->getPlayer()->SetSpeedY(0.0f);
+			}
+		}
+		break;
+		case ObjectType::ICE:
+		{
+			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)
+			{
+				room->getPlayer()->SetIsGrounded(true);
+				room->getPlayer()->SetSpeedY(0.0f);
+
+				room->getPlayer()->setfriction(0.046875 * 25);
+			}
+			if (room->getPlayer()->GetVel().y < obj->GetPos().y)
+			{
+				//top collision
+				room->getPlayer()->SetIsGrounded(true);
+				room->getPlayer()->SetSpeedY(0.0f);
+
+			}
+			else if (room->getPlayer()->GetPos().y > obj->GetPos().y)
+			{
+				//bottom collision
+				room->getPlayer()->SetSpeedY(0.0f);
+			}
+		}
+		break;
 		case ObjectType::ENEMY:
 			if (room->getPlayer()->getLives() != 0)
 			{
@@ -203,6 +280,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 			{
 				room->getPlayer()->SetIsGrounded(true);
 				room->getPlayer()->SetSpeedY(0.0f);
+				room->getPlayer()->setfriction(0.046875 * 40);
 			}
 			if (room->getPlayer()->GetVel().y < obj->GetPos().y)
 			{
