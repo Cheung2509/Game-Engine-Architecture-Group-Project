@@ -216,7 +216,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 				else
 				{
 					room->getPlayer()->SetAlive(true);
-					room->getPlayer()->SetPos(Vector2(0, 0));
+					room->getPlayer()->SetPos(room->getPlayerSpawn());
 				}
 				room->getPlayer()->SetZeroVel(0);
 			}
