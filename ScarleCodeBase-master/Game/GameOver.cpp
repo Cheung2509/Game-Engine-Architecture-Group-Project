@@ -3,6 +3,7 @@
 #include "GameObject2D.h"
 #include "GameData.h"
 #include "TextGO2D.h"
+#include <DirectXColors.h>
 
 GameOver::GameOver()
 {
@@ -28,7 +29,7 @@ void GameOver::GameOverButtons(HWND& _hwnd, TextGO2D* GameRestart, TextGO2D* Gam
 	if ((cursorPos.x > virtualRectPlay.left && cursorPos.x < virtualRectPlay.right) &&
 		(cursorPos.y > virtualRectPlay.top && cursorPos.y < virtualRectPlay.bottom))
 	{
-		/*GameExit->SetColour(Color((float*)&Colors::Yellow));*/
+		GameRestart->SetColour(Color((float*)&Colors::Yellow));
 		if (m_GD->m_mouseState->rgbButtons[0])
 		{
 			m_GD->m_MS = MS_PLAY;
@@ -36,13 +37,13 @@ void GameOver::GameOverButtons(HWND& _hwnd, TextGO2D* GameRestart, TextGO2D* Gam
 	}
 	else
 	{
-		/*GameExit->SetColour(Color((float*)&Colors::White));*/
+		GameRestart->SetColour(Color((float*)&Colors::White));
 
 	}
 	if ((cursorPos.x > virtualRectExit.left && cursorPos.x < virtualRectExit.right) &&
 		(cursorPos.y > virtualRectExit.top && cursorPos.y < virtualRectExit.bottom))
 	{
-		/*GameRestart->SetColour(Color((float*)&Colors::Yellow));*/
+		GameExit->SetColour(Color((float*)&Colors::Yellow));
 		if (m_GD->m_mouseState->rgbButtons[0])
 		{
 			m_GD->m_MS = MS_EXIT;
@@ -50,7 +51,7 @@ void GameOver::GameOverButtons(HWND& _hwnd, TextGO2D* GameRestart, TextGO2D* Gam
 	}
 	else
 	{
-		/*GameRestart->SetColour(Color((float*)&Colors::White));*/
+		GameExit->SetColour(Color((float*)&Colors::White));
 	}
 }
 
