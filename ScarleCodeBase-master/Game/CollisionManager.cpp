@@ -150,7 +150,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 				room->getPlayer()->SetSpeedY(0.0f);
 			}
 		}
-		break;		
+		break;
 		case ObjectType::CONVEYORRIGHT:
 		{
 			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)
@@ -229,7 +229,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 			if (room->getPlayer()->getCollectables() != 3)
 			{
 
-				
+
 				if (room->getPlayer()->GetPos().x > obj->GetPos().x + 40 &&
 					room->getPlayer()->GetPos().y <= obj->GetPos().y + 50
 					&& room->getPlayer()->GetPos().y >= obj->GetPos().y - 50)
@@ -260,8 +260,8 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 					room->getPlayer()->SetPos(Vector2(currentX, obj->GetPos().y - 40));
 					room->getPlayer()->SetSpeedY(0);
 				}
-			
-				else if (room->getPlayer()->GetPos().y >= obj->GetPos().y + 50 && 
+
+				else if (room->getPlayer()->GetPos().y >= obj->GetPos().y + 50 &&
 					room->getPlayer()->GetPos().y <= obj->GetPos().y + 50)
 				{
 					//top collision
@@ -276,13 +276,53 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 			}
 			break;
 		case ObjectType::PLATFORM:
-			if (room->getPlayer()->getSpeedY() >= 0)
+			//If the player is above the platform
+
+			if (dynamic_cast<Tile*> (obj) != NULL)
 			{
-				if (room->getPlayer()->GetPos().y + (72 * obj->getScale().y) <= obj->GetPos().y)
+				Tile* _plat = dynamic_cast<Tile*> (obj);
+
+				float playerBot = room->getPlayer()->GetPos().y + room->getPlayer()->getSprite()->getSpriteHeight();
+				float playerRight = room->getPlayer()->GetPos().x + room->getPlayer()->getSprite()->getSpriteWidth();
+
+				float platBot = _plat->GetPos().y + _plat->getSprite()->getSpriteHeight();
+				float platRight = _plat->GetPos().x + _plat->getSprite()->getSpriteWidth();
+
+
+				float botCollision = platBot - room->getPlayer()->GetPos().y;
+				float topCollision = playerBot - _plat->GetPos().y;
+				float leftCollision = playerRight - _plat->GetPos().x;
+				float rightCollision = platRight - room->getPlayer()->GetPos().x;
+
+				//Top Collision
+				if (topCollision < botCollision &&
+					topCollision < leftCollision &&
+					topCollision < rightCollision)
 				{
 					room->getPlayer()->SetSpeedY(0);
 					room->getPlayer()->SetIsGrounded(true);
-					std::cout << "On Platform" << std::endl;
+					_plat->SetColour(Color(0, 1, 0, 1));
+				}
+				//Bot Collision
+				if (botCollision < topCollision &&
+					botCollision < leftCollision &&
+					botCollision < rightCollision)
+				{
+
+				}
+				//left Collision 
+				if (leftCollision < rightCollision &&
+					leftCollision < topCollision &&
+					leftCollision < botCollision)
+				{
+					room->getPlayer()->SetSpeed(-(room->getPlayer()->getSpeed()));
+				}
+				//Right Collision
+				if (rightCollision < leftCollision &&
+					rightCollision < topCollision &&
+					rightCollision < botCollision)
+				{
+					room->getPlayer()->SetSpeed((room->getPlayer()->getSpeed()));
 				}
 			}
 			break;

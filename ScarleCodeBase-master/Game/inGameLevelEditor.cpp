@@ -1,10 +1,11 @@
 #include "inGameLevelEditor.h"
 
 #include "gamedata.h"
-
+#include "DrawData2D.h"
 #include "LevelEditorButton.h"
 #include "Tile.h"
 #include "Room.h"
+#include "Camera2D.h"
 
 
 inGameLevelEditor::inGameLevelEditor(ID3D11Device* _pd3dDevice)
@@ -36,7 +37,7 @@ void inGameLevelEditor::createButtons(ID3D11Device* _pd3dDevice)
 	}
 }
 
-void inGameLevelEditor::createObject(GameData * _GD, Room* room, HWND m_hWnd)
+void inGameLevelEditor::createObject(GameData * _GD, Room* room, HWND m_hWnd, DrawData2D* _DD)
 {
 	POINT cursorPos;
 	GetCursorPos(&cursorPos);
@@ -47,7 +48,15 @@ void inGameLevelEditor::createObject(GameData * _GD, Room* room, HWND m_hWnd)
 	{*/
 		if (_GD->m_mouseState->rgbButtons[0])
 		{
-			plat = new Tile(_platform, Vector2(cursorPos.x, cursorPos.y));// 
+			Vector2 camPos = Vector2(_DD->m_cam2D->GetPos());
+
+			Vector2 camSize = Vector2(_DD->m_cam2D->getZoom(),_DD->m_cam2D->getZoom());
+
+			Vector2 w_pos;
+			cursorPos.x += camPos.x + (camSize.x);
+			cursorPos.y += camPos.y + (camSize.y);
+
+			plat = new Tile(_platform, w_pos);// 
 			plat->setType(PLATFORM);
 			room->addToLists(plat);
 		}

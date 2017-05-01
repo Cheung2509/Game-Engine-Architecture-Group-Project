@@ -253,7 +253,7 @@ bool Game::Tick()
 		break;
 	case GS_PLAY_DEBUG_CAM:
 		PlayTick();
-		inGameEditor->createObject(m_GD, m_Room.get(), m_hWnd);
+		inGameEditor->createObject(m_GD, m_Room.get(), m_hWnd, m_DD2D);
 		inGameEditor->Tick(m_GD);
 		break;
 	}
