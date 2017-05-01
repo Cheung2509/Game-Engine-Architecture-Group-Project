@@ -1,7 +1,7 @@
 #pragma once
 #include <windows.h>
 #include <dinput.h>
-#include "Game.h"
+//#include "Game.h"
 
 class menu;
 struct GameData;
@@ -14,10 +14,8 @@ public:
 	GameOver();
 	~GameOver();
 
-	void GameOverButtons();
+	void GameOverButtons(HWND& _hwnd, TextGO2D* GameRestart, TextGO2D* GameExit, GameData* m_GD);
 private:
-
-	HWND m_hWnd;
 	TextGO2D* GameRestart;
 	TextGO2D* GameExit;
 	GameData* m_GD;

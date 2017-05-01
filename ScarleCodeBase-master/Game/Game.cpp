@@ -281,17 +281,13 @@ void Game::PlayTick()
 	} 
 	if (m_GD->m_MS == MS_GAMEOVER)
 	{
-		if (((m_keyboardState[DIK_E] & 0x80) && !(m_prevKeyboardState[DIK_E] & 0x80)))
-		{
-			player->setLives(3);
-			m_Room->setCollectableAlive();
-			m_GD->m_MS = MS_PLAY;
-		}
+		gameOver = new GameOver();
+		gameOver->GameOverButtons(m_hWnd,GameRestart,GameExit,m_GD);
+		player->setLives(3);
+		m_Room->setCollectableAlive();
+			
 		
-		/*gameOver->GameOverButtons();*/
-		/*GameOver gameOver;
-		gameOver.GameOverButtons();*/
-
+		
 	}
 	if (m_GD->m_MS == MS_MAIN)
 	{

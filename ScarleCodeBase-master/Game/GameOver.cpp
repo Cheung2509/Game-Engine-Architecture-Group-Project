@@ -20,18 +20,18 @@ GameOver::~GameOver()
 {
 }
 
-void GameOver::GameOverButtons()
+void GameOver::GameOverButtons(HWND& _hwnd, TextGO2D* GameRestart, TextGO2D* GameExit, GameData* m_GD)
 {
 	POINT cursorPos;
 	GetCursorPos(&cursorPos);
-	ScreenToClient(m_hWnd, &cursorPos);
+	ScreenToClient(_hwnd, &cursorPos);
 	if ((cursorPos.x > virtualRectPlay.left && cursorPos.x < virtualRectPlay.right) &&
 		(cursorPos.y > virtualRectPlay.top && cursorPos.y < virtualRectPlay.bottom))
 	{
 		/*GameExit->SetColour(Color((float*)&Colors::Yellow));*/
 		if (m_GD->m_mouseState->rgbButtons[0])
 		{
-			m_GD->m_MS = MS_EXIT;
+			m_GD->m_MS = MS_PLAY;
 		}
 	}
 	else
