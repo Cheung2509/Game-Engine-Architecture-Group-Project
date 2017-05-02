@@ -20,9 +20,11 @@ void CollisionManager::checkCollision(Room* room)
 			{
 				if ((obj)->GetType() != ObjectType::PLAYER)
 				{
-						//Do collision behaviour
-						resolveCollision(room, obj);
-						collided = true;
+					Direction dir;
+					dir = checkDirection(room->getPlayer(), obj);
+					//Do collision behaviour
+					resolveCollision(room, obj, dir);
+					collided = true;
 				}
 			}
 		}
@@ -101,7 +103,7 @@ bool CollisionManager::isCollided(GameObject2D* gameObject1, GameObject2D* gameO
 	return false;
 }
 
-void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
+void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction direction)
 {
 	//Ladder collisions overider everything
 	if (obj->GetType() == ObjectType::LADDER)
@@ -281,54 +283,89 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj)
 			if (dynamic_cast<Tile*> (obj) != NULL)
 			{
 				Tile* _plat = dynamic_cast<Tile*> (obj);
-
-				float playerBot = room->getPlayer()->GetPos().y + room->getPlayer()->getSprite()->getSpriteHeight();
-				float playerRight = room->getPlayer()->GetPos().x + room->getPlayer()->getSprite()->getSpriteWidth();
-
-				float platBot = _plat->GetPos().y + _plat->getSprite()->getSpriteHeight();
-				float platRight = _plat->GetPos().x + _plat->getSprite()->getSpriteWidth();
-
-
-				float botCollision = platBot - room->getPlayer()->GetPos().y;
-				float topCollision = playerBot - _plat->GetPos().y;
-				float leftCollision = playerRight - _plat->GetPos().x;
-				float rightCollision = platRight - room->getPlayer()->GetPos().x;
-
 				//Top Collision
-				if (topCollision < botCollision &&
-					topCollision < leftCollision &&
-					topCollision < rightCollision)
+				if (direction == Direction::TOP)
 				{
-					room->getPlayer()->SetSpeedY(0);
+					room->getPlayer()->SetSpeedY(-10);
 					room->getPlayer()->SetIsGrounded(true);
-					_plat->SetColour(Color(0, 1, 0, 1));
 				}
 				//Bot Collision
-				if (botCollision < topCollision &&
-					botCollision < leftCollision &&
-					botCollision < rightCollision)
+				if (direction == Direction::BOTTOM)
 				{
 
 				}
 				//left Collision 
-				if (leftCollision < rightCollision &&
-					leftCollision < topCollision &&
-					leftCollision < botCollision)
+				if (direction == Direction::LEFT && room->getPlayer()->getIsGrounded())
 				{
-					room->getPlayer()->SetSpeed(-(room->getPlayer()->getSpeed()));
+					room->getPlayer()->SetSpeed(-200);
 				}
 				//Right Collision
-				if (rightCollision < leftCollision &&
-					rightCollision < topCollision &&
-					rightCollision < botCollision)
+				if (direction == Direction::RIGHT && room->getPlayer()->getIsGrounded())
 				{
-					room->getPlayer()->SetSpeed((room->getPlayer()->getSpeed()));
+					room->getPlayer()->SetSpeed(+200);
+					//_plat->SetColour(Color(0, 1, 0, 1));
 				}
 			}
-			break;
 		case ObjectType::RESPAWN:
 			room->getRespawner()->SetRespawnUp(true);
 			break;
+		}
+	}
+}
+
+Direction CollisionManager::checkDirection(GameObject2D* obj1, GameObject2D* obj2)
+{
+	if (dynamic_cast<Player2D*> (obj1) != NULL)
+	{
+		Player2D* player = dynamic_cast<Player2D*> (obj1);
+
+		if (dynamic_cast<Tile*> (obj2) != NULL)
+		{
+			Tile* tile = dynamic_cast<Tile*>  (obj2);
+
+			float playerBot = player->GetPos().y + (player->getSprite()->getSpriteHeight() * player->getScale().y);
+			float playerRight = player->GetPos().x + (player->getSprite()->getSpriteWidth() * player->getScale().x);
+
+			float platBot = tile->GetPos().y + (tile->getSprite()->getSpriteHeight() * tile->getScale().y);
+			float platRight = tile->GetPos().x + (tile->getSprite()->getSpriteWidth() * tile->getScale().x);
+
+
+			float botCollision = platBot - player->GetPos().y;
+			float topCollision = playerBot - tile->GetPos().y;
+			float leftCollision = playerRight - tile->GetPos().x;
+			float rightCollision = platRight - player->GetPos().x;
+
+			//Top Collision
+			if (topCollision < botCollision &&
+				topCollision < leftCollision &&
+				topCollision < rightCollision)
+			{
+				return Direction::TOP;
+			}
+
+			//Bot Collision
+			if (botCollision < topCollision &&
+				botCollision < leftCollision &&
+				botCollision < rightCollision)
+			{
+				return Direction::BOTTOM;
+			}
+
+			//left Collision 
+			if (leftCollision < rightCollision &&
+				leftCollision < topCollision &&
+				leftCollision < botCollision)
+			{
+				return Direction::LEFT;
+			}
+
+			//Right Collision
+			if (rightCollision < leftCollision &&
+				rightCollision < topCollision &&
+				rightCollision < botCollision)
+			{
+				return Direction::RIGHT;
+			}
 		}
 	}
 }

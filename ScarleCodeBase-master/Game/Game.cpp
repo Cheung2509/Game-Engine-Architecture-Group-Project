@@ -331,8 +331,6 @@ void Game::PlayTick()
 			}
 		}
 
-
-
 		//update all objects
 		for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
 		{
@@ -343,6 +341,7 @@ void Game::PlayTick()
 		{
 			(*it)->Tick(m_GD);
 		}
+
 
 		collisionManager->checkCollision(m_Room.get());
 	}
