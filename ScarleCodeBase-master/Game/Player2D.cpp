@@ -26,7 +26,7 @@ Player2D::Player2D(string _fileName, ID3D11Device* _GD)
 	accel = 0.046875 * 40;
 	decel = 0.5 * 40;
 	friction = 0.046875 * 40;
-	isGrounded = true;
+	isGrounded = false;
 	airAccel = 0.09375 * 40;
 	speedY = 0.0f;
 	grav = 0.21875 * 5;
