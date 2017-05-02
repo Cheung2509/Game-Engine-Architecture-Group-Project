@@ -356,14 +356,12 @@ void Game::PlayTick()
 		{
 			if (m_GD->m_GS == GS_PLAY_MAIN_CAM)
 			{
-				std::cout << "State Changed";
 				m_GD->m_GS = GS_PLAY_DEBUG_CAM;
 				inGameEditor = new inGameLevelEditor(_pd3dDevice);
 				//inGameEditor->createButtons(_pd3dDevice);
 			}
 			else
 			{
-				std::cout << "State Changed";
 				m_GD->m_GS = GS_PLAY_MAIN_CAM;
 			}
 		}
@@ -419,8 +417,9 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	switch (m_GD->m_GS)
 	{
 	case GS_PLAY_DEBUG_CAM:
-		cout << "DebugCam \n";
 		m_DD2D->m_cam2D = m_debugCam2D;
+		std::cout << "X: " << m_DD2D->m_cam2D->GetPos().x << 
+			"  Y: " << m_DD2D->m_cam2D->GetPos().y << std::endl;
 		break;
 	case GS_PLAY_MAIN_CAM:
 		//	cout << "PlayerCam \n";

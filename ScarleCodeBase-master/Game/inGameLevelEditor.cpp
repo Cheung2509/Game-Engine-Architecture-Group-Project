@@ -39,22 +39,23 @@ void inGameLevelEditor::createButtons(ID3D11Device* _pd3dDevice)
 
 void inGameLevelEditor::createObject(GameData * _GD, Room* room, HWND m_hWnd, DrawData2D* _DD)
 {
-	POINT cursorPos;
-	GetCursorPos(&cursorPos);
-	ScreenToClient(m_hWnd, &cursorPos);
-
 	/*if ((cursorPos.x < (PlatformButton->GetPos().x + PlatformButton->getSpriteWidth())) &&
 	(cursorPos.y < (PlatformButton->GetPos().x + PlatformButton->getSpriteWidth())))
 	{*/
 		if (_GD->m_mouseState->rgbButtons[0])
 		{
-			Vector2 camPos = Vector2(_DD->m_cam2D->GetPos());
+			//geting the cursor position relative to the screen
+			POINT cursorPos;
+			GetCursorPos(&cursorPos);
+			ScreenToClient(m_hWnd, &cursorPos);
 
-			Vector2 camSize = Vector2(_DD->m_cam2D->getZoom(),_DD->m_cam2D->getZoom());
+			Vector2 camPos;
+			camPos = _DD->m_cam2D->GetPos();
 
 			Vector2 w_pos;
-			cursorPos.x += camPos.x + (camSize.x);
-			cursorPos.y += camPos.y + (camSize.y);
+
+			w_pos.x = camPos.x + cursorPos.x - (_GD->viewportWidth / 2);
+			w_pos.y = camPos.y + cursorPos.y - (_GD->viewportHeight / 2);
 
 			plat = new Tile(_platform, w_pos);// 
 			plat->setType(PLATFORM);
