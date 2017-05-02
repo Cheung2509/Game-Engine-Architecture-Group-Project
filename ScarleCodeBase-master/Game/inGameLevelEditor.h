@@ -17,7 +17,7 @@ public:
 	inGameLevelEditor(ID3D11Device* _pd3dDevice);
 	~inGameLevelEditor()=default;
 	void createButtons(ID3D11Device* _pd3dDevice);
-	void createObject(GameData* _GD, Room* room, HWND m_hWnd);
+	void createObject(GameData* _GD, Room* room, HWND m_hWnd, DrawData2D* _DD);
 	void Tick(GameData* _GD);
 	void Draw(DrawData2D* _DD);
 

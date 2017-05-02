@@ -3,22 +3,35 @@
   {
     "RoomName": "Level 1",
     "Map":  [
-             "I+OOOOOOOOOOOOOOOO%I",
-             "IH________________$I",
-             "IHOOOOOOOOOOOOOOOOOI",
-             "IHO*OOOOO@OOOOOO$O$I",
-             "IH_________________I"
+             "I_______________________________________",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I_______________________________________",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I_______________________________________",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I_______________________________________",
+             "I@OO*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I_______________________________________"
+            
             ]
   },
   "The Milkman Conspiracy": 
    {
     "RoomName": "Level 2",
     "Map":  [
-             "HOOOHOOOHOOOHOOOHOOO",
-             "H___H___H___H___H__$",
-             "HOOOHOOOHO$OHOOOHOOO",
-             "H*OOHOOOHOOOHOOOHOOO",
-             "H___H___H___H___H___"
+             "__H___H___H___H___H___H___H___H___H___H_",
+             "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
+             "__H___H___H___H___H___H___H___H___H___H_",
+             "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
+             "__H___H___H___H___H___H___H___H___H___H_",
+             "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
+             "__H___H___H___H___H___H___H___H___H___H_",
+             "@OHOO*HOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
+             "________________________________________"
             ]
    },
   "Water Temple": 
@@ -28,7 +41,7 @@
              "OOOOOOOOOOOOOOOOOOOO",
              "+__________________%",
              "H$$$$$$$$$$$$$$$$$$$",
-             "HOOO@OO*OOOOOOOOOOOO",
+             "HOOO@OO*OO0OOOOOOOOO",
              "H__________!!!!_____"
             ]
    }

@@ -9,6 +9,7 @@
 #include "SimpleMath.h"
 #include <string>
 #include "ObjectType.h"
+#include <DirectXColors.h>
 
 using namespace DirectX;
 using namespace SimpleMath;
