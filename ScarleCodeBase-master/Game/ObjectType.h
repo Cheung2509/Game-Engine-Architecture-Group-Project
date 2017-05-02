@@ -15,7 +15,10 @@ enum ObjectType
 	RESPAWN,
 	CONVEYORLEFT,
 	CONVEYORRIGHT,
-	ICE
+	ICE,
+	DOOREXIT,
+	DOORENT
+
 };
 
 #endif

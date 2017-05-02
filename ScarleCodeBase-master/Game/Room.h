@@ -45,12 +45,18 @@ public:
 	void Draw(DrawData2D* _DD);
 	void setCollectableAlive();
 	void addToLists(GameObject2D* Object);
+	void addToPickUpList(Collectables* pickedColl);
 
+	bool getLevelIncrease() { return levelIncrease; }
+	void setLevelIncrease(bool boo);
+
+	bool getLevelDecrease() { return LevelDecrease; }
+	void setLevelDecrease(bool boo);
 
 	void resetRoom();
 	void ChangeLevel(GameData* _GD, ID3D11Device* _pd3dDevice);
 
-
+	void setPlayersSpawnPoint();
 
 
 private:
@@ -58,6 +64,8 @@ private:
 	Levels& level;
 
 	int levelCur;
+	bool levelIncrease;
+	bool LevelDecrease;
 	bool firstRespawn;
 
 	std::string title;
@@ -82,13 +90,17 @@ private:
 	Collectables* pickUp;
 	Collectables* collectables;
 	Collectables* respawner;
+	Collectables* Exit;
+	Collectables* Entrance;
+
 
 	Player2D* player;
 	CameraFollow2D* m_playerCam;
 
-
+	//vector<vector<Vector2>> PickedUpCollectables;
 	list<GameObject2D *> InSceneObjects;//list to hold all objects created
 	list<GameObject2D*> m_collider;
+	vector<vector<Collectables*>> PickedUpCollectables;// a list of picked up collectables for each level 
 	Vector2 Playerspawn;
 };
 
