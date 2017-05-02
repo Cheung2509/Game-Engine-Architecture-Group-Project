@@ -1,66 +1,232 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="AnimatedSprite.cpp" />
-    <ClCompile Include="Background.cpp" />
-    <ClCompile Include="Camera2D.cpp" />
-    <ClCompile Include="CameraFollow2D.cpp" />
-    <ClCompile Include="Collectable.cpp" />
-    <ClCompile Include="CollisionManager.cpp" />
-    <ClCompile Include="DebugCamera.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="gameobject.cpp" />
-    <ClCompile Include="GameObject2D.cpp" />
-    <ClCompile Include="GameOver.cpp" />
-    <ClCompile Include="ImageGO2D.cpp" />
-    <ClCompile Include="inGameLevelEditor.cpp" />
-    <ClCompile Include="LevelEditorButton.cpp" />
-    <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="Levels.cpp" />
-    <ClCompile Include="light.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="MotherObstecle.cpp" />
-    <ClCompile Include="Player2D.cpp" />
-    <ClCompile Include="Room.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="TextGO2D.cpp" />
-    <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelEditorButton.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="light.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Levels.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Base\Header</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioManager.cpp">
+      <Filter>Base\Source\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Base\Source\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="inGameLevelEditor.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Collectable.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="MotherObstecle.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Player2D.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="TextGO2D.cpp">
+      <Filter>Objects\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera2D.cpp">
+      <Filter>Objects\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraFollow2D.cpp">
+      <Filter>Objects\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugCamera.cpp">
+      <Filter>Objects\Source\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject2D.cpp">
+      <Filter>Objects\Source\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="gameobject.cpp">
+      <Filter>Objects\Source\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Objects\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageGO2D.cpp">
+      <Filter>Objects\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedSprite.cpp">
+      <Filter>Objects\Source\Sprite</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimatedSprite.h" />
-    <ClInclude Include="Background.h" />
-    <ClInclude Include="Camera2D.h" />
-    <ClInclude Include="CameraFollow2D.h" />
-    <ClInclude Include="Collectables.h" />
-    <ClInclude Include="CollisionManager.h" />
-    <ClInclude Include="ConstantBuffer.h" />
-    <ClInclude Include="DebugCamera.h" />
-    <ClInclude Include="DrawData2D.h" />
-    <ClInclude Include="DrawData.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameData.h" />
-    <ClInclude Include="gameobject.h" />
-    <ClInclude Include="GameObject2D.h" />
-    <ClInclude Include="GameOver.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="Helper.h" />
-    <ClInclude Include="ImageGO2D.h" />
-    <ClInclude Include="inGameLevelEditor.h" />
-    <ClInclude Include="LevelEditorButton.h" />
-    <ClInclude Include="Tile.h" />
-    <ClInclude Include="Levels.h" />
-    <ClInclude Include="Light.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="MotherObstecle.h" />
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Base\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Base\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h">
+      <Filter>Base\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Levels.h">
+      <Filter>Base\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Base\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectType.h">
+      <Filter>Base\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>Base\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="vertex.h">
+      <Filter>Base\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioManager.h">
+      <Filter>Base\Header\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Base\Header\Manager</Filter>
+    </ClInclude>
     <ClInclude Include="ObjectList.h" />
-    <ClInclude Include="ObjectType.h" />
-    <ClInclude Include="Player2D.h" />
-    <ClInclude Include="Room.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="TextGO2D.h" />
-    <ClInclude Include="vertex.h" />
-    <ClInclude Include="AudioManager.h" />
+    <ClInclude Include="DrawData.h">
+      <Filter>Base\Header\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawData2D.h">
+      <Filter>Base\Header\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="GameData.h">
+      <Filter>Base\Header\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Base\Header\States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Base\Header\States</Filter>
+    </ClInclude>
+    <ClInclude Include="inGameLevelEditor.h">
+      <Filter>Base\Header\States</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelEditorButton.h">
+      <Filter>Base\Header\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Base\Header\States</Filter>
+    </ClInclude>
+    <ClInclude Include="Collectables.h">
+      <Filter>Objects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Objects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="MotherObstecle.h">
+      <Filter>Objects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Player2D.h">
+      <Filter>Objects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Objects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="TextGO2D.h">
+      <Filter>Objects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>Objects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera2D.h">
+      <Filter>Objects\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraFollow2D.h">
+      <Filter>Objects\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugCamera.h">
+      <Filter>Objects\Header\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimatedSprite.h">
+      <Filter>Objects\Header\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageGO2D.h">
+      <Filter>Objects\Header\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>Objects\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="gameobject.h">
+      <Filter>Objects\Header\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject2D.h">
+      <Filter>Objects\Header\Base</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Base">
+      <UniqueIdentifier>{1429b93a-fafe-4db4-a05f-e8ca45fa0a17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{f9cdbac4-81be-4808-88fd-4092ecd5744d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\Header">
+      <UniqueIdentifier>{02167c56-98b9-45cf-81c9-a0862fd00905}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\Source">
+      <UniqueIdentifier>{7344cdb5-d384-4ed0-a54f-f13583807cf6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\Header\Manager">
+      <UniqueIdentifier>{566560a5-36cd-4b25-8857-f3cde0d861ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\Header\Data">
+      <UniqueIdentifier>{85da2185-e151-4f4b-9e7e-ef5123e2b6fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\Header\States">
+      <UniqueIdentifier>{18f95999-e0c4-4037-90a9-c38d948a19f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\Source\Manager">
+      <UniqueIdentifier>{a0f0f311-64c1-4ea6-a699-56d7f4a72968}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Header">
+      <UniqueIdentifier>{1ec3df99-f0ae-4039-8a84-761afdde9aa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Source">
+      <UniqueIdentifier>{a835957d-dc91-4194-87ff-9d6cbe9e8285}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Header\Camera">
+      <UniqueIdentifier>{44775bf4-5911-48d0-8d56-2933d00266c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Header\Sprite">
+      <UniqueIdentifier>{61871d95-ff18-4c11-a4b6-7f8bd29b9bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Header\Base">
+      <UniqueIdentifier>{c41899aa-4c74-4743-a1a1-50f76689a201}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Source\Camera">
+      <UniqueIdentifier>{5eb0499c-a2fd-437b-be0b-0094e847e467}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Source\Base">
+      <UniqueIdentifier>{49d9524e-8410-4d57-80e4-ffddf2909dc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects\Source\Sprite">
+      <UniqueIdentifier>{0a7ab57d-8c83-47db-bd69-fb741801f7c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
