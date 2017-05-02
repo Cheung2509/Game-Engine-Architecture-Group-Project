@@ -123,21 +123,23 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 			{
 				std::cout << "Collected \n";
 				room->getPlayer()->addCollectable();
-				obj->SetAlive(false);
+				//obj->SetAlive(false);
 			}
+
 			break;
 		case ObjectType::CONVEYORLEFT:
-		{
 			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)
 			{
-				room->getPlayer()->SetIsGrounded(true);
-				room->getPlayer()->SetSpeedY(0.0f);
+				if (direction == Direction::TOP)
+				{
+					room->getPlayer()->SetIsGrounded(true);
+					room->getPlayer()->SetSpeedY(0.0f);
 
-				float currentPosX = room->getPlayer()->GetPos().x;
-				float currentPosY = room->getPlayer()->GetPos().y;
-				room->getPlayer()->SetPos(Vector2(currentPosX - 0.05, currentPosY));
-				room->getPlayer()->setfriction(0.046875 * 40);
-
+					float currentPosX = room->getPlayer()->GetPos().x;
+					float currentPosY = room->getPlayer()->GetPos().y;
+					room->getPlayer()->SetPos(Vector2(currentPosX - 0.05, currentPosY));
+					room->getPlayer()->setfriction(0.046875 * 40);
+				}
 			}
 			if (room->getPlayer()->GetVel().y < obj->GetPos().y)
 			{
@@ -151,10 +153,9 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 				//bottom collision
 				room->getPlayer()->SetSpeedY(0.0f);
 			}
-		}
-		break;
+
+			break;
 		case ObjectType::CONVEYORRIGHT:
-		{
 			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)
 			{
 				room->getPlayer()->SetIsGrounded(true);
@@ -178,10 +179,9 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 				//bottom collision
 				room->getPlayer()->SetSpeedY(0.0f);
 			}
-		}
-		break;
+
+			break;
 		case ObjectType::ICE:
-		{
 			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)
 			{
 				room->getPlayer()->SetIsGrounded(true);
@@ -201,8 +201,8 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 				//bottom collision
 				room->getPlayer()->SetSpeedY(0.0f);
 			}
-		}
-		break;
+
+			break;
 		case ObjectType::ENEMY:
 			if (room->getPlayer()->getLives() != 0)
 			{
@@ -226,6 +226,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 			{
 				room->getPlayer()->SetAlive(false);
 			}
+
 			break;
 		case ObjectType::MOTHER:
 			if (room->getPlayer()->getCollectables() != 3)
@@ -276,39 +277,45 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 			{
 				//PLAYER WINS - STATE CHANGE TO WIN/GAME OVER
 			}
+
 			break;
 		case ObjectType::PLATFORM:
-			//If the player is above the platform
-
-			if (dynamic_cast<Tile*> (obj) != NULL)
-			{
-				Tile* _plat = dynamic_cast<Tile*> (obj);
 				//Top Collision
-				if (direction == Direction::TOP)
-				{
-					room->getPlayer()->SetSpeedY(-10);
-					room->getPlayer()->SetIsGrounded(true);
-				}
-				//Bot Collision
-				if (direction == Direction::BOTTOM)
-				{
-
-				}
-				//left Collision 
-				if (direction == Direction::LEFT && room->getPlayer()->getIsGrounded())
-				{
-					room->getPlayer()->SetSpeed(-200);
-				}
-				//Right Collision
-				if (direction == Direction::RIGHT && room->getPlayer()->getIsGrounded())
-				{
-					room->getPlayer()->SetSpeed(+200);
-					//_plat->SetColour(Color(0, 1, 0, 1));
-				}
+			if (direction == Direction::TOP)
+			{
+				room->getPlayer()->SetSpeedY(-10);
+				room->getPlayer()->SetIsGrounded(true);
 			}
+			//Bot Collision
+			if (direction == Direction::BOTTOM)
+			{
+				room->getPlayer()->SetSpeedY(+100);
+			}
+			//left Collision 
+			if (direction == Direction::LEFT && room->getPlayer()->getIsGrounded())
+			{
+				float y = room->getPlayer()->GetPos().y;
+				//room->getPlayer()->SetPos(Vector2(obj->GetPos().x - 5, y));
+				room->getPlayer()->SetSpeed(-200);
+			}
+			//Right Collision
+			if (direction == Direction::RIGHT && room->getPlayer()->getIsGrounded())
+			{
+				
+				float y = room->getPlayer()->GetPos().y;
+				//room->getPlayer()->SetPos(Vector2(obj->GetPos().x + 4, y));
+				room->getPlayer()->SetSpeed(200);
+			}
+		break;
 		case ObjectType::RESPAWN:
 			room->getRespawner()->SetRespawnUp(true);
 			break;
+		case ObjectType::THINPLATFORM:
+			if (direction == Direction::TOP && !(room->getPlayer()->getIsGrounded()))
+			{
+				room->getPlayer()->SetSpeedY(0);
+				room->getPlayer()->SetIsGrounded(true);
+			}
 		}
 	}
 }
