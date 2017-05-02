@@ -3,18 +3,19 @@
   {
     "RoomName": "Level 1",
     "Map":  [
-             "I_______________________________________",
+             "IOOO$OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I_________________>>>>>>OOOOOOOOOOOOOOOO",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-             "I_______________________________________",
+             "I_____________________!!!!!!OOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO%",
+             "I_______________________________OOOOOOOO",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-             "I_______________________________________",
-             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-             "I_______________________________________",
-             "I@OO*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I_____________________________<<<<<<OOOO",
+             "IOOOOOmOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOO@*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
              "I_______________________________________"
             
             ]
@@ -23,13 +24,18 @@
    {
     "RoomName": "Level 2",
     "Map":  [
+             "OO$OOO$OOO$OOO$OOO$OOO$OOO$OOO$OOO$OOO$O",
              "__H___H___H___H___H___H___H___H___H___H_",
+             "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
              "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
              "__H___H___H___H___H___H___H___H___H___H_",
              "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
-             "__H___H___H___H___H___H___H___H___H___H_",
              "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
              "__H___H___H___H___H___H___H___H___H___H_",
+             "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
+             "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
+             "__H___H___H___H___H___H___H___H___H___H_",
+             "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
              "@OHOO*HOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
              "________________________________________"
             ]
@@ -46,4 +52,3 @@
             ]
    }
 }
-
