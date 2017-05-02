@@ -371,20 +371,23 @@ void Game::PlayTick()
 		else
 		{
 
-			if (m_Room->getPlayer()->GetPos().x >= m_GD->viewportWidth)
+			if (m_Room->getPlayer()->GetPos().x >= (m_GD->viewportWidth*2))
 			{
-				m_Room->setCurrentLevel(m_Room->getCurrentLevel() + 1);
-
-				//Levels::load();
-				//m_Room.reset(Levels::LoadedLevels[m_Room->getCurrentLevel()].createRoom());
-				//m_Room->CreateRoom(m_GD, _pd3dDevice);
-				////player = m_Room->getPlayer();
-				//m_Room->resetRoom();
-
-				//m_Room->setLevelChange(false);
-
-				m_Room->ChangeLevel(m_GD, _pd3dDevice);
+				if (m_Room->getCurrentLevel()<3)
+				{
+					m_Room->setCurrentLevel(m_Room->getCurrentLevel() + 1);
+					m_Room->ChangeLevel(m_GD, _pd3dDevice);
+				}
 			}
+			else if (m_Room->getPlayer()->GetPos().x <= 0)
+			{
+				if (m_Room->getCurrentLevel() > 0)
+				{
+					m_Room->setCurrentLevel(m_Room->getCurrentLevel() - 1);
+					m_Room->ChangeLevel(m_GD, _pd3dDevice);
+				}
+			}
+
 
 			//update all objects
 			for (list<GameObject *>::iterator it = m_GameObjects.begin(); it != m_GameObjects.end(); it++)
