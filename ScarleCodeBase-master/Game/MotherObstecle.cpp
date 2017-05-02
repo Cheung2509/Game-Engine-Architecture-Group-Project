@@ -6,6 +6,7 @@ MotherObstacle::MotherObstacle(Sprite* _sprite, Vector2 Pos)
 	SetPos(Pos);
 	setType(MOTHER);
 	m_scale = Vector2(0.05, 0.05);
+	blocking = true;
 }
 
 MotherObstacle::~MotherObstacle()

@@ -28,7 +28,9 @@ struct DrawData;
 struct DrawData2D;
 class Light;
 class TextGO2D;
+
 class Player2D;
+class MotherObstacle;
 class Background;
 class Levels;
 class Room;
@@ -105,6 +107,7 @@ protected:
 	GameOver* gameOver;
 	/*Collectables*collectable;*/
 
+	MotherObstacle* mother;
 	Player2D* player;       // pointer to player class
 	Background* BackG;
 	Menu* mainMenu;
