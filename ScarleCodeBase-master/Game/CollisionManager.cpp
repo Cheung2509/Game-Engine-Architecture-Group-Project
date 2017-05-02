@@ -8,6 +8,18 @@
 
 #include <iostream>
 
+CollisionManager::CollisionManager()
+{
+	CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+	AUDIO_ENGINE_FLAGS eflags = AudioEngine_Default;
+#ifdef _DEBUG
+	eflags = eflags | AudioEngine_Debug;
+#endif
+	m_audioEngine.reset(new AudioEngine(eflags));
+
+	m_Pilons = std::make_unique<SoundEffect>(m_audioEngine.get(), L"..\\Assets\\Pilons.wav");
+}
+
 void CollisionManager::checkCollision(Room* room)
 {
 	bool collided = false;
@@ -232,8 +244,17 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 		case ObjectType::MOTHER:
 			if (room->getPlayer()->getCollectables() != 3)
 			{
-
-
+				if (m_Pilons->IsInUse() || thinCol == true)
+				{
+					
+				}
+				else
+				{
+					m_Pilons->Play(0.5, 0, 0);
+				}
+					
+				
+				
 				if (room->getPlayer()->GetPos().x > obj->GetPos().x + 40 &&
 					room->getPlayer()->GetPos().y <= obj->GetPos().y + 50
 					&& room->getPlayer()->GetPos().y >= obj->GetPos().y - 50)
@@ -312,9 +333,11 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 		case ObjectType::RESPAWN:
 			room->getRespawner()->SetRespawnUp(true);
 			break;
+			thinCol = false;
 		case ObjectType::THINPLATFORM:
 			if (direction == Direction::TOP && !(room->getPlayer()->getIsGrounded()))
 			{
+				thinCol = true;
 				room->getPlayer()->SetSpeedY(0);
 				room->getPlayer()->SetIsGrounded(true);
 			}

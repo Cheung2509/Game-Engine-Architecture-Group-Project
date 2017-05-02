@@ -91,5 +91,8 @@
     <Media Include="Jump.wav">
       <Filter>Audio</Filter>
     </Media>
+    <Media Include="Pilons.wav">
+      <Filter>Audio</Filter>
+    </Media>
   </ItemGroup>
 </Project>

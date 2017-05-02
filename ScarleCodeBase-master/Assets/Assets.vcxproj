@@ -208,6 +208,7 @@
   <ItemGroup>
     <Media Include="GameMusic.wav" />
     <Media Include="Jump.wav" />
+    <Media Include="Pilons.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

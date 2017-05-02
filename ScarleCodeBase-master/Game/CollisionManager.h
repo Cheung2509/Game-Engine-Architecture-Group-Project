@@ -5,6 +5,7 @@
 #include "GameObject2D.h"
 #include <memory>
 #include "Room.h"
+#include "Audio.h"
 
 enum Direction
 {
@@ -19,7 +20,7 @@ class Player2D;
 class CollisionManager
 {
 public:
-	CollisionManager() = default;
+	CollisionManager();
 	~CollisionManager() = default;
 
 	void checkCollision(Room*);
@@ -29,5 +30,8 @@ public:
 	void resolveCollision(Room*git , GameObject2D*, Direction);
 private:
 	Direction checkDirection(GameObject2D*, GameObject2D*);
+	std::unique_ptr<AudioEngine> m_audioEngine;
+	std::unique_ptr<SoundEffect> m_Pilons;
+	bool thinCol = false;
 };
 #endif // ! _COLLISION_MANAGER_H_

@@ -170,7 +170,15 @@ void Player2D::MovementManagement(GameData* _GD)
 			}
 			else
 			{
-				m_JumpSound->Play();
+				if (m_JumpSound->IsInUse())
+				{
+
+				}
+				else
+				{
+					m_JumpSound->Play();
+				}
+				
 			}
 		}
 		else
