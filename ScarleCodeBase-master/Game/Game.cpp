@@ -71,6 +71,7 @@ Game::Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance)
 	m_GD->m_prevKeyboardState = m_prevKeyboardState;
 	m_GD->m_GS = GS_PLAY_MAIN_CAM;
 	m_GD->m_mouseState = &m_mouseState;
+	m_GD->m_prevMouseState = &m_prevMouseState;
 	m_GD->m_MS = MS_MAIN;
 
 	//set up DirectXTK Effects system
@@ -116,7 +117,7 @@ Game::Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance)
 	GameOverMenu->SetPos(Vector2(570, 300));
 
 	//create a background
-	BackG = new Background("background", _pd3dDevice);
+	//BackG = new Background("background", _pd3dDevice);
 
 	//create first level
 	Levels::load();
@@ -455,7 +456,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 
 	if (m_Room->getPlayer()->isAlive())
 	{
-		BackG->Draw(m_DD2D);
+		//BackG->Draw(m_DD2D);
 	}
 
 	if (m_GD->m_GS == GameState::GS_PLAY_DEBUG_CAM)

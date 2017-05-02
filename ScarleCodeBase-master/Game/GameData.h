@@ -21,6 +21,7 @@ struct GameData
 	//player input
 	unsigned char* m_keyboardState; //current state of the Keyboard
 	unsigned char* m_prevKeyboardState; //previous frame's state of the keyboard
+	DIMOUSESTATE* m_prevMouseState;
 	DIMOUSESTATE* m_mouseState; //current state of the mouse
 };
 #endif

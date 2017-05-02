@@ -93,6 +93,7 @@ protected:
 	unsigned char			m_keyboardState[256];
 	unsigned char			m_prevKeyboardState[256];
 	DIMOUSESTATE			m_mouseState;
+	DIMOUSESTATE			m_prevMouseState;
 	HWND m_hWnd;
 	RECT window;
 
