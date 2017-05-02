@@ -267,7 +267,7 @@ bool Game::Tick()
 		break;
 	case GS_PLAY_DEBUG_CAM:
 		PlayTick();
-		inGameEditor->createObject(m_GD, m_Room.get(), m_hWnd);
+		inGameEditor->createObject(m_GD, m_Room.get(), m_hWnd, m_DD2D);
 		inGameEditor->Tick(m_GD);
 		break;
 	}
@@ -283,19 +283,19 @@ void Game::PlayTick()
 	if ((m_keyboardState[DIK_M] & 0x80) && !(m_prevKeyboardState[DIK_M] & 0x80))//NEVER PRESS M!!!
 	{
 		m_DD2D->m_cam2D->SetRot(180.0f);
-	} 
+	}
 	if (m_GD->m_MS == MS_GAMEOVER)
 	{
 		gameOver = new GameOver();
-		gameOver->GameOverButtons(m_hWnd,GameRestart,GameExit,m_GD);
+		gameOver->GameOverButtons(m_hWnd, GameRestart, GameExit, m_GD);
 		player->setLives(3);
 		player->setCollectables(0);
 		player->SetPos(m_Room->getPlayerSpawn());
 		m_Room->getRespawner()->SetRespawnUp(false);
 		m_Room->setCollectableAlive();
-			
-		
-		
+
+
+
 	}
 	if (m_GD->m_MS == MS_MAIN)
 	{
@@ -324,7 +324,7 @@ void Game::PlayTick()
 		else
 		{
 			MenuStart->SetColour(Color((float*)&Colors::White));
-			
+
 		}
 		if ((cursorPos.x > virtualRectExit.left && cursorPos.x < virtualRectExit.right) &&
 			(cursorPos.y > virtualRectExit.top && cursorPos.y < virtualRectExit.bottom))
@@ -342,7 +342,7 @@ void Game::PlayTick()
 	}
 	else
 	{
-		
+
 		if ((m_GD->m_MS == MS_PAUSE) && (m_keyboardState[DIK_P] & 0x80) && !(m_prevKeyboardState[DIK_P] & 0x80))
 		{
 			m_GD->m_MS = MS_PLAY;
@@ -352,7 +352,7 @@ void Game::PlayTick()
 			m_GD->m_MS = MS_PAUSE;
 			Sleep(100);
 		}
-		
+
 		collisionManager->checkCollision(m_Room.get());
 
 		if ((m_keyboardState[DIK_SPACE] & 0x80) && !(m_prevKeyboardState[DIK_SPACE] & 0x80))
@@ -426,7 +426,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 		m_DD2D->m_cam2D = m_debugCam2D;
 		break;
 	case GS_PLAY_MAIN_CAM:
-	//	cout << "PlayerCam \n";
+		//	cout << "PlayerCam \n";
 		m_DD2D->m_cam2D = m_Room->getPlayerCamera();//cahnged this line 
 		break;
 	}
@@ -436,9 +436,9 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	{
 		(*it)->Draw(m_DD);
 	}
-	
+
 	// Draw sprite batch stuff 
-	m_DD2D->m_Sprites->Begin( SpriteSortMode::SpriteSortMode_BackToFront,
+	m_DD2D->m_Sprites->Begin(SpriteSortMode::SpriteSortMode_BackToFront,
 		nullptr,
 		nullptr,
 		nullptr,
@@ -492,12 +492,12 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 	else
 	{
 	}
-	
+
 	m_DD2D->m_Sprites->End();
-	
+
 	//drawing text screws up the Depth Stencil State, this puts it back again!
 	_pd3dImmediateContext->OMSetDepthStencilState(m_states->DepthDefault(), 0);
-};
+}
 
 
 

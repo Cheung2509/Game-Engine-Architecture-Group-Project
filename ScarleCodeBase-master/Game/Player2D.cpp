@@ -22,18 +22,18 @@ Player2D::Player2D(string _fileName, ID3D11Device* _GD)
 
 	m_pos.y = 0.5f;
 	speed = 0.0f;
-	topSpeed = 6 *40 ;
+	topSpeed = 6 * 40;
 	accel = 0.046875 * 40;
-	decel = 0.5* 40;
+	decel = 0.5 * 40;
 	friction = 0.046875 * 40;
 	isGrounded = true;
 	airAccel = 0.09375 * 40;
 	speedY = 0.0f;
-	grav = 0.21875*5;
-	jumpSpeed = -6.5*50;
+	grav = 0.21875 * 5;
+	jumpSpeed = -6.5 * 50;
 
 	SetDrag(friction);
-	
+
 	SetPhysicsOn(true);
 
 	sprite = new Sprite(_fileName, _GD);
@@ -54,7 +54,6 @@ void Player2D::Tick(GameData* _GD)
 
 void Player2D::MovementManagement(GameData* _GD)
 {
-
 	//THIS IS WHERE THE PHYSICS HAPPEN
 	//BUT ONLY BASE PHYSICS. CHANGES TO THE PLAYER THROUGH INTERACTION WITH OBJECTS WILL BE IN THE GAME.CPP WITH COLLISION STUFF
 	if (m_PS == PlayerState::PlayerState_CLIMBING)
@@ -81,10 +80,13 @@ void Player2D::MovementManagement(GameData* _GD)
 		//checks if player is pressing against their direction or forward
 		if (speed < 0)
 		{
+			// if player is going one direction and presses to go the other, then apply deceleration
 			speed += decel;
 		}
+		//otherwise, if the speed is less than the topspeed
 		else if (speed < topSpeed)
 		{
+			//if the player is not grounded, apply air acceleration rather than normal acceleration
 			if (!isGrounded)
 			{
 				speed += airAccel;
@@ -97,6 +99,7 @@ void Player2D::MovementManagement(GameData* _GD)
 	}
 	else if (_GD->m_keyboardState[DIK_A] & 0x80)
 	{
+		//same stuff as above, but if they're pressing left rather than right. As a result, everything is negative rather than positive
 		if (speed > 0)
 		{
 			speed -= decel;
@@ -115,14 +118,17 @@ void Player2D::MovementManagement(GameData* _GD)
 	}
 	else
 	{
+		//if the player is not pressing anything
 		if (isGrounded)
 		{
-			if (speed < 0.125*40 && speed > -0.125 *40)
+			//if the speed is between a certain threshold (close enough to 0) it is set to zero
+			if (speed < 0.125 * 40 && speed > -0.125 * 40)
 			{
 				speed = 0;
 			}
 			else
 			{
+				//otherwise, friction is applied to the player
 				if (speed > 0)
 				{
 					speed -= friction;
@@ -139,6 +145,8 @@ void Player2D::MovementManagement(GameData* _GD)
 	//jump functionality 
 	if (_GD->m_keyboardState[DIK_W] & 0x80)
 	{
+		//when the player presses jump, if they are grounded then set their Y speed to jumpSpeed and set isgrounded to false 
+		//(also sets hasjumped to true, which is only relevant for springs)
 		if (isGrounded)
 		{
 			speedY = jumpSpeed;
@@ -148,6 +156,8 @@ void Player2D::MovementManagement(GameData* _GD)
 		}
 		else
 		{
+			//if they aren't on the ground, it continues to apply gravity and if their speed is above a certain threshold, it is set to that threshold 
+			//(to ensure the player doesn't fall too fast)
 			speedY += grav;
 
 			if (speedY >= 16 * 40)
@@ -159,6 +169,8 @@ void Player2D::MovementManagement(GameData* _GD)
 	}
 	else
 	{
+		//if the player hasn't pressed the jump button in this frame, it checks if they were jumping the frame before and if they were, it will set their speed to a set value 
+		//(this allows for variable jump height)
 		if (hasJumped)
 		{
 			if (speedY < -2 * 50)
@@ -166,6 +178,8 @@ void Player2D::MovementManagement(GameData* _GD)
 				speedY = -2 * 50;
 			}
 		}
+		//if the player is not on the ground, gravity is applied 
+		//(this is basically the same as when grav was applied earlier but having it here makes sure gravity is applied whether they're pressing or not)
 		if (!isGrounded)
 		{
 
@@ -176,6 +190,8 @@ void Player2D::MovementManagement(GameData* _GD)
 			}
 		}
 	}
+
+	//this applies air drag if the player is above a certain Y speed - no need to touch this
 	if (speedY > 0 && speedY > -4 * 40)
 	{
 		float airDrag = 0.96875;
@@ -186,6 +202,8 @@ void Player2D::MovementManagement(GameData* _GD)
 	}
 	SetDrag(friction);
 
+
+	//this is all for if the player is on the ladder - just moving them up and down
 	if (_GD->m_keyboardState[DIK_W] & 0x80)
 	{
 		if (onLadder)
@@ -231,11 +249,6 @@ void Player2D::MovementManagement(GameData* _GD)
 		m_pos = newPos;
 
 		m_acc = Vector2::Zero;
-	}
-
-	if (_GD->m_keyboardState[DIK_R] & 0x80)
-	{
-		printf("Debug");
 	}
 }
 

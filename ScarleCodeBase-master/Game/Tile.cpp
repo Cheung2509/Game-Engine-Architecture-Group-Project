@@ -27,6 +27,7 @@ void Tile::Draw(DrawData2D * _DD)
 	sprite->SetPos(m_pos);
 	sprite->SetScale(m_scale);
 	sprite->SetRot(m_rotation);
+	sprite->SetColour(m_colour);
 	sprite->Draw(_DD);
 }
 
