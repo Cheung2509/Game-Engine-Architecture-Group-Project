@@ -293,9 +293,6 @@ void Game::PlayTick()
 		player->SetPos(m_Room->getPlayerSpawn());
 		m_Room->getRespawner()->SetRespawnUp(false);
 		m_Room->setCollectableAlive();
-
-
-
 	}
 	if (m_GD->m_MS == MS_MAIN)
 	{
