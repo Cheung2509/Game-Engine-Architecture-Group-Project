@@ -8,6 +8,7 @@
 
 
 
+
 Player2D::Player2D(string _fileName, ID3D11Device* _GD)
 {
 	/*SetDrag(1);
@@ -19,6 +20,16 @@ Player2D::Player2D(string _fileName, ID3D11Device* _GD)
 	upMove = 500 * Vector2(0.0f, 1.0f);
 	forwardMove = 200.0f * Vector2(1.0f, 0.0f);*/
 	//m_fudge = Matrix::CreateRotationY(XM_PI);
+
+	//dirty audio change if time
+	CoInitializeEx(nullptr, COINIT_MULTITHREADED);
+	AUDIO_ENGINE_FLAGS eflags = AudioEngine_Default;
+#ifdef _DEBUG
+	eflags = eflags | AudioEngine_Debug;
+#endif
+	m_audioEngine.reset(new AudioEngine(eflags));
+
+	m_JumpSound = std::make_unique<SoundEffect>(m_audioEngine.get(), L"..\\Assets\\Jump.wav");
 
 	m_pos.y = 0.5f;
 	speed = 0.0f;
@@ -153,6 +164,14 @@ void Player2D::MovementManagement(GameData* _GD)
 			isGrounded = false;
 			printf("jumped\n");
 			hasJumped = true;
+			if (onLadder)
+			{
+
+			}
+			else
+			{
+				m_JumpSound->Play();
+			}
 		}
 		else
 		{

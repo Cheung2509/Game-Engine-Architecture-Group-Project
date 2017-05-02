@@ -3,6 +3,7 @@
 
 #include "GameObject2D.h"
 #include "Sprite.h"
+#include "Audio.h"
 enum PlayerState
 {
 	PlayerState_IDLE,
@@ -50,6 +51,8 @@ private:
 	Vector2 upMove;
 
 	Sprite* sprite;
+	std::unique_ptr<AudioEngine> m_audioEngine;
+	std::unique_ptr<SoundEffect> m_JumpSound;
 };
 
 #endif
