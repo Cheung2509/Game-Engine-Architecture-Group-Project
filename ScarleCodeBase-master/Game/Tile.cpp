@@ -6,9 +6,6 @@ Tile::Tile(Sprite* sp, Vector2 _pos)
 {
 	SetPos(_pos);
 	SetScale(0.5f);
-
-	setType(ObjectType::LADDER);
-
 	sprite = sp;
 }
 
