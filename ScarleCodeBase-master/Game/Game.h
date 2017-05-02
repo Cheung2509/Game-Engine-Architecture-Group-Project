@@ -116,6 +116,8 @@ protected:
 
 	//sound stuff
 	std::unique_ptr<AudioEngine> m_audioEngine;
+	std::unique_ptr<SoundEffect> m_ambient;
+	std::unique_ptr<DirectX::SoundEffectInstance> m_Loop;
 
 	//Tick functions for each state
 	void PlayTick();

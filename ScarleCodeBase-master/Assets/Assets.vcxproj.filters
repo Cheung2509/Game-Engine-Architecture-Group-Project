@@ -10,6 +10,9 @@
     <Filter Include="Textures">
       <UniqueIdentifier>{d0ca2129-2972-476d-82a9-1f0a9000b117}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{0b56b555-e551-4d55-8059-86737945c5a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="italic.spritefont">
@@ -80,5 +83,13 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Assets.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="GameMusic.wav">
+      <Filter>Audio</Filter>
+    </Media>
+    <Media Include="Jump.wav">
+      <Filter>Audio</Filter>
+    </Media>
   </ItemGroup>
 </Project>

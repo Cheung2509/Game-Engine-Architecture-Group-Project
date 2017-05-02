@@ -125,8 +125,10 @@ Game::Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance)
 	m_Room.reset(Levels::LoadedLevels[0].createRoom());
 	m_Room->CreateRoom(m_GD, _pd3dDevice);
 	player = m_Room->getPlayer(); //set games copy of player 
-	
 
+	//Audio
+	m_ambient= std::make_unique<SoundEffect>(m_audioEngine.get(), L"..\\Assets\\GameMusic.wav");
+	m_Loop = m_ambient->CreateInstance();
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
 	m_DD->m_pd3dImmediateContext = nullptr;
@@ -278,6 +280,14 @@ bool Game::Tick()
 
 void Game::PlayTick()
 {
+	if (m_GD->m_MS == MS_PLAY)
+	{
+		if (m_Loop)
+		{
+			m_Loop->Play(true);
+		}
+			
+	}
 	if (m_Room->getMother()!=nullptr)//getMother()->getBlocking())
 	{
 		if (!m_Room->getMother()->getBlocking())
