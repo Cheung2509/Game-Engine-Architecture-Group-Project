@@ -3,22 +3,31 @@
   {
     "RoomName": "Level 1",
     "Map":  [
-             "I+OOOOOOOOOOOOOOOO%I",
-             "IH________________$I",
-             "IHOOOOOOOOOOOOOOOOOI",
-             "IHO*OOOOO@OOOOOO$O$I",
-             "IH_________________I"
+             "I_______________________________________",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I_______________________________________",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I_______________________________________",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I_______________________________________",
+             "I@OO*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I_______________________________________"
+            
             ]
   },
   "The Milkman Conspiracy": 
    {
     "RoomName": "Level 2",
     "Map":  [
-             "HOOOHOOOHOOOHOOOHOOO",
-             "H___H___H___H___H__$",
-             "HOOOHOOOHO$OHOOOHOOO",
-             "H*OOHOO@HOOOHOOOHOOO",
-             "H___H___H___H___H___"
+             "__H___H___H___H___H___H___H___H___H___H_",
+             "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
+             "__H___H___H___H___H___H___H___H___H___H_",
+             "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
+             "__H___H___H___H___H___H___H___H___H___H_",
+             "OOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
+             "__H___H___H___H___H___H___H___H___H___H_",
+             "@OHOO*HOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHO",
+             "________________________________________"
             ]
    },
   "Water Temple": 

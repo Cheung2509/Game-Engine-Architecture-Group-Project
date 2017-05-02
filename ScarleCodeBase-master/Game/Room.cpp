@@ -31,6 +31,8 @@ Room::Room(Levels& L) :
 	conveyorLeft = nullptr;
 	conveyorRight = nullptr;
 	ice = nullptr;
+	firstRespawn = true;
+
 }
 
 list<GameObject2D*> Room::getColldingObjects()
@@ -47,6 +49,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 	Sprite* _ladder = new Sprite("Ladder", _pd3dDevice);
 	Sprite* _collectable = new Sprite("Collectable", _pd3dDevice);
 	Sprite* _respawn = new Sprite("CheckPoint", _pd3dDevice);
+	Sprite* _doorEnt = new Sprite("respawner", _pd3dDevice);
 	Sprite* _enemyHor = new Sprite("EnemyHor", _pd3dDevice);
 	Sprite* _motherObstacle = new Sprite("motherFigure", _pd3dDevice);
 	Sprite* _conveyerBelt = new Sprite("ConveyerBelt", _pd3dDevice);
@@ -56,7 +59,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 	{
 		for (int i = 0; i < mapRow.size(); i++)
 		{
-			if (TilePos.x >= _GD->viewportWidth)
+			if (TilePos.x >= (_GD->viewportWidth*2))
 			{
 			TilePos.x = 0;
 			TilePos.y += 50;//needs to be change to size of tile
@@ -65,21 +68,26 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 			{
 			case '_':
 				//create a platfrom;
-				//TilePos.x = 0.0f + incrementY;
+				
 				plat = new Tile(_platform, TilePos);
-				//plat->SetScale(1.0f);
 				plat->setType(PLATFORM);
+
 				InSceneObjects.push_back(plat);
 				m_collider.push_back(plat);
 				break;
 			case'I':
 				//invisible wall
+
 				invisPlat = new Tile(_platform, TilePos);
-				//invisPlat->//set rotation or set width plus height when functionailty is in there 
-				invisPlat->SetAlive(false);
+				//invisPlat->SetRot(150.0f);//set rotation or set width plus height when functionailty is in there 
+				//invisPlat->SetAlive(false);
+
 				InSceneObjects.push_back(invisPlat);
 				m_collider.push_back(invisPlat);
+
+				incrementer = Vector2(invisPlat->getSprite()->getSpriteWidth(), invisPlat->getSprite()->getSpriteHeight());
 				break;
+
 
 			case'H':
 				//create ladderTile
@@ -127,7 +135,16 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case '@':
 				//create Respawner
-				respawner = new Collectables(_respawn);
+				if (firstRespawn)
+				{
+					respawner = new Collectables(_doorEnt);
+					firstRespawn = false;
+				}
+				else
+				{
+					respawner = new Collectables(_respawn);
+				}
+				
 				respawner->SetScale(0.5f);
 				respawner->SetPos(TilePos);
 
@@ -159,7 +176,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 				conveyorLeft = new Tile(_conveyerBelt, TilePos);
 				conveyorLeft->setType(ObjectType::CONVEYORLEFT);
-				conveyorLeft->SetScale(0.05f);
+				//conveyorLeft->SetScale(0.05f);
 				InSceneObjects.push_back(conveyorLeft);
 				m_collider.push_back(conveyorLeft);
 				break;
@@ -167,14 +184,14 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 				conveyorRight = new Tile(_conveyerBelt, TilePos);
 				conveyorRight->setType(ObjectType::CONVEYORRIGHT);
-				conveyorRight->SetScale(0.05f);
+				//conveyorRight->SetScale(0.05f);
 				InSceneObjects.push_back(conveyorRight);
 				m_collider.push_back(conveyorRight);
 				break;
 			case '!':
 				ice = new Tile(_ice, TilePos);
 				ice->setType(ObjectType::ICE);
-				ice->SetScale(0.05f);
+				//ice->SetScale(0.05f);
 				InSceneObjects.push_back(ice);
 				m_collider.push_back(ice);
 			default:
@@ -230,11 +247,11 @@ void Room::resetRoom()
 	m_collider.clear();
 	plat = nullptr;
 	ladder = nullptr;
-	//player = nullptr;
 	pickUp = nullptr;
 	respawner = nullptr;
 	enemyHor = nullptr;
 	mother = nullptr;
+	firstRespawn = true;
 }
 
 void Room::ChangeLevel(GameData * _GD, ID3D11Device * _pd3dDevice)

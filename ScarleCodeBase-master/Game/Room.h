@@ -55,7 +55,9 @@ public:
 private:
 	Room(Levels&);
 	Levels& level;
+
 	int levelCur;
+	bool firstRespawn;
 
 	std::string title;
 	std::vector<std::string> map;
@@ -63,7 +65,7 @@ private:
 
 	Vector2 enemyStartPos;
 
-	//float incrementY;
+	Vector2 incrementer;
 	//possibly need to add a bool to stop two players being created 
 
 	Enemy* enemyHor;
