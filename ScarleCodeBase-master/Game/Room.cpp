@@ -147,9 +147,9 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				
 				respawner->SetScale(0.5f);
 				respawner->SetPos(TilePos);
+				respawner->setType(RESPAWN);
 
 				InSceneObjects.push_back(respawner);
-				respawner->setType(RESPAWN);
 				m_collider.push_back(respawner);
 				break;
 
@@ -194,6 +194,12 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				//ice->SetScale(0.05f);
 				InSceneObjects.push_back(ice);
 				m_collider.push_back(ice);
+			case '-':
+				thinPlat = new Tile(_platform, TilePos);
+				thinPlat->setType(ObjectType::THINPLATFORM);
+
+				InSceneObjects.push_back(thinPlat);
+				m_collider.push_back(thinPlat);
 			default:
 				break;
 			}

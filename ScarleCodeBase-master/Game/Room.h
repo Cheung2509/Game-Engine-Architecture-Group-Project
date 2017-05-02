@@ -77,6 +77,7 @@ private:
 	//RopeTile* Rope;
 	Tile* plat;
 	Tile* invisPlat;
+	Tile* thinPlat;
 	Collectables* pickUp;
 	Collectables* collectables;
 	Collectables* respawner;
