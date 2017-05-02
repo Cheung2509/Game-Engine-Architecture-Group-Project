@@ -140,20 +140,20 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case'$':
 				//create collecatable
-				for (auto&& PickedColl : PickedUpCollectables[levelCur])
-				{
+				/*for (auto&& PickedColl : PickedUpCollectables[levelCur])
+				{*/
 					/*if ((PickedColl==nullptr) || (TilePos != PickedColl->GetPos()))*/
 					//{
 					pickUp = new Collectables(_collectable);
 					pickUp->SetPos(TilePos);
-					if (((pickUp != PickedColl) || (pickUp == PickedColl&&PickedColl->isAlive())))
-					{
+					/*if (((pickUp != PickedColl) || (pickUp == PickedColl&&PickedColl->isAlive())))
+					{*/
 						InSceneObjects.push_back(pickUp);
 						m_collider.push_back(pickUp);
 						PickedUpCollectables[levelCur].push_back(pickUp);
 						//PickedColl = pickUp;
-						break;
-					}
+						//break;
+					//}
 				}
 				break;
 
