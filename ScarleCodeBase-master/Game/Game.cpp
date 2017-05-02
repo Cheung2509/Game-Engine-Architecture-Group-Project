@@ -18,6 +18,7 @@
 
 #include "Menu.h"
 #include "inGameLevelEditor.h"
+#include "MotherObstecle.h"
 
 #include "CollisionManager.h"
 #include "GameOver.h"
@@ -123,7 +124,7 @@ Game::Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance)
 	m_Room.reset(Levels::LoadedLevels[0].createRoom());
 	m_Room->CreateRoom(m_GD, _pd3dDevice);
 	player = m_Room->getPlayer(); //set games copy of player 
-
+	
 
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
@@ -276,6 +277,13 @@ bool Game::Tick()
 
 void Game::PlayTick()
 {
+	if (m_Room->getMother()!=nullptr)//getMother()->getBlocking())
+	{
+		if (!m_Room->getMother()->getBlocking())
+		{
+			m_GD->m_MS = MS_GAMEOVER;
+		}
+	}
 	if (player->getLives() <= 0)
 	{
 		m_GD->m_MS = MS_GAMEOVER;
@@ -293,6 +301,7 @@ void Game::PlayTick()
 		player->SetPos(m_Room->getPlayerSpawn());
 		m_Room->getRespawner()->SetRespawnUp(false);
 		m_Room->setCollectableAlive();
+		m_Room->getMother()->setBlocking(true);
 	}
 	if (m_GD->m_MS == MS_MAIN)
 	{

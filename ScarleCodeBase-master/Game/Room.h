@@ -34,6 +34,7 @@ public:
 	Collectables* getCollectable() { return pickUp; }
 	Collectables* getRespawner() { return respawner; }
 	Collectables* setRespawner(Collectables* _respawn) { _respawn = respawner; }
+	MotherObstacle* getMother() { return mother; }
 	/*Vector2 setRespawner(Vector2 _respawn) { respawner = _respawn; }*/
 
 	void CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice);

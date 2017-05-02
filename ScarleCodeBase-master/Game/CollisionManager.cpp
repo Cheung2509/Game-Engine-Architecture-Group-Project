@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "MotherObstecle.h"
 
+
 #include <iostream>
 
 void CollisionManager::checkCollision(Room* room)
@@ -275,6 +276,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 			else
 			{
 				//PLAYER WINS - STATE CHANGE TO WIN/GAME OVER
+				room->getMother()->setBlocking(false);
 			}
 			break;
 		case ObjectType::PLATFORM:
@@ -306,6 +308,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 					//_plat->SetColour(Color(0, 1, 0, 1));
 				}
 			}
+			break;
 		case ObjectType::RESPAWN:
 			room->getRespawner()->SetRespawnUp(true);
 			break;

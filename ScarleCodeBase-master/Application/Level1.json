@@ -1,5 +1,5 @@
 {
-  "Level 1 - 1": 
+  "A Level 1 - 1": 
   {
     "RoomName": "Level 1",
     "Map":  [
@@ -15,12 +15,13 @@
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
              "I_____________________________<<<<<<OOOO",
              "IOOOOOmOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
-             "IOOOOOOO@*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOmOOOO@*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
              "I_______________________________________"
             
             ]
   },
-  "The Milkman Conspiracy": 
+
+  "B The Milkman Conspiracy": 
    {
     "RoomName": "Level 2",
     "Map":  [
@@ -40,15 +41,46 @@
              "________________________________________"
             ]
    },
-  "Water Temple": 
+
+  "C Water Temple": 
    {
     "RoomName": "Level 3",
     "Map":  [
-             "OOOOOOOOOOOOOOOOOOOO",
-             "+__________________%",
-             "H$$$$$$$$$$$$$$$$$$$",
-             "HOOO@OO*OO0OOOOOOOOO",
-             "H__________!!!!_____"
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO",
+             "I@*OOOO$OOOOOO$OOOOO$OOOOO$OOOOO$OOOOO$O",
+             "I__OOO!!!OOOOO!!!OOO!!!OOO!!!OOO!!!OOO__",
+             "II+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO%II",
+             "II+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO%II",
+             "II+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO%II",
+             "________________________________________"
+            ]
+   },
+
+   "D GreenHillZone": 
+   {
+    "RoomName": "Level 4",
+    "Map":  [
+             "I$OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "I<<<<<<<<<<<<<<<<<<<<<<<<<<<<OOOOOOOOOOI",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "IOOOOOOOOOO<<<<<<<<<<<<<<<<<<<<<<<<<<<<I",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "I>>>>>>>>>>>>>>>>>>>>>>>>>>>>OOOOOOOOOOI",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "IOOOOOOOOOO<<<<<<<<<<<<<<<<<<<<<<<<<<<<I",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "I*@OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "I__>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>I"
             ]
    }
 }
