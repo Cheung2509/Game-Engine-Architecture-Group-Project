@@ -62,7 +62,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 			if (TilePos.x >= (_GD->viewportWidth*2))
 			{
 			TilePos.x = 0;
-			TilePos.y += 50;//needs to be change to size of tile
+			TilePos.y += incrementer.y*0.5;//needs to be change to size of tile
 			}
 			switch (mapRow.at(i))
 			{
@@ -81,7 +81,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				invisPlat = new Tile(_platform, TilePos);
 				//invisPlat->SetRot(150.0f);//set rotation or set width plus height when functionailty is in there 
 				//invisPlat->SetAlive(false);
-
+				invisPlat->setType(PLATFORM);
 				InSceneObjects.push_back(invisPlat);
 				m_collider.push_back(invisPlat);
 
