@@ -324,23 +324,23 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 		case ObjectType::RESPAWN:
 		{
 			room->getRespawner()->SetRespawnUp(true);
-<<<<<<< HEAD
+
 			break;
 			thinCol = false;
-=======
+
 		}
 		break;
->>>>>>> origin/master
+
 		case ObjectType::THINPLATFORM:
 		{
 			if (direction == Direction::TOP && !(room->getPlayer()->getIsGrounded()))
 			{
-<<<<<<< HEAD
+
 				thinCol = true;
 				room->getPlayer()->SetSpeedY(0);
-=======
+
 				room->getPlayer()->SetSpeedY(-10);
->>>>>>> origin/master
+
 				room->getPlayer()->SetIsGrounded(true);
 			}
 		}
