@@ -340,10 +340,24 @@ void Room::addToLists(GameObject2D * Object)
 
 void Room::restPrevRoom()
 {
-	for (int i = 0; i < level.LoadedLevels.size(); i++)
+	list<GameObject2D*> nullList;
+	if (preLevels.size()==0)
 	{
-		preLevels.push_back(InSceneObjects);
+		for (int i = 0; i < level.LoadedLevels.size(); i++)
+		{
+
+			preLevels.push_back(nullList);
+		}
 	}
+	else
+	{
+		for (auto& room : preLevels)
+		{
+			room = nullList;
+		}
+
+	}
+	
 }
 
 void Room::setLevelIncrease(bool boo)
