@@ -19,9 +19,6 @@
     <ClCompile Include="Room.cpp">
       <Filter>Base\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Base\Header</Filter>
-    </ClCompile>
     <ClCompile Include="AudioManager.cpp">
       <Filter>Base\Source\Manager</Filter>
     </ClCompile>
@@ -75,6 +72,9 @@
     </ClCompile>
     <ClCompile Include="AnimatedSprite.cpp">
       <Filter>Objects\Source\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Base\Source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

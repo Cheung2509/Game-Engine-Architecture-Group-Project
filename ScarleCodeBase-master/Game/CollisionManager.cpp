@@ -120,44 +120,38 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 		switch (obj->GetType())
 		{
 		case ObjectType::COLLECTIBLE:
+		{
 			if (obj->isAlive())
 			{
 				std::cout << "Collected \n";
 				room->getPlayer()->addCollectable();
 				//obj->SetAlive(false);
 			}
-
-			break;
+		}
+		break;
 		case ObjectType::CONVEYORLEFT:
-			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)
+		{
+			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP &&
+				direction == Direction::TOP)
 			{
-				if (direction == Direction::TOP)
-				{
-					room->getPlayer()->SetIsGrounded(true);
-					room->getPlayer()->SetSpeedY(0.0f);
-
-					float currentPosX = room->getPlayer()->GetPos().x;
-					float currentPosY = room->getPlayer()->GetPos().y;
-					room->getPlayer()->SetPos(Vector2(currentPosX - 0.05, currentPosY));
-					room->getPlayer()->setfriction(0.046875 * 40);
-				}
-			}
-			if (room->getPlayer()->GetVel().y < obj->GetPos().y)
-			{
-				//top collision
 				room->getPlayer()->SetIsGrounded(true);
 				room->getPlayer()->SetSpeedY(0.0f);
 
+				float currentPosX = room->getPlayer()->GetPos().x;
+				float currentPosY = room->getPlayer()->GetPos().y;
+				room->getPlayer()->SetPos(Vector2(currentPosX - 0.05, currentPosY));
+				room->getPlayer()->setfriction(0.046875 * 40);
 			}
-			else if (room->getPlayer()->GetPos().y > obj->GetPos().y)
+			else if (direction == Direction::BOTTOM)
 			{
-				//bottom collision
-				room->getPlayer()->SetSpeedY(0.0f);
+				room->getPlayer()->SetSpeedY(+100);
 			}
-
-			break;
+		}
+		break;
 		case ObjectType::CONVEYORRIGHT:
-			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)
+		{
+			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP &&
+				direction == Direction::TOP)
 			{
 				room->getPlayer()->SetIsGrounded(true);
 				room->getPlayer()->SetSpeedY(0.0f);
@@ -166,45 +160,33 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 				float currentPosY = room->getPlayer()->GetPos().y;
 				room->getPlayer()->SetPos(Vector2(currentPosX + 0.05, currentPosY));
 				room->getPlayer()->setfriction(0.046875 * 40);
-
 			}
-			if (room->getPlayer()->GetVel().y < obj->GetPos().y)
-			{
-				//top collision
-				room->getPlayer()->SetIsGrounded(true);
-				room->getPlayer()->SetSpeedY(0.0f);
-
-			}
-			else if (room->getPlayer()->GetPos().y > obj->GetPos().y)
+			else if (direction == Direction::BOTTOM)
 			{
 				//bottom collision
-				room->getPlayer()->SetSpeedY(0.0f);
+				room->getPlayer()->SetSpeedY(+100);
 			}
-
-			break;
+		}
+		break;
 		case ObjectType::ICE:
-			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP)
+		{
+			if (room->getPlayer()->GetPlayerState() != PlayerState::PlayerState_JUMP &&
+				direction == Direction::TOP)
 			{
 				room->getPlayer()->SetIsGrounded(true);
-				room->getPlayer()->SetSpeedY(0.0f);
+				room->getPlayer()->SetSpeedY(-10.0f);
 
 				room->getPlayer()->setfriction(0.046875 * 25);
 			}
-			if (room->getPlayer()->GetVel().y < obj->GetPos().y)
-			{
-				//top collision
-				room->getPlayer()->SetIsGrounded(true);
-				room->getPlayer()->SetSpeedY(0.0f);
-
-			}
-			else if (room->getPlayer()->GetPos().y > obj->GetPos().y)
+			else if (direction == Direction::BOTTOM)
 			{
 				//bottom collision
-				room->getPlayer()->SetSpeedY(0.0f);
+				room->getPlayer()->SetSpeedY(+100);
 			}
-
-			break;
+		}
+		break;
 		case ObjectType::ENEMY:
+		{
 			if (room->getPlayer()->getLives() != 0)
 			{
 				room->getPlayer()->SetAlive(false);
@@ -227,9 +209,10 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 			{
 				room->getPlayer()->SetAlive(false);
 			}
-
-			break;
+		}
+		break;
 		case ObjectType::MOTHER:
+		{
 			if (room->getPlayer()->getCollectables() != 3)
 			{
 
@@ -279,10 +262,11 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 				//PLAYER WINS - STATE CHANGE TO WIN/GAME OVER
 				room->getMother()->setBlocking(false);
 			}
-
-			break;
+		}
+		break;
 		case ObjectType::PLATFORM:
-				//Top Collision
+		{
+			//Top Collision
 			if (direction == Direction::TOP)
 			{
 				room->getPlayer()->SetSpeedY(-10);
@@ -296,29 +280,37 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 			//left Collision 
 			if (direction == Direction::LEFT && room->getPlayer()->getIsGrounded())
 			{
-				float y = room->getPlayer()->GetPos().y;
 				//room->getPlayer()->SetPos(Vector2(obj->GetPos().x - 5, y));
 				room->getPlayer()->SetSpeed(-200);
 			}
 			//Right Collision
 			if (direction == Direction::RIGHT && room->getPlayer()->getIsGrounded())
 			{
-				
-				float y = room->getPlayer()->GetPos().y;
 				//room->getPlayer()->SetPos(Vector2(obj->GetPos().x + 4, y));
 				room->getPlayer()->SetSpeed(200);
 			}
+		}
 		break;
 		case ObjectType::RESPAWN:
+		{
 			room->getRespawner()->SetRespawnUp(true);
-			break;
+		}
+		break;
 		case ObjectType::THINPLATFORM:
+		{
 			if (direction == Direction::TOP && !(room->getPlayer()->getIsGrounded()))
 			{
-				room->getPlayer()->SetSpeedY(0);
+				room->getPlayer()->SetSpeedY(-10);
 				room->getPlayer()->SetIsGrounded(true);
 			}
 		}
+		}
+	}
+
+	if (obj->GetType() != ObjectType::ICE)
+	{
+		//set back to default friction
+		room->getPlayer()->setfriction(0.046875 * 40);
 	}
 }
 
@@ -332,13 +324,14 @@ Direction CollisionManager::checkDirection(GameObject2D* obj1, GameObject2D* obj
 		{
 			Tile* tile = dynamic_cast<Tile*>  (obj2);
 
+			//getting sprite sizes
 			float playerBot = player->GetPos().y + (player->getSprite()->getSpriteHeight() * player->getScale().y);
 			float playerRight = player->GetPos().x + (player->getSprite()->getSpriteWidth() * player->getScale().x);
 
 			float platBot = tile->GetPos().y + (tile->getSprite()->getSpriteHeight() * tile->getScale().y);
 			float platRight = tile->GetPos().x + (tile->getSprite()->getSpriteWidth() * tile->getScale().x);
 
-
+			//calculate collisions
 			float botCollision = platBot - player->GetPos().y;
 			float topCollision = playerBot - tile->GetPos().y;
 			float leftCollision = playerRight - tile->GetPos().x;

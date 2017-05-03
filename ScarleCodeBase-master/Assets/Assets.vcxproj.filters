@@ -74,6 +74,9 @@
     <ImageContentTask Include="Ice.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="ThinPlatform.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />

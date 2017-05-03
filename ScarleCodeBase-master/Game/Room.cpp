@@ -54,6 +54,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 	Sprite* _motherObstacle = new Sprite("motherFigure", _pd3dDevice);
 	Sprite* _conveyerBelt = new Sprite("ConveyerBelt", _pd3dDevice);
 	Sprite* _ice = new Sprite("Ice", _pd3dDevice);
+	Sprite* _thinPlatform = new Sprite("ThinPlatform", _pd3dDevice);
 
 	for (auto&& mapRow : map)
 	{
@@ -194,8 +195,9 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				//ice->SetScale(0.05f);
 				InSceneObjects.push_back(ice);
 				m_collider.push_back(ice);
+				break;
 			case '-':
-				thinPlat = new Tile(_platform, TilePos);
+				thinPlat = new Tile(_thinPlatform, TilePos);
 				thinPlat->setType(ObjectType::THINPLATFORM);
 
 				InSceneObjects.push_back(thinPlat);

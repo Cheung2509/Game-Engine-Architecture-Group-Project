@@ -205,6 +205,9 @@
   <ItemGroup>
     <ImageContentTask Include="Ice.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="ThinPlatform.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\ImageContentTask.targets" />
