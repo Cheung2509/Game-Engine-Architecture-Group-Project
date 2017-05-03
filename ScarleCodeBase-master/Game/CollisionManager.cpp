@@ -222,7 +222,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 		break;
 		case ObjectType::MOTHER:
 		{
-			if (room->getPlayer()->getCollectables() != 3)
+			if (room->getPlayer()->getCollectables() != 18)
 			{
 
 

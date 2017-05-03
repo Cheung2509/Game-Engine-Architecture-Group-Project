@@ -3,17 +3,20 @@
   {
     "RoomName": "Level 1",
     "Map":  [
+             "I______________________________________I",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
              "IOOO$OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
-             "I----------------->>>>>>OOOOOOOOOOOOOOOI",
+             "I_________________>>>>>>OOOOOOOOOOOOOOOI",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
-             "I---------------------!!!!!!OOOOOOOOOOOI",
+             "I_____________________!!!!!!OOOOOOOOOOOI",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
              "I+OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO%I",
              "I-------------------------------OOOOOOOI",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
-             "I-----------------------------<<<<<<OOOI",
+             "I_____________________________<<<<<<OOOI",
              "IOOOOOmOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
              "IOOOOOOO*@OOOOOOOOOOOOOOOOOOOOOOOOOOOOEI",
              "I_______________________________________"
@@ -25,6 +28,9 @@
    {
     "RoomName": "Level 2",
     "Map":  [
+             "I______________________________________I",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
              "IO$OOO$OOO$OOO$OOO$OOO$OOO$OOO$OOO$OOO$I",
              "IOHO_OHO_OHO_OHO_OHO_OHO_OHO_OHO_OHO_OHI",
              "IOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHOOOHI",
@@ -46,6 +52,11 @@
    {
     "RoomName": "Level 3",
     "Map":  [
+             "I______________________________________I",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
              "I*OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
@@ -67,6 +78,9 @@
    {
     "RoomName": "Level 4",
     "Map":  [
+             "I______________________________________I",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
+             "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
              "I$OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
              "I<<<<<<<<<<<<<<<<<<<<<<<<<<<<OOOOOOOOOOI",
              "IOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOI",
