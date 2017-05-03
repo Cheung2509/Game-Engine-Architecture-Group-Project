@@ -125,7 +125,8 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 			{
 				std::cout << "Collected \n";
 				room->getPlayer()->addCollectable();
-				//obj->SetAlive(false);
+				obj->SetAlive(false);
+				//	room->addToPickUpList(obj-);
 			}
 		}
 		break;
@@ -192,11 +193,19 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 				room->getPlayer()->SetAlive(false);
 				room->getPlayer()->TakeLives();
 
-				if (room->getRespawner()->GetRespawnUp())
+				if (room->getRespawner() != nullptr)
 				{
-					room->getPlayer()->SetAlive(true);
-					room->getPlayer()->SetPos(room->getRespawner()->GetPos());
-					room->getPlayer()->SetPlayerState(PlayerState::PlayerState_IDLE);
+					if (room->getRespawner()->GetRespawnUp())
+					{
+						room->getPlayer()->SetAlive(true);
+						room->getPlayer()->SetPos(room->getRespawner()->GetPos());
+						room->getPlayer()->SetPlayerState(PlayerState::PlayerState_IDLE);
+					}
+					else
+					{
+						room->getPlayer()->SetAlive(true);
+						room->getPlayer()->SetPos(room->getPlayerSpawn());
+					}
 				}
 				else
 				{
@@ -303,6 +312,26 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 				room->getPlayer()->SetSpeedY(-10);
 				room->getPlayer()->SetIsGrounded(true);
 			}
+			break;
+		}
+		case ObjectType::DOOREXIT:
+
+			if (room->getCurrentLevel()<4)
+			{
+				//tell room to cahnge level
+				room->setLevelIncrease(true);
+
+			}
+			break;
+		case ObjectType::DOORENT:
+		{
+			if (room->getCurrentLevel() > 0)
+			{
+				//tell room to cahnge level
+				room->setLevelDecrease(true);
+
+			}
+			break;
 		}
 		}
 	}

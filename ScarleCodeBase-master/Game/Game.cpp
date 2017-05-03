@@ -125,8 +125,10 @@ Game::Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance)
 	m_Room.reset(Levels::LoadedLevels[0].createRoom());
 	m_Room->CreateRoom(m_GD, _pd3dDevice);
 	player = m_Room->getPlayer(); //set games copy of player 
-	
 
+	//Audio
+	m_ambient= std::make_unique<SoundEffect>(m_audioEngine.get(), L"..\\Assets\\GameMusic.wav");
+	m_Loop = m_ambient->CreateInstance();
 	//create DrawData struct and populate its pointers
 	m_DD = new DrawData;
 	m_DD->m_pd3dImmediateContext = nullptr;
@@ -278,6 +280,14 @@ bool Game::Tick()
 
 void Game::PlayTick()
 {
+	if (m_GD->m_MS == MS_PLAY)
+	{
+		if (m_Loop)
+		{
+			m_Loop->Play(true);
+		}
+			
+	}
 	if (m_Room->getMother()!=nullptr)//getMother()->getBlocking())
 	{
 		if (!m_Room->getMother()->getBlocking())
@@ -300,7 +310,10 @@ void Game::PlayTick()
 		player->setLives(3);
 		player->setCollectables(0);
 		player->SetPos(m_Room->getPlayerSpawn());
-		m_Room->getRespawner()->SetRespawnUp(false);
+		if (m_Room->getRespawner() != nullptr)
+		{
+			m_Room->getRespawner()->SetRespawnUp(false);
+		}
 		m_Room->setCollectableAlive();
 		m_Room->getMother()->setBlocking(true);
 	}
@@ -381,21 +394,19 @@ void Game::PlayTick()
 		else
 		{
 
-			if (m_Room->getPlayer()->GetPos().x >= (m_GD->viewportWidth*2))
+			if (m_Room->getLevelIncrease())
 			{
-				if (m_Room->getCurrentLevel()<3)
-				{
-					m_Room->setCurrentLevel(m_Room->getCurrentLevel() + 1);
-					m_Room->ChangeLevel(m_GD, _pd3dDevice);
-				}
+				m_Room->addToPrevLevelList();
+				m_Room->setCurrentLevel(m_Room->getCurrentLevel() + 1);
+				m_Room->ChangeLevel(m_GD, _pd3dDevice);
+				m_Room->setLevelIncrease(false);
 			}
-			else if (m_Room->getPlayer()->GetPos().x <= 0)
+			if (m_Room->getLevelDecrease())
 			{
-				if (m_Room->getCurrentLevel() > 0)
-				{
-					m_Room->setCurrentLevel(m_Room->getCurrentLevel() - 1);
-					m_Room->ChangeLevel(m_GD, _pd3dDevice);
-				}
+				m_Room->addToPrevLevelList();
+				m_Room->setCurrentLevel(m_Room->getCurrentLevel() - 1);
+				m_Room->ChangeLevel(m_GD, _pd3dDevice);
+				m_Room->setLevelDecrease(false);
 			}
 
 

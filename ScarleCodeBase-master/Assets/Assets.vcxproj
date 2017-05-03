@@ -207,6 +207,11 @@
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="ThinPlatform.png" />
+    <Media Include="GameMusic.wav" />
+    <Media Include="Jump.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageContentTask Include="Door.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

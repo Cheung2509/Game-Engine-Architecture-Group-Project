@@ -31,7 +31,15 @@ Room::Room(Levels& L) :
 	conveyorLeft = nullptr;
 	conveyorRight = nullptr;
 	ice = nullptr;
-	firstRespawn = true;
+	firstLevel = true;
+	levelIncrease = false;
+	LevelDecrease = false;
+
+	
+	for (int i = 0; i < L.LoadedLevels.size(); i++)
+	{
+		preLevels.push_back(InSceneObjects);
+	}
 
 }
 
@@ -48,13 +56,15 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 	Sprite* _platform = new Sprite("Platform", _pd3dDevice);
 	Sprite* _ladder = new Sprite("Ladder", _pd3dDevice);
 	Sprite* _collectable = new Sprite("Collectable", _pd3dDevice);
-	Sprite* _respawn = new Sprite("CheckPoint", _pd3dDevice);
-	Sprite* _doorEnt = new Sprite("respawner", _pd3dDevice);
+	Sprite* _respawn = new Sprite("respawner", _pd3dDevice);
+	Sprite* _doorEnt = new Sprite("Door", _pd3dDevice);
 	Sprite* _enemyHor = new Sprite("EnemyHor", _pd3dDevice);
 	Sprite* _motherObstacle = new Sprite("motherFigure", _pd3dDevice);
 	Sprite* _conveyerBelt = new Sprite("ConveyerBelt", _pd3dDevice);
 	Sprite* _ice = new Sprite("Ice", _pd3dDevice);
 	Sprite* _thinPlatform = new Sprite("ThinPlatform", _pd3dDevice);
+
+	bool makeCollectable = true;
 
 	for (auto&& mapRow : map)
 	{
@@ -108,50 +118,89 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case'*':
 				// create player 
+				// create player 
 				if (player == nullptr)
 				{
 					player = new Player2D("Walk", _pd3dDevice);
 					player->SetScale(1.0f);
-					
+					player->SetPos(TilePos);
 					Playerspawn = TilePos;
 					player->setType(PLAYER);
 				}
-				player->SetPos(TilePos);
+
 				InSceneObjects.push_back(player);
 				m_collider.push_back(player);
 
 				m_playerCam = new CameraFollow2D(player);
 				InSceneObjects.push_back(m_playerCam);
-				//possibly create another platform here
 
 				break;
 
 			case'$':
 				//create collecatable
+				
+				makeCollectable = true;
 				pickUp = new Collectables(_collectable);
 				pickUp->SetPos(TilePos);
 				InSceneObjects.push_back(pickUp);
 				m_collider.push_back(pickUp);
+
+				for (auto prevColl : preLevels[levelCur])// for every object previously stored in this level
+				{
+					if (prevColl->GetType() == COLLECTIBLE)//is there a collectable in this level
+					{
+						if (prevColl->GetPos() == TilePos)// is this the same collectable 
+						{
+							if (!prevColl->isAlive())// was this collectable dead when they left 
+							{
+								pickUp->SetAlive(false);
+							}
+						}
+
+					}
+				}
+				/*if (makeCollectable)
+				{
+					pickUp = new Collectables(_collectable);
+					pickUp->SetPos(TilePos);
+					pickUp->SetAlive(true);
+					InSceneObjects.push_back(pickUp);
+					m_collider.push_back(pickUp);
+				}*/
 				break;
 
 			case '@':
-				//create Respawner
-				if (firstRespawn)
-				{
-					respawner = new Collectables(_doorEnt);
-					firstRespawn = false;
-				}
-				else
-				{
-					respawner = new Collectables(_respawn);
-				}
-				
+				respawner = new Collectables(_respawn);
 				respawner->SetScale(0.5f);
 				respawner->SetPos(TilePos);
-				respawner->setType(RESPAWN);
-
+				respawner->SetAlive(true);
 				InSceneObjects.push_back(respawner);
+				respawner->setType(RESPAWN);
 				m_collider.push_back(respawner);
+				break;
+
+			case 'E':
+
+				Exit = new Collectables(_doorEnt);
+				Exit->SetScale(0.5f);
+				Exit->SetPos(TilePos);
+				Exit->SetAlive(true);
+				Exit->setType(DOOREXIT);
+
+				InSceneObjects.push_back(Exit);
+				m_collider.push_back(Exit);
+				break;
+			case 'D':
+
+				Entrance = new Collectables(_doorEnt);
+				Entrance->SetScale(0.5f);
+				Entrance->SetPos(TilePos);
+				Entrance->SetAlive(true);
+				Entrance->setType(DOORENT);
+
+				InSceneObjects.push_back(Entrance);
+				m_collider.push_back(Entrance);
+
 				break;
 
 			case '+':
@@ -208,6 +257,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 			TilePos.x += 30;//Tilesize
 		}
 	}
+	preLevels[levelCur] = InSceneObjects;
 }
 
 void Room::setCurrentLevel(int i)
@@ -249,6 +299,10 @@ void Room::setCollectableAlive()
 
 	}
 }
+void Room::setLevelDecrease(bool boo)
+{
+	LevelDecrease = boo;
+}
 void Room::resetRoom()
 {
 	InSceneObjects.clear();
@@ -259,7 +313,7 @@ void Room::resetRoom()
 	respawner = nullptr;
 	enemyHor = nullptr;
 	mother = nullptr;
-	firstRespawn = true;
+	firstLevel = false;
 }
 
 void Room::ChangeLevel(GameData * _GD, ID3D11Device * _pd3dDevice)
@@ -268,10 +322,38 @@ void Room::ChangeLevel(GameData * _GD, ID3D11Device * _pd3dDevice)
 	map = level.LoadedLevels[levelCur].getMap();
 	title = level.LoadedLevels[levelCur].getTitle();
 	CreateRoom(_GD, _pd3dDevice);
+	setPlayersSpawnPoint();
+}
+
+void Room::setPlayersSpawnPoint()
+{
+	if (levelIncrease)
+	{
+		player->SetPos(Vector2((Entrance->GetPos().x + 50), Entrance->GetPos().y));
+		Playerspawn = Vector2((Entrance->GetPos().x + 50), Entrance->GetPos().y);
+	}
+	else if (LevelDecrease)
+	{
+		player->SetPos(Vector2((Exit->GetPos().x - 50), Exit->GetPos().y));
+		Playerspawn = Vector2((Entrance->GetPos().x + 50), Entrance->GetPos().y);
+	}
 }
 
 void Room::addToLists(GameObject2D * Object)
 {
 	InSceneObjects.push_back(Object);
 	m_collider.push_back(Object);
+}
+
+void Room::addToPrevLevelList()
+{
+	/*if (preLevels[levelCur].size() != InSceneObjects.size())
+	{*/
+		//preLevels[levelCur] = InSceneObjects;
+	//}
+}
+
+void Room::setLevelIncrease(bool boo)
+{
+	levelIncrease = boo;
 }

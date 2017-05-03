@@ -1,50 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Fonts">
-      <UniqueIdentifier>{27d945df-6801-4676-b1f2-9b171e8b0425}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shaders">
-      <UniqueIdentifier>{8e595723-add9-42f2-8215-4fcf74f338ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Textures">
-      <UniqueIdentifier>{d0ca2129-2972-476d-82a9-1f0a9000b117}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="italic.spritefont">
-      <Filter>Fonts</Filter>
-    </None>
-    <None Include="shader.fx">
-      <Filter>Shaders</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ImageContentTask Include="grass.jpg">
+    <ImageContentTask Include="background.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="white.jpg">
+    <ImageContentTask Include="BackgroundOther.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="logo_small.png">
-      <Filter>Textures</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="PlayerSpriteSheet.png">
-      <Filter>Textures</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="Walk.png">
-      <Filter>Textures</Filter>
-    </ImageContentTask>
-    <ImageContentTask Include="JetSetEnemy.png">
+    <ImageContentTask Include="CheckPoint.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Collectable.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Platform.png">
+    <ImageContentTask Include="ConveyerBelt.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="ladder.png">
+    <ImageContentTask Include="Door.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
     <ImageContentTask Include="Enemy.png">
@@ -53,25 +25,37 @@
     <ImageContentTask Include="EnemyHor.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="respawner.png">
+    <ImageContentTask Include="grass.jpg">
       <Filter>Textures</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="CheckPoint.png">
+    <ImageContentTask Include="Ice.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="background.png">
+    <ImageContentTask Include="JetSetEnemy.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="ladder.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="logo_small.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
     <ImageContentTask Include="motherFigure.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="BackgroundOther.png">
+    <ImageContentTask Include="Platform.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="ConveyerBelt.png">
+    <ImageContentTask Include="PlayerSpriteSheet.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
-    <ImageContentTask Include="Ice.png">
+    <ImageContentTask Include="respawner.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="Walk.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="white.jpg">
       <Filter>Textures</Filter>
     </ImageContentTask>
     <ImageContentTask Include="ThinPlatform.png">
@@ -83,5 +67,25 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Assets.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="Jump.wav">
+      <Filter>Sound</Filter>
+    </Media>
+    <Media Include="GameMusic.wav">
+      <Filter>Sound</Filter>
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="italic.spritefont" />
+    <None Include="shader.fx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Textures">
+      <UniqueIdentifier>{6dbeba9e-1de3-4da1-a02a-fd0acaea7564}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{fd04e45b-49fa-4108-ad21-2f1d3aa51cb9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
