@@ -312,17 +312,18 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 				room->getPlayer()->SetSpeedY(-10);
 				room->getPlayer()->SetIsGrounded(true);
 			}
-			break;
 		}
+		break;
 		case ObjectType::DOOREXIT:
-
-			if (room->getCurrentLevel()<4)
+		{
+			if (room->getCurrentLevel() < 4)
 			{
 				//tell room to cahnge level
 				room->setLevelIncrease(true);
 
 			}
-			break;
+		}
+		break;
 		case ObjectType::DOORENT:
 		{
 			if (room->getCurrentLevel() > 0)
@@ -331,8 +332,8 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 				room->setLevelDecrease(true);
 
 			}
-			break;
 		}
+		break;
 		}
 	}
 
