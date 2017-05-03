@@ -217,11 +217,12 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				break;
 			case 'm':
 				
-					//create motherObstecle
-					mother = new MotherObstacle(_motherObstacle, TilePos);
-					InSceneObjects.push_back(mother);
-					m_collider.push_back(mother);
-					break;
+				//create motherObstecle
+				mother = new MotherObstacle(_motherObstacle, TilePos);
+				InSceneObjects.push_back(mother);
+				m_collider.push_back(mother);
+
+				break;
 			case '<':
 
 				conveyorLeft = new Tile(_conveyerBelt, TilePos);
@@ -292,11 +293,6 @@ void Room::setCollectableAlive()
 		{
 			Object->SetAlive(true);
 		}
-		if (Object->GetType() == ObjectType::RESPAWN)
-		{
-
-		}
-
 	}
 }
 void Room::setLevelDecrease(bool boo)
