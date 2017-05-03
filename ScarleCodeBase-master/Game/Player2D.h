@@ -35,8 +35,6 @@ public:
 	bool getIsGrounded() { return isGrounded; }
 	Sprite* getSprite() { return sprite; }
 
-	void resetJumpTime();
-
 	virtual void Tick(GameData* _GD);
 	virtual void Draw(DrawData2D* _DD);
 
@@ -46,7 +44,7 @@ private:
 	PlayerState m_PS;
 
 	int Collectables;
-	int lives = 0;
+	int lives = 3;
 	Vector2 forwardMove;
 	Vector2 upMove;
 
