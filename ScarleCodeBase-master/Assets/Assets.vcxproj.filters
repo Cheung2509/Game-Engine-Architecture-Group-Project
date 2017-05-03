@@ -95,4 +95,9 @@
       <Filter>Audio</Filter>
     </Media>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Fireflower.png">
+      <Filter>Textures</Filter>
+    </Image>
+  </ItemGroup>
 </Project>

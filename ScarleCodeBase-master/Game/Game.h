@@ -39,6 +39,7 @@ class inGameLevelEditor;
 
 class Menu;
 class GameOver;
+class GameWon;
 
 
 
@@ -75,6 +76,7 @@ protected:
 	TextGO2D* MenuExit;
 	TextGO2D* GameRestart;
 	TextGO2D* GameExit;
+	TextGO2D* GameWonTxt;
 	
 	
 	list<GameObject *> m_GameObjects; //data structure storing all GameObjects of this Game
@@ -112,6 +114,8 @@ protected:
 	Background* BackG;
 	Menu* mainMenu;
 	Menu* GameOverMenu;
+	Menu* GameWonMenu;
+	GameWon* gamewon;
 	std::unique_ptr<Room> m_Room = nullptr;
 
 	//sound stuff

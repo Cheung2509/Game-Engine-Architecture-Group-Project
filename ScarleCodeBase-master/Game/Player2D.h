@@ -46,7 +46,7 @@ private:
 	PlayerState m_PS;
 
 	int Collectables;
-	int lives = 0;
+	int lives = 3;
 	Vector2 forwardMove;
 	Vector2 upMove;
 

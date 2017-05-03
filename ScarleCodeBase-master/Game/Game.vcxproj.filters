@@ -76,6 +76,9 @@
     <ClCompile Include="AnimatedSprite.cpp">
       <Filter>Objects\Source\Sprite</Filter>
     </ClCompile>
+    <ClCompile Include="GameWon.cpp">
+      <Filter>Base\Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ConstantBuffer.h">
@@ -177,6 +180,9 @@
     </ClInclude>
     <ClInclude Include="GameObject2D.h">
       <Filter>Objects\Header\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="GameWon.h">
+      <Filter>Base\Header\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

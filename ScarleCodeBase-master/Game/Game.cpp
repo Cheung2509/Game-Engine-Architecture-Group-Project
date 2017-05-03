@@ -22,6 +22,7 @@
 
 #include "CollisionManager.h"
 #include "GameOver.h"
+#include "GameWon.h"
 #include "DebugCamera.h"
 #include "CameraFollow2D.h"
 
@@ -117,6 +118,10 @@ Game::Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance)
 	GameOverMenu->SetScale(0.6f);
 	GameOverMenu->SetPos(Vector2(570, 300));
 
+	GameWonMenu = new Menu("BackgroundOther", _pd3dDevice);
+	GameWonMenu->SetScale(0.6f);
+	GameWonMenu->SetPos(Vector2(570, 300));
+
 	//create a background
 	//BackG = new Background("background", _pd3dDevice);
 
@@ -147,6 +152,12 @@ Game::Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance)
 	MenuExit->SetScale(0.7);
 	MenuExit->SetColour(Color((float*)&Colors::White));
 	m_MainMenuText.push_back(MenuExit);
+
+	GameWonTxt = new TextGO2D("CONGRATULATIONS YOU ARE A WINNER");
+	GameWonTxt->SetPos(Vector2(100, 100));
+	GameWonTxt->SetScale(0.7);
+	GameWonTxt->SetColour(Color((float*)&Colors::White));
+	
 
 	GameExit = new TextGO2D("EXIT");
 	GameExit->SetPos(Vector2(600, 250));
@@ -280,6 +291,23 @@ bool Game::Tick()
 
 void Game::PlayTick()
 {
+	player->setCollectables(3); //Debugging
+	if (m_Room->getMother()->getBlocking() == false)
+	{
+		
+		m_GD->m_MS = MS_GAMEWON;
+	}
+	if (m_GD->m_MS == MS_GAMEWON)
+	{
+		gamewon = new GameWon();
+		gamewon->GameWonButtons(m_hWnd, GameRestart, GameExit, m_GD);
+		player->setLives(3);
+		player->setCollectables(0);
+		player->SetPos(m_Room->getPlayerSpawn());
+		m_Room->getRespawner()->SetRespawnUp(false);
+		m_Room->setCollectableAlive();
+		m_Room->getMother()->setBlocking(true);
+	}
 	if (m_GD->m_MS == MS_PLAY)
 	{
 		if (m_Loop)
@@ -290,10 +318,10 @@ void Game::PlayTick()
 	}
 	if (m_Room->getMother()!=nullptr)//getMother()->getBlocking())
 	{
-		if (!m_Room->getMother()->getBlocking())
+	/*	if (!m_Room->getMother()->getBlocking())
 		{
 			m_GD->m_MS = MS_GAMEOVER;
-		}
+		}*/
 	}
 	if (player->getLives() <= 0)
 	{
@@ -305,6 +333,7 @@ void Game::PlayTick()
 	}
 	if (m_GD->m_MS == MS_GAMEOVER)
 	{
+		
 		gameOver = new GameOver();
 		gameOver->GameOverButtons(m_hWnd, GameRestart, GameExit, m_GD);
 		player->setLives(3);
@@ -499,6 +528,15 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 		{
 			(*it)->Draw(m_DD2D);
 		}
+	}
+	if (m_GD->m_MS == MS_GAMEWON)//Draw Game Over menu
+	{
+		GameWonMenu->Draw(m_DD2D);
+		for (list<TextGO2D*>::iterator it = m_GameOverText.begin(); it != m_GameOverText.end(); it++)
+		{
+			(*it)->Draw(m_DD2D);
+		}
+		GameWonTxt->Draw(m_DD2D);
 	}
 	if (m_GD->m_MS == MS_MAIN) //Draw Main Menu
 	{

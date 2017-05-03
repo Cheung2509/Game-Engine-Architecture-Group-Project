@@ -240,11 +240,6 @@ void Room::setCollectableAlive()
 		{
 			Object->SetAlive(true);
 		}
-		if (Object->GetType() == ObjectType::RESPAWN)
-		{
-
-		}
-
 	}
 }
 void Room::resetRoom()
