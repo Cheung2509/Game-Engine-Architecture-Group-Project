@@ -45,7 +45,7 @@ public:
 	void Draw(DrawData2D* _DD);
 	void setCollectableAlive();
 	void addToLists(GameObject2D* Object);
-	void addToPrevLevelList();
+	void restPrevRoom();
 
 	bool getLevelIncrease() { return levelIncrease; }
 	void setLevelIncrease(bool boo);

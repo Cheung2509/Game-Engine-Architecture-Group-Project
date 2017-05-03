@@ -36,10 +36,7 @@ Room::Room(Levels& L) :
 	LevelDecrease = false;
 
 	
-	for (int i = 0; i < L.LoadedLevels.size(); i++)
-	{
-		preLevels.push_back(InSceneObjects);
-	}
+	restPrevRoom();
 
 }
 
@@ -345,12 +342,12 @@ void Room::addToLists(GameObject2D * Object)
 	m_collider.push_back(Object);
 }
 
-void Room::addToPrevLevelList()
+void Room::restPrevRoom()
 {
-	/*if (preLevels[levelCur].size() != InSceneObjects.size())
-	{*/
-		//preLevels[levelCur] = InSceneObjects;
-	//}
+	for (int i = 0; i < level.LoadedLevels.size(); i++)
+	{
+		preLevels.push_back(InSceneObjects);
+	}
 }
 
 void Room::setLevelIncrease(bool boo)
