@@ -114,11 +114,11 @@ Game::Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance)
 	mainMenu->SetScale(0.6f);
 	mainMenu->SetPos(Vector2(570, 300));
 
-	GameOverMenu = new Menu("BackgroundOther", _pd3dDevice);
+	GameOverMenu = new Menu("tried", _pd3dDevice);
 	GameOverMenu->SetScale(0.6f);
-	GameOverMenu->SetPos(Vector2(570, 300));
+	GameOverMenu->SetPos(Vector2(300, 300));
 
-	GameWonMenu = new Menu("BackgroundOther", _pd3dDevice);
+	GameWonMenu = new Menu("moon", _pd3dDevice);
 	GameWonMenu->SetScale(0.6f);
 	GameWonMenu->SetPos(Vector2(570, 300));
 
@@ -291,11 +291,14 @@ bool Game::Tick()
 
 void Game::PlayTick()
 {
-	player->setCollectables(3); //Debugging
-	if (m_Room->getMother()->getBlocking() == false)
+	player->setCollectables(18);
+	if (m_Room->getMother() != NULL)
 	{
-		
-		m_GD->m_MS = MS_GAMEWON;
+		if (m_Room->getMother()->getBlocking() == false)
+		{
+
+			m_GD->m_MS = MS_GAMEWON;
+		}
 	}
 	if (m_GD->m_MS == MS_GAMEWON)
 	{

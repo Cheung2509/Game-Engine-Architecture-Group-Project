@@ -61,6 +61,15 @@
     <ImageContentTask Include="ThinPlatform.png">
       <Filter>Textures</Filter>
     </ImageContentTask>
+    <ImageContentTask Include="space.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="moon.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
+    <ImageContentTask Include="tried.png">
+      <Filter>Textures</Filter>
+    </ImageContentTask>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -75,9 +84,7 @@
     <Media Include="GameMusic.wav">
       <Filter>Sound</Filter>
     </Media>
-    <Media Include="Pilons.wav">
-      <Filter>Audio</Filter>
-    </Media>
+    <Media Include="Pilons.wav" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Fireflower.png">

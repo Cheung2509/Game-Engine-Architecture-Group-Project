@@ -213,6 +213,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Fireflower.png" />
+    <ImageContentTask Include="tried.png" />
+    <ImageContentTask Include="moon.png" />
+    <ImageContentTask Include="space.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageContentTask Include="Door.png" />

@@ -340,9 +340,10 @@ void Room::addToLists(GameObject2D * Object)
 
 void Room::restPrevRoom()
 {
+	list<GameObject2D*> nullList;
 	for (int i = 0; i < level.LoadedLevels.size(); i++)
 	{
-		preLevels.push_back(InSceneObjects);
+		preLevels.push_back(nullList);
 	}
 }
 
