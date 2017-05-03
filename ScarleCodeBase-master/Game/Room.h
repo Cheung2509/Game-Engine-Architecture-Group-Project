@@ -45,7 +45,7 @@ public:
 	void Draw(DrawData2D* _DD);
 	void setCollectableAlive();
 	void addToLists(GameObject2D* Object);
-	void addToPickUpList(Collectables* pickedColl);
+	void addToPrevLevelList();
 
 	bool getLevelIncrease() { return levelIncrease; }
 	void setLevelIncrease(bool boo);
@@ -66,7 +66,7 @@ private:
 	int levelCur;
 	bool levelIncrease;
 	bool LevelDecrease;
-	bool firstRespawn;
+	bool firstLevel;
 
 	std::string title;
 	std::vector<std::string> map;
@@ -100,7 +100,7 @@ private:
 	//vector<vector<Vector2>> PickedUpCollectables;
 	list<GameObject2D *> InSceneObjects;//list to hold all objects created
 	list<GameObject2D*> m_collider;
-	vector<vector<Collectables*>> PickedUpCollectables;// a list of picked up collectables for each level 
+	vector<list<GameObject2D*>> preLevels;// a vector of the objects in old levels
 	Vector2 Playerspawn;
 };
 

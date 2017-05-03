@@ -396,12 +396,14 @@ void Game::PlayTick()
 
 			if (m_Room->getLevelIncrease())
 			{
+				m_Room->addToPrevLevelList();
 				m_Room->setCurrentLevel(m_Room->getCurrentLevel() + 1);
 				m_Room->ChangeLevel(m_GD, _pd3dDevice);
 				m_Room->setLevelIncrease(false);
 			}
 			if (m_Room->getLevelDecrease())
 			{
+				m_Room->addToPrevLevelList();
 				m_Room->setCurrentLevel(m_Room->getCurrentLevel() - 1);
 				m_Room->ChangeLevel(m_GD, _pd3dDevice);
 				m_Room->setLevelDecrease(false);

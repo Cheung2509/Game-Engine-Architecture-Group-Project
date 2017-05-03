@@ -31,19 +31,14 @@ Room::Room(Levels& L) :
 	conveyorLeft = nullptr;
 	conveyorRight = nullptr;
 	ice = nullptr;
-	firstRespawn = true;
+	firstLevel = true;
 	levelIncrease = false;
 	LevelDecrease = false;
 
-	vector<Collectables*> a;
-	for (int i = 0; i < map[0].size(); i++)
-	{
-		//a.push_back(Vector2(0.0f, 0.0f));
-		a.push_back(nullptr);
-	}
+	
 	for (int i = 0; i < L.LoadedLevels.size(); i++)
 	{
-		PickedUpCollectables.push_back(a);
+		preLevels.push_back(InSceneObjects);
 	}
 
 }
@@ -67,6 +62,8 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 	Sprite* _motherObstacle = new Sprite("motherFigure", _pd3dDevice);
 	Sprite* _conveyerBelt = new Sprite("ConveyerBelt", _pd3dDevice);
 	Sprite* _ice = new Sprite("Ice", _pd3dDevice);
+
+	bool makeCollectable = true;
 
 	for (auto&& mapRow : map)
 	{
@@ -140,27 +137,42 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 
 			case'$':
 				//create collecatable
-				/*for (auto&& PickedColl : PickedUpCollectables[levelCur])
-				{*/
-					/*if ((PickedColl==nullptr) || (TilePos != PickedColl->GetPos()))*/
-					//{
+				
+				makeCollectable = true;
+				pickUp = new Collectables(_collectable);
+				pickUp->SetPos(TilePos);
+				InSceneObjects.push_back(pickUp);
+				m_collider.push_back(pickUp);
+
+				for (auto prevColl : preLevels[levelCur])// for every object previously stored in this level
+				{
+					if (prevColl->GetType() == COLLECTIBLE)//is there a collectable in this level
+					{
+						if (prevColl->GetPos() == TilePos)// is this the same collectable 
+						{
+							if (!prevColl->isAlive())// was this collectable dead when they left 
+							{
+								pickUp->SetAlive(false);
+							}
+						}
+
+					}
+				}
+				/*if (makeCollectable)
+				{
 					pickUp = new Collectables(_collectable);
 					pickUp->SetPos(TilePos);
-					/*if (((pickUp != PickedColl) || (pickUp == PickedColl&&PickedColl->isAlive())))
-					{*/
-						InSceneObjects.push_back(pickUp);
-						m_collider.push_back(pickUp);
-						PickedUpCollectables[levelCur].push_back(pickUp);
-						//PickedColl = pickUp;
-						//break;
-					//}
-				}
+					pickUp->SetAlive(true);
+					InSceneObjects.push_back(pickUp);
+					m_collider.push_back(pickUp);
+				}*/
 				break;
 
 			case '@':
 				respawner = new Collectables(_respawn);
 				respawner->SetScale(0.5f);
 				respawner->SetPos(TilePos);
+				respawner->SetAlive(true);
 				InSceneObjects.push_back(respawner);
 				respawner->setType(RESPAWN);
 				m_collider.push_back(respawner);
@@ -171,6 +183,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				Exit = new Collectables(_doorEnt);
 				Exit->SetScale(0.5f);
 				Exit->SetPos(TilePos);
+				Exit->SetAlive(true);
 				Exit->setType(DOOREXIT);
 
 				InSceneObjects.push_back(Exit);
@@ -181,6 +194,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 				Entrance = new Collectables(_doorEnt);
 				Entrance->SetScale(0.5f);
 				Entrance->SetPos(TilePos);
+				Entrance->SetAlive(true);
 				Entrance->setType(DOORENT);
 
 				InSceneObjects.push_back(Entrance);
@@ -241,6 +255,7 @@ void Room::CreateRoom(GameData* _GD, ID3D11Device* _pd3dDevice)
 			TilePos.x += 30;//Tilesize
 		}
 	}
+	preLevels[levelCur] = InSceneObjects;
 }
 
 void Room::setCurrentLevel(int i)
@@ -296,7 +311,7 @@ void Room::resetRoom()
 	respawner = nullptr;
 	enemyHor = nullptr;
 	mother = nullptr;
-	firstRespawn = true;
+	firstLevel = false;
 }
 
 void Room::ChangeLevel(GameData * _GD, ID3D11Device * _pd3dDevice)
@@ -328,10 +343,12 @@ void Room::addToLists(GameObject2D * Object)
 	m_collider.push_back(Object);
 }
 
-void Room::addToPickUpList(Collectables* pickedColl)
+void Room::addToPrevLevelList()
 {
-	//PickedUpCollectables[levelCur].push_back(pickedPos);
-	PickedUpCollectables[levelCur].push_back(pickedColl);
+	/*if (preLevels[levelCur].size() != InSceneObjects.size())
+	{*/
+		//preLevels[levelCur] = InSceneObjects;
+	//}
 }
 
 void Room::setLevelIncrease(bool boo)

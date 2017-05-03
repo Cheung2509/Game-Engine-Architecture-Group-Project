@@ -124,7 +124,7 @@ void CollisionManager::resolveCollision(Room* room, GameObject2D* obj, Direction
 			{
 				std::cout << "Collected \n";
 				room->getPlayer()->addCollectable();
-				//obj->SetAlive(false);
+				obj->SetAlive(false);
 				//	room->addToPickUpList(obj-);
 			}
 
