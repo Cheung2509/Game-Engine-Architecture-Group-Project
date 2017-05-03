@@ -344,8 +344,6 @@ void Room::restPrevRoom()
 
 	for (int i = 0; i < level.LoadedLevels.size(); i++)
 	{
-		preLevels.push_back(nullList);
-
 		if (preLevels.size() == 0)
 		{
 			for (int i = 0; i < level.LoadedLevels.size(); i++)

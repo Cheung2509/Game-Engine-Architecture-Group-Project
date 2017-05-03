@@ -303,6 +303,7 @@ void Game::PlayTick()
 	{
 		gamewon = new GameWon();
 		gamewon->GameWonButtons(m_hWnd, GameRestart, GameExit, m_GD);
+		m_Room->restPrevRoom();
 		player->setLives(3);
 		player->setCollectables(0);
 		player->SetPos(m_Room->getPlayerSpawn());
@@ -338,6 +339,7 @@ void Game::PlayTick()
 		
 		gameOver = new GameOver();
 		gameOver->GameOverButtons(m_hWnd, GameRestart, GameExit, m_GD);
+		m_Room->restPrevRoom();
 		player->setLives(3);
 		player->setCollectables(0);
 		player->SetPos(m_Room->getPlayerSpawn());
@@ -350,7 +352,6 @@ void Game::PlayTick()
 		{
 			m_Room->getMother()->setBlocking(true);
 		}
-		m_Room->restPrevRoom();
 	}
 	if (m_GD->m_MS == MS_MAIN)
 	{
