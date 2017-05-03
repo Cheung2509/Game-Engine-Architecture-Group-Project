@@ -212,6 +212,7 @@
     <Media Include="Pilons.wav" />
   </ItemGroup>
   <ItemGroup>
+    <ImageContentTask Include="BackGroundCity.png" />
     <Image Include="Fireflower.png" />
     <ImageContentTask Include="tried.png" />
     <ImageContentTask Include="moon.png" />

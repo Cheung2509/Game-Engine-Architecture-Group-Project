@@ -123,7 +123,7 @@ Game::Game(ID3D11Device* _pd, HWND _hWnd, HINSTANCE _hInstance)
 	GameWonMenu->SetPos(Vector2(570, 300));
 
 	//create a background
-	//BackG = new Background("background", _pd3dDevice);
+	BackG = new Background("BackGroundCity", _pd3dDevice);
 
 	//create first level
 	Levels::load();
@@ -291,7 +291,6 @@ bool Game::Tick()
 
 void Game::PlayTick()
 {
-	player->setCollectables(18);
 	if (m_Room->getMother() != NULL)
 	{
 		if (m_Room->getMother()->getBlocking() == false)
@@ -512,7 +511,7 @@ void Game::Draw(ID3D11DeviceContext* _pd3dImmediateContext)
 
 	if (m_Room->getPlayer()->isAlive())
 	{
-		//BackG->Draw(m_DD2D);
+		BackG->Draw(m_DD2D);
 	}
 
 	if (m_GD->m_GS == GameState::GS_PLAY_DEBUG_CAM)
