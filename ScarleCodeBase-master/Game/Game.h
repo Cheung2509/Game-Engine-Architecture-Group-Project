@@ -109,7 +109,6 @@ protected:
 	GameOver* gameOver;
 	/*Collectables*collectable;*/
 
-	MotherObstacle* mother;
 	Player2D* player;       // pointer to player class
 	Background* BackG;
 	Menu* mainMenu;

@@ -35,8 +35,6 @@ public:
 	bool getIsGrounded() { return isGrounded; }
 	Sprite* getSprite() { return sprite; }
 
-	void resetJumpTime();
-
 	virtual void Tick(GameData* _GD);
 	virtual void Draw(DrawData2D* _DD);
 
